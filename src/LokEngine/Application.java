@@ -1,5 +1,6 @@
 package LokEngine;
 
+import LokEngine.GUI.Canvas;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.SpriteLoader;
@@ -28,6 +29,7 @@ public class Application {
         try {
             appWin.setTitle(windowTitle);
             appWin.open(windowFullscreen, windowResolution);
+            windowResolution = appWin.getResolution();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,6 +42,7 @@ public class Application {
         });
         RuntimeFields.frameBuilder = new FrameBuilder(appWin);
         RuntimeFields.scene = new Scene();
+        RuntimeFields.canvas = new Canvas();
 
         try {
             DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl","#/resources/shaders/DefaultFragShader.glsl");
@@ -47,7 +50,6 @@ public class Application {
             DefaultFields.DisplayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl","#/resources/shaders/DisplayFragShader.glsl");
             DefaultFields.PostProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl","#/resources/shaders/BlurFragShader.glsl");
             DefaultFields.unknownSprite.size = 50;
-
 
             Shader.use(DefaultFields.PostProcessingShader);
             Camera.updateProjection(appWin.getResolution().x, appWin.getResolution().y,1 / 0.000520833f / 4);
@@ -57,7 +59,7 @@ public class Application {
             Camera.updateProjection(appWin.getResolution().x, appWin.getResolution().y,1 / 0.000520833f / 4);
 
             Shader.use(DefaultFields.defaultShader);
-            Camera.updateProjection(appWin.getResolution().x / appWin.getResolution().y, 1,1);
+            Camera.updateProjection((float)appWin.getResolution().x / (float)appWin.getResolution().y, 1,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +78,7 @@ public class Application {
             }
 
             RuntimeFields.scene.update();
+            RuntimeFields.canvas.update();
 
             try {
                 nextFrame();

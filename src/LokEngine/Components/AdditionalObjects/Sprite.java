@@ -19,6 +19,7 @@ public class Sprite {
         this.uvBuffer = uvBuffer;
         this.shader = DefaultFields.defaultShader;
     }
+
     public Sprite(Texture texture, int vertexBuffer, int uvBuffer, double size){
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;
@@ -26,6 +27,7 @@ public class Sprite {
         this.uvBuffer = uvBuffer;
         this.shader = DefaultFields.defaultShader;
     }
+
     public Sprite(Texture texture, int vertexBuffer, int uvBuffer, double size, Shader shader){
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;

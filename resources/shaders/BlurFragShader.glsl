@@ -16,7 +16,8 @@ vec4 blur(sampler2D texture, vec2 direction, int samples, float bokeh){
         float delta = 1.0/samples; //порция цвета в одной выборке
         float di = 1.0/(samples-1.0); //вычисляем инкремент
         for (float i=-0.5; i<0.501; i+=di) {
-            vec4 color = texture2D(texture, uvposition + direction * i); //делаем выборку в заданном направлении
+            vec2 uvpos = uvposition + direction * i;
+            vec4 color = texture2D(texture, uvpos); //делаем выборку в заданном направлении
             sum += color * delta; //суммируем цвет
             msum = max(color, msum); //вычисляем максимальное значение цвета
         }

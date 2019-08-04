@@ -4,6 +4,7 @@ import LokEngine.Tools.Utilities.BlurTuning;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
 
 public class BlurAction extends PostProcessingAction {
 
@@ -21,7 +22,7 @@ public class BlurAction extends PostProcessingAction {
 
     @Override
     public void apply(){
-        glBegin(GL_QUADS);
+        glBegin(GL_POLYGON);
 
         glColor4d(blurTuning.strength / 10d,blurTuning.samples / 1000d, blurTuning.bokeh,1);
         glVertex3f(position.x,position.y,0);

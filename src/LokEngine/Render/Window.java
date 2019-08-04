@@ -45,7 +45,7 @@ public class Window {
                 this.resolution = new Vector2i(Display.getWidth(),Display.getHeight());
             }else {
                 this.resolution = resolution;
-                Display.setDisplayMode(new DisplayMode((int)resolution.x, (int)resolution.y));
+                Display.setDisplayMode(new DisplayMode(resolution.x, resolution.y));
             }
 
             Display.create();

@@ -8,20 +8,27 @@ import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIPanel extends GUIObject {
-    Color color;
     GUIPanelFramePart framePart;
     BlurAction blurAction;
 
     public GUIPanel(Vector2i position, Vector2i size, Color color, BlurTuning blur){
         super(position, size);
-        this.color = color;
-        this.framePart = new GUIPanelFramePart(position,size);
+        if (color != null){
+            this.framePart = new GUIPanelFramePart(position,size,color);
+        }else{
+            this.framePart = new GUIPanelFramePart(position,size);
+        }
+
         if (blur != null)
             this.blurAction = new BlurAction(position,size, blur);
     }
 
     public GUIPanel(Vector2i position, Vector2i size, Color color){
         this(position,size,color,null);
+    }
+
+    public GUIPanel(Vector2i position, Vector2i size){
+        this(position,size,null);
     }
 
     @Override

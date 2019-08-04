@@ -61,6 +61,20 @@ class LokEngineTest extends Application {
         rb.isStatic = true;
         so2.components.add(new RigidbodyComponent(ShapeCreator.CreateBoxShape(new Vector2f(200,200)), rb));
         RuntimeFields.scene.addObject(so2);
+
+        SceneObject so3 = new SceneObject();
+        so3.components.add(new SpriteComponent("#/resources/textures/testWallpaper.jpg"));
+        RuntimeFields.scene.addObject(so3);
+
+        RuntimeFields.canvas.putObject(
+                new GUIPanel(
+                        new Vector2i(0,0),
+                        new Vector2i(appWin.getResolution().x / 4,appWin.getResolution().y),
+                        new ColorRGB(209, 226, 255,255 / 3),
+                        new BlurTuning()
+                ),
+                "PanelTest");
+
     }
 
     LokEngineTest(){
