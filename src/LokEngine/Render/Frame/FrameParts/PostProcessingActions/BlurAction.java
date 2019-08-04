@@ -1,32 +1,33 @@
 package LokEngine.Render.Frame.FrameParts.PostProcessingActions;
 
+import LokEngine.Tools.Utilities.BlurTuning;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class BlurAction extends PostProcessingAction {
-    public float intensity = 1f;
-    int samples = 10;
-    float bokeh = 0.3f;
+
+    public BlurTuning blurTuning;
 
     public BlurAction(Vector2i position, Vector2i size) {
-        super(position, size);
+        this(position, size, new BlurTuning());
+
     }
 
-    public BlurAction(Vector2i position, Vector2i size, float intensity) {
+    public BlurAction(Vector2i position, Vector2i size, BlurTuning blurTuning) {
         super(position, size);
-        this.intensity = intensity;
+        this.blurTuning = blurTuning;
     }
 
     @Override
     public void apply(){
         glBegin(GL_QUADS);
 
-        glColor4f(intensity,samples / 1000f, bokeh,1);
-        glVertex3f(0 + position.x,0 + position.y,0);
-        glVertex3f(size.x + position.x,0 + position.y,0);
+        glColor4d(blurTuning.strength / 10d,blurTuning.samples / 1000d, blurTuning.bokeh,1);
+        glVertex3f(position.x,position.y,0);
+        glVertex3f(size.x + position.x,position.y,0);
         glVertex3f(size.x + position.x,size.y + position.y,0);
-        glVertex3f(0 + position.x,size.y + position.y,0);
+        glVertex3f(position.x,size.y + position.y,0);
 
         glEnd();
     }

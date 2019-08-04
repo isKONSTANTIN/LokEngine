@@ -2,8 +2,7 @@ package LokEngine.Render.Enums;
 
 public enum FramePartType{
     Scene(0, DrawMode.Scene),
-    GUI(1, DrawMode.Display),
-    RawGUI(2, DrawMode.RawGUI);
+    GUI(1, DrawMode.Display);
 
     private final int index;
     private final DrawMode drawMode;

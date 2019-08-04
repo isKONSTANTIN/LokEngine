@@ -1,5 +1,6 @@
 package LokEngine.Render.Frame;
 
+import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
@@ -14,8 +15,8 @@ public class FrameBufferWorker {
     private int texture;
     private int depthTexture;
 
-    public FrameBufferWorker(Vector2f resolution) {
-        initialiseFrameBuffer((int)resolution.x,(int)resolution.y);
+    public FrameBufferWorker(Vector2i resolution) {
+        initialiseFrameBuffer(resolution.x,resolution.y);
     }
 
     public void cleanUp() {//call when closing the game

@@ -2,6 +2,7 @@ package LokEngine.Render;
 
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Tools.DefaultFields;
+import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -17,10 +18,10 @@ import static org.lwjgl.util.glu.GLU.*;
 public class Window {
 
     private Camera camera;
-    private Vector2f resolution;
+    private Vector2i resolution;
     private boolean fullscreen = false;
     private boolean isOpened = false;
-    public Vector2f getResolution(){
+    public Vector2i getResolution(){
         return resolution;
     }
     public Camera getCamera(){
@@ -35,13 +36,13 @@ public class Window {
         return Display.getTitle();
     }
 
-    public void open(boolean fullscreen, Vector2f resolution) throws LWJGLException {
+    public void open(boolean fullscreen, Vector2i resolution) throws LWJGLException {
         if (!isOpened){
             this.fullscreen = fullscreen;
 
             if (fullscreen){
                 Display.setFullscreen(true);
-                this.resolution = new Vector2f(Display.getWidth(),Display.getHeight());
+                this.resolution = new Vector2i(Display.getWidth(),Display.getHeight());
             }else {
                 this.resolution = resolution;
                 Display.setDisplayMode(new DisplayMode((int)resolution.x, (int)resolution.y));

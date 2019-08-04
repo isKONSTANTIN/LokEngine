@@ -5,9 +5,13 @@ import LokEngine.Components.AdditionalObjects.Rigidbody;
 import LokEngine.Components.ComponentsTools.ShapeCreator;
 import LokEngine.Components.RigidbodyComponent;
 import LokEngine.Components.SpriteComponent;
+import LokEngine.GUI.GUIObjects.GUIObject;
+import LokEngine.GUI.GUIObjects.GUIPanel;
 import LokEngine.Render.Frame.FrameParts.PostProcessingActions.BlurAction;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Utilities.BlurTuning;
+import LokEngine.Tools.Utilities.ColorRGB;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
@@ -42,7 +46,6 @@ class LokEngineTest extends Application {
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
             appWin.close();
         }
-
     }
 
     @Override
@@ -61,6 +64,6 @@ class LokEngineTest extends Application {
     }
 
     LokEngineTest(){
-        start(false,new Vector2f(512,512));
+        start(false,new Vector2i(512,512));
     }
 }

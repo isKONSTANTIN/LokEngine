@@ -31,7 +31,7 @@ void main() {
 	vec4 rawColor;
 	vec4 postColor = texture(postFrame, uvposition);
 	if (postColor.x > 0){
-		rawColor = blur(frame, dir * postColor.x * 0.01, int(postColor.y * 1000), postColor.z);
+		rawColor = blur(frame, dir * postColor.x, int(postColor.y * 1000), postColor.z);
 	}else{
 		rawColor = texture(frame, uvposition);
 	}

@@ -11,6 +11,7 @@ import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -21,7 +22,7 @@ import static org.lwjgl.opengl.GL20.glUniform2f;
 public class Application {
     public Window appWin;
 
-    private void startApp(boolean windowFullscreen, Vector2f windowResolution, String windowTitle){
+    private void startApp(boolean windowFullscreen, Vector2i windowResolution, String windowTitle){
         appWin = new Window();
 
         try {
@@ -87,18 +88,18 @@ public class Application {
     }
 
     public void start() {
-        startApp(false, new Vector2f(512,512), "LokEngine application");
+        startApp(false, new Vector2i(512,512), "LokEngine application");
     }
 
     public void start(boolean windowFullscreen) {
-        startApp(windowFullscreen, new Vector2f(512,512), "LokEngine application");
+        startApp(windowFullscreen, new Vector2i(512,512), "LokEngine application");
     }
 
-    public void start(boolean windowFullscreen, Vector2f windowResolution) {
+    public void start(boolean windowFullscreen, Vector2i windowResolution) {
         startApp(windowFullscreen, windowResolution, "LokEngine application");
     }
 
-    public void start(boolean windowFullscreen, Vector2f windowResolution, String windowTitle) {
+    public void start(boolean windowFullscreen, Vector2i windowResolution, String windowTitle) {
         startApp(windowFullscreen, windowResolution, windowTitle);
     }
 
