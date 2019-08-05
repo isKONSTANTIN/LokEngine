@@ -16,6 +16,7 @@ public class GUITextFramePart extends FramePart {
 
     public String text;
     public Vector2i position;
+    public org.newdawn.slick.Color color;
 
     public GUITextFramePart(String FontName, String text, int fontStyle, int size, boolean antiAlias) {
         super(FramePartType.GUI);
@@ -35,6 +36,6 @@ public class GUITextFramePart extends FramePart {
     @Override
     public void partRender() {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, buffer);
-        font.drawString(position.x, position.y, text);
+        font.drawString(position.x, position.y, text, color);
     }
 }

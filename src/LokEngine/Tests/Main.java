@@ -5,11 +5,8 @@ import LokEngine.Components.AdditionalObjects.Rigidbody;
 import LokEngine.Components.ComponentsTools.ShapeCreator;
 import LokEngine.Components.RigidbodyComponent;
 import LokEngine.Components.SpriteComponent;
-import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.GUI.GUIObjects.GUIPanel;
 import LokEngine.GUI.GUIObjects.GUIText;
-import LokEngine.Render.Frame.FrameParts.GUI.GUITextFramePart;
-import LokEngine.Render.Frame.FrameParts.PostProcessingActions.BlurAction;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.BlurTuning;
@@ -77,7 +74,7 @@ class LokEngineTest extends Application {
                 "PanelTest");
 
         RuntimeFields.canvas.putObject(
-                new GUIText(new Vector2i(0,0), "test", "test",0,24,false),
+                new GUIText(new Vector2i(0,0), "test", "test",0,24,true),
                 "TestText"
         );
     }
