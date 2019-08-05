@@ -104,8 +104,6 @@ public class ShaderLoader {
 
         ARBShaderObjects.glLinkProgramARB(program);
         ARBShaderObjects.glValidateProgramARB(program);
-
         return new Shader(program);
     }
-
 }

@@ -1,6 +1,7 @@
 package LokEngine.Loaders;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
@@ -17,6 +18,10 @@ public class BufferLoader {
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, pointsFB, GL15.GL_STATIC_DRAW);
 
         return buffer;
+    }
+
+    public static void unload(int buffer){
+        GL15.glDeleteBuffers(buffer);
     }
 
 }

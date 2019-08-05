@@ -77,11 +77,13 @@ public class Application {
                 e.printStackTrace();
             }
 
+            if (!appWin.isOpened()) break;
+
             RuntimeFields.scene.update();
             RuntimeFields.canvas.update();
 
             try {
-                nextFrame();
+                 nextFrame();
             }catch (Exception e){
                 e.printStackTrace();
             }

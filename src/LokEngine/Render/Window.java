@@ -36,6 +36,10 @@ public class Window {
         return Display.getTitle();
     }
 
+    public boolean isOpened(){
+        return isOpened;
+    }
+
     public void open(boolean fullscreen, Vector2i resolution) throws LWJGLException {
         if (!isOpened){
             this.fullscreen = fullscreen;
@@ -62,7 +66,8 @@ public class Window {
     }
 
     public void update(){
-        Display.update();
+        if (isOpened)
+            Display.update();
     }
 
     public void setDrawMode(DrawMode dm){

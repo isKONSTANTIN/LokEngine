@@ -14,8 +14,12 @@ import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class TextureLoader {
 
-    public static Texture LoadTexture(String path) throws IOException {
+    public static void unloadTexture(Texture texture){
+        glDeleteTextures(texture.buffer);
+        texture = null;
+    }
 
+    public static Texture loadTexture(String path) throws IOException {
         BufferedImage image;
 
         if (path.charAt(0) == '#'){

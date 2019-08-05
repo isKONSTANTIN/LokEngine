@@ -10,7 +10,7 @@ import java.io.IOException;
 public class SpriteLoader {
 
     public static Sprite loadSprite(String texturePath) throws IOException {
-        Texture tex = TextureLoader.LoadTexture(texturePath);
+        Texture tex = TextureLoader.loadTexture(texturePath);
 
         int vertexBuffer = BufferLoader.load(new float[]
                 {
@@ -25,7 +25,7 @@ public class SpriteLoader {
     }
 
     public static Sprite loadSprite(String texturePath, Shader shader) throws IOException {
-        Texture tex = TextureLoader.LoadTexture(texturePath);
+        Texture tex = TextureLoader.loadTexture(texturePath);
 
         int vertexBuffer = BufferLoader.load(new float[]
                 {
