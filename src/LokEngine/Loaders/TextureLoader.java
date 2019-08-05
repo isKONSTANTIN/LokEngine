@@ -2,17 +2,21 @@ package LokEngine.Loaders;
 
 import LokEngine.Render.Texture;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.Sys;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class TextureLoader {
+
+    private static HashMap<String, Texture> loadedTextures = new HashMap<>();
 
     public static void unloadTexture(Texture texture){
         glDeleteTextures(texture.buffer);
@@ -20,6 +24,11 @@ public class TextureLoader {
     }
 
     public static Texture loadTexture(String path) throws IOException {
+
+        if (loadedTextures.containsKey(path)){
+            return loadedTextures.get(path);
+        }
+
         BufferedImage image;
         if (path.charAt(0) == '#'){
             image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
@@ -54,7 +63,9 @@ public class TextureLoader {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, textureBuffer);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        return new Texture(textureID,image.getWidth(), image.getHeight());
+        Texture texture = new Texture(textureID,image.getWidth(), image.getHeight());
+        loadedTextures.put(path,texture);
+        return texture;
     }
 
 }
