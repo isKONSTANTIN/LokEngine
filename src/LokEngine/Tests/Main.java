@@ -74,7 +74,7 @@ class LokEngineTest extends Application {
                 "PanelTest");
 
         RuntimeFields.canvas.putObject(
-                new GUIText(new Vector2i(0,0), "test", "test",0,24,true),
+                new GUIText(new Vector2i(0,0), "test"),
                 "TestText"
         );
     }

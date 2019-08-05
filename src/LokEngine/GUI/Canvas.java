@@ -17,6 +17,7 @@ public class Canvas {
 
     public void putObject(GUIObject object, String name){
         objects.put(name, object);
+        object.name = name;
     }
 
     public void replaceObject(GUIObject object, String name){

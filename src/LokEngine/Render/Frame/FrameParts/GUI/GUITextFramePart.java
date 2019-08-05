@@ -18,11 +18,12 @@ public class GUITextFramePart extends FramePart {
     public Vector2i position;
     public org.newdawn.slick.Color color;
 
-    public GUITextFramePart(String FontName, String text, int fontStyle, int size, boolean antiAlias) {
+    public GUITextFramePart(String FontName, String text, org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
         super(FramePartType.GUI);
         font = new TrueTypeFont(new Font(FontName, fontStyle, size), antiAlias);
         buffer = GL11.glGetInteger(GL_TEXTURE_BINDING_2D);
         this.text = text;
+        this.color = color;
     }
 
     public int getHeight(){
@@ -37,5 +38,6 @@ public class GUITextFramePart extends FramePart {
     public void partRender() {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, buffer);
         font.drawString(position.x, position.y, text, color);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
     }
 }
