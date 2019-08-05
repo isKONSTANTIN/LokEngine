@@ -40,6 +40,7 @@ public class Application {
                 windowResolution.x / 2, -windowResolution.y / 2,
                 windowResolution.x / 2, windowResolution.y / 2,
         });
+
         RuntimeFields.frameBuilder = new FrameBuilder(appWin);
         RuntimeFields.scene = new Scene();
         RuntimeFields.canvas = new Canvas();
@@ -92,25 +93,6 @@ public class Application {
         }
     }
 
-    public void start() {
-        startApp(false, new Vector2i(512,512), "LokEngine application");
-    }
-
-    public void start(boolean windowFullscreen) {
-        startApp(windowFullscreen, new Vector2i(512,512), "LokEngine application");
-    }
-
-    public void start(boolean windowFullscreen, Vector2i windowResolution) {
-        startApp(windowFullscreen, windowResolution, "LokEngine application");
-    }
-
-    public void start(boolean windowFullscreen, Vector2i windowResolution, String windowTitle) {
-        startApp(windowFullscreen, windowResolution, windowTitle);
-    }
-
-    public void Init(){}
-    public void Update(){}
-
     private void nextFrame(){
         Shader.use(DefaultFields.defaultShader);
         appWin.getCamera().updateView();
@@ -121,4 +103,13 @@ public class Application {
         }
     }
 
+    public void start() {
+        startApp(false, new Vector2i(512,512), "LokEngine application");
+    }
+    public void start(boolean windowFullscreen) { startApp(windowFullscreen, new Vector2i(512,512), "LokEngine application"); }
+    public void start(boolean windowFullscreen, Vector2i windowResolution) { startApp(windowFullscreen, windowResolution, "LokEngine application"); }
+    public void start(boolean windowFullscreen, Vector2i windowResolution, String windowTitle) {startApp(windowFullscreen, windowResolution, windowTitle); }
+
+    public void Init(){}
+    public void Update(){}
 }

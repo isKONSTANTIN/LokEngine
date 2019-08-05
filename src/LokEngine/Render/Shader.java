@@ -5,7 +5,7 @@ import org.lwjgl.opengl.ARBShaderObjects;
 
 public class Shader {
 
-    public int program = 0;
+    public int program;
     public Shader(int program){
         this.program = program;
     }
@@ -26,5 +26,4 @@ public class Shader {
         ARBShaderObjects.glUseProgramObjectARB(0);
         currentShader = null;
     }
-
 }

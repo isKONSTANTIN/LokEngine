@@ -21,23 +21,22 @@ public class Window {
     private Vector2i resolution;
     private boolean fullscreen = false;
     private boolean isOpened = false;
+
+    public boolean isFullscreen(){return fullscreen;}
+    public boolean isOpened(){
+        return isOpened;
+    }
     public Vector2i getResolution(){
         return resolution;
     }
     public Camera getCamera(){
         return camera;
     }
-    public boolean isFullscreen(){return fullscreen;}
-
-    public void setTitle(String title){
-        Display.setTitle(title);
-    }
     public String getTitle(){
         return Display.getTitle();
     }
-
-    public boolean isOpened(){
-        return isOpened;
+    public void setTitle(String title){
+        Display.setTitle(title);
     }
 
     public void open(boolean fullscreen, Vector2i resolution) throws LWJGLException {
@@ -71,7 +70,7 @@ public class Window {
     }
 
     public void setDrawMode(DrawMode dm){
-        if (dm == DrawMode.Display || dm == DrawMode.RawGUI ){
+        if (dm == DrawMode.Display || dm == DrawMode.RawGUI){
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
@@ -117,5 +116,4 @@ public class Window {
             Shader.use(DefaultFields.defaultShader);
         }
     }
-
 }

@@ -22,5 +22,4 @@ public class Camera {
     public void updateView(Shader shader){
         MatrixCreator.PutMatrixInShader(shader, "View", MatrixCreator.CreateViewMatrix(this));
     }
-
 }
