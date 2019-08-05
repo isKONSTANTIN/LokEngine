@@ -2,7 +2,6 @@ package LokEngine.GUI;
 
 import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Render.Window;
-
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -31,6 +30,4 @@ public class Canvas {
     public GUIObject getObject(String name){
         return objects.get(name);
     }
-
-
 }
