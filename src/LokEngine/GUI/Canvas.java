@@ -27,4 +27,9 @@ public class Canvas {
         objects.remove(name);
     }
 
+    public GUIObject getObject(String name){
+        return objects.get(name);
+    }
+
+
 }

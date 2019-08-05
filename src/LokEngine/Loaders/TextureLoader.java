@@ -21,7 +21,6 @@ public class TextureLoader {
 
     public static Texture loadTexture(String path) throws IOException {
         BufferedImage image;
-
         if (path.charAt(0) == '#'){
             image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
         }else{

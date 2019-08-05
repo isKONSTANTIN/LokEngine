@@ -7,6 +7,8 @@ import LokEngine.Components.RigidbodyComponent;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.GUI.GUIObjects.GUIPanel;
+import LokEngine.GUI.GUIObjects.GUIText;
+import LokEngine.Render.Frame.FrameParts.GUI.GUITextFramePart;
 import LokEngine.Render.Frame.FrameParts.PostProcessingActions.BlurAction;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
@@ -25,7 +27,6 @@ public class Main {
 class LokEngineTest extends Application {
 
     int idObject = 0;
-
     @Override
     public void Update(){
         if (Keyboard.isKeyDown(Keyboard.KEY_W)){
@@ -75,6 +76,10 @@ class LokEngineTest extends Application {
                 ),
                 "PanelTest");
 
+        RuntimeFields.canvas.putObject(
+                new GUIText(new Vector2i(0,0), "test", "test",0,24,false),
+                "TestText"
+        );
     }
 
     LokEngineTest(){
