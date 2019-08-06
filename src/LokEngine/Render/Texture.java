@@ -19,5 +19,4 @@ public class Texture {
                 objt.sizeX == sizeX &&
                 objt.sizeY == sizeY;
     }
-
 }
