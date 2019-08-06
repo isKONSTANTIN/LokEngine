@@ -38,13 +38,13 @@ public class GUIImageFramePart extends FramePart {
         glBegin(GL_POLYGON);
         glColor4d(1,1,1,1);
 
-        glTexCoord2f(0,1);
-        glVertex3f(position.x,position.y,0);
         glTexCoord2f(0,0);
-        glVertex3f(size.x + position.x,position.y,0);
+        glVertex3f(position.x,position.y,0);
         glTexCoord2f(1,0);
-        glVertex3f(size.x + position.x,size.y + position.y,0);
+        glVertex3f(size.x + position.x,position.y,0);
         glTexCoord2f(1,1);
+        glVertex3f(size.x + position.x,size.y + position.y,0);
+        glTexCoord2f(0,1);
         glVertex3f(position.x,size.y + position.y,0);
 
         glEnd();
