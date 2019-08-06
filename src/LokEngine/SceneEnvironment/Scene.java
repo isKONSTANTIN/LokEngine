@@ -9,7 +9,6 @@ public class Scene {
 
     private Vector<SceneObject> objects = new Vector<>();
     private Vector<PostUpdateEvent> postUpdateEvents = new Vector<>();
-    private int amountObjects;
     public World b2World;
     public float speedPhysics = 1;
 
@@ -19,9 +18,8 @@ public class Scene {
 
     public int addObject(SceneObject newObject){
         objects.add(newObject);
-        amountObjects++;
         newObject.init(this);
-        return amountObjects-1;
+        return objects.size()-1;
     }
 
     public void addPostUpdateEvent(PostUpdateEvent event){

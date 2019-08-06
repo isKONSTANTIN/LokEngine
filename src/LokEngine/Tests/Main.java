@@ -19,25 +19,23 @@ class LokEngineTest extends Application {
     @Override
     public void Update(){
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-            appWin.close();
+            window.close();
         }
     }
 
     @Override
     public void Init(){
         RuntimeFields.canvas.putObject(
-                new GUIPanel(
-                        new Vector2i(0,0),
-                        new Vector2i(appWin.getResolution().x / 4,appWin.getResolution().y),
-                        new ColorRGB(209, 226, 255,255 / 3),
-                        new BlurTuning()
-                ),
-                "PanelTest");
+                new GUIText(new Vector2i(0,0), "test")
+        );
 
         RuntimeFields.canvas.putObject(
-                new GUIText(new Vector2i(0,0), "test"),
-                "TestText"
-        );
+                new GUIPanel(
+                        new Vector2i(0,0),
+                        new Vector2i(window.getResolution().x / 4, window.getResolution().y),
+                        new ColorRGB(209, 226, 255,255 / 3),
+                        new BlurTuning()
+                ));
     }
 
     LokEngineTest(){

@@ -6,28 +6,25 @@ import java.util.HashMap;
 import java.util.Vector;
 
 public class Canvas {
-    HashMap<String, GUIObject> objects = new HashMap<>();
+
+    Vector<GUIObject> objects = new Vector<>();
 
     public void update(){
-        for (GUIObject object : objects.values()) {
-            object.update();
+        for (int i = 0; i < objects.size(); i++) {
+            objects.get(i).update();
         }
     }
 
-    public void putObject(GUIObject object, String name){
-        objects.put(name, object);
-        object.name = name;
-    }
-
-    public void replaceObject(GUIObject object, String name){
-        objects.replace(name, object);
+    public int putObject(GUIObject object){
+        objects.add(object);
+        return objects.size()-1;
     }
 
     public void removeObject(String name){
         objects.remove(name);
     }
 
-    public GUIObject getObject(String name){
-        return objects.get(name);
+    public GUIObject getObject(int id){
+        return objects.get(id);
     }
 }

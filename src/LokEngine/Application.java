@@ -10,26 +10,22 @@ import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glUniform2f;
 
 public class Application {
-    public Window appWin;
+    public Window window;
 
     private void startApp(boolean windowFullscreen, Vector2i windowResolution, String windowTitle){
-        appWin = new Window();
+        window = new Window();
 
         try {
-            appWin.setTitle(windowTitle);
-            appWin.open(windowFullscreen, windowResolution);
-            windowResolution = appWin.getResolution();
+            window.setTitle(windowTitle);
+            window.open(windowFullscreen, windowResolution);
+            windowResolution = window.getResolution();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +37,7 @@ public class Application {
                 windowResolution.x / 2, windowResolution.y / 2,
         });
 
-        RuntimeFields.frameBuilder = new FrameBuilder(appWin);
+        RuntimeFields.frameBuilder = new FrameBuilder(window);
         RuntimeFields.scene = new Scene();
         RuntimeFields.canvas = new Canvas();
 
@@ -53,14 +49,14 @@ public class Application {
             DefaultFields.unknownSprite.size = 50;
 
             Shader.use(DefaultFields.PostProcessingShader);
-            Camera.updateProjection(appWin.getResolution().x, appWin.getResolution().y,1 / 0.000520833f / 4);
+            Camera.updateProjection(window.getResolution().x, window.getResolution().y,1 / 0.000520833f / 4);
 
             Shader.use(DefaultFields.DisplayShader);
-            glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), appWin.getResolution().x, appWin.getResolution().y);
-            Camera.updateProjection(appWin.getResolution().x, appWin.getResolution().y,1 / 0.000520833f / 4);
+            glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
+            Camera.updateProjection(window.getResolution().x, window.getResolution().y,1 / 0.000520833f / 4);
 
             Shader.use(DefaultFields.defaultShader);
-            Camera.updateProjection((float)appWin.getResolution().x / (float)appWin.getResolution().y, 1,1);
+            Camera.updateProjection((float) window.getResolution().x / (float) window.getResolution().y, 1,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,7 +74,7 @@ public class Application {
                 e.printStackTrace();
             }
 
-            if (!appWin.isOpened()) break;
+            if (!window.isOpened()) break;
 
             RuntimeFields.scene.update();
             RuntimeFields.canvas.update();
@@ -89,13 +85,13 @@ public class Application {
                 e.printStackTrace();
             }
 
-            appWin.update();
+            window.update();
         }
     }
 
     private void nextFrame(){
         Shader.use(DefaultFields.defaultShader);
-        appWin.getCamera().updateView();
+        window.getCamera().updateView();
         try {
             RuntimeFields.frameBuilder.build();
         } catch (Exception e) {
