@@ -15,7 +15,7 @@ public class FrameBuilder {
 
     private Vector<Vector<FramePart>> frameParts;
     private Vector<PostProcessingAction> postProcessingActions;
-    private Window win;
+    public Window window;
     private FrameBufferWorker sceneFrameWorker;
     private FrameBufferWorker blurPostProcessingFrameWorker;
     private FrameBufferWorker blurSceneFrameWorker1;
@@ -25,18 +25,18 @@ public class FrameBuilder {
     public Vector3f glSceneClearColor = new Vector3f(0.6f,0.6f,0.6f);
 
     public FrameBuilder(Window currectWin) {
-        this.win = currectWin;
+        this.window = currectWin;
         frameParts = new Vector<>();
         postProcessingActions = new Vector<>();
         for (int i = 0; i < FramePartType.values().length; i++) {
             frameParts.add(i, new Vector<FramePart>());
         }
 
-        sceneFrameWorker = new FrameBufferWorker(win.getResolution());
-        blurPostProcessingFrameWorker = new FrameBufferWorker(win.getResolution());
-        blurSceneFrameWorker1 = new FrameBufferWorker(win.getResolution());
-        blurSceneFrameWorker2 = new FrameBufferWorker(win.getResolution());
-        blurSceneFrameWorker3 = new FrameBufferWorker(win.getResolution());
+        sceneFrameWorker = new FrameBufferWorker(window.getResolution());
+        blurPostProcessingFrameWorker = new FrameBufferWorker(window.getResolution());
+        blurSceneFrameWorker1 = new FrameBufferWorker(window.getResolution());
+        blurSceneFrameWorker2 = new FrameBufferWorker(window.getResolution());
+        blurSceneFrameWorker3 = new FrameBufferWorker(window.getResolution());
     }
 
     public void addPart(FramePart fp) {
@@ -47,7 +47,7 @@ public class FrameBuilder {
 
     public void build() {
         sceneFrameWorker.bindFrameBuffer();
-        win.setDrawMode(DrawMode.Scene);
+        window.setDrawMode(DrawMode.Scene);
 
         GL11.glClearColor(glSceneClearColor.x,glSceneClearColor.y,glSceneClearColor.z,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -60,7 +60,7 @@ public class FrameBuilder {
         sceneFrameWorker.unbindCurrentFrameBuffer();
         blurPostProcessingFrameWorker.bindFrameBuffer();
 
-        win.setDrawMode(DrawMode.RawGUI);
+        window.setDrawMode(DrawMode.RawGUI);
 
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -71,12 +71,12 @@ public class FrameBuilder {
         postProcessingActions.clear();
         blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
 
-        int preDisplayFrame = DisplayDrawer.blurPostProcess(win,blurPostProcessingFrameWorker.getTexture(),sceneFrameWorker.getTexture(),blurSceneFrameWorker1,blurSceneFrameWorker2,blurSceneFrameWorker3);
+        int preDisplayFrame = DisplayDrawer.blurPostProcess(window,blurPostProcessingFrameWorker.getTexture(),sceneFrameWorker.getTexture(),blurSceneFrameWorker1,blurSceneFrameWorker2,blurSceneFrameWorker3);
 
         Shader.use(DefaultFields.DisplayShader);
         DisplayDrawer.renderScreen(preDisplayFrame);
 
-        win.setDrawMode(DrawMode.RawGUI);
+        window.setDrawMode(DrawMode.RawGUI);
         for (int fp = 0; fp < frameParts.get(FramePartType.GUI.index()).size(); fp++) {
             frameParts.get(FramePartType.GUI.index()).get(fp).partRender();
         }

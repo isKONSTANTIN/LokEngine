@@ -11,7 +11,9 @@ import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
+import org.lwjgl.input.Mouse;
 
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glUniform2f;
@@ -37,6 +39,7 @@ public class Application {
                 windowResolution.x / 2, windowResolution.y / 2,
         });
 
+        RuntimeFields.mouseStatus = new MouseStatus();
         RuntimeFields.frameBuilder = new FrameBuilder(window);
         RuntimeFields.scene = new Scene();
         RuntimeFields.canvas = new Canvas();
@@ -68,6 +71,10 @@ public class Application {
         }
 
         while (true){
+            RuntimeFields.mouseStatus.mousePosition.x = Mouse.getX();
+            RuntimeFields.mouseStatus.mousePosition.y = Mouse.getY();
+            RuntimeFields.mouseStatus.mousePressed = Mouse.isButtonDown(0);
+
             try {
                 Update();
             }catch (Exception e){
