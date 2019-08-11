@@ -7,6 +7,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -56,6 +57,10 @@ public class Window {
 
             isOpened = true;
             camera = new Camera();
+
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            GL30.glBindVertexArray(GL30.glGenVertexArrays());
         }
     }
 
@@ -87,9 +92,6 @@ public class Window {
             glDisable(GL_MULTISAMPLE);
             glEnable(GL_TEXTURE_2D);
 
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
             if (dm == DrawMode.Display){
                 Shader.use(DefaultFields.DisplayShader);
             }else{
@@ -109,9 +111,6 @@ public class Window {
             glEnable(GL_MULTISAMPLE);
             glEnable(GL_ALPHA_TEST);
             glAlphaFunc(GL_GREATER, 0.1f);
-
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
             Shader.use(DefaultFields.defaultShader);
         }

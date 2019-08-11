@@ -1,5 +1,6 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -62,16 +63,12 @@ public class GUIButton extends GUIObject {
         Vector2i resolution = RuntimeFields.frameBuilder.window.getResolution();
 
         mousePosition.y = Math.abs(mousePosition.y - resolution.y);
-        boolean enterInBox = false;
-        if (mousePosition.x > position.x && mousePosition.x < size.x + position.x){
-            if (mousePosition.y > position.y && mousePosition.y < size.y + position.y){
-                enterInBox = true;
-                if (RuntimeFields.mouseStatus.mousePressed){
-                    if (!pressed){
-                        pressed();
-                        pressed = true;
-                    }
-                }
+        boolean enterInBox = Misc.mouseInField(position,size);
+
+        if (enterInBox && RuntimeFields.mouseStatus.mousePressed){
+            if (!pressed){
+                pressed();
+                pressed = true;
             }
         }
 
@@ -79,7 +76,6 @@ public class GUIButton extends GUIObject {
             unPressed();
             pressed = false;
         }
-
     }
 
     @Override

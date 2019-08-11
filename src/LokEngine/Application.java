@@ -10,10 +10,14 @@ import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.DefaultFields;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.input.Mouse;
+
+import java.awt.*;
+import java.io.IOException;
 
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glUniform2f;
@@ -22,6 +26,7 @@ public class Application {
     public Window window;
 
     private void startApp(boolean windowFullscreen, Vector2i windowResolution, String windowTitle){
+        Logger.debug("Init window","LokEngine_start");
         window = new Window();
 
         try {
@@ -32,18 +37,27 @@ public class Application {
             e.printStackTrace();
         }
 
+        Logger.debug("Init default vertex screen buffer","LokEngine_start");
         DefaultFields.defaultVertexScreenBuffer = BufferLoader.load(new float[] {
                 -windowResolution.x / 2, windowResolution.y / 2,
                 -windowResolution.x / 2, -windowResolution.y / 2,
                 windowResolution.x / 2, -windowResolution.y / 2,
                 windowResolution.x / 2, windowResolution.y / 2,
         });
-
+        Logger.debug("Init runtime fields","LokEngine_start");
         RuntimeFields.mouseStatus = new MouseStatus();
         RuntimeFields.frameBuilder = new FrameBuilder(window);
         RuntimeFields.scene = new Scene();
         RuntimeFields.canvas = new Canvas();
-
+        Logger.debug("Init default font","LokEngine_start");
+        try {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT,this.getClass().getResourceAsStream("/resources/Fonts/Default.ttf")));
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Logger.debug("Init shaders","LokEngine_start");
         try {
             DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl","#/resources/shaders/DefaultFragShader.glsl");
             DefaultFields.unknownSprite = SpriteLoader.loadSprite("#/resources/textures/unknown.png",DefaultFields.defaultShader);
@@ -63,13 +77,13 @@ public class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Logger.debug("Call user init method","LokEngine_start");
         try {
             Init();
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        Logger.debug("Turn in main while!","LokEngine_start");
         while (true){
             RuntimeFields.mouseStatus.mousePosition.x = Mouse.getX();
             RuntimeFields.mouseStatus.mousePosition.y = Mouse.getY();
