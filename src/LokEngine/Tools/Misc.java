@@ -13,4 +13,13 @@ public class Misc {
                (mousePosition.y > position.y && mousePosition.y < size.y + position.y);
     }
 
+    public static String stackTraceToString(StackTraceElement[] elements){
+        StringBuilder StackTrace = new StringBuilder();
+
+        for (int i = 0; i < elements.length; i++) {
+            StackTrace.append("Class name: '" + elements[i].getClassName() + "' Method name: '" + elements[i].getMethodName() + "' - " + elements[i].getLineNumber() + " line\n");
+        }
+        return StackTrace.toString();
+    }
+
 }
