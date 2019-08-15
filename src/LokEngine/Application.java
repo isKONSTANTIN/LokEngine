@@ -34,7 +34,8 @@ public class Application {
             window.open(windowFullscreen, windowResolution);
             windowResolution = window.getResolution();
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.error("Fail open window!", "LokEngine_start");
+            Logger.underMessage(e.getMessage());
         }
 
         Logger.debug("Init default vertex screen buffer","LokEngine_start");
@@ -52,11 +53,11 @@ public class Application {
         Logger.debug("Init default font","LokEngine_start");
         try {
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT,this.getClass().getResourceAsStream("/resources/Fonts/Default.ttf")));
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FontFormatException | IOException e) {
+            Logger.error("Fail register default font!", "LokEngine_start");
+            Logger.underMessage(e.getMessage());
         }
+
         Logger.debug("Init shaders","LokEngine_start");
         try {
             DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl","#/resources/shaders/DefaultFragShader.glsl");
@@ -75,13 +76,15 @@ public class Application {
             Shader.use(DefaultFields.defaultShader);
             Camera.updateProjection((float) window.getResolution().x / (float) window.getResolution().y, 1,1);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.error("Fail load shaders!", "LokEngine_start");
+            Logger.underMessage(e.getMessage());
         }
         Logger.debug("Call user init method","LokEngine_start");
         try {
             Init();
         }catch (Exception e){
-            e.printStackTrace();
+            Logger.warning("Fail user-init!", "LokEngine_start");
+            Logger.underMessage(e.getMessage());
         }
         Logger.debug("Turn in main while!","LokEngine_start");
         while (true){
@@ -92,7 +95,8 @@ public class Application {
             try {
                 Update();
             }catch (Exception e){
-                e.printStackTrace();
+                Logger.warning("Fail user-update!", "Main_while");
+                Logger.underMessage(e.getMessage());
             }
 
             if (!window.isOpened()) break;
@@ -103,7 +107,8 @@ public class Application {
             try {
                  nextFrame();
             }catch (Exception e){
-                e.printStackTrace();
+                Logger.warning("Fail build frame!", "Main_while");
+                Logger.underMessage(e.getMessage());
             }
 
             window.update();
