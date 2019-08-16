@@ -90,6 +90,12 @@ public class Application {
                 Logger.printException(e);
             }
             Logger.debug("Turn in main while!", "LokEngine_start");
+        } catch (Exception e) {
+            Logger.error("Fail start engine!", "LokEngine_start");
+            Logger.printException(e);
+        }
+
+        try {
             while (true) {
                 RuntimeFields.mouseStatus.mousePosition.x = Mouse.getX();
                 RuntimeFields.mouseStatus.mousePosition.y = Mouse.getY();
@@ -98,7 +104,7 @@ public class Application {
                 try {
                     Update();
                 } catch (Exception e) {
-                    Logger.warning("Fail user-update!", "Main_while");
+                    Logger.warning("Fail user-update!", "LokEngine_runtime");
                     Logger.printException(e);
                 }
 
@@ -110,14 +116,14 @@ public class Application {
                 try {
                     nextFrame();
                 } catch (Exception e) {
-                    Logger.warning("Fail build frame!", "Main_while");
+                    Logger.warning("Fail build frame!", "LokEngine_runtime");
                     Logger.printException(e);
                 }
 
                 window.update();
             }
-        } catch (Exception e) {
-            Logger.error("Fail start engine!", "LokEngine_start");
+        }catch (Exception e){
+            Logger.error("Critical error in main while engine!", "LokEngine_runtime");
             Logger.printException(e);
         }
     }
