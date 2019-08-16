@@ -30,6 +30,10 @@ public class SpriteComponent extends Component {
         framePart = new SpriteFramePart(sprite);
     }
 
+    public Sprite getSprite(){
+        return sprite;
+    }
+
     public SpriteComponent(String path, Shader customShader){
         try {
             sprite = SpriteLoader.loadSprite(path, customShader);
