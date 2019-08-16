@@ -38,7 +38,7 @@ public class AtlasPositions {
 
         ArrayList<Integer> uvBuffers = new ArrayList<>();
 
-        for (int i = 0; i < countSprites; i++){
+        for (int i = countSprites - 1; i >= 0; i--){
             float offset = fistPoint.x * i;
             uvBuffers.add(
                     BufferLoader.load(new float[]{
@@ -50,7 +50,7 @@ public class AtlasPositions {
             );
         }
 
-        for (int i = 0; i < positions.size(); i++){
+        for (int i = positions.size() - 1; i >= 0; i--){
             uvBuffers.add(
                     BufferLoader.load(new float[]{
                             (float)positions.get(i).z / (float)texture.sizeX, (float)positions.get(i).w / (float)texture.sizeY,
