@@ -33,9 +33,9 @@ public class GUIPanel extends GUIObject {
 
     @Override
     public void update(){
-        RuntimeFields.frameBuilder.addPart(framePart);
+        RuntimeFields.getFrameBuilder().addPart(framePart);
         if (blurAction != null)
-            RuntimeFields.frameBuilder.addPostProcessingAction(blurAction);
+            RuntimeFields.getFrameBuilder().addPostProcessingAction(blurAction);
     }
 
 }

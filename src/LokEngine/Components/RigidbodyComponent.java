@@ -56,7 +56,7 @@ public class RigidbodyComponent extends Component {
 
         bodyDef.type = body.isStatic ? BodyType.STATIC : BodyType.DYNAMIC;
 
-        Body body = RuntimeFields.scene.b2World.createBody(bodyDef);
+        Body body = RuntimeFields.getScene().b2World.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

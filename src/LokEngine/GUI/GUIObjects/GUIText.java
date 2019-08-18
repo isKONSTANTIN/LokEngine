@@ -46,7 +46,7 @@ public class GUIText extends GUIObject {
 
     @Override
     public void update(){
-        RuntimeFields.frameBuilder.addPart(framePart);
+        RuntimeFields.getFrameBuilder().addPart(framePart);
     }
 
 }

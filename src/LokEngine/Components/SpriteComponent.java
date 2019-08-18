@@ -46,7 +46,7 @@ public class SpriteComponent extends Component {
     @Override
     public void update(SceneObject source){
         framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
-        RuntimeFields.frameBuilder.addPart(framePart);
+        RuntimeFields.getFrameBuilder().addPart(framePart);
     }
 
 }

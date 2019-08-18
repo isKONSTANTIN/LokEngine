@@ -51,10 +51,9 @@ public class Application {
             });
 
             Logger.debug("Init runtime fields", "LokEngine_start");
-            RuntimeFields.mouseStatus = new MouseStatus();
-            RuntimeFields.frameBuilder = new FrameBuilder(window);
-            RuntimeFields.scene = new Scene();
-            RuntimeFields.canvas = new Canvas();
+
+            RuntimeFields.init(new FrameBuilder(window), new Scene(), new Canvas(), new MouseStatus());
+
             Logger.debug("Init default font", "LokEngine_start");
             try {
                 GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/resources/Fonts/Default.ttf")));
@@ -99,15 +98,7 @@ public class Application {
         }
 
         try {
-            long startTime;
-
             while (true) {
-                startTime = System.nanoTime();
-
-                RuntimeFields.mouseStatus.mousePosition.x = Mouse.getX();
-                RuntimeFields.mouseStatus.mousePosition.y = Mouse.getY();
-                RuntimeFields.mouseStatus.mousePressed = Mouse.isButtonDown(0);
-
                 try {
                     Update();
                 } catch (Exception e) {
@@ -117,8 +108,8 @@ public class Application {
 
                 if (!window.isOpened()) break;
 
-                RuntimeFields.scene.update();
-                RuntimeFields.canvas.update();
+                RuntimeFields.getScene().update();
+                RuntimeFields.getCanvas().update();
 
                 try {
                     nextFrame();
@@ -127,9 +118,14 @@ public class Application {
                     Logger.printException(e);
                 }
 
-                window.update();
+                try {
+                    RuntimeFields.update();
+                } catch (Exception e) {
+                    Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
+                    Logger.printException(e);
+                }
 
-                RuntimeFields.deltaTime = (System.nanoTime() - startTime) / 10000000f;
+                window.update();
             }
         }catch (Exception e){
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
@@ -142,7 +138,7 @@ public class Application {
         Shader.use(DefaultFields.defaultShader);
         window.getCamera().updateView();
         try {
-            RuntimeFields.frameBuilder.build();
+            RuntimeFields.getFrameBuilder().build();
         } catch (Exception e) {
             e.printStackTrace();
         }

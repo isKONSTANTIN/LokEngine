@@ -59,20 +59,20 @@ public class GUIButton extends GUIObject {
     }
 
     private void checkMouse(){
-        Vector2i mousePosition = RuntimeFields.mouseStatus.mousePosition;
-        Vector2i resolution = RuntimeFields.frameBuilder.window.getResolution();
+        Vector2i mousePosition = RuntimeFields.getMouseStatus().mousePosition;
+        Vector2i resolution = RuntimeFields.getFrameBuilder().window.getResolution();
 
         mousePosition.y = Math.abs(mousePosition.y - resolution.y);
         boolean enterInBox = Misc.mouseInField(position,size);
 
-        if (enterInBox && RuntimeFields.mouseStatus.mousePressed){
+        if (enterInBox && RuntimeFields.getMouseStatus().mousePressed){
             if (!pressed){
                 pressed();
                 pressed = true;
             }
         }
 
-        if ((!RuntimeFields.mouseStatus.mousePressed || !enterInBox) && pressed){
+        if ((!RuntimeFields.getMouseStatus().mousePressed || !enterInBox) && pressed){
             unPressed();
             pressed = false;
         }

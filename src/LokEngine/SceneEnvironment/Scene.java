@@ -31,7 +31,7 @@ public class Scene {
         for (int i = 0; i < objects.size(); i++){
             objects.get(i).update();
         }
-        b2World.step(1.0f / 60.0f * speedPhysics * RuntimeFields.deltaTime, 12, 4);
+        b2World.step(1.0f / 60.0f * speedPhysics * RuntimeFields.getDeltaTime(), 12, 4);
 
         for (int i = 0; i < postUpdateEvents.size(); i++){
             postUpdateEvents.get(i).postUpdate();

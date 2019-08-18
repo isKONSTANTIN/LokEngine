@@ -15,7 +15,7 @@ public class GUIImage extends GUIObject {
 
     @Override
     public void update(){
-        RuntimeFields.frameBuilder.addPart(framePart);
+        RuntimeFields.getFrameBuilder().addPart(framePart);
     }
 
 }

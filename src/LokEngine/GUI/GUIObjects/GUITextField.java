@@ -22,9 +22,9 @@ public class GUITextField extends GUIObject {
 
     @Override
     public void update(){
-        if (Misc.mouseInField(position, size) && RuntimeFields.mouseStatus.mousePressed){
+        if (Misc.mouseInField(position, size) && RuntimeFields.getMouseStatus().mousePressed){
             active = true;
-        }else if (RuntimeFields.mouseStatus.mousePressed){
+        }else if (RuntimeFields.getMouseStatus().mousePressed){
             active = false;
         }
 

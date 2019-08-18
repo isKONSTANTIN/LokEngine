@@ -56,14 +56,14 @@ public class AnimationComponent extends Component {
             sprite.texture = activeAnimation.altasTexture;
             sprite.uvBuffer = activeAnimation.uvBuffers.get((int)activeAnimation.currectFrame);
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
-            activeAnimation.currectFrame += activeAnimation.speedAnimation * RuntimeFields.deltaTime;
+            activeAnimation.currectFrame += activeAnimation.speedAnimation * RuntimeFields.getDeltaTime();
 
             if ((int)activeAnimation.currectFrame > activeAnimation.uvBuffers.size()-1){
                 activeAnimation.currectFrame = 0;
             }
 
             framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
-            RuntimeFields.frameBuilder.addPart(framePart);
+            RuntimeFields.getFrameBuilder().addPart(framePart);
         }
     }
 
