@@ -15,6 +15,7 @@ import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
+import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
 
 import java.awt.*;
@@ -27,6 +28,7 @@ public class Application {
     public Window window;
 
     private void startApp(boolean windowFullscreen, Vector2i windowResolution, String windowTitle) {
+
         try {
             Logger.debug("Init window", "LokEngine_start");
             window = new Window();
@@ -93,6 +95,7 @@ public class Application {
         } catch (Exception e) {
             Logger.error("Fail start engine!", "LokEngine_start");
             Logger.printException(e);
+            System.exit(-1);
         }
 
         try {
@@ -125,6 +128,7 @@ public class Application {
         }catch (Exception e){
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
             Logger.printException(e);
+            System.exit(-2);
         }
     }
 

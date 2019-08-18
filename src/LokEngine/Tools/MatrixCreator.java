@@ -4,13 +4,11 @@ import LokEngine.Render.Camera;
 import LokEngine.Render.Shader;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.nio.FloatBuffer;
 
-import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 
 public class MatrixCreator {
@@ -63,7 +61,7 @@ public class MatrixCreator {
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.setIdentity();
 
-        Matrix4f.rotate((float)DegressToRadians(camera.RollRotation), new Vector3f(0, 0, 1),viewMatrix,viewMatrix);
+        Matrix4f.rotate((float)DegressToRadians(camera.rollRotation), new Vector3f(0, 0, 1),viewMatrix,viewMatrix);
         Matrix4f.translate(new Vector3f(-camera.position.x, -camera.position.y, -500), viewMatrix, viewMatrix);
         return viewMatrix;
     }
