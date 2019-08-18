@@ -11,4 +11,5 @@ public class RuntimeFields {
     public static Scene scene;
     public static Canvas canvas;
     public static MouseStatus mouseStatus;
+    public static float deltaTime;
 }

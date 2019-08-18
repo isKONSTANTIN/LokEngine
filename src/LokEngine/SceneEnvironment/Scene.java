@@ -1,5 +1,6 @@
 package LokEngine.SceneEnvironment;
 
+import LokEngine.Tools.RuntimeFields;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
@@ -30,7 +31,7 @@ public class Scene {
         for (int i = 0; i < objects.size(); i++){
             objects.get(i).update();
         }
-        b2World.step(1.0f / 60.0f * speedPhysics, 12, 4);
+        b2World.step(1.0f / 60.0f * speedPhysics * RuntimeFields.deltaTime, 12, 4);
 
         for (int i = 0; i < postUpdateEvents.size(); i++){
             postUpdateEvents.get(i).postUpdate();

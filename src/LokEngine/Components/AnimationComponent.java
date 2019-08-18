@@ -56,7 +56,7 @@ public class AnimationComponent extends Component {
             sprite.texture = activeAnimation.altasTexture;
             sprite.uvBuffer = activeAnimation.uvBuffers.get((int)activeAnimation.currectFrame);
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
-            activeAnimation.currectFrame += activeAnimation.speedAnimation;
+            activeAnimation.currectFrame += activeAnimation.speedAnimation * RuntimeFields.deltaTime;
 
             if ((int)activeAnimation.currectFrame > activeAnimation.uvBuffers.size()-1){
                 activeAnimation.currectFrame = 0;

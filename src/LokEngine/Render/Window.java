@@ -40,7 +40,7 @@ public class Window {
         Display.setTitle(title);
     }
 
-    public void open(boolean fullscreen, Vector2i resolution) throws LWJGLException {
+    public void open(boolean fullscreen, boolean vSync, Vector2i resolution) throws LWJGLException {
         if (!isOpened){
             this.fullscreen = fullscreen;
 
@@ -53,7 +53,7 @@ public class Window {
             }
 
             Display.create();
-            Display.setVSyncEnabled(true);
+            Display.setVSyncEnabled(vSync);
 
             isOpened = true;
             camera = new Camera();

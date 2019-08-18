@@ -27,7 +27,7 @@ import static org.lwjgl.opengl.GL20.glUniform2f;
 public class Application {
     public Window window;
 
-    private void startApp(boolean windowFullscreen, Vector2i windowResolution, String windowTitle) {
+    private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
 
         try {
             Logger.debug("Init window", "LokEngine_start");
@@ -35,7 +35,7 @@ public class Application {
 
             try {
                 window.setTitle(windowTitle);
-                window.open(windowFullscreen, windowResolution);
+                window.open(windowFullscreen, vSync, windowResolution);
                 windowResolution = window.getResolution();
             } catch (Exception e) {
                 Logger.error("Fail open window!", "LokEngine_start");
@@ -99,7 +99,11 @@ public class Application {
         }
 
         try {
+            long startTime;
+
             while (true) {
+                startTime = System.nanoTime();
+
                 RuntimeFields.mouseStatus.mousePosition.x = Mouse.getX();
                 RuntimeFields.mouseStatus.mousePosition.y = Mouse.getY();
                 RuntimeFields.mouseStatus.mousePressed = Mouse.isButtonDown(0);
@@ -124,6 +128,8 @@ public class Application {
                 }
 
                 window.update();
+
+                RuntimeFields.deltaTime = (System.nanoTime() - startTime) / 10000000f;
             }
         }catch (Exception e){
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
@@ -143,11 +149,11 @@ public class Application {
     }
 
     public void start() {
-        startApp(false, new Vector2i(512,512), "LokEngine application");
+        startApp(false, true, new Vector2i(512,512), "LokEngine application");
     }
-    public void start(boolean windowFullscreen) { startApp(windowFullscreen, new Vector2i(512,512), "LokEngine application"); }
-    public void start(boolean windowFullscreen, Vector2i windowResolution) { startApp(windowFullscreen, windowResolution, "LokEngine application"); }
-    public void start(boolean windowFullscreen, Vector2i windowResolution, String windowTitle) {startApp(windowFullscreen, windowResolution, windowTitle); }
+    public void start(boolean windowFullscreen) { startApp(windowFullscreen, true, new Vector2i(512,512), "LokEngine application"); }
+    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution) { startApp(windowFullscreen, vSync, windowResolution, "LokEngine application"); }
+    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {startApp(windowFullscreen, vSync, windowResolution, windowTitle); }
 
     public void Init(){}
     public void Update(){}
