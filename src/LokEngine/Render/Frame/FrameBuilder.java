@@ -2,7 +2,8 @@ package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Enums.FramePartType;
-import LokEngine.Render.Frame.FrameParts.PostProcessingActions.PostProcessingAction;
+import LokEngine.Render.Frame.FrameParts.PostProcessing.Actions.PostProcessingAction;
+import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
 import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.Tools.DefaultFields;
@@ -14,36 +15,38 @@ import java.util.Vector;
 public class FrameBuilder {
 
     private Vector<Vector<FramePart>> frameParts;
-    private Vector<PostProcessingAction> postProcessingActions;
+    private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<PostProcessingActionWorker>();
     public Window window;
     private FrameBufferWorker sceneFrameWorker;
-    private FrameBufferWorker blurPostProcessingFrameWorker;
-    private FrameBufferWorker blurSceneFrameWorker1;
-    private FrameBufferWorker blurSceneFrameWorker2;
-    private FrameBufferWorker blurSceneFrameWorker3;
 
     public Vector3f glSceneClearColor = new Vector3f(0.6f,0.6f,0.6f);
 
     public FrameBuilder(Window currectWin) {
         this.window = currectWin;
         frameParts = new Vector<>();
-        postProcessingActions = new Vector<>();
         for (int i = 0; i < FramePartType.values().length; i++) {
             frameParts.add(i, new Vector<FramePart>());
         }
 
         sceneFrameWorker = new FrameBufferWorker(window.getResolution());
-        blurPostProcessingFrameWorker = new FrameBufferWorker(window.getResolution());
-        blurSceneFrameWorker1 = new FrameBufferWorker(window.getResolution());
-        blurSceneFrameWorker2 = new FrameBufferWorker(window.getResolution());
-        blurSceneFrameWorker3 = new FrameBufferWorker(window.getResolution());
     }
 
     public void addPart(FramePart fp) {
         frameParts.get(fp.frameType.index()).add(fp);
     }
 
-    public void addPostProcessingAction(PostProcessingAction action){ postProcessingActions.add(action); }
+    public void addPostProcessingActionWorker(PostProcessingActionWorker worker){ postProcessingActionWorkers.add(worker); }
+
+    public PostProcessingActionWorker getPostProcessingActionWorker(String name){
+
+        for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
+            if (postProcessingActionWorker.getName().equals(name)) {
+                return postProcessingActionWorker;
+            }
+        }
+        return null;
+
+    }
 
     public void build() {
         sceneFrameWorker.bindFrameBuffer();
@@ -58,20 +61,12 @@ public class FrameBuilder {
         frameParts.get(FramePartType.Scene.index()).clear();
 
         sceneFrameWorker.unbindCurrentFrameBuffer();
-        blurPostProcessingFrameWorker.bindFrameBuffer();
 
-        window.setDrawMode(DrawMode.RawGUI);
+        int preDisplayFrame = sceneFrameWorker.getTexture();
 
-        GL11.glClearColor(0,0,0,1);
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
-        for (int i = 0; i < postProcessingActions.size(); i++){
-            postProcessingActions.get(i).apply();
+        for (int i = 0; i < postProcessingActionWorkers.size(); i++){
+            preDisplayFrame = postProcessingActionWorkers.get(i).render(preDisplayFrame);
         }
-        postProcessingActions.clear();
-        blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
-
-        int preDisplayFrame = DisplayDrawer.blurPostProcess(window,blurPostProcessingFrameWorker.getTexture(),sceneFrameWorker.getTexture(),blurSceneFrameWorker1,blurSceneFrameWorker2,blurSceneFrameWorker3);
 
         Shader.use(DefaultFields.DisplayShader);
         DisplayDrawer.renderScreen(preDisplayFrame);

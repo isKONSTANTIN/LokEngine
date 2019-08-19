@@ -1,4 +1,4 @@
-package LokEngine.Render.Frame.FrameParts.PostProcessingActions;
+package LokEngine.Render.Frame.FrameParts.PostProcessing.Actions;
 
 import LokEngine.Tools.Utilities.Vector2i;
 

@@ -6,6 +6,7 @@ import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Camera;
 import LokEngine.Render.Frame.FrameBuilder;
+import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
 import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
@@ -83,6 +84,10 @@ public class Application {
                 Logger.error("Fail load shaders!", "LokEngine_start");
                 Logger.printException(e);
             }
+            Logger.debug("Init engine post processing action workers", "LokEngine_start");
+
+            RuntimeFields.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
+
             Logger.debug("Call user init method", "LokEngine_start");
             try {
                 Init();

@@ -1,10 +1,9 @@
-package LokEngine.Render.Frame.FrameParts.PostProcessingActions;
+package LokEngine.Render.Frame.FrameParts.PostProcessing.Actions;
 
 import LokEngine.Tools.Utilities.BlurTuning;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
 
 public class BlurAction extends PostProcessingAction {
 
