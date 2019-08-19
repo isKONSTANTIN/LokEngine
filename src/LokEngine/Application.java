@@ -84,9 +84,6 @@ public class Application {
                 Logger.error("Fail load shaders!", "LokEngine_start");
                 Logger.printException(e);
             }
-            Logger.debug("Init engine post processing action workers", "LokEngine_start");
-
-            RuntimeFields.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
 
             Logger.debug("Call user init method", "LokEngine_start");
             try {
@@ -95,6 +92,11 @@ public class Application {
                 Logger.warning("Fail user-init!", "LokEngine_start");
                 Logger.printException(e);
             }
+
+            Logger.debug("Init engine post processing action workers", "LokEngine_start");
+
+            RuntimeFields.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
+
             Logger.debug("Turn in main while!", "LokEngine_start");
         } catch (Exception e) {
             Logger.error("Fail start engine!", "LokEngine_start");
