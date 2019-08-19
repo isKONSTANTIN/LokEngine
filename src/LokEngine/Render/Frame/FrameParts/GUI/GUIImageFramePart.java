@@ -13,9 +13,9 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GUIImageFramePart extends FramePart {
 
-    Texture texture;
-    Vector2i position;
-    Vector2i size;
+    public Texture texture;
+    public Vector2i position;
+    public Vector2i size;
 
     public GUIImageFramePart(Vector2i position, Vector2i size, String path) {
         super(FramePartType.GUI);

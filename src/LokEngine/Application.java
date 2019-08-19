@@ -14,6 +14,7 @@ import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.SplashScreen;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.Sys;
@@ -42,7 +43,14 @@ public class Application {
                 Logger.error("Fail open window!", "LokEngine_start");
                 Logger.printException(e);
             }
+            try {
+                SplashScreen.init(window);
+            } catch (Exception e) {
+                Logger.error("Fail init splash screen!", "LokEngine_start");
+                Logger.printException(e);
+            }
 
+            SplashScreen.updateStatus(0.1f);
             Logger.debug("Init default vertex screen buffer", "LokEngine_start");
             DefaultFields.defaultVertexScreenBuffer = BufferLoader.load(new float[]{
                     -windowResolution.x / 2, windowResolution.y / 2,
@@ -50,7 +58,7 @@ public class Application {
                     windowResolution.x / 2, -windowResolution.y / 2,
                     windowResolution.x / 2, windowResolution.y / 2,
             });
-
+            SplashScreen.updateStatus(0.2f);
             Logger.debug("Init runtime fields", "LokEngine_start");
 
             RuntimeFields.init(new FrameBuilder(window), new Scene(), new Canvas(), new MouseStatus());
@@ -63,6 +71,7 @@ public class Application {
                 Logger.printException(e);
             }
 
+            SplashScreen.updateStatus(0.3f);
             Logger.debug("Init shaders", "LokEngine_start");
             try {
                 DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
@@ -84,7 +93,7 @@ public class Application {
                 Logger.error("Fail load shaders!", "LokEngine_start");
                 Logger.printException(e);
             }
-
+            SplashScreen.updateStatus(0.4f);
             Logger.debug("Call user init method", "LokEngine_start");
             try {
                 Init();
@@ -97,6 +106,7 @@ public class Application {
 
             RuntimeFields.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
 
+            SplashScreen.updateStatus(0.9f);
             Logger.debug("Turn in main while!", "LokEngine_start");
         } catch (Exception e) {
             Logger.error("Fail start engine!", "LokEngine_start");
