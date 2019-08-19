@@ -15,7 +15,7 @@ public class RuntimeFields {
     private static float deltaTime;
     private static int fps;
 
-    private static int fcpu;
+    public static float speedEngine = 1f;
     private static long lastUpdateTime;
     private static long lastFPSUpdateTime;
 
@@ -23,7 +23,8 @@ public class RuntimeFields {
     public static Scene getScene(){ return scene; }
     public static Canvas getCanvas(){ return canvas; }
     public static MouseStatus getMouseStatus(){ return mouseStatus; }
-    public static float getDeltaTime(){ return deltaTime; }
+    public static float getFixedDeltaTime(){ return deltaTime; }
+    public static float getDeltaTime(){ return deltaTime / 16.66666f * speedEngine; }
     public static int getFps(){ return fps; }
 
     public static void init(FrameBuilder frameBuilder, Scene scene, Canvas canvas, MouseStatus mouseStatus){
@@ -38,16 +39,15 @@ public class RuntimeFields {
         mouseStatus.mousePosition.y = Mouse.getY();
         mouseStatus.mousePressed = Mouse.isButtonDown(0);
 
-        deltaTime = (System.nanoTime() - lastUpdateTime) / 10000000f;
-        lastUpdateTime = System.nanoTime();
+        long timeNow = System.nanoTime();
 
-        if ((lastUpdateTime - lastFPSUpdateTime) / 1000000 >= 1000){
-            fps = fcpu;
-            fcpu = 0;
-            lastFPSUpdateTime = lastUpdateTime;
+        deltaTime = (timeNow - lastUpdateTime) / 1000000f;
+        lastUpdateTime = timeNow;
+
+        if (timeNow - lastFPSUpdateTime >= 1000000000){
+            lastFPSUpdateTime = timeNow;
+            fps = Math.round(1000f / deltaTime);
         }
-
-        fcpu++;
     }
 
 }

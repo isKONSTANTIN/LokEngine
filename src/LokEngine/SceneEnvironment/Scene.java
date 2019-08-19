@@ -11,7 +11,6 @@ public class Scene {
     private Vector<SceneObject> objects = new Vector<>();
     private Vector<PostUpdateEvent> postUpdateEvents = new Vector<>();
     public World b2World;
-    public float speedPhysics = 1;
 
     public Scene(){
         b2World = new World(new Vec2(0,-5));
@@ -31,7 +30,7 @@ public class Scene {
         for (int i = 0; i < objects.size(); i++){
             objects.get(i).update();
         }
-        b2World.step(1.0f / 60.0f * speedPhysics * RuntimeFields.getDeltaTime(), 12, 4);
+        b2World.step(1.0f / 60.0f * RuntimeFields.getDeltaTime(), 12, 4);
 
         for (int i = 0; i < postUpdateEvents.size(); i++){
             postUpdateEvents.get(i).postUpdate();
