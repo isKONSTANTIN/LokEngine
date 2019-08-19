@@ -9,9 +9,9 @@ public class GUIText extends GUIObject {
 
     private GUITextFramePart framePart;
 
-    public GUIText(Vector2i position, String FontName, String text, Color color, int fontStyle, int size, boolean antiAlias) {
+    public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias) {
         super(position, new Vector2i(0,0));
-        framePart = new GUITextFramePart(text,new org.newdawn.slick.Color(color.red,color.green,color.blue,color.alpha), fontStyle,size,antiAlias);
+        framePart = new GUITextFramePart(text, fontName, new org.newdawn.slick.Color(color.red, color.green, color.blue, color.alpha), fontStyle, size, antiAlias);
 
         this.size.y = framePart.getHeight();
         this.size.x = framePart.getWidth();
@@ -31,7 +31,7 @@ public class GUIText extends GUIObject {
     }
 
     public GUIText(Vector2i position) {
-        this(position,"Arial", "Text", new Color(1,1,1,1), 0, 24, true);
+        this(position,"Times New Roman", "Text", new Color(1,1,1,1), 0, 24, true);
     }
 
     public String getText(){

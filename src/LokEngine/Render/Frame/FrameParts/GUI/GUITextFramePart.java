@@ -22,9 +22,9 @@ public class GUITextFramePart extends FramePart {
     public Vector2i position;
     public org.newdawn.slick.Color color;
 
-    public GUITextFramePart(String text, org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
+    public GUITextFramePart(String text, String fontName , org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
         super(FramePartType.GUI);
-        font = new TrueTypeFont(new Font("Times New Roman",fontStyle,size),antiAlias);
+        font = new TrueTypeFont(new Font(fontName,fontStyle,size),antiAlias);
         buffer = GL11.glGetInteger(GL_TEXTURE_BINDING_2D);
         this.text = text;
         this.color = color;

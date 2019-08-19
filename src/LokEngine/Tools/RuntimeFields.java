@@ -15,7 +15,7 @@ public class RuntimeFields {
     private static float deltaTime;
     private static int fps;
 
-    public static float speedEngine = 1f;
+    private static float speedEngine = 1f;
     private static long lastUpdateTime;
     private static long lastFPSUpdateTime;
 
@@ -23,9 +23,18 @@ public class RuntimeFields {
     public static Scene getScene(){ return scene; }
     public static Canvas getCanvas(){ return canvas; }
     public static MouseStatus getMouseStatus(){ return mouseStatus; }
-    public static float getFixedDeltaTime(){ return deltaTime; }
-    public static float getDeltaTime(){ return deltaTime / 16.66666f * speedEngine; }
+    public static float getDeltaTime(){ return deltaTime / 16.66666f; }
     public static int getFps(){ return fps; }
+
+    public static float getSpeedEngine(){ return speedEngine; }
+
+    public static void setSpeedEngine(float speed){
+        if (speed >= 0){
+            speedEngine = speed;
+        }else{
+            throw new IllegalArgumentException("Speed cannot be less than zero!");
+        }
+    }
 
     public static void init(FrameBuilder frameBuilder, Scene scene, Canvas canvas, MouseStatus mouseStatus){
         RuntimeFields.frameBuilder = frameBuilder;
