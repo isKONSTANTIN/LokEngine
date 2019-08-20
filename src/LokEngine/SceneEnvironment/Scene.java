@@ -15,9 +15,7 @@ public class Scene {
     public int physicsVelocityIterations = 12;
     public int physicsPositionsIterations = 4;
 
-    public Scene(){
-        b2World = new World(new Vec2(0,-5));
-    }
+    public Scene(){ b2World = new World(new Vec2(0,-5)); }
 
     public int addObject(SceneObject newObject){
         objects.add(newObject);

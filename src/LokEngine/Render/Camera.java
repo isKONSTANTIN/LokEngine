@@ -3,6 +3,8 @@ package LokEngine.Render;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.AL10;
 import org.lwjgl.util.vector.Vector2f;
 
 public class Camera {
@@ -16,10 +18,12 @@ public class Camera {
     }
 
     public void updateView(){
-        MatrixCreator.PutMatrixInShader(Shader.currentShader, "View", MatrixCreator.CreateViewMatrix(this));
+        updateView(Shader.currentShader);
     }
 
     public void updateView(Shader shader){
         MatrixCreator.PutMatrixInShader(shader, "View", MatrixCreator.CreateViewMatrix(this));
+        AL10.alListener3f(AL10.AL_POSITION,position.x,position.y,0);
+        AL10.alListener3f(AL10.AL_VELOCITY,0,0,0);
     }
 }

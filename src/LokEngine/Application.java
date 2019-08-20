@@ -19,6 +19,7 @@ import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
 
 import java.awt.*;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import static org.lwjgl.opengl.GL20.glUniform2f;
 
 public class Application {
     public Window window;
+    private boolean isRun;
 
     private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
 
@@ -94,6 +96,16 @@ public class Application {
                 Logger.printException(e);
             }
             SplashScreen.updateStatus(0.4f);
+            Logger.debug("Init OpenAL", "LokEngine_start");
+
+            try{
+                AL.create();
+            }catch (Exception e){
+                Logger.error("Fail init OpenAL!", "LokEngine_start");
+                Logger.printException(e);
+            }
+
+            SplashScreen.updateStatus(0.5f);
             Logger.debug("Call user init method", "LokEngine_start");
             try {
                 Init();
@@ -108,6 +120,7 @@ public class Application {
 
             SplashScreen.updateStatus(0.9f);
             Logger.debug("Turn in main while!", "LokEngine_start");
+            isRun = true;
         } catch (Exception e) {
             Logger.error("Fail start engine!", "LokEngine_start");
             Logger.printException(e);
@@ -123,7 +136,7 @@ public class Application {
                     Logger.printException(e);
                 }
 
-                if (!window.isOpened()) break;
+                if (!isRun) break;
 
                 RuntimeFields.getScene().update();
                 RuntimeFields.getCanvas().update();
@@ -149,6 +162,7 @@ public class Application {
             Logger.printException(e);
             System.exit(-2);
         }
+        AL.destroy();
     }
 
     private void nextFrame(){
@@ -173,6 +187,7 @@ public class Application {
                 Logger.printException(e);
             }
             Logger.debug("Turn in main while!", "LokEngine_start");
+            isRun = true;
         }catch (Exception e){
             Logger.error("Fail start engine!", "LokEngine_start");
             Logger.printException(e);
@@ -186,6 +201,8 @@ public class Application {
                     Logger.warning("Fail user-update!", "LokEngine_runtime");
                     Logger.printException(e);
                 }
+
+                if (!isRun) break;
 
                 RuntimeFields.getScene().update();
 
@@ -201,6 +218,13 @@ public class Application {
             Logger.printException(e);
             System.exit(-2);
         }
+    }
+
+    public void close(){
+        if (window != null){
+            window.close();
+        }
+        isRun = false;
     }
 
     public void start() {
