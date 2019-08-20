@@ -44,9 +44,11 @@ public class RuntimeFields {
     }
 
     public static void update(){
-        mouseStatus.mousePosition.x = Mouse.getX();
-        mouseStatus.mousePosition.y = Mouse.getY();
-        mouseStatus.mousePressed = Mouse.isButtonDown(0);
+        if (mouseStatus != null){
+            mouseStatus.mousePosition.x = Mouse.getX();
+            mouseStatus.mousePosition.y = Mouse.getY();
+            mouseStatus.mousePressed = Mouse.isButtonDown(0);
+        }
 
         long timeNow = System.nanoTime();
 

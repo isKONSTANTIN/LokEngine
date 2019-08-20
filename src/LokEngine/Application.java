@@ -161,6 +161,48 @@ public class Application {
         }
     }
 
+    public void startConsole(){
+        try {
+            Logger.debug("Init runtime fields (Scene)", "LokEngine_start");
+            RuntimeFields.init(null, new Scene(), null, null);
+            Logger.debug("Call user init method", "LokEngine_start");
+            try {
+                Init();
+            } catch (Exception e) {
+                Logger.warning("Fail user-init!", "LokEngine_start");
+                Logger.printException(e);
+            }
+            Logger.debug("Turn in main while!", "LokEngine_start");
+        }catch (Exception e){
+            Logger.error("Fail start engine!", "LokEngine_start");
+            Logger.printException(e);
+            System.exit(-1);
+        }
+        try {
+            while (true) {
+                try {
+                    Update();
+                } catch (Exception e) {
+                    Logger.warning("Fail user-update!", "LokEngine_runtime");
+                    Logger.printException(e);
+                }
+
+                RuntimeFields.getScene().update();
+
+                try {
+                    RuntimeFields.update();
+                } catch (Exception e) {
+                    Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
+                    Logger.printException(e);
+                }
+            }
+        }catch (Exception e){
+            Logger.error("Critical error in main while engine!", "LokEngine_runtime");
+            Logger.printException(e);
+            System.exit(-2);
+        }
+    }
+
     public void start() {
         startApp(false, true, new Vector2i(512,512), "LokEngine application");
     }
