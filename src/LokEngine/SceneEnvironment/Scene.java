@@ -12,6 +12,9 @@ public class Scene {
     private Vector<PostUpdateEvent> postUpdateEvents = new Vector<>();
     public World b2World;
 
+    public int physicsVelocityIterations = 12;
+    public int physicsPositionsIterations = 4;
+
     public Scene(){
         b2World = new World(new Vec2(0,-5));
     }
@@ -30,7 +33,7 @@ public class Scene {
         for (int i = 0; i < objects.size(); i++){
             objects.get(i).update();
         }
-        b2World.step(1 / 60f * RuntimeFields.getSpeedEngine() * RuntimeFields.getDeltaTime(), 12, 4);
+        b2World.step(1 / 60f * RuntimeFields.getSpeedEngine() * RuntimeFields.getDeltaTime(), physicsVelocityIterations, physicsPositionsIterations);
 
         for (int i = 0; i < postUpdateEvents.size(); i++){
             postUpdateEvents.get(i).postUpdate();
