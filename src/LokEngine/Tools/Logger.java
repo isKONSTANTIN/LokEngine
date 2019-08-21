@@ -103,7 +103,7 @@ public class Logger {
 
     public static void printException(Exception e){
         if (exceptionMessages){
-            underMessage(e.getMessage());
+            underMessage(e.getClass().getName() + " - " + e.getMessage());
             underMessage(Misc.stackTraceToString(e.getStackTrace()));
         }
     }
