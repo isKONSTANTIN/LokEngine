@@ -36,11 +36,19 @@ public class SplashScreen {
 
             GL11.glColor4f(1, 1, 1, 1);
 
+            float length = sizeBar.x * percentage;
+
             GL11.glVertex3f(positionBar.x, positionBar.y, 0);
-            GL11.glVertex3f(sizeBar.x * percentage + positionBar.x, positionBar.y, 0);
-            GL11.glVertex3f(sizeBar.x * percentage + positionBar.x, sizeBar.y + positionBar.y, 0);
+            GL11.glVertex3f(length + positionBar.x, positionBar.y, 0);
+            GL11.glVertex3f(length + positionBar.x, sizeBar.y + positionBar.y, 0);
             GL11.glVertex3f(positionBar.x, sizeBar.y + positionBar.y, 0);
 
+            GL11.glColor4f(0.1f, 0.1f, 0.1f, 1);
+
+            GL11.glVertex3f(length + positionBar.x, positionBar.y, 0);
+            GL11.glVertex3f(sizeBar.x + positionBar.x, positionBar.y, 0);
+            GL11.glVertex3f(sizeBar.x + positionBar.x, sizeBar.y + positionBar.y, 0);
+            GL11.glVertex3f(length + positionBar.x, sizeBar.y + positionBar.y, 0);
             GL11.glEnd();
         }
         window.update();
