@@ -25,7 +25,7 @@ public class SoundLoader {
         sound.buffer = AL10.alGenBuffers();
 
         try {
-            if (soundType == SoundType.Wave){
+            if (soundType == SoundType.WAV){
                 WaveData waveData;
                 if (path.charAt(0) == '#'){
                     waveData = WaveData.create(SoundLoader.class.getResourceAsStream(path.substring(1)));

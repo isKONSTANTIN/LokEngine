@@ -12,7 +12,7 @@ public class SoundComponent extends Component {
     private int source;
 
     public SoundComponent(String path){
-        sound = SoundLoader.loadSound(path, SoundType.Wave);
+        sound = SoundLoader.loadSound(path, SoundType.WAV);
         source = AL10.alGenSources();
 
         AL10.alSourcef(this.source,AL10.AL_GAIN,1);

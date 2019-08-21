@@ -32,7 +32,6 @@ public class Application {
     private boolean isRun;
 
     private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
-
         try {
             Logger.debug("Init window", "LokEngine_start");
             window = new Window();

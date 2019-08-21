@@ -1,5 +1,6 @@
 package LokEngine.Tools.Utilities;
 
+import LokEngine.Tools.Logger;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
 
@@ -11,6 +12,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+
+import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 
 public class WaveData {
 
@@ -59,10 +62,7 @@ public class WaveData {
             return null;
         }
         InputStream bufferedInput = new BufferedInputStream(stream);
-        AudioInputStream audioStream = null;
-
-        audioStream = AudioSystem.getAudioInputStream(bufferedInput);
-        WaveData wavStream = new WaveData(audioStream);
+        WaveData wavStream = new WaveData(getAudioInputStream(bufferedInput));
         return wavStream;
     }
 

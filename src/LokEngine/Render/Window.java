@@ -6,7 +6,6 @@ import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -87,7 +86,6 @@ public class Window {
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
             glDisable(GL_DEPTH_TEST);
             glDisable(GL_MULTISAMPLE);
             glEnable(GL_TEXTURE_2D);
@@ -108,7 +106,6 @@ public class Window {
 
             glEnable(GL_TEXTURE_2D);
             glEnable(GL_DEPTH_TEST);
-            glEnable(GL_MULTISAMPLE);
             glEnable(GL_ALPHA_TEST);
             glAlphaFunc(GL_GREATER, 0.1f);
 

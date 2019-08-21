@@ -54,13 +54,18 @@ public class AnimationComponent extends Component {
     public void update(SceneObject source){
         if (activeAnimation != null){
             sprite.texture = activeAnimation.altasTexture;
-            sprite.uvBuffer = activeAnimation.uvBuffers.get((int)activeAnimation.currectFrame);
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
             activeAnimation.currectFrame += activeAnimation.speedAnimation * RuntimeFields.getDeltaTime() * RuntimeFields.getSpeedEngine();
 
             if ((int)activeAnimation.currectFrame > activeAnimation.uvBuffers.size()-1){
                 activeAnimation.currectFrame = 0;
             }
+
+            if ((int)activeAnimation.currectFrame < 0){
+                activeAnimation.currectFrame = activeAnimation.uvBuffers.size()-1;
+            }
+
+            sprite.uvBuffer = activeAnimation.uvBuffers.get((int)activeAnimation.currectFrame);
 
             framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
             RuntimeFields.getFrameBuilder().addPart(framePart);
