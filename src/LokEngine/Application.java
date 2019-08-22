@@ -1,6 +1,6 @@
 package LokEngine;
 
-import LokEngine.GUI.Canvas;
+import LokEngine.GUI.GUIObjects.GUICanvas;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.SpriteLoader;
@@ -12,13 +12,10 @@ import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.Logger;
-import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SplashScreen;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.Sys;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 
 import java.awt.*;
@@ -62,7 +59,7 @@ public class Application {
             SplashScreen.updateStatus(0.2f);
             Logger.debug("Init runtime fields", "LokEngine_start");
 
-            RuntimeFields.init(new FrameBuilder(window), new Scene(), new Canvas(), new MouseStatus());
+            RuntimeFields.init(new FrameBuilder(window), new Scene(), new GUICanvas(new Vector2i(0,0), windowResolution), new MouseStatus());
 
             Logger.debug("Init default font", "LokEngine_start");
             try {
@@ -204,6 +201,7 @@ public class Application {
                 if (!isRun) break;
 
                 RuntimeFields.getScene().update();
+                RuntimeFields.getCanvas().update();
 
                 try {
                     RuntimeFields.update();

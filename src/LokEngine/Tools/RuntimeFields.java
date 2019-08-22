@@ -1,8 +1,7 @@
 package LokEngine.Tools;
 
-import LokEngine.GUI.Canvas;
+import LokEngine.GUI.GUIObjects.GUICanvas;
 import LokEngine.Render.Frame.FrameBuilder;
-import LokEngine.Render.Shader;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.Utilities.MouseStatus;
 import org.lwjgl.input.Mouse;
@@ -10,7 +9,7 @@ import org.lwjgl.input.Mouse;
 public class RuntimeFields {
     private static FrameBuilder frameBuilder;
     private static Scene scene;
-    private static Canvas canvas;
+    private static GUICanvas canvas;
     private static MouseStatus mouseStatus;
     private static float deltaTime;
     private static int fps;
@@ -21,7 +20,7 @@ public class RuntimeFields {
 
     public static FrameBuilder getFrameBuilder(){ return frameBuilder; }
     public static Scene getScene(){ return scene; }
-    public static Canvas getCanvas(){ return canvas; }
+    public static GUICanvas getCanvas(){ return canvas; }
     public static MouseStatus getMouseStatus(){ return mouseStatus; }
     public static float getDeltaTime(){ return deltaTime / 16.66666f; }
     public static int getFps(){ return fps; }
@@ -36,7 +35,7 @@ public class RuntimeFields {
         }
     }
 
-    public static void init(FrameBuilder frameBuilder, Scene scene, Canvas canvas, MouseStatus mouseStatus){
+    public static void init(FrameBuilder frameBuilder, Scene scene, GUICanvas canvas, MouseStatus mouseStatus){
         RuntimeFields.frameBuilder = frameBuilder;
         RuntimeFields.scene = scene;
         RuntimeFields.canvas = canvas;
