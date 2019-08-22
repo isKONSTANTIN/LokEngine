@@ -1,5 +1,6 @@
-package LokEngine.GUI.GUIObjects;
+package LokEngine.GUI.Canvases;
 
+import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import java.util.Vector;

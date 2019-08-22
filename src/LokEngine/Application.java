@@ -1,6 +1,6 @@
 package LokEngine;
 
-import LokEngine.GUI.GUIObjects.GUICanvas;
+import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.SpriteLoader;

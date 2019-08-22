@@ -21,6 +21,18 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
+    public void setPosition(Vector2i position){
+        this.position = position;
+        text.setPosition(position);
+    }
+
+    @Override
+    public void setSize(Vector2i size){
+        this.size = size;
+        text.setSize(size);
+    }
+
+    @Override
     public void update(){
         if (Misc.mouseInField(position, size) && RuntimeFields.getMouseStatus().mousePressed){
             active = true;

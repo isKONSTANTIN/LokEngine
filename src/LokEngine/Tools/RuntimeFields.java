@@ -1,6 +1,6 @@
 package LokEngine.Tools;
 
-import LokEngine.GUI.GUIObjects.GUICanvas;
+import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.Utilities.MouseStatus;

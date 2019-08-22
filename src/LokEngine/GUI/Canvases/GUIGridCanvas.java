@@ -1,5 +1,6 @@
-package LokEngine.GUI.GUIObjects;
+package LokEngine.GUI.Canvases;
 
+import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import java.util.ArrayList;
@@ -52,7 +53,8 @@ public class GUIGridCanvas extends GUICanvas {
 
     public void updatePositions(){
         int lastObjectID = 0;
-        Vector2i nextObjectPos = new Vector2i(position.x,position.y);
+        Vector2i nextObjectPos = new Vector2i(getPosition().x,getPosition().y);
+        Vector2i size = new Vector2i(getSize().x,getSize().y);
 
         for (int column = 0; column < linesAndColumns.y; column++) {
             for (int line = 0; line < linesAndColumns.x; line++) {
@@ -61,16 +63,16 @@ public class GUIGridCanvas extends GUICanvas {
                 GUIObject object = objects.get(lastObjectID);
 
                 Vector2i objectSize = new Vector2i(Math.round(size.x * percentSizesX.get(column)), Math.round(size.y * percentSizesY.get(line)));
-                object.size.x = objectSize.x;
-                object.size.y = objectSize.y;
-                object.position.x = nextObjectPos.x;
-                object.position.y = nextObjectPos.y;
+
+                object.setSize(objectSize);
+                object.setPosition(new Vector2i(nextObjectPos.x,nextObjectPos.y));
+
                 nextObjectPos.y += objectSize.y;
 
                 lastObjectID++;
             }
             nextObjectPos.x += size.x * percentSizesX.get(column);
-            nextObjectPos.y = position.y;
+            nextObjectPos.y = getPosition().y;
         }
         while (lastObjectID < objects.size()) {
             objects.remove(objects.size()-1);

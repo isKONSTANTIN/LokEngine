@@ -79,6 +79,20 @@ public class GUIButton extends GUIObject {
     }
 
     @Override
+    public void setPosition(Vector2i position){
+        this.position = position;
+        text.setPosition(position);
+        panel.setPosition(position);
+    }
+
+    @Override
+    public void setSize(Vector2i size){
+        this.size = size;
+        text.setSize(size);
+        panel.setSize(size);
+    }
+
+    @Override
     public void update(){
         panel.position.x = position.x;
         panel.position.y = position.y;

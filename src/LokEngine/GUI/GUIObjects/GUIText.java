@@ -45,6 +45,17 @@ public class GUIText extends GUIObject {
     }
 
     @Override
+    public void setPosition(Vector2i position){
+        this.position = position;
+        framePart.position = position;
+    }
+
+    @Override
+    public void setSize(Vector2i size){
+        this.size = size;
+    }
+
+    @Override
     public void update(){
         RuntimeFields.getFrameBuilder().addPart(framePart);
     }
