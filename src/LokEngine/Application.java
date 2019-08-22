@@ -201,7 +201,6 @@ public class Application {
                 if (!isRun) break;
 
                 RuntimeFields.getScene().update();
-                RuntimeFields.getCanvas().update();
 
                 try {
                     RuntimeFields.update();
