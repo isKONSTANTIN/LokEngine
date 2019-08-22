@@ -31,7 +31,7 @@ public class Scene {
         for (int i = 0; i < objects.size(); i++){
             objects.get(i).update();
         }
-        b2World.step(1 / 60f * RuntimeFields.getSpeedEngine() * RuntimeFields.getDeltaTime(), physicsVelocityIterations, physicsPositionsIterations);
+        b2World.step(1 / 60f * RuntimeFields.getSpeedEngine() * Math.min(12,RuntimeFields.getDeltaTime()), physicsVelocityIterations, physicsPositionsIterations);
 
         for (int i = 0; i < postUpdateEvents.size(); i++){
             postUpdateEvents.get(i).postUpdate();

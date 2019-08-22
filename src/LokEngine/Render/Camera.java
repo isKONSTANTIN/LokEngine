@@ -17,6 +17,13 @@ public class Camera {
         MatrixCreator.PutMatrixInShader(Shader.currentShader, "Projection", MatrixCreator.CreateOrthoMatrix(width * fieldOfView, height * fieldOfView));
     }
 
+    public void setFieldOfView(float fieldOfView){
+        Shader activeShader = Shader.currentShader;
+        Shader.use(DefaultFields.defaultShader);
+        Camera.updateProjection((float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y, 1, fieldOfView);
+        Shader.use(activeShader);
+    }
+
     public void updateView(){
         updateView(Shader.currentShader);
     }

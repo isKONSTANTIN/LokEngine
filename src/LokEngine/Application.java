@@ -86,7 +86,7 @@ public class Application {
                 Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
 
                 Shader.use(DefaultFields.defaultShader);
-                Camera.updateProjection((float) window.getResolution().x / (float) window.getResolution().y, 1, 1);
+                window.getCamera().setFieldOfView(1);
             } catch (Exception e) {
                 Logger.error("Fail load shaders!", "LokEngine_start");
                 Logger.printException(e);
