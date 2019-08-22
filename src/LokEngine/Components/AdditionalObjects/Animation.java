@@ -12,9 +12,7 @@ import java.util.ArrayList;
 
 public class Animation {
 
-    public float speedAnimation = 1;
     public Texture altasTexture;
-    public float currectFrame;
     public int vertexBuffer;
     public ArrayList<Integer> uvBuffers;
 

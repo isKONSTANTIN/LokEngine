@@ -18,6 +18,8 @@ public class AnimationComponent extends Component {
 
     private Animation activeAnimation;
     private SpriteFramePart framePart;
+    public float currectFrame;
+    public float speedAnimation = 1;
     private Sprite sprite = new Sprite(null,0,0);
 
     public Sprite getSprite(){
@@ -48,6 +50,7 @@ public class AnimationComponent extends Component {
 
     public void setActiveAnimation(String name){
         activeAnimation = animations.get(name);
+        currectFrame = 0;
     }
 
     @Override
@@ -55,17 +58,17 @@ public class AnimationComponent extends Component {
         if (activeAnimation != null){
             sprite.texture = activeAnimation.altasTexture;
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
-            activeAnimation.currectFrame += activeAnimation.speedAnimation * RuntimeFields.getDeltaTime() * RuntimeFields.getSpeedEngine();
+            currectFrame += speedAnimation * RuntimeFields.getDeltaTime() * RuntimeFields.getSpeedEngine();
 
-            if ((int)activeAnimation.currectFrame > activeAnimation.uvBuffers.size()-1){
-                activeAnimation.currectFrame = 0;
+            if ((int)currectFrame > activeAnimation.uvBuffers.size()-1){
+                currectFrame = 0;
             }
 
-            if ((int)activeAnimation.currectFrame < 0){
-                activeAnimation.currectFrame = activeAnimation.uvBuffers.size()-1;
+            if ((int)currectFrame < 0){
+                currectFrame = activeAnimation.uvBuffers.size()-1;
             }
 
-            sprite.uvBuffer = activeAnimation.uvBuffers.get((int)activeAnimation.currectFrame);
+            sprite.uvBuffer = activeAnimation.uvBuffers.get((int)currectFrame);
 
             framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
             RuntimeFields.getFrameBuilder().addPart(framePart);
