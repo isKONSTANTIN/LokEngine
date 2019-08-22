@@ -51,14 +51,14 @@ public class GUIGridCanvas extends GUICanvas {
     }
 
     public void updatePositions(){
-        int objectID = 0;
+        int lastObjectID = 0;
         Vector2i nextObjectPos = new Vector2i(position.x,position.y);
 
         for (int column = 0; column < linesAndColumns.y; column++) {
             for (int line = 0; line < linesAndColumns.x; line++) {
-                if (objectID == objects.size()) break;
+                if (lastObjectID == objects.size()) break;
 
-                GUIObject object = objects.get(objectID);
+                GUIObject object = objects.get(lastObjectID);
 
                 Vector2i objectSize = new Vector2i(Math.round(size.x * percentSizesX.get(column)), Math.round(size.y * percentSizesY.get(line)));
                 object.size.x = objectSize.x;
@@ -67,10 +67,13 @@ public class GUIGridCanvas extends GUICanvas {
                 object.position.y = nextObjectPos.y;
                 nextObjectPos.y += objectSize.y;
 
-                objectID++;
+                lastObjectID++;
             }
             nextObjectPos.x += size.x * percentSizesX.get(column);
             nextObjectPos.y = position.y;
+        }
+        while (lastObjectID < objects.size()) {
+            objects.remove(objects.size()-1);
         }
     }
 
