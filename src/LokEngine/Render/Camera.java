@@ -6,6 +6,7 @@ import LokEngine.Tools.RuntimeFields;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 public class Camera {
 
@@ -19,8 +20,13 @@ public class Camera {
 
     public void setFieldOfView(float fieldOfView){
         Shader activeShader = Shader.currentShader;
+
         Shader.use(DefaultFields.defaultShader);
         Camera.updateProjection((float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y, 1, fieldOfView);
+
+        Shader.use(DefaultFields.particlesShader);
+        Camera.updateProjection((float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y, 1, fieldOfView);
+
         Shader.use(activeShader);
     }
 

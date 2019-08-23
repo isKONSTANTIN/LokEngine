@@ -2,7 +2,6 @@ package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Enums.FramePartType;
-import LokEngine.Render.Frame.FrameParts.PostProcessing.Actions.PostProcessingAction;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
 import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
@@ -68,7 +67,7 @@ public class FrameBuilder {
             preDisplayFrame = postProcessingActionWorkers.get(i).render(preDisplayFrame);
         }
 
-        Shader.use(DefaultFields.DisplayShader);
+        Shader.use(DefaultFields.displayShader);
         DisplayDrawer.renderScreen(preDisplayFrame);
 
         window.setDrawMode(DrawMode.RawGUI);

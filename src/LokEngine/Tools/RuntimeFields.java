@@ -40,6 +40,8 @@ public class RuntimeFields {
         RuntimeFields.scene = scene;
         RuntimeFields.canvas = canvas;
         RuntimeFields.mouseStatus = mouseStatus;
+        lastUpdateTime = System.nanoTime();
+        lastFPSUpdateTime = System.nanoTime();
     }
 
     public static void update(){

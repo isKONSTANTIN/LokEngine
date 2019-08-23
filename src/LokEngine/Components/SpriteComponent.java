@@ -36,9 +36,18 @@ public class SpriteComponent extends Component {
 
     public SpriteComponent(String path, Shader customShader){
         try {
-            sprite = SpriteLoader.loadSprite(path, customShader);
+            sprite = SpriteLoader.loadSprite(path,1, customShader);
         } catch (IOException e) {
             sprite = DefaultFields.unknownSprite;
+        }
+        framePart = new SpriteFramePart(sprite);
+    }
+
+    public SpriteComponent(Sprite sprite){
+        if (sprite != null){
+            this.sprite = sprite;
+        }else {
+            this.sprite = DefaultFields.unknownSprite;
         }
         framePart = new SpriteFramePart(sprite);
     }

@@ -1,15 +1,9 @@
 package LokEngine.Render.Frame;
 
-import LokEngine.Components.AdditionalObjects.Sprite;
-import LokEngine.Loaders.BufferLoader;
 import LokEngine.Render.Enums.DrawMode;
-import LokEngine.Render.Enums.FramePartType;
-import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Shader;
-import LokEngine.Render.Texture;
 import LokEngine.Render.Window;
 import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.RuntimeFields;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -34,7 +28,7 @@ public class DisplayDrawer {
     public static int blurPostProcess(Window win, int postFrame, int originalFrame, FrameBufferWorker blurSceneFrameWorker1, FrameBufferWorker blurSceneFrameWorker2, FrameBufferWorker blurSceneFrameWorker3){
         blurSceneFrameWorker1.bindFrameBuffer();
         win.setDrawMode(DrawMode.Display);
-        Shader.use(DefaultFields.PostProcessingShader);
+        Shader.use(DefaultFields.postProcessingShader);
         DisplayDrawer.bindTexture("postFrame", postFrame,1);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -45,23 +39,23 @@ public class DisplayDrawer {
         blurSceneFrameWorker1.unbindCurrentFrameBuffer();
         blurSceneFrameWorker2.bindFrameBuffer();
         win.setDrawMode(DrawMode.Display);
-        Shader.use(DefaultFields.PostProcessingShader);
+        Shader.use(DefaultFields.postProcessingShader);
         DisplayDrawer.bindTexture("postFrame", postFrame,1);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0.866f / (win.getResolution().x / win.getResolution().y), 0.5f);
+        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0.866f / ((float)win.getResolution().x / (float)win.getResolution().y), 0.5f);
         DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTexture());
 
         blurSceneFrameWorker2.unbindCurrentFrameBuffer();
         blurSceneFrameWorker3.bindFrameBuffer();
         win.setDrawMode(DrawMode.Display);
-        Shader.use(DefaultFields.PostProcessingShader);
+        Shader.use(DefaultFields.postProcessingShader);
         DisplayDrawer.bindTexture("postFrame", postFrame,1);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0.866f / (win.getResolution().x / win.getResolution().y), -0.5f);
+        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0.866f / ((float)win.getResolution().x / (float)win.getResolution().y), -0.5f);
         DisplayDrawer.renderScreen(blurSceneFrameWorker2.getTexture());
 
         blurSceneFrameWorker3.unbindCurrentFrameBuffer();

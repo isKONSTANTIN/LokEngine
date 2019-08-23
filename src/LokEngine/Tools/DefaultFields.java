@@ -6,8 +6,9 @@ import LokEngine.Components.AdditionalObjects.Sprite;
 
 public class DefaultFields {
     public static Shader defaultShader;
-    public static Shader DisplayShader;
-    public static Shader PostProcessingShader;
+    public static Shader displayShader;
+    public static Shader postProcessingShader;
+    public static Shader particlesShader;
 
     public static Sprite unknownSprite;
     public static int defaultUVBuffer = BufferLoader.load(new float[] {

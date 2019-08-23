@@ -10,13 +10,12 @@ import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker
 import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
-import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.Logger;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.*;
 import LokEngine.Tools.SplashScreen;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.openal.AL;
+import org.lwjgl.util.vector.Vector3f;
 
 import java.awt.*;
 import java.io.IOException;
@@ -78,10 +77,10 @@ public class Application {
                 DefaultFields.PostProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
                 DefaultFields.unknownSprite.size = 50;
 
-                Shader.use(DefaultFields.PostProcessingShader);
+                Shader.use(DefaultFields.postProcessingShader);
                 Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
 
-                Shader.use(DefaultFields.DisplayShader);
+                Shader.use(DefaultFields.displayShader);
                 glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
                 Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
 
@@ -116,6 +115,7 @@ public class Application {
 
             SplashScreen.updateStatus(0.9f);
             Logger.debug("Turn in main while!", "LokEngine_start");
+            System.gc();
             isRun = true;
         } catch (Exception e) {
             Logger.error("Fail start engine!", "LokEngine_start");
@@ -134,20 +134,20 @@ public class Application {
 
                 if (!isRun) break;
 
+                try {
+                    RuntimeFields.update();
+                } catch (Exception e) {
+                    Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
+                    Logger.printException(e);
+                }
+
                 RuntimeFields.getScene().update();
                 RuntimeFields.getCanvas().update();
 
                 try {
                     nextFrame();
                 } catch (Exception e) {
-                    Logger.warning("Fail build frame!", "LokEngine_runtime");
-                    Logger.printException(e);
-                }
-
-                try {
-                    RuntimeFields.update();
-                } catch (Exception e) {
-                    Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
+                    Logger.error("Fail build frame!", "LokEngine_runtime");
                     Logger.printException(e);
                 }
 
@@ -164,11 +164,7 @@ public class Application {
     private void nextFrame(){
         Shader.use(DefaultFields.defaultShader);
         window.getCamera().updateView();
-        try {
-            RuntimeFields.getFrameBuilder().build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RuntimeFields.getFrameBuilder().build();
     }
 
     public void startConsole(){
@@ -183,6 +179,7 @@ public class Application {
                 Logger.printException(e);
             }
             Logger.debug("Turn in main while!", "LokEngine_start");
+            System.gc();
             isRun = true;
         }catch (Exception e){
             Logger.error("Fail start engine!", "LokEngine_start");
@@ -198,16 +195,16 @@ public class Application {
                     Logger.printException(e);
                 }
 
-                if (!isRun) break;
-
-                RuntimeFields.getScene().update();
-
                 try {
                     RuntimeFields.update();
                 } catch (Exception e) {
                     Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
                     Logger.printException(e);
                 }
+
+                if (!isRun) break;
+
+                RuntimeFields.getScene().update();
             }
         }catch (Exception e){
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");

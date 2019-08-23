@@ -7,9 +7,6 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL30;
-import org.lwjgl.util.vector.Vector2f;
-
-import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
@@ -91,7 +88,7 @@ public class Window {
             glEnable(GL_TEXTURE_2D);
 
             if (dm == DrawMode.Display){
-                Shader.use(DefaultFields.DisplayShader);
+                Shader.use(DefaultFields.displayShader);
             }else{
                 Shader.unUse();
             }
