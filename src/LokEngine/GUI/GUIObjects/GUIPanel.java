@@ -35,14 +35,16 @@ public class GUIPanel extends GUIObject {
     public void setPosition(Vector2i position){
         this.position = position;
         framePart.position = position;
-        blurAction.position = position;
+        if (blurAction != null)
+            blurAction.position = position;
     }
 
     @Override
     public void setSize(Vector2i size){
         this.size = size;
         framePart.size = size;
-        blurAction.size = size;
+        if (blurAction != null)
+            blurAction.size = size;
     }
 
     @Override
