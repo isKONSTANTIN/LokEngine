@@ -72,10 +72,10 @@ public class Application {
             Logger.debug("Init shaders", "LokEngine_start");
             try {
                 DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
-                DefaultFields.unknownSprite = SpriteLoader.loadSprite("#/resources/textures/unknown.png", DefaultFields.defaultShader);
-                DefaultFields.DisplayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
-                DefaultFields.PostProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
-                DefaultFields.unknownSprite.size = 50;
+                DefaultFields.unknownSprite = SpriteLoader.loadSprite("#/resources/textures/unknown.png", 100 , DefaultFields.defaultShader);
+                DefaultFields.displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
+                DefaultFields.postProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
+                DefaultFields.particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
 
                 Shader.use(DefaultFields.postProcessingShader);
                 Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
@@ -83,6 +83,9 @@ public class Application {
                 Shader.use(DefaultFields.displayShader);
                 glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
                 Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
+
+                Shader.use(DefaultFields.particlesShader);
+                MatrixCreator.PutMatrixInShader(DefaultFields.particlesShader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(0,new Vector3f(0,0,0)));
 
                 Shader.use(DefaultFields.defaultShader);
                 window.getCamera().setFieldOfView(1);
