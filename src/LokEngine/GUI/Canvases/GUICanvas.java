@@ -27,8 +27,9 @@ public class GUICanvas extends GUIObject {
 
     @Override
     public void update(){
-        for (int i = 0; i < objects.size(); i++) {
-            objects.get(i).update();
+        for (GUIObject object : objects) {
+            if (!object.hidden)
+                object.update();
         }
     }
 }

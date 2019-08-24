@@ -6,6 +6,8 @@ public class GUIObject {
     Vector2i position;
     Vector2i size;
 
+    public boolean hidden;
+
     public void setPosition(Vector2i position){ this.position = position; }
 
     public Vector2i getPosition(){ return position; }
