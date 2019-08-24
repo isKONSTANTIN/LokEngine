@@ -27,7 +27,12 @@ public class Camera {
         Shader.use(DefaultFields.particlesShader);
         Camera.updateProjection((float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y, 1, fieldOfView);
 
-        Shader.use(activeShader);
+        if (activeShader != null){
+            Shader.use(activeShader);
+        }else{
+            Shader.unUse();
+        }
+
     }
 
     public void updateView(){
