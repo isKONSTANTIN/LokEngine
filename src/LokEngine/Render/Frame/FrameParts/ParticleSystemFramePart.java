@@ -49,8 +49,8 @@ public class ParticleSystemFramePart extends FramePart {
     public void update(ArrayList<Float> positions, ArrayList<Float> sizes){
         count = sizes.size();
 
-        glDeleteBuffers(positionsBuffer);
-        glDeleteBuffers(sizesBuffer);
+        BufferLoader.unload(positionsBuffer);
+        BufferLoader.unload(sizesBuffer);
 
         if (count > 0){
             positionsBuffer = BufferLoader.load(positions);

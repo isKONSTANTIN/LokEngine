@@ -8,8 +8,8 @@ public class DefaultParticleHandler implements ParticleHandler{
     public Particle processParticle(Particle particle) {
 
         particle.lifeTime -= RuntimeFields.getDeltaTime();
-        particle.positionX += particle.speedX;
-        particle.positionY += particle.speedY;
+        particle.positionX += particle.speedX * RuntimeFields.getDeltaTime();
+        particle.positionY += particle.speedY * RuntimeFields.getDeltaTime();
         particle.size = particle.lifeTime / 600f;
 
         return particle.lifeTime <= 0 ? null : particle;
