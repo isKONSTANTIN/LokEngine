@@ -33,7 +33,6 @@ public class GUIImageFramePart extends FramePart {
 
     @Override
     public void partRender(){
-
         glBindTexture(GL_TEXTURE_2D,texture.buffer);
         glBegin(GL_POLYGON);
         glColor4d(1,1,1,1);
