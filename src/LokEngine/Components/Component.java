@@ -8,8 +8,5 @@ public class Component {
         return "Component";
     }
 
-    public void update(SceneObject source){
-
-    }
-
+    public void update(SceneObject source){}
 }

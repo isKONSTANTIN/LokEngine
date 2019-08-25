@@ -57,5 +57,4 @@ public class SpriteComponent extends Component {
         framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
         RuntimeFields.getFrameBuilder().addPart(framePart);
     }
-
 }
