@@ -161,6 +161,14 @@ public class Application {
             Logger.printException(e);
             System.exit(-2);
         }
+
+        try {
+            Exit();
+        } catch (Exception e) {
+            Logger.warning("Fail user-exit!", "LokEngine_postRuntime");
+            Logger.printException(e);
+        }
+
         AL.destroy();
     }
 
@@ -170,7 +178,7 @@ public class Application {
         RuntimeFields.getFrameBuilder().build();
     }
 
-    public void startConsole(){
+    public void startConsole() {
         try {
             Logger.debug("Init runtime fields (Scene)", "LokEngine_start");
             RuntimeFields.init(null, new Scene(), null, null);
@@ -184,7 +192,7 @@ public class Application {
             Logger.debug("Turn in main while!", "LokEngine_start");
             System.gc();
             isRun = true;
-        }catch (Exception e){
+        } catch (Exception e) {
             Logger.error("Fail start engine!", "LokEngine_start");
             Logger.printException(e);
             System.exit(-1);
@@ -209,10 +217,16 @@ public class Application {
 
                 RuntimeFields.getScene().update();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
             Logger.printException(e);
             System.exit(-2);
+        }
+        try {
+            Exit();
+        } catch (Exception e) {
+            Logger.warning("Fail user-exit!", "LokEngine_postRuntime");
+            Logger.printException(e);
         }
     }
 
@@ -232,4 +246,5 @@ public class Application {
 
     public void Init(){}
     public void Update(){}
+    public void Exit(){}
 }
