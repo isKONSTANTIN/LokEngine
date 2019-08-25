@@ -11,6 +11,7 @@ import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.*;
+import LokEngine.Tools.SaveWorker.Prefs;
 import LokEngine.Tools.SplashScreen;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -28,6 +29,12 @@ public class Application {
     private boolean isRun;
 
     private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
+        try {
+            Prefs.init();
+        }catch (Exception e) {
+            Logger.warning("Fail load in prefs!", "LokEngine_start");
+            Logger.printException(e);
+        }
         try {
             Logger.debug("Init window", "LokEngine_start");
             window = new Window();
@@ -169,6 +176,12 @@ public class Application {
             Logger.printException(e);
         }
 
+        try {
+            Prefs.save();
+        }catch (Exception e) {
+            Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
+            Logger.printException(e);
+        }
         AL.destroy();
     }
 
@@ -179,6 +192,12 @@ public class Application {
     }
 
     public void startConsole() {
+        try {
+            Prefs.init();
+        }catch (Exception e) {
+            Logger.warning("Fail load in prefs!", "LokEngine_start");
+            Logger.printException(e);
+        }
         try {
             Logger.debug("Init runtime fields (Scene)", "LokEngine_start");
             RuntimeFields.init(null, new Scene(), null, null);
@@ -222,10 +241,18 @@ public class Application {
             Logger.printException(e);
             System.exit(-2);
         }
+
         try {
             Exit();
         } catch (Exception e) {
             Logger.warning("Fail user-exit!", "LokEngine_postRuntime");
+            Logger.printException(e);
+        }
+
+        try {
+            Prefs.save();
+        }catch (Exception e) {
+            Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
             Logger.printException(e);
         }
     }

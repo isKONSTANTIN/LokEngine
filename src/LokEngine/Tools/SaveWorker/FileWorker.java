@@ -13,6 +13,10 @@ public class FileWorker {
     FileWriter fileWriter;
     FileReader fileReader;
 
+    public static boolean fileExists(String filePath){
+        return new File(filePath).exists();
+    }
+
     public FileWorker(String filePath) throws IOException {
         file = new File(filePath);
         this.filePath = filePath;
