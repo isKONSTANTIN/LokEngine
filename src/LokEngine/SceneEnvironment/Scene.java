@@ -25,6 +25,10 @@ public class Scene implements Saveable {
         return objects.size()-1;
     }
 
+    public void removeObject(int id){
+        objects.remove(id);
+    }
+
     public void addPostUpdateEvent(PostUpdateEvent event){
         postUpdateEvents.add(event);
     }
