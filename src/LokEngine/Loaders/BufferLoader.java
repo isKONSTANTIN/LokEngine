@@ -2,7 +2,6 @@ package LokEngine.Loaders;
 
 import LokEngine.Tools.Logger;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;

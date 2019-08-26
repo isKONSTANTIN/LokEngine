@@ -2,10 +2,8 @@ package LokEngine.Components.AdditionalObjects;
 
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Render.Texture;
-import LokEngine.Tools.Utilities.Vector2i;
 import LokEngine.Tools.Utilities.Vector4i;
 import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector4f;
 
 import java.util.ArrayList;
 

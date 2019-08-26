@@ -2,18 +2,14 @@ package LokEngine.Components;
 
 import LokEngine.Components.AdditionalObjects.Animation;
 import LokEngine.Components.AdditionalObjects.Sprite;
-import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Frame.FrameParts.SpriteFramePart;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.Logger;
 import LokEngine.Tools.RuntimeFields;
 import org.lwjgl.util.vector.Vector4f;
 
 import java.util.HashMap;
 
 public class AnimationComponent extends Component {
-
     private HashMap<String, Animation> animations = new HashMap<>();
 
     private Animation activeAnimation;

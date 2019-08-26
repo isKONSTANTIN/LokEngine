@@ -1,17 +1,16 @@
 package LokEngine.Components;
 
 import LokEngine.Components.AdditionalObjects.Rigidbody;
-import LokEngine.Render.Enums.FramePartType;
-import LokEngine.Render.Frame.FramePart;
 import LokEngine.SceneEnvironment.PostUpdateEvent;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
 import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.*;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.util.vector.Vector2f;
 
 public class RigidbodyComponent extends Component {

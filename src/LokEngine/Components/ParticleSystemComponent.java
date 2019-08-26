@@ -6,7 +6,6 @@ import LokEngine.Components.AdditionalObjects.ParticleSystem.ParticleHandler;
 import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Render.Frame.FrameParts.ParticleSystemFramePart;
 import LokEngine.Render.Shader;
-import LokEngine.Render.Texture;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.RuntimeFields;

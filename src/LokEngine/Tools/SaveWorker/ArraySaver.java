@@ -3,7 +3,6 @@ package LokEngine.Tools.SaveWorker;
 import LokEngine.Tools.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 
 public class ArraySaver implements Saveable {

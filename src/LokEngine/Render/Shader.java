@@ -1,6 +1,5 @@
 package LokEngine.Render;
 
-import LokEngine.Tools.RuntimeFields;
 import org.lwjgl.opengl.ARBShaderObjects;
 
 public class Shader {

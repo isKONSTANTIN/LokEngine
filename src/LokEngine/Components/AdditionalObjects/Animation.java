@@ -5,9 +5,7 @@ import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Texture;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.util.vector.Vector2f;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Animation {

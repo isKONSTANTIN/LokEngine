@@ -3,11 +3,8 @@ package LokEngine.Loaders;
 import LokEngine.Tools.Utilities.Sound;
 import LokEngine.Tools.Utilities.SoundType;
 import LokEngine.Tools.Utilities.WaveData;
-import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
-import org.lwjgl.openal.AL11;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.HashMap;
 

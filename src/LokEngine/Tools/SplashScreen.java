@@ -5,7 +5,6 @@ import LokEngine.Render.Frame.FrameParts.GUI.GUIImageFramePart;
 import LokEngine.Render.Window;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 
 public class SplashScreen {
 

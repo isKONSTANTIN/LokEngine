@@ -5,7 +5,6 @@ import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GUIGraph extends GUIObject {

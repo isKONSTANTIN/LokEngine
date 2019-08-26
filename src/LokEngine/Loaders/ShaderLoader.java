@@ -5,8 +5,11 @@ import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
 
-import java.io.*;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 
@@ -32,7 +35,7 @@ public class ShaderLoader {
 
         BufferedReader reader;
         try{
-            reader = new BufferedReader(new InputStreamReader(in,"UTF-8"));
+            reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
             Exception innerExc= null;
             try {

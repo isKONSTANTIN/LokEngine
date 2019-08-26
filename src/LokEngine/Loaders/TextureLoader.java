@@ -2,7 +2,6 @@ package LokEngine.Loaders;
 
 import LokEngine.Render.Texture;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.Sys;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
