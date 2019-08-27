@@ -7,83 +7,76 @@ import java.util.ArrayList;
 
 public class GUIGridCanvas extends GUICanvas {
 
-    public ArrayList<Float> percentSizesY;
-    public ArrayList<Float> percentSizesX;
-    public Vector2i linesAndColumns;
+    ArrayList<Vector2i> objectsPos = new ArrayList<>();
 
-    public float defaultPercentX;
-    public float defaultPercentY;
+    int columns;
+    int lines;
 
-    public GUIGridCanvas(Vector2i position, Vector2i size, int lines, int columns) {
+    public GUIGridCanvas(Vector2i position, Vector2i size, int columns, int lines) {
         super(position, size);
+        this.columns = columns > 0 ? columns : 1;
+        this.lines = columns > 0 ? columns : 1;
+    }
 
-        percentSizesX = new ArrayList<>();
-        percentSizesY = new ArrayList<>();
+    public GUIGridCanvas(Vector2i position, Vector2i size) {
+        this(position, size, 2,2);
+    }
 
-        linesAndColumns = new Vector2i(lines, columns);
+    public void setColumnsAndLines(Vector2i columnsAndLines){
+        columns = columnsAndLines.x;
+        lines = columnsAndLines.y;
 
-        defaultPercentX = (float)size.x / (float)columns / (float)size.x;
-        for (int i = 0; i < columns; i++){
-            percentSizesX.add(defaultPercentX);
+        for (int i = 0; i < objects.size(); i++){
+            updatePosition(i);
+            updateSize(i);
         }
-
-        defaultPercentY = (float)size.y / (float)lines / (float)size.y;
-        for (int i = 0; i < lines; i++){
-            percentSizesY.add(defaultPercentY);
-        }
     }
 
-    public void addColumn(float percentSizeX) {
-        linesAndColumns.y++;
-        percentSizesX.add(percentSizeX);
-    }
-    public void addLine(float percentSizeY){
-        linesAndColumns.x++;
-        percentSizesY.add(percentSizeY);
-    }
+    public void setObjectsPos(int objectID, Vector2i newColumnAndLinePos){
+        Vector2i objectPos = objectsPos.get(objectID);
+        objectPos.x = newColumnAndLinePos.x;
+        objectPos.y = newColumnAndLinePos.y;
 
-    public void addColumn() {
-        linesAndColumns.y++;
-        percentSizesX.add(defaultPercentX);
-    }
-    public void addLine(){
-        linesAndColumns.x++;
-        percentSizesY.add(defaultPercentY);
+        updatePosition(objectID);
+        updateSize(objectID);
     }
 
-    public void updatePositions(){
-        int lastObjectID = 0;
-        Vector2i nextObjectPos = new Vector2i(getPosition().x,getPosition().y);
-        Vector2i size = new Vector2i(getSize().x,getSize().y);
+    public void updatePosition(int objectID){
+        GUIObject object = objects.get(objectID);
+        Vector2i objectPos = objectsPos.get(objectID);
 
-        for (int column = 0; column < linesAndColumns.y; column++) {
-            for (int line = 0; line < linesAndColumns.x; line++) {
-                if (lastObjectID == objects.size()) break;
+        object.setPosition(new Vector2i(
+                Math.round(objectPos.x * (getSize().x / (float)columns)),
+                Math.round(objectPos.y * (getSize().y / (float)lines))
+        ));
+    }
 
-                GUIObject object = objects.get(lastObjectID);
+    public void updateSize(int objectID){
+        GUIObject object = objects.get(objectID);
 
-                Vector2i objectSize = new Vector2i(Math.round(size.x * percentSizesX.get(column)), Math.round(size.y * percentSizesY.get(line)));
-
-                object.setSize(objectSize);
-                object.setPosition(new Vector2i(nextObjectPos.x,nextObjectPos.y));
-
-                nextObjectPos.y += objectSize.y;
-
-                lastObjectID++;
-            }
-            nextObjectPos.x += size.x * percentSizesX.get(column);
-            nextObjectPos.y = getPosition().y;
-        }
-        while (lastObjectID < objects.size()) {
-            objects.remove(objects.size()-1);
-        }
+        object.setSize(new Vector2i(
+                Math.round(getSize().x / (float)columns),
+                Math.round(getSize().y / (float)lines)
+        ));
     }
 
     @Override
-    public int putObject(GUIObject object){
-        objects.add(object);
-        updatePositions();
+    public void removeObject(int id){
+        objects.remove(id);
+        objectsPos.remove(id);
+    }
 
-        return objects.size()-1;
+    @Override
+    public int addObject(GUIObject object){
+        return addObject(object,0,0);
+    }
+
+    public int addObject(GUIObject object, int column, int line){
+        int objectID = objects.size();
+        objects.add(object);
+        objectsPos.add(new Vector2i(column, line));
+        updatePosition(objectID);
+        updateSize(objectID);
+        return objectID;
     }
 }
