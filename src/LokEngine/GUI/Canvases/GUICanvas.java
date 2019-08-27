@@ -13,13 +13,13 @@ public class GUICanvas extends GUIObject {
         super(position, size);
     }
 
-    public int putObject(GUIObject object){
+    public int addObject(GUIObject object){
         objects.add(object);
         return objects.size()-1;
     }
 
-    public void removeObject(String name){
-        objects.remove(name);
+    public void removeObject(int id){
+        objects.remove(id);
     }
     public GUIObject getObject(int id){
         return objects.get(id);
