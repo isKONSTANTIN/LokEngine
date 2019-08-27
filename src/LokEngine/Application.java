@@ -4,15 +4,14 @@ import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.SpriteLoader;
-import LokEngine.Render.Camera;
 import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
 import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.*;
-import LokEngine.Tools.SaveWorker.Prefs;
 import LokEngine.Tools.SplashScreen;
+import LokEngine.Tools.SaveWorker.Prefs;
 import LokEngine.Tools.Utilities.MouseStatus;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.openal.AL;
@@ -85,11 +84,11 @@ public class Application {
                 DefaultFields.particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
 
                 Shader.use(DefaultFields.postProcessingShader);
-                Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
+                window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
 
                 Shader.use(DefaultFields.displayShader);
                 glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
-                Camera.updateProjection(window.getResolution().x, window.getResolution().y, 1 / 0.000520833f / 4);
+                window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
 
                 Shader.use(DefaultFields.particlesShader);
                 MatrixCreator.PutMatrixInShader(DefaultFields.particlesShader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(0,new Vector3f(0,0,0)));
