@@ -8,6 +8,7 @@ import LokEngine.Tools.Utilities.Vector2i;
 public class GUIText extends GUIObject {
 
     private GUITextFramePart framePart;
+    private int maxTextLength;
 
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias) {
         super(position, new Vector2i(0,0));
@@ -40,8 +41,8 @@ public class GUIText extends GUIObject {
 
     public void updateText(String text){
         framePart.text = text;
-        this.size.y = framePart.getHeight();
-        this.size.x = framePart.getWidth();
+        updateMaxSize();
+        framePart.text = framePart.getWidth() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
     }
 
     @Override
@@ -53,6 +54,12 @@ public class GUIText extends GUIObject {
     @Override
     public void setSize(Vector2i size){
         this.size = size;
+        updateMaxSize();
+        framePart.text = framePart.getWidth() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
+    }
+
+    private void updateMaxSize(){
+        this.maxTextLength = size.x / (framePart.getWidth() / framePart.text.length());
     }
 
     @Override

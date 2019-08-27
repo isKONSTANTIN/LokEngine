@@ -5,14 +5,10 @@ import LokEngine.Render.Frame.FramePart;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.util.ResourceLoader;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_BINDING_2D;
 
 public class GUITextFramePart extends FramePart {
     private TrueTypeFont font;
@@ -24,7 +20,7 @@ public class GUITextFramePart extends FramePart {
 
     public GUITextFramePart(String text, String fontName , org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
         super(FramePartType.GUI);
-        font = new TrueTypeFont(new Font(fontName,fontStyle,size),antiAlias);
+        font = new TrueTypeFont(new Font(fontName,fontStyle,size), antiAlias);
         buffer = GL11.glGetInteger(GL_TEXTURE_BINDING_2D);
         this.text = text;
         this.color = color;
@@ -33,7 +29,6 @@ public class GUITextFramePart extends FramePart {
     public int getHeight(){
         return font.getHeight();
     }
-
     public int getWidth(){
         return font.getWidth(text);
     }
