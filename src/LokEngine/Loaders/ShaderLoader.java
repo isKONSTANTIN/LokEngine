@@ -16,7 +16,8 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 public class ShaderLoader {
 
-    private static HashMap<Shader,String[]> patchesShaders = new HashMap<>();
+    private static HashMap<String[], Shader> loadedShaders = new HashMap<>();
+    private static HashMap<Shader, String[]> patchesShaders = new HashMap<>();
 
     public static String[] getPatches(Shader shader){
         if (patchesShaders.containsKey(shader)){
@@ -108,8 +109,15 @@ public class ShaderLoader {
     }
 
     public static Shader loadShader(String vertPath, String fragPath) throws Exception {
-        int vertShader = loadPartShader(vertPath, ARBVertexShader.GL_VERTEX_SHADER_ARB);
-        int fragShader = loadPartShader(fragPath, ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
+
+        String[] patches = new String[]{vertPath, fragPath};
+
+        if (loadedShaders.containsKey(patches)){
+            return loadedShaders.get(patches);
+        }
+
+        int vertShader = loadPartShader(patches[0], ARBVertexShader.GL_VERTEX_SHADER_ARB);
+        int fragShader = loadPartShader(patches[1], ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
         int program = ARBShaderObjects.glCreateProgramObjectARB();
 
         ARBShaderObjects.glAttachObjectARB(program, vertShader);
@@ -120,7 +128,8 @@ public class ShaderLoader {
 
         Shader newShader = new Shader(program);
 
-        patchesShaders.put(newShader, new String[]{vertPath, fragPath});
+        loadedShaders.put(patches,newShader);
+        patchesShaders.put(newShader, patches);
 
         return newShader;
     }
