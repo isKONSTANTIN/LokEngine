@@ -2,16 +2,19 @@ package LokEngine.Components.AdditionalObjects;
 
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Render.Texture;
+import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.Utilities.Vector4i;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
 
-public class AtlasPositions {
+public class AtlasPositions implements Saveable {
 
     public ArrayList<Vector4i> positions = new ArrayList<>();
     public Vector4i startPosition;
     public int countSprites;
+
+    public AtlasPositions(){}
 
     public AtlasPositions(Vector4i startPosition, int countSprites){
         this.startPosition = startPosition;
@@ -62,4 +65,52 @@ public class AtlasPositions {
         return uvBuffers;
     }
 
+    @Override
+    public String save() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Vector4i pos : positions) {
+            stringBuilder
+                    .append(pos.x).append(",")
+                    .append(pos.y).append(",")
+                    .append(pos.z).append(",")
+                    .append(pos.w).append("\n");
+        }
+
+        stringBuilder.append(";")
+                .append(startPosition.x).append(",")
+                .append(startPosition.y).append(",")
+                .append(startPosition.z).append(",")
+                .append(startPosition.w).append("\n");
+
+        stringBuilder.append(";").append(countSprites);
+
+        return stringBuilder.toString();
+    }
+
+    private Vector4i parseVector(String data){
+        String[] vectorParts = data.split(",");
+        return new Vector4i(
+                Integer.valueOf(vectorParts[0]),
+                Integer.valueOf(vectorParts[1]),
+                Integer.valueOf(vectorParts[2]),
+                Integer.valueOf(vectorParts[3])
+        );
+    }
+
+    @Override
+    public Saveable load(String savedString) {
+        String[] data = savedString.split(";");
+        String[] vectors = data[0].split(System.getProperty("line.separator"));
+        this.countSprites = Integer.valueOf(data[2]);
+
+        positions = new ArrayList<>();
+
+        for (String stringVector : vectors){
+            positions.add(parseVector(stringVector));
+        }
+        startPosition = parseVector(data[1]);
+
+        return null;
+    }
 }
