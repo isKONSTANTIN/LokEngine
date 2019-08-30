@@ -5,7 +5,7 @@ import LokEngine.Tools.Utilities.Vector2i;
 public class Misc {
 
     public static boolean mouseInField(Vector2i position, Vector2i size){
-        Vector2i mousePosition = RuntimeFields.getMouseStatus().mousePosition;
+        Vector2i mousePosition = new Vector2i( RuntimeFields.getMouseStatus().mousePosition.x, RuntimeFields.getMouseStatus().mousePosition.y);
         Vector2i resolution = RuntimeFields.getFrameBuilder().window.getResolution();
         mousePosition.y = Math.abs(mousePosition.y - resolution.y);
 
