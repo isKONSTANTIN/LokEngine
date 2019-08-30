@@ -10,10 +10,20 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 public class ShaderLoader {
+
+    private static HashMap<Shader,String[]> patchesShaders = new HashMap<>();
+
+    public static String[] getPatches(Shader shader){
+        if (patchesShaders.containsKey(shader)){
+            return patchesShaders.get(shader);
+        }
+        return null;
+    }
 
     private static String getLogInfo(int obj) {
         return ARBShaderObjects.glGetInfoLogARB(obj, ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
@@ -107,6 +117,11 @@ public class ShaderLoader {
 
         ARBShaderObjects.glLinkProgramARB(program);
         ARBShaderObjects.glValidateProgramARB(program);
-        return new Shader(program);
+
+        Shader newShader = new Shader(program);
+
+        patchesShaders.put(newShader, new String[]{vertPath, fragPath});
+
+        return newShader;
     }
 }
