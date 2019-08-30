@@ -49,14 +49,9 @@ public class GUITextField extends GUIObject {
                 if (text.getText().length() > 0)
                     text.updateText(text.getText().substring(0,text.getText().length()-1));
             }else {
-                String futureText = text.getText() + Key;
-                text.updateText(futureText);
-                if (text.size.x > size.x){
-                    text.updateText(futureText.substring(0,futureText.length()-1));
-                }
+                text.updateText(text.getText() + Key);
             }
         }
         text.update();
-
     }
 }
