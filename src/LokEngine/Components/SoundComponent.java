@@ -2,7 +2,7 @@ package LokEngine.Components;
 
 import LokEngine.Loaders.SoundLoader;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.Utilities.Sound;
+import LokEngine.Components.AdditionalObjects.Sound;
 import LokEngine.Tools.Utilities.SoundType;
 import org.lwjgl.openal.AL10;
 

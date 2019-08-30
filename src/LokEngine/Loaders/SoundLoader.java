@@ -1,7 +1,7 @@
 package LokEngine.Loaders;
 
 import LokEngine.Tools.Logger;
-import LokEngine.Tools.Utilities.Sound;
+import LokEngine.Components.AdditionalObjects.Sound;
 import LokEngine.Tools.Utilities.SoundType;
 import LokEngine.Tools.Utilities.WaveData;
 import org.lwjgl.openal.AL10;
