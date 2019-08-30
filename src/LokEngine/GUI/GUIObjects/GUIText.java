@@ -42,7 +42,7 @@ public class GUIText extends GUIObject {
     public void updateText(String text){
         framePart.text = text;
         updateMaxSize();
-        framePart.text = framePart.getWidth() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
+        framePart.text = text.length() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
     }
 
     @Override
@@ -59,7 +59,9 @@ public class GUIText extends GUIObject {
     }
 
     private void updateMaxSize(){
-        this.maxTextLength = size.x / (framePart.getWidth() / framePart.text.length());
+        int textLength = framePart.text.length();
+        if (textLength > 0)
+            this.maxTextLength = size.x / (framePart.getWidth() / framePart.text.length());
     }
 
     @Override
