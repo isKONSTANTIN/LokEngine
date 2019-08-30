@@ -19,6 +19,23 @@ public class SpriteLoader {
         return null;
     }
 
+    public static Sprite loadSprite(Texture texture, float vertexSize, Shader shader){
+        int vertexBuffer = BufferLoader.load(new float[]
+                {
+                        -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
+                        -texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
+                        texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
+                        texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f
+                }
+        );
+
+        Sprite newSprite = new Sprite(texture,vertexBuffer,DefaultFields.defaultUVBuffer,1, shader);
+
+        vertexSizes.put(newSprite, vertexSize);
+
+        return newSprite;
+    }
+
     public static Sprite loadSprite(String texturePath, float vertexSize, Shader shader) throws IOException {
         Texture tex = TextureLoader.loadTexture(texturePath);
 
