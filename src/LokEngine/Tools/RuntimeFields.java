@@ -4,7 +4,6 @@ import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.Utilities.MouseStatus;
-import org.lwjgl.input.Mouse;
 
 public class RuntimeFields {
     private static FrameBuilder frameBuilder;
@@ -46,9 +45,7 @@ public class RuntimeFields {
 
     public static void update(){
         if (mouseStatus != null){
-            mouseStatus.mousePosition.x = Mouse.getX();
-            mouseStatus.mousePosition.y = Mouse.getY();
-            mouseStatus.mousePressed = Mouse.isButtonDown(0);
+            mouseStatus.update();
         }
 
         long timeNow = System.nanoTime();

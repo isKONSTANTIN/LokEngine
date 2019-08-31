@@ -34,9 +34,9 @@ public class GUITextField extends GUIObject {
 
     @Override
     public void update(){
-        if (Misc.mouseInField(position, size) && RuntimeFields.getMouseStatus().mousePressed){
+        if (Misc.mouseInField(position, size) && RuntimeFields.getMouseStatus().getPressedStatus()){
             active = true;
-        }else if (RuntimeFields.getMouseStatus().mousePressed){
+        }else if (RuntimeFields.getMouseStatus().getPressedStatus()){
             active = false;
         }
 
