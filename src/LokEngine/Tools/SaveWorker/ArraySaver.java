@@ -1,9 +1,9 @@
 package LokEngine.Tools.SaveWorker;
 
 import LokEngine.Tools.Logger;
+import LokEngine.Tools.Misc;
 
 import java.util.ArrayList;
-import java.util.Base64;
 
 public class ArraySaver implements Saveable {
 
@@ -36,12 +36,12 @@ public class ArraySaver implements Saveable {
                     .append(i);
         }
 
-        return Base64.getEncoder().encodeToString(stringBuilder.toString().getBytes());
+        return Misc.toBase64(stringBuilder.toString());
     }
 
     @Override
     public Saveable load(String savedString) {
-        String[] elements = new String(Base64.getDecoder().decode(savedString)).split("ELM.");
+        String[] elements = Misc.fromBase64(savedString).split("ELM.");
         try {
             typeClass = Class.forName(elements[0].substring(0,elements[0].length()-1));
         } catch (ClassNotFoundException e) {

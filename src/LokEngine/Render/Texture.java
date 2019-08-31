@@ -11,13 +11,15 @@ public class Texture implements Saveable {
     public int buffer;
     public int sizeX;
     public int sizeY;
+    public String path;
 
     public Texture(){}
 
-    public Texture(int buffer, int sizeX, int sizeY){
+    public Texture(int buffer, int sizeX, int sizeY, String path){
         this.buffer = buffer;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        this.path = path;
     }
 
     public boolean equals(Object obj){
@@ -30,7 +32,7 @@ public class Texture implements Saveable {
 
     @Override
     public String save() {
-        return TextureLoader.getPath(this);
+        return path;
     }
 
     @Override
@@ -40,6 +42,7 @@ public class Texture implements Saveable {
             this.buffer = loadedTexture.buffer;
             this.sizeX = loadedTexture.sizeX;
             this.sizeY = loadedTexture.sizeY;
+            this.path = loadedTexture.path;
         } catch (IOException e) {
             Logger.warning("Fail load texture from save!","LokEngine_Texture");
             Logger.printException(e);

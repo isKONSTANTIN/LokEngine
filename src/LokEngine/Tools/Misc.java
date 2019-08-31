@@ -2,7 +2,17 @@ package LokEngine.Tools;
 
 import LokEngine.Tools.Utilities.Vector2i;
 
+import java.util.Base64;
+
 public class Misc {
+
+    public static String toBase64(String text){
+        return Base64.getEncoder().encodeToString(text.getBytes());
+    }
+
+    public static String fromBase64(String base64){
+        return new String(Base64.getDecoder().decode(base64));
+    }
 
     public static boolean mouseInField(Vector2i position, Vector2i size){
         Vector2i mousePosition = RuntimeFields.getMouseStatus().getMousePosition();

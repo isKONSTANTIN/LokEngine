@@ -16,18 +16,10 @@ import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 public class TextureLoader {
 
     private static HashMap<String, Texture> loadedTextures = new HashMap<>();
-    private static HashMap<Texture, String> patchesTextures = new HashMap<>();
 
     public static void unloadTexture(Texture texture){
         glDeleteTextures(texture.buffer);
         texture = null;
-    }
-
-    public static String getPath(Texture texture){
-        if (patchesTextures.containsKey(texture)){
-            return patchesTextures.get(texture);
-        }
-        return null;
     }
 
     public static Texture loadTexture(String path) throws IOException {
@@ -69,10 +61,9 @@ public class TextureLoader {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, textureBuffer);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        Texture texture = new Texture(textureID,image.getWidth(), image.getHeight());
+        Texture texture = new Texture(textureID,image.getWidth(), image.getHeight(), path);
 
         loadedTextures.put(path,texture);
-        patchesTextures.put(texture,path);
 
         return texture;
     }

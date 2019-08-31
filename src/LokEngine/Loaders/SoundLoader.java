@@ -12,14 +12,6 @@ import java.util.HashMap;
 public class SoundLoader {
 
     private static HashMap<String, Sound> loadedSounds = new HashMap<>();
-    private static HashMap<Sound, String> patchesSounds = new HashMap<>();
-
-    public static String getPath(Sound sound){
-        if (patchesSounds.containsKey(sound)){
-            return patchesSounds.get(sound);
-        }
-        return null;
-    }
 
     public static Sound loadSound(String path, SoundType soundType){
 
@@ -46,7 +38,6 @@ public class SoundLoader {
         }
 
         loadedSounds.put(path, sound);
-        patchesSounds.put(sound, path);
         return sound;
     }
 

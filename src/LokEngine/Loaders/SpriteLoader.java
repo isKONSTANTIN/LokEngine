@@ -6,18 +6,8 @@ import LokEngine.Render.Texture;
 import LokEngine.Tools.DefaultFields;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class SpriteLoader {
-
-    private static HashMap<Sprite,Float> vertexSizes = new HashMap<>();
-
-    public static Float getVertexSizes(Sprite sprite){
-        if (vertexSizes.containsKey(sprite)){
-            return vertexSizes.get(sprite);
-        }
-        return null;
-    }
 
     public static Sprite loadSprite(Texture texture, float vertexSize, Shader shader){
         int vertexBuffer = BufferLoader.load(new float[]
@@ -29,11 +19,7 @@ public class SpriteLoader {
                 }
         );
 
-        Sprite newSprite = new Sprite(texture,vertexBuffer,DefaultFields.defaultUVBuffer,1, shader);
-
-        vertexSizes.put(newSprite, vertexSize);
-
-        return newSprite;
+        return new Sprite(texture,vertexBuffer,DefaultFields.defaultUVBuffer,1, vertexSize, shader);
     }
 
     public static Sprite loadSprite(String texturePath, float vertexSize, Shader shader) throws IOException {
@@ -48,11 +34,7 @@ public class SpriteLoader {
                 }
         );
 
-        Sprite newSprite = new Sprite(tex,vertexBuffer,DefaultFields.defaultUVBuffer,1, shader);
-
-        vertexSizes.put(newSprite, vertexSize);
-
-        return newSprite;
+        return new Sprite(tex,vertexBuffer,DefaultFields.defaultUVBuffer,1, vertexSize, shader);
     }
 
     public static Sprite loadSprite(String texturePath, float vertexSize) throws IOException {

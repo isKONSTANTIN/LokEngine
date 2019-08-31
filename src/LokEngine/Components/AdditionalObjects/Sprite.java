@@ -14,30 +14,39 @@ public class Sprite implements Saveable {
     public int uvBuffer;
     public double size;
 
-    public Sprite(){ }
+    private float vertexSize;
 
-    public Sprite(Texture texture, int vertexBuffer, int uvBuffer){
+    public float getVertexSize(){
+        return vertexSize;
+    }
+
+    public Sprite(){}
+
+    public Sprite(Texture texture, int vertexBuffer, int uvBuffer, float vertexSize){
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;
         this.size = 1;
         this.uvBuffer = uvBuffer;
         this.shader = DefaultFields.defaultShader;
+        this.vertexSize = vertexSize;
     }
 
-    public Sprite(Texture texture, int vertexBuffer, int uvBuffer, double size){
+    public Sprite(Texture texture, int vertexBuffer, int uvBuffer, double size, float vertexSize){
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;
         this.size = size;
         this.uvBuffer = uvBuffer;
         this.shader = DefaultFields.defaultShader;
+        this.vertexSize = vertexSize;
     }
 
-    public Sprite(Texture texture, int vertexBuffer, int uvBuffer, double size, Shader shader){
+    public Sprite(Texture texture, int vertexBuffer, int uvBuffer, double size, float vertexSize, Shader shader){
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;
         this.size = size;
         this.uvBuffer = uvBuffer;
         this.shader = shader;
+        this.vertexSize = vertexSize;
     }
 
     public boolean equals(Object obj){
@@ -51,20 +60,20 @@ public class Sprite implements Saveable {
 
     @Override
     public String save() {
-        return shader.save() + "\n" + texture.save() + "\n" + size + "\n" + SpriteLoader.getVertexSizes(this);
+        return shader.save() + "\n" + texture.save() + "\n" + size + "\n" + vertexSize;
     }
 
     @Override
     public Saveable load(String savedString) {
         String[] data = savedString.split(System.getProperty("line.separator"));
-        Sprite loadedSprite = SpriteLoader.loadSprite((Texture)new Texture().load(data[1]), Float.valueOf(data[3]), (Shader)new Shader().load(data[0]));
-
+        this.vertexSize = Float.valueOf(data[3]);
         this.size = Double.valueOf(data[2]);
+
+        Sprite loadedSprite = SpriteLoader.loadSprite((Texture)new Texture().load(data[1]), vertexSize, (Shader)new Shader().load(data[0]));
         this.texture = loadedSprite.texture;
         this.shader = loadedSprite.shader;
         this.vertexBuffer = loadedSprite.vertexBuffer;
         this.uvBuffer = loadedSprite.uvBuffer;
-
         return this;
     }
 }

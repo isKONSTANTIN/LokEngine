@@ -7,10 +7,18 @@ import LokEngine.Tools.Utilities.SoundType;
 public class Sound implements Saveable {
 
     public int buffer;
+    public String path;
+
+    public Sound(){ }
+
+    public Sound(String path, int buffer){
+        this.path = path;
+        this.buffer = buffer;
+    }
 
     @Override
     public String save() {
-        return SoundLoader.getPath(this);
+        return path;
     }
 
     @Override

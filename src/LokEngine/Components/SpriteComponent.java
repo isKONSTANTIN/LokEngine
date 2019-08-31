@@ -7,11 +7,12 @@ import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector4f;
 
 import java.io.IOException;
 
-public class SpriteComponent extends Component {
+public class SpriteComponent extends Component implements Saveable {
 
     private Sprite sprite;
     private SpriteFramePart framePart;
@@ -20,6 +21,8 @@ public class SpriteComponent extends Component {
     public String getName(){
         return "Sprite Component";
     }
+
+    public SpriteComponent(){}
 
     public SpriteComponent(String path){
         try {
@@ -56,5 +59,20 @@ public class SpriteComponent extends Component {
     public void update(SceneObject source){
         framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
         RuntimeFields.getFrameBuilder().addPart(framePart);
+    }
+
+    @Override
+    public String save() {
+        return sprite.save();
+    }
+
+    @Override
+    public Saveable load(String savedString) {
+        SpriteComponent loadedSpriteComponent = new SpriteComponent((Sprite)new Sprite().load(savedString));
+
+        this.framePart = loadedSpriteComponent.framePart;
+        this.sprite = loadedSpriteComponent.sprite;
+
+        return this;
     }
 }

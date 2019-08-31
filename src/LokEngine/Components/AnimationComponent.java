@@ -5,18 +5,22 @@ import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Render.Frame.FrameParts.SpriteFramePart;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.SaveWorker.ArraySaver;
+import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector4f;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class AnimationComponent extends Component {
+public class AnimationComponent extends Component implements Saveable {
     private HashMap<String, Animation> animations = new HashMap<>();
-
     private Animation activeAnimation;
+    private String activeAnimationName;
     private SpriteFramePart framePart;
+
     public float currectFrame;
     public float speedAnimation = 1;
-    private Sprite sprite = new Sprite(null,0,0);
+    private Sprite sprite = new Sprite(null,0,0,0,0);
 
     public Sprite getSprite(){
         return sprite;
@@ -32,7 +36,7 @@ public class AnimationComponent extends Component {
     }
 
     public void addAnimation(Animation animation, String name){
-        animations.put(name,animation);
+        animations.put(name, animation);
         setActiveAnimation(name);
     }
 
@@ -46,6 +50,7 @@ public class AnimationComponent extends Component {
 
     public void setActiveAnimation(String name){
         activeAnimation = animations.get(name);
+        activeAnimationName = name;
         currectFrame = 0;
     }
 
@@ -71,4 +76,43 @@ public class AnimationComponent extends Component {
         }
     }
 
+
+    @Override
+    public String save() {
+        ArraySaver arraySaver = new ArraySaver(Animation.class);
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Map.Entry<String, Animation> entry : animations.entrySet()) {
+            String key = entry.getKey();
+            Animation value = entry.getValue();
+
+            arraySaver.arrayList.add(value);
+            stringBuilder.append(key).append(",");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append(";").append(activeAnimationName);
+        stringBuilder.append(";").append(arraySaver.save());
+        stringBuilder.append(";").append(speedAnimation);
+        stringBuilder.append(";").append(currectFrame);
+
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public Saveable load(String savedString) {
+        String[] data = savedString.split(";");
+        ArraySaver arraySaver = (ArraySaver)new ArraySaver(Animation.class).load(data[2]);
+        String[] animationNames = data[0].split(",");
+
+        for (int i = 0; i < animationNames.length; i++){
+            animations.put(animationNames[i], (Animation)arraySaver.arrayList.get(i));
+        }
+
+        setActiveAnimation(data[1]);
+
+        speedAnimation = Float.valueOf(data[3]);
+        currectFrame = Float.valueOf(data[4]);
+
+        return this;
+    }
 }
