@@ -9,30 +9,32 @@ public class GUIText extends GUIObject {
 
     private GUITextFramePart framePart;
     private int maxTextLength;
+    private boolean canResize;
 
-    public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias) {
+    public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0,0));
         framePart = new GUITextFramePart(text, fontName, new org.newdawn.slick.Color(color.red, color.green, color.blue, color.alpha), fontStyle, size, antiAlias);
 
         this.size.y = framePart.getHeight();
         this.size.x = framePart.getWidth();
+        this.canResize = canResize;
         framePart.position = this.position;
     }
 
     public GUIText(Vector2i position, String text, Color color,  int fontStyle, int size) {
-        this(position,"Times New Roman", text, color, fontStyle, size, true);
+        this(position,"Times New Roman", text, color, fontStyle, size, true, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle) {
-        this(position,"Times New Roman", text, color, fontStyle, 24, true);
+        this(position, text, color, fontStyle, 24);
     }
 
     public GUIText(Vector2i position, String text) {
-        this(position,"Times New Roman", text, new Color(1,1,1,1), 0, 24, true);
+        this(position, text, new Color(1,1,1,1), 0);
     }
 
     public GUIText(Vector2i position) {
-        this(position,"Times New Roman", "Text", new Color(1,1,1,1), 0, 24, true);
+        this(position,"Text");
     }
 
     public String getText(){
@@ -41,8 +43,13 @@ public class GUIText extends GUIObject {
 
     public void updateText(String text){
         framePart.text = text;
-        updateMaxSize();
-        framePart.text = text.length() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
+        if (canResize){
+            this.size.x = framePart.getWidth();
+            this.size.y = framePart.getHeight();
+        }else{
+            updateMaxSize();
+            framePart.text = text.length() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
+        }
     }
 
     @Override
