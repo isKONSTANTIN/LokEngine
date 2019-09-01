@@ -60,7 +60,7 @@ public class GUIText extends GUIObject {
 
     private void updateMaxSize(){
         int textLength = framePart.text.length();
-        if (textLength > 0)
+        if (textLength > 0 && framePart.getWidth() > 0)
             this.maxTextLength = size.x / (framePart.getWidth() / framePart.text.length());
     }
 
