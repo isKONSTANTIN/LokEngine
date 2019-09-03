@@ -7,8 +7,9 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class ShapeCreator {
 
-    public static PolygonShape CreateArbitraryShape(Vector2f[] collidePoints, int length) {
+    public static PolygonShape CreateArbitraryShape(Vector2f[] collidePoints) {
         PolygonShape polyShape = new PolygonShape();
+        int length = collidePoints.length;
         Vec2[] b2Points = new Vec2[length];
 
         for (int i = 0; i < length; i++) {
