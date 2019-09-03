@@ -14,6 +14,14 @@ public class Misc {
         return new String(Base64.getDecoder().decode(base64));
     }
 
+    public static String bytesToBase64(byte[] text){
+        return Base64.getEncoder().encodeToString(text);
+    }
+
+    public static byte[] bytesFromBase64(String base64){
+        return Base64.getDecoder().decode(base64);
+    }
+
     public static boolean mouseInField(Vector2i position, Vector2i size){
         Vector2i mousePosition = RuntimeFields.getMouseStatus().getMousePosition();
         Vector2i resolution = RuntimeFields.getFrameBuilder().window.getResolution();
