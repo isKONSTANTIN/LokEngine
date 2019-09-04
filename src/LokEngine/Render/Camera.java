@@ -31,6 +31,16 @@ public class Camera {
         );
     }
 
+
+    public Vector2i scenePointToScreen(Vector2f point){
+        Vector2f screenCenter = new Vector2f(RuntimeFields.getFrameBuilder().window.getResolution().x / 2f, RuntimeFields.getFrameBuilder().window.getResolution().y / 2f);
+
+        return new Vector2i(
+                Math.round((point.x - position.x) / 0.520833f / fieldOfView / screenRatio * screenCenter.x + screenCenter.x),
+                Math.round((point.y - position.y) / 0.520833f / fieldOfView * screenCenter.y + screenCenter.y)
+        );
+    }
+
     public void setFieldOfView(float fieldOfView){
         this.fieldOfView = fieldOfView;
         screenRatio = (float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y;
