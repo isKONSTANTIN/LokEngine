@@ -35,6 +35,14 @@ public class FileWorker {
         }
     }
 
+    public void flush() throws IOException {
+        if (fileWriter != null){
+            fileWriter.flush();
+        }else{
+            throw new IOException("File not writable");
+        }
+    }
+
     public String read() throws IOException {
         if (fileReader != null){
             Scanner scan = new Scanner(fileReader);
