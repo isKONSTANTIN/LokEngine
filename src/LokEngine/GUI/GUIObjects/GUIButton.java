@@ -2,6 +2,7 @@ package LokEngine.GUI.GUIObjects;
 
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Scripting.Script;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -13,6 +14,8 @@ public class GUIButton extends GUIObject {
     public GUIPanel panel;
 
     private Color activeColor;
+    private Script pressScript;
+    private Script unpressScript;
     private boolean pressed;
 
     public boolean isPressed(){
@@ -43,19 +46,33 @@ public class GUIButton extends GUIObject {
         this.pressedColor = new Color(calmState.red + colorChange,calmState.green + colorChange,calmState.blue + colorChange,calmState.alpha);
         this.calmStateColor = calmState;
         this.activeColor = new Color(calmStateColor.red,calmStateColor.green,calmStateColor.blue, calmStateColor.alpha);
-        this.panel = new GUIPanel(position,size,activeColor);
+        this.panel = new GUIPanel(position, size, activeColor);
     }
 
-    public void pressed(){
+    public void setPressScript(Script script){
+        this.pressScript = script;
+    }
+
+    public void setUnpressScript(Script script){
+        this.unpressScript = script;
+    }
+
+    private void pressed(){
         activeColor.red = pressedColor.red;
         activeColor.green = pressedColor.green;
         activeColor.blue = pressedColor.blue;
+
+        if (pressScript != null)
+            pressScript.execute();
     }
 
-    public void unPressed(){
+    private void unpressed(){
         activeColor.red = calmStateColor.red;
         activeColor.green = calmStateColor.green;
         activeColor.blue = calmStateColor.blue;
+
+        if (unpressScript != null)
+            unpressScript.execute();
     }
 
     private void checkMouse(){
@@ -69,7 +86,7 @@ public class GUIButton extends GUIObject {
         }
 
         if ((!RuntimeFields.getMouseStatus().getPressedStatus() || !enterInBox) && pressed){
-            unPressed();
+            unpressed();
             pressed = false;
         }
     }
