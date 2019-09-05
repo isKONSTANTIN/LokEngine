@@ -17,7 +17,7 @@ public class DefaultParticleHandler implements ParticleHandler{
 
     @Override
     public Particle createNewParticle(ParticleSystemComponent particleSystemComponent) {
-        Particle particle = new Particle(particleSystemComponent.sourcePosition,1, 60 * 10);
+        Particle particle = new Particle(particleSystemComponent.getSourcePosition(),1, 60 * 10);
 
         particle.speedX = (float)(Math.random() - 0.5f) / 100f;
         particle.speedY = (float)(Math.random() - 0.5f) / 100f;

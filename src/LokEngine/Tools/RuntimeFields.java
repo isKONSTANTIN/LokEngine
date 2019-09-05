@@ -10,9 +10,9 @@ public class RuntimeFields {
     private static Scene scene;
     private static GUICanvas canvas;
     private static MouseStatus mouseStatus;
+
     private static float deltaTime;
     private static int fps;
-
     private static float speedEngine = 1f;
     private static long lastUpdateTime;
     private static long lastFPSUpdateTime;
@@ -21,9 +21,9 @@ public class RuntimeFields {
     public static Scene getScene(){ return scene; }
     public static GUICanvas getCanvas(){ return canvas; }
     public static MouseStatus getMouseStatus(){ return mouseStatus; }
+
     public static float getDeltaTime(){ return deltaTime / 16.66666f; }
     public static int getFps(){ return fps; }
-
     public static float getSpeedEngine(){ return speedEngine; }
 
     public static void setSpeedEngine(float speed){
@@ -39,6 +39,7 @@ public class RuntimeFields {
         RuntimeFields.scene = scene;
         RuntimeFields.canvas = canvas;
         RuntimeFields.mouseStatus = mouseStatus;
+
         lastUpdateTime = System.nanoTime();
         lastFPSUpdateTime = System.nanoTime();
     }

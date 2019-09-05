@@ -1,8 +1,8 @@
 package LokEngine.Render;
 
 import LokEngine.Loaders.ShaderLoader;
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.Logger;
-import LokEngine.Tools.Misc;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.opengl.ARBShaderObjects;
 
@@ -39,12 +39,12 @@ public class Shader implements Saveable {
 
     @Override
     public String save() {
-        return Misc.toBase64(vertPath + "\n" + fragPath);
+        return Base64.toBase64(vertPath + "\n" + fragPath);
     }
 
     @Override
     public Saveable load(String savedString) {
-        String[] patches = Misc.fromBase64(savedString).split(System.getProperty("line.separator"));
+        String[] patches = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
 
         try {
             Shader loadedShader = ShaderLoader.loadShader(patches[0], patches[1]);

@@ -104,8 +104,24 @@ public class Logger {
     public static void printException(Exception e){
         if (exceptionMessages){
             underMessage(e.getClass().getName() + " - " + e.getMessage());
-            underMessage(Misc.stackTraceToString(e.getStackTrace()));
+            underMessage(stackTraceToString(e.getStackTrace()));
         }
+    }
+
+    public static String stackTraceToString(StackTraceElement[] elements){
+        StringBuilder StackTrace = new StringBuilder();
+
+        for (int i = 0; i < elements.length; i++) {
+            StackTrace
+                    .append("Class name: '")
+                    .append(elements[i].getClassName())
+                    .append("' Method name: '")
+                    .append(elements[i].getMethodName())
+                    .append("' - ")
+                    .append(elements[i].getLineNumber())
+                    .append(" line\n");
+        }
+        return StackTrace.toString();
     }
 
     public static void underMessage(String message){

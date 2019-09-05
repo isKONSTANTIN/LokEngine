@@ -15,9 +15,12 @@ public class SplashScreen {
 
     public static void init(Window window){
         SplashScreen.framePart = new GUIImageFramePart(new Vector2i(0,0),new Vector2i(0,0),"#/resources/textures/Splash.png");
+
         SplashScreen.framePart.position = new Vector2i(
                 window.getResolution().x / 2 - SplashScreen.framePart.size.x / 2,
-                window.getResolution().y / 2 - SplashScreen.framePart.size.y / 2);
+                window.getResolution().y / 2 - SplashScreen.framePart.size.y / 2
+        );
+
         SplashScreen.window = window;
 
         sizeBar = new Vector2i(Math.round(window.getResolution().x * 0.8f),4);
@@ -48,6 +51,7 @@ public class SplashScreen {
             GL11.glVertex3f(sizeBar.x + positionBar.x, positionBar.y, 0);
             GL11.glVertex3f(sizeBar.x + positionBar.x, sizeBar.y + positionBar.y, 0);
             GL11.glVertex3f(length + positionBar.x, sizeBar.y + positionBar.y, 0);
+
             GL11.glEnd();
         }
         window.update();

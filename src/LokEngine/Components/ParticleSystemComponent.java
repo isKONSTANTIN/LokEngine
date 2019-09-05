@@ -19,10 +19,12 @@ public class ParticleSystemComponent extends Component {
     ParticleSystemFramePart framePart;
     ArrayList<Particle> particlesList = new ArrayList<>();
     ParticleHandler particleHandler;
-    public Vector2f sourcePosition = new Vector2f();
 
-    ArrayList<Float> positions = new ArrayList<>();
-    ArrayList<Float> sizes = new ArrayList<>();
+    private Vector2f sourcePosition = new Vector2f();
+
+    public Vector2f getSourcePosition(){
+        return new Vector2f(sourcePosition.x, sourcePosition.y);
+    }
 
     public ParticleSystemComponent(Sprite spriteParticles, ParticleHandler particleHandler, Shader shader) {
         framePart = new ParticleSystemFramePart(spriteParticles, shader);
@@ -51,8 +53,8 @@ public class ParticleSystemComponent extends Component {
     public void update(SceneObject source){
         sourcePosition = source.position;
 
-        positions.clear();
-        sizes.clear();
+        ArrayList<Float> positions = new ArrayList<>();
+        ArrayList<Float> sizes = new ArrayList<>();
 
         for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext();) {
             Particle particle = iter.next();

@@ -1,7 +1,7 @@
 package LokEngine.Tools.SaveWorker;
 
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.Logger;
-import LokEngine.Tools.Misc;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -15,7 +15,7 @@ public interface AutoSaveable extends Serializable, Saveable {
             oos.writeObject(this);
             oos.close();
 
-            return Misc.bytesToBase64(baos.toByteArray());
+            return Base64.bytesToBase64(baos.toByteArray());
         } catch (IOException e) {
             Logger.warning("Fail auto save object!", "LokEngine_AutoSaveable");
             Logger.printException(e);
@@ -26,7 +26,7 @@ public interface AutoSaveable extends Serializable, Saveable {
     default Saveable load(String savedString) {
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new ByteArrayInputStream(Misc.bytesFromBase64(savedString)));
+            ois = new ObjectInputStream(new ByteArrayInputStream(Base64.bytesFromBase64(savedString)));
 
             Object loadedObject = ois.readObject();
             ois.close();
