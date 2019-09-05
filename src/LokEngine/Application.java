@@ -25,6 +25,9 @@ import static org.lwjgl.opengl.GL20.glUniform2f;
 
 public class Application {
     public Window window;
+    public Scene scene;
+    public GUICanvas canvas;
+
     private boolean isRun;
 
     private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
@@ -65,6 +68,9 @@ public class Application {
             Logger.debug("Init runtime fields", "LokEngine_start");
 
             RuntimeFields.init(new FrameBuilder(window), new Scene(), new GUICanvas(new Vector2i(0,0), windowResolution), new MouseStatus());
+
+            scene = RuntimeFields.getScene();
+            canvas = RuntimeFields.getCanvas();
 
             Logger.debug("Init default font", "LokEngine_start");
             try {
