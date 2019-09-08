@@ -22,7 +22,11 @@ public class SubclassSaver implements Saveable {
         String[] data = savedString.split(":");
 
         try {
-            saveableObject = ((Saveable)Class.forName(data[0]).newInstance()).load(data[1]);
+            saveableObject = ((Saveable)Class.forName(data[0]).newInstance());
+
+            if (data.length > 1){
+                saveableObject.load(data[1]);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }

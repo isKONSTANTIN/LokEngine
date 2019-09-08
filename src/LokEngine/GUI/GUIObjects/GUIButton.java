@@ -2,7 +2,7 @@ package LokEngine.GUI.GUIObjects;
 
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
-import LokEngine.Tools.Scripting.Script;
+import LokEngine.Tools.Scripting.Scriptable;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -14,8 +14,8 @@ public class GUIButton extends GUIObject {
     public GUIPanel panel;
 
     private Color activeColor;
-    private Script pressScript;
-    private Script unpressScript;
+    private Scriptable pressScript;
+    private Scriptable unpressScript;
     private boolean pressed;
 
     public boolean isPressed(){
@@ -49,11 +49,11 @@ public class GUIButton extends GUIObject {
         this.panel = new GUIPanel(position, size, activeColor);
     }
 
-    public void setPressScript(Script script){
+    public void setPressScript(Scriptable script){
         this.pressScript = script;
     }
 
-    public void setUnpressScript(Script script){
+    public void setUnpressScript(Scriptable script){
         this.unpressScript = script;
     }
 

@@ -3,6 +3,7 @@ package LokEngine.Components.AdditionalObjects;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Texture;
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -59,12 +60,12 @@ public class Animation implements Saveable {
 
     @Override
     public String save() {
-        return altasTexture.save() + "\n" + atlasPositions.save();
+        return Base64.toBase64(altasTexture.save() + "\n" + atlasPositions.save());
     }
 
     @Override
     public Saveable load(String savedString) {
-        String[] data = savedString.split(System.getProperty("line.separator"));
+        String[] data = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
 
         Animation loadedAnimation = new Animation((Texture)new Texture().load(data[0]), (AtlasPositions)(new AtlasPositions().load(data[1])));
 

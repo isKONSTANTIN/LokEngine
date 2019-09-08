@@ -42,6 +42,7 @@ public class ArraySaver implements Saveable {
     @Override
     public Saveable load(String savedString) {
         String[] elements = Base64.fromBase64(savedString).split("ELM.");
+
         try {
             typeClass = Class.forName(elements[0].substring(0,elements[0].length()-1));
         } catch (ClassNotFoundException e) {
@@ -49,8 +50,10 @@ public class ArraySaver implements Saveable {
             Logger.printException(e);
             return this;
         }
+
         for (int i = 1; i < elements.length; i++){
             String[] lines = elements[i].split(System.getProperty("line.separator"));
+
             if (lines[0].equals(lines[lines.length-1].substring(4))){
                 StringBuilder elementSaved = new StringBuilder();
 
@@ -60,12 +63,15 @@ public class ArraySaver implements Saveable {
                 }
 
                 try {
-                    arrayList.add(((Saveable)typeClass.newInstance()).load(elementSaved.toString()));
+                    arrayList.add(
+                            ((Saveable)typeClass.newInstance()).load(elementSaved.toString())
+                    );
                 } catch (InstantiationException | IllegalAccessException e) {
                     Logger.warning("Fail add loaded object!", "LokEngine_ArraySaver");
                     Logger.printException(e);
                 }
             }
+
         }
 
         return this;

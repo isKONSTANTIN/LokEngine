@@ -1,6 +1,7 @@
 package LokEngine.SceneEnvironment;
 
 import LokEngine.Components.ComponentList;
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -23,12 +24,12 @@ public class SceneObject implements Saveable {
 
     @Override
     public String save() {
-        return position.x + "\n" + position.y + "\n" + rollRotation + "\n" + renderPriority + "\n" + components.save();
+        return Base64.toBase64(position.x + "\n" + position.y + "\n" + rollRotation + "\n" + renderPriority + "\n" + components.save());
     }
 
     @Override
     public Saveable load(String savedString) {
-        String[] lines = savedString.split(System.getProperty("line.separator"));
+        String[] lines = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
 
         position = new Vector2f(Float.valueOf(lines[0]),Float.valueOf(lines[1]));
         rollRotation = Float.valueOf(lines[2]);

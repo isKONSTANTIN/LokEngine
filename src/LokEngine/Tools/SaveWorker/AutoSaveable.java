@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 
 public interface AutoSaveable extends Serializable, Saveable {
 
+    @Override
     default String save() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -23,6 +24,7 @@ public interface AutoSaveable extends Serializable, Saveable {
         return null;
     }
 
+    @Override
     default Saveable load(String savedString) {
         ObjectInputStream ois = null;
         try {

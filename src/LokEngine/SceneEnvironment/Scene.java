@@ -1,5 +1,6 @@
 package LokEngine.SceneEnvironment;
 
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.ArraySaver;
 import LokEngine.Tools.SaveWorker.Saveable;
@@ -56,13 +57,13 @@ public class Scene implements Saveable {
 
         String sceneData = physicsVelocityIterations + "\n" + physicsPositionsIterations;
 
-        return sceneData + ",\n" + arraySaver.save();
+        return Base64.toBase64(sceneData + ",\n" + arraySaver.save());
     }
 
     @Override
     public Saveable load(String savedString) {
         ArraySaver arraySaver = new ArraySaver(SceneObject.class);
-        String[] data = savedString.split(",\n");
+        String[] data = Base64.fromBase64(savedString).split(",\n");
         String[] lines = data[0].split(System.getProperty("line.separator"));
 
         physicsVelocityIterations = Integer.valueOf(lines[0]);

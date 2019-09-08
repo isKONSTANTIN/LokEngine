@@ -3,6 +3,7 @@ package LokEngine.Components.AdditionalObjects;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Shader;
 import LokEngine.Render.Texture;
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.SaveWorker.Saveable;
 
@@ -60,12 +61,12 @@ public class Sprite implements Saveable {
 
     @Override
     public String save() {
-        return shader.save() + "\n" + texture.save() + "\n" + size + "\n" + vertexSize;
+        return Base64.toBase64(shader.save() + "\n" + texture.save() + "\n" + size + "\n" + vertexSize);
     }
 
     @Override
     public Saveable load(String savedString) {
-        String[] data = savedString.split(System.getProperty("line.separator"));
+        String[] data = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
         this.vertexSize = Float.valueOf(data[3]);
         this.size = Double.valueOf(data[2]);
 
