@@ -1,4 +1,4 @@
-package LokEngine.Network.TCPServer;
+package LokEngine.Network.TCP.Server;
 
 public interface TCPServerHandler {
     void connected(int userID);

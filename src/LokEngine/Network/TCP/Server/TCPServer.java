@@ -1,4 +1,6 @@
-package LokEngine.Network.TCPServer;
+package LokEngine.Network.TCP.Server;
+
+import LokEngine.Network.TCP.Handlers.Default.DefaultTCPServerHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,7 +8,7 @@ import java.net.ServerSocket;
 public class TCPServer {
 
     private volatile ServerSocket serverSocket;
-    private TCPServerHandler serverHandler;
+    public TCPServerHandler serverHandler;
 
     public TCPServer(int port, TCPServerHandler serverHandler) throws IOException {
         serverSocket = new ServerSocket(port);

@@ -1,4 +1,4 @@
-package LokEngine.Network;
+package LokEngine.Network.TCP;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,16 +13,19 @@ public class TCPTools {
 
         while(true) {
             String line = reader.readLine();
-            if (line.equals(endLineDesignation)) {
+            if (line == null || line.equals(endLineDesignation)) {
                 break;
             }
 
             stringBuilder.append(line).append("\n");
         }
 
-         stringBuilder.deleteCharAt(stringBuilder.length()-1);
-
-        return stringBuilder.toString();
+        if (stringBuilder.length() > 0){
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
+            return stringBuilder.toString();
+        }else{
+            return null;
+        }
     }
 
     public static void sendMessage(String message, BufferedWriter writer) throws IOException {

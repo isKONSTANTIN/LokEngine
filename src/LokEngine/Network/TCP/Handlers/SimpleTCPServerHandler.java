@@ -1,10 +1,10 @@
-package LokEngine.Network.TCPServer;
+package LokEngine.Network.TCP.Handlers;
 
+import LokEngine.Network.TCP.Server.TCPServerHandler;
 import LokEngine.Tools.Logger;
 
-public class DefaultTCPServerHandler implements TCPServerHandler {
-
-    int userID;
+public class SimpleTCPServerHandler implements TCPServerHandler {
+    protected int userID;
 
     @Override
     public void connected(int userID) {

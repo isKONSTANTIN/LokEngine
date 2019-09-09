@@ -1,6 +1,6 @@
-package LokEngine.Network.TCPServer;
+package LokEngine.Network.TCP.Server;
 
-import LokEngine.Network.TCPTools;
+import LokEngine.Network.TCP.TCPTools;
 import LokEngine.Tools.Logger;
 
 import java.io.*;
@@ -35,20 +35,32 @@ public class TCPServerThread extends Thread {
                     while(!Thread.interrupted()){
                         try {
                             String messageFrom = TCPTools.getMessage(fromClient);
-                            String messageTo = handler.acceptMessage(messageFrom);
 
-                            if (messageTo != null)
-                                TCPTools.sendMessage(messageTo, toClient);
+                            if (messageFrom == null){
+                                if (socket.isClosed()){
+                                    break;
+                                }
+                            }else{
+                                String messageTo = handler.acceptMessage(messageFrom);
 
+                                if (messageTo != null)
+                                    TCPTools.sendMessage(messageTo, toClient);
+                            }
                         } catch (Exception e) {
                             Logger.warning("Fail process client!", "LokEngine_TCPServer-ClientThread");
                             Logger.printException(e);
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                     }
 
                     handler.disconnected();
                     try {
-                        socket.close();
+                        if (!socket.isClosed())
+                            socket.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

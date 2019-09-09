@@ -1,5 +1,6 @@
-package LokEngine.Network.TCPClient;
+package LokEngine.Network.TCP.Client;
 
+import LokEngine.Network.TCP.Handlers.Default.DefaultTCPClientHandler;
 import LokEngine.Tools.Logger;
 
 import java.io.*;
@@ -50,7 +51,7 @@ public class TCPClient {
             toServer.close();
             socket.close();
         } catch (IOException e) {
-            Logger.warning("Fail close TCPClient!", "LokEngine_TCPClient");
+            Logger.warning("Fail close Client!", "LokEngine_TCPClient");
             Logger.printException(e);
         }
     }
