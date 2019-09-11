@@ -9,19 +9,26 @@ public class TCPServer {
 
     private volatile ServerSocket serverSocket;
     public TCPServerHandler serverHandler;
+    private TCPServerMainThread thread;
 
     public TCPServer(int port, TCPServerHandler serverHandler) throws IOException {
         serverSocket = new ServerSocket(port);
         this.serverHandler = serverHandler;
-        startServer();
+        thread = new TCPServerMainThread(serverSocket, serverHandler);
+        thread.start();
     }
 
     public TCPServer(int port) throws IOException {
-        this(port,new DefaultTCPServerHandler());
+        this(port, new DefaultTCPServerHandler());
     }
 
-    private void startServer(){
-        new TCPServerThread(serverSocket, serverHandler).start();
+    public void close(){
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        thread.close();
     }
 
 }
