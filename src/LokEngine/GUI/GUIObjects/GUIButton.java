@@ -1,8 +1,8 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
-import LokEngine.Tools.Scripting.Scriptable;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -14,8 +14,8 @@ public class GUIButton extends GUIObject {
     public GUIPanel panel;
 
     private Color activeColor;
-    private Scriptable pressScript;
-    private Scriptable unpressScript;
+    private GUIButtonScript pressScript;
+    private GUIButtonScript unpressScript;
     private boolean pressed;
 
     public boolean isPressed(){
@@ -49,11 +49,11 @@ public class GUIButton extends GUIObject {
         this.panel = new GUIPanel(position, size, activeColor);
     }
 
-    public void setPressScript(Scriptable script){
+    public void setPressScript(GUIButtonScript script){
         this.pressScript = script;
     }
 
-    public void setUnpressScript(Scriptable script){
+    public void setUnpressScript(GUIButtonScript script){
         this.unpressScript = script;
     }
 
@@ -63,7 +63,7 @@ public class GUIButton extends GUIObject {
         activeColor.blue = pressedColor.blue;
 
         if (pressScript != null)
-            pressScript.execute();
+            pressScript.execute(this);
     }
 
     private void unpressed(){
@@ -72,7 +72,7 @@ public class GUIButton extends GUIObject {
         activeColor.blue = calmStateColor.blue;
 
         if (unpressScript != null)
-            unpressScript.execute();
+            unpressScript.execute(this);
     }
 
     private void checkMouse(){
