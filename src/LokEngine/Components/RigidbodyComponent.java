@@ -52,7 +52,6 @@ public class RigidbodyComponent extends Component {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(object.position.x * 9.5f, object.position.y * 9.5f);
         bodyDef.angle = (float)MatrixCreator.DegressToRadians(object.rollRotation);
-
         bodyDef.type = body.isStatic ? BodyType.STATIC : BodyType.DYNAMIC;
 
         Body body = RuntimeFields.getScene().b2World.createBody(bodyDef);
