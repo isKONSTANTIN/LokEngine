@@ -58,17 +58,12 @@ public class Application {
 
             SplashScreen.updateStatus(0.1f);
             Logger.debug("Init default vertex screen buffer", "LokEngine_start");
-            DefaultFields.defaultVertexScreenBuffer = BufferLoader.load(new float[]{
-                    -windowResolution.x / 2, windowResolution.y / 2,
-                    -windowResolution.x / 2, -windowResolution.y / 2,
-                    windowResolution.x / 2, -windowResolution.y / 2,
-                    windowResolution.x / 2, windowResolution.y / 2,
-            });
+            DefaultFields.defaultVertexScreenBuffer = BufferLoader.load(new float[]{-windowResolution.x / 2, windowResolution.y / 2, -windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, windowResolution.y / 2,});
+
             SplashScreen.updateStatus(0.2f);
             Logger.debug("Init runtime fields", "LokEngine_start");
 
             RuntimeFields.init(new FrameBuilder(window), new Scene(), new GUICanvas(new Vector2i(0,0), windowResolution), new MouseStatus());
-
             scene = RuntimeFields.getScene();
             canvas = RuntimeFields.getCanvas();
 
@@ -83,24 +78,7 @@ public class Application {
             SplashScreen.updateStatus(0.3f);
             Logger.debug("Init shaders", "LokEngine_start");
             try {
-                DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
-                DefaultFields.unknownSprite = SpriteLoader.loadSprite("#/resources/textures/unknown.png", 100 , DefaultFields.defaultShader);
-                DefaultFields.displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
-                DefaultFields.postProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
-                DefaultFields.particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
-
-                Shader.use(DefaultFields.postProcessingShader);
-                window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-
-                Shader.use(DefaultFields.displayShader);
-                glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
-                window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-
-                Shader.use(DefaultFields.particlesShader);
-                MatrixCreator.PutMatrixInShader(DefaultFields.particlesShader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(0,new Vector3f(0,0,0)));
-
-                Shader.use(DefaultFields.defaultShader);
-                window.getCamera().setFieldOfView(1);
+                shadersInit();
             } catch (Exception e) {
                 Logger.error("Fail load shaders!", "LokEngine_start");
                 Logger.printException(e);
@@ -139,35 +117,7 @@ public class Application {
         }
 
         try {
-            while (true) {
-                try {
-                    Update();
-                } catch (Exception e) {
-                    Logger.warning("Fail user-update!", "LokEngine_runtime");
-                    Logger.printException(e);
-                }
-
-                if (!isRun) break;
-
-                try {
-                    RuntimeFields.update();
-                } catch (Exception e) {
-                    Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
-                    Logger.printException(e);
-                }
-
-                RuntimeFields.getScene().update();
-                RuntimeFields.getCanvas().update();
-
-                try {
-                    nextFrame();
-                } catch (Exception e) {
-                    Logger.error("Fail build frame!", "LokEngine_runtime");
-                    Logger.printException(e);
-                }
-
-                window.update();
-            }
+            mainWhile();
         }catch (Exception e){
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
             Logger.printException(e);
@@ -188,6 +138,81 @@ public class Application {
             Logger.printException(e);
         }
         AL.destroy();
+    }
+
+    private void mainWhile(){
+        while (true) {
+            try {
+                Update();
+            } catch (Exception e) {
+                Logger.warning("Fail user-update!", "LokEngine_runtime");
+                Logger.printException(e);
+            }
+
+            if (!isRun) break;
+
+            try {
+                RuntimeFields.update();
+            } catch (Exception e) {
+                Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
+                Logger.printException(e);
+            }
+
+            RuntimeFields.getScene().update();
+            RuntimeFields.getCanvas().update();
+
+            try {
+                nextFrame();
+            } catch (Exception e) {
+                Logger.error("Fail build frame!", "LokEngine_runtime");
+                Logger.printException(e);
+            }
+
+            window.update();
+        }
+    }
+
+    private void consoleMainWhile(){
+        while (true) {
+            try {
+                Update();
+            } catch (Exception e) {
+                Logger.warning("Fail user-update!", "LokEngine_runtime");
+                Logger.printException(e);
+            }
+
+            try {
+                RuntimeFields.update();
+            } catch (Exception e) {
+                Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
+                Logger.printException(e);
+            }
+
+            if (!isRun) break;
+
+            RuntimeFields.getScene().update();
+        }
+    }
+
+    private void shadersInit() throws Exception {
+        DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
+        DefaultFields.unknownSprite = SpriteLoader.loadSprite("#/resources/textures/unknown.png", 100 , DefaultFields.defaultShader);
+        DefaultFields.displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
+        DefaultFields.postProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
+        DefaultFields.particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
+
+        Shader.use(DefaultFields.postProcessingShader);
+        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+
+        Shader.use(DefaultFields.displayShader);
+        glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
+        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+
+        Shader.use(DefaultFields.particlesShader);
+        MatrixCreator.PutMatrixInShader(DefaultFields.particlesShader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(0,new Vector3f(0,0,0)));
+
+        Shader.use(DefaultFields.defaultShader);
+        window.getCamera().setFieldOfView(1);
     }
 
     private void nextFrame(){
@@ -222,25 +247,7 @@ public class Application {
             System.exit(-1);
         }
         try {
-            while (true) {
-                try {
-                    Update();
-                } catch (Exception e) {
-                    Logger.warning("Fail user-update!", "LokEngine_runtime");
-                    Logger.printException(e);
-                }
-
-                try {
-                    RuntimeFields.update();
-                } catch (Exception e) {
-                    Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
-                    Logger.printException(e);
-                }
-
-                if (!isRun) break;
-
-                RuntimeFields.getScene().update();
-            }
+            consoleMainWhile();
         } catch (Exception e) {
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
             Logger.printException(e);
