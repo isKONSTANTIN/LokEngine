@@ -26,7 +26,8 @@ public class MySQLConnect {
 
     public void close(){
         try {
-            connection.close();
+            if (connection != null)
+                connection.close();
         } catch (SQLException e) {
             Logger.warning("Fail close MySQL database connect", "LokEngine_MySQLConnect");
             Logger.printException(e);
