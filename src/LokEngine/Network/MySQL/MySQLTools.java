@@ -27,20 +27,20 @@ public class MySQLTools {
         return arrayList;
     }
 
-    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, int lineId){
-        ResultSet resultSet = database.executeQuery("SELECT `" + column + "` FROM `" + tableName + "` WHERE `id` = " + lineId);
-
-        try {
-            return resultSet.next() ? resultSet.getObject(1) : null;
-        } catch (SQLException e) {
-            Logger.warning("Fail get data from cell", "LokEngine_MySQLTools");
-            Logger.printException(e);
-        }
-        return null;
+    public static void setDataToCell(MySQLConnect database, String tableName, String data, String column, String lineNameFilter, String line){
+        database.executeQuery("UPDATE `" + tableName + "` SET `" + column + "` = " + data + " WHERE `" + lineNameFilter + "` = " + line);
     }
 
-    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, String lineNameFilter, String lineString){
-        ResultSet resultSet = database.executeQuery("SELECT `" + column + "` FROM `" + tableName + "` WHERE `" + lineNameFilter + "` = '" + lineString + "'");
+    public static void setDataToCell(MySQLConnect database, String tableName, String data, String column, int lineId){
+        setDataToCell(database, tableName, data, column,"id", String.valueOf(lineId));
+    }
+
+    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, int lineId){
+        return getDataFromCell(database, tableName, column, "id", String.valueOf(lineId));
+    }
+
+    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, String lineNameFilter, String line){
+        ResultSet resultSet = database.executeQuery("SELECT `" + column + "` FROM `" + tableName + "` WHERE `" + lineNameFilter + "` = " + line);
 
         try {
             return resultSet.next() ? resultSet.getObject(1) : null;
