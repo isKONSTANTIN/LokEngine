@@ -18,6 +18,7 @@ public class GUITextField extends GUIObject {
     public GUITextField(Vector2i position, Vector2i size) {
         super(position, size);
         this.text = new GUIText(position,"");
+        this.text.size = size;
     }
 
     @Override
