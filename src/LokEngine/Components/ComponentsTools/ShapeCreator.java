@@ -1,13 +1,16 @@
 package LokEngine.Components.ComponentsTools;
 
-import org.jbox2d.collision.shapes.CircleShape;
+
+import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.ArbitraryShape;
+import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.BoxShape;
+import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.lwjgl.util.vector.Vector2f;
 
 public class ShapeCreator {
 
-    public static PolygonShape CreateArbitraryShape(Vector2f[] collidePoints) {
+    public static ArbitraryShape CreateArbitraryShape(Vector2f[] collidePoints) {
         PolygonShape polyShape = new PolygonShape();
         int length = collidePoints.length;
         Vec2[] b2Points = new Vec2[length];
@@ -18,21 +21,21 @@ public class ShapeCreator {
 
         polyShape.set(b2Points, length);
 
-        return polyShape;
+        return new ArbitraryShape(collidePoints, polyShape);
     }
 
-    public static  PolygonShape CreateBoxShape(Vector2f collideSize) {
+    public static BoxShape CreateBoxShape(Vector2f collideSize) {
         PolygonShape polyShape = new PolygonShape();
         polyShape.setAsBox((collideSize.x - 3.55f) * 0.005f, (collideSize.y - 3.55f) * 0.005f);
 
-        return polyShape;
+        return new BoxShape(collideSize, polyShape);
     }
 
     public static CircleShape CreateCircleShape(float radius) {
-        CircleShape shape = new CircleShape();
+        org.jbox2d.collision.shapes.CircleShape shape = new org.jbox2d.collision.shapes.CircleShape();
         shape.m_radius = (radius - 3.55f) * 0.005f;
 
-        return shape;
+        return new CircleShape(radius, shape);
     }
 
 }

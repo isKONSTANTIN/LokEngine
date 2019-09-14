@@ -1,11 +1,14 @@
 package LokEngine.Components;
 
-import LokEngine.Components.AdditionalObjects.Rigidbody;
+import LokEngine.Components.AdditionalObjects.Rigidbody.Rigidbody;
+import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.Shape;
 import LokEngine.SceneEnvironment.PostUpdateEvent;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
-import org.jbox2d.collision.shapes.Shape;
+import LokEngine.Tools.SaveWorker.Saveable;
+import LokEngine.Tools.SaveWorker.SubclassSaver;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
@@ -13,7 +16,7 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.util.vector.Vector2f;
 
-public class RigidbodyComponent extends Component {
+public class RigidbodyComponent extends Component implements Saveable {
 
     Shape polygons;
     Rigidbody body;
@@ -26,7 +29,6 @@ public class RigidbodyComponent extends Component {
 
     @Override
     public void update(SceneObject source){
-
         if (!bodyInited){
             initBody(source,polygons);
             bodyInited = true;
@@ -57,7 +59,7 @@ public class RigidbodyComponent extends Component {
         Body body = RuntimeFields.getScene().b2World.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
+        fixtureDef.shape = shape.shape;
         fixtureDef.density = this.body.density;
         fixtureDef.friction = this.body.friction;
 
@@ -65,6 +67,8 @@ public class RigidbodyComponent extends Component {
 
         this.body.b2body = body;
     }
+
+    public RigidbodyComponent(){}
 
     public RigidbodyComponent(Shape polygons) {
         this.polygons = polygons;
@@ -94,5 +98,24 @@ public class RigidbodyComponent extends Component {
 
     public Rigidbody getRigidbody(){
         return body;
+    }
+
+    @Override
+    public String save(){
+        SubclassSaver subclassSaver = new SubclassSaver(polygons);
+
+        return Base64.toBase64(subclassSaver.save() + "\n" + body.save());
+    }
+
+    @Override
+    public Saveable load(String savedString) {
+        String[] lines = Base64.fromBase64(savedString).split("\n");
+
+        SubclassSaver subclassSaver = new SubclassSaver();
+
+        polygons = (Shape)(((SubclassSaver)subclassSaver.load(lines[0])).saveableObject);
+        body = (Rigidbody)(new Rigidbody().load(lines[1]));
+
+        return this;
     }
 }
