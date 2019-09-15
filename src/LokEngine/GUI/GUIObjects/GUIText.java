@@ -71,7 +71,7 @@ public class GUIText extends GUIObject {
     public void setSize(Vector2i size){
         this.size = size;
         updateMaxSize();
-        framePart.text = framePart.getWidth() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
+        framePart.text = getText().length() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
     }
 
     private void updateMaxSize(){

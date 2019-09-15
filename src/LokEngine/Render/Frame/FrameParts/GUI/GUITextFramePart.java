@@ -26,7 +26,7 @@ public class GUITextFramePart extends FramePart {
         this.color = color;
     }
 
-    public GUITextFramePart(String text, String fontName , org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
+    public GUITextFramePart(String text, String fontName, org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
         super(FramePartType.GUI);
         font = new TrueTypeFont(new Font(fontName,fontStyle,size), antiAlias, ("йцукенгшщзхъфывапролджэячсмитьбю".toUpperCase()+"йцукенгшщзхъфывапролджэячсмитьбю").toCharArray());
         buffer = GL11.glGetInteger(GL_TEXTURE_BINDING_2D);
