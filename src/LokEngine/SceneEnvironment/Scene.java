@@ -20,6 +20,10 @@ public class Scene implements Saveable {
 
     public Scene(){ b2World = new World(new Vec2(0,-5)); }
 
+    public int getCountObjects(){
+        return objects.size();
+    }
+
     public int addObject(SceneObject newObject){
         objects.add(newObject);
         newObject.init(this);
