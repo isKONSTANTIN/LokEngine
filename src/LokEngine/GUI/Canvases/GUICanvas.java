@@ -21,6 +21,7 @@ public class GUICanvas extends GUIObject {
     public void removeObject(int id){
         objects.remove(id);
     }
+    public void removeAll(){ objects.clear(); }
     public GUIObject getObject(int id){
         return objects.get(id);
     }
