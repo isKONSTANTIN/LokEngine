@@ -9,7 +9,7 @@ public class GUIText extends GUIObject {
 
     private GUITextFramePart framePart;
     private int maxTextLength;
-    private boolean canResize;
+    public boolean canResize;
 
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0,0));
