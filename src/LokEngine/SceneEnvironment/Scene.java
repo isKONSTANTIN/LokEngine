@@ -54,6 +54,14 @@ public class Scene implements Saveable {
         return objects.get(id);
     }
 
+    public SceneObject getObjectByName(String name){
+        for (SceneObject sceneObject : objects){
+            if (sceneObject.name.equals(name))
+                return sceneObject;
+        }
+        return null;
+    }
+
     @Override
     public String save() {
         ArraySaver arraySaver = new ArraySaver(SceneObject.class);
