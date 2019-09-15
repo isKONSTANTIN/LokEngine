@@ -27,6 +27,7 @@ public class GUIFreeTextDrawer extends GUIObject {
     public void draw(String text, Vector2i position, Color color){
         GUITextFramePart framePart = new GUITextFramePart(text, new org.newdawn.slick.Color(color.red, color.green, color.blue, color.alpha), font, buffer);
         framePart.position = position;
+        frameParts.add(framePart);
     }
 
     public void draw(String text, Vector2i position){
