@@ -18,6 +18,14 @@ public class GUITextFramePart extends FramePart {
     public Vector2i position;
     public org.newdawn.slick.Color color;
 
+    public GUITextFramePart(String text, org.newdawn.slick.Color color, TrueTypeFont font, int fontBuffer) {
+        super(FramePartType.GUI);
+        this.font = font;
+        this.buffer = fontBuffer;
+        this.text = text;
+        this.color = color;
+    }
+
     public GUITextFramePart(String text, String fontName , org.newdawn.slick.Color color, int fontStyle, int size, boolean antiAlias) {
         super(FramePartType.GUI);
         font = new TrueTypeFont(new Font(fontName,fontStyle,size), antiAlias, ("йцукенгшщзхъфывапролджэячсмитьбю".toUpperCase()+"йцукенгшщзхъфывапролджэячсмитьбю").toCharArray());

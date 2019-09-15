@@ -11,6 +11,15 @@ public class GUIText extends GUIObject {
     private int maxTextLength;
     public boolean canResize;
 
+    public GUIText(Vector2i position, GUITextFramePart customFramePart) {
+        super(position, new Vector2i(0,0));
+        this.framePart = customFramePart;
+        this.size.y = framePart.getHeight();
+        this.size.x = framePart.getWidth();
+        this.canResize = canResize;
+        framePart.position = this.position;
+    }
+
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0,0));
         framePart = new GUITextFramePart(text, fontName, new org.newdawn.slick.Color(color.red, color.green, color.blue, color.alpha), fontStyle, size, antiAlias);
