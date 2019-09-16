@@ -44,7 +44,7 @@ public class GUITextFramePart extends FramePart {
     @Override
     public void partRender() {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, buffer);
-        font.drawString(position.x, position.y + 10, text, color);
+        font.drawString(position.x, position.y, text, color);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
     }
 }

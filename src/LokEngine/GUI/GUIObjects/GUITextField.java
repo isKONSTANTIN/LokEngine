@@ -10,6 +10,14 @@ public class GUITextField extends GUIObject {
     GUIText text;
     private boolean active;
 
+    public GUIText getGUIText(){
+        return text;
+    }
+
+    public boolean getActive(){
+        return active;
+    }
+
     public GUITextField(Vector2i position, Vector2i size, GUIText text) {
         super(position, size);
         this.text = text;
