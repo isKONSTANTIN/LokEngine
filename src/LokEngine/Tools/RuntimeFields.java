@@ -13,6 +13,7 @@ public class RuntimeFields {
 
     private static float deltaTime;
     private static int fps;
+    private static long startEngineTime;
     private static float speedEngine = 1f;
     private static long lastUpdateTime;
     private static long lastFPSUpdateTime;
@@ -25,6 +26,10 @@ public class RuntimeFields {
     public static float getDeltaTime(){ return deltaTime / 16.66666f; }
     public static int getFps(){ return fps; }
     public static float getSpeedEngine(){ return speedEngine; }
+
+    public static long getEngineRunTime(){
+        return System.nanoTime() - startEngineTime;
+    }
 
     public static void setSpeedEngine(float speed){
         if (speed >= 0){
@@ -42,6 +47,7 @@ public class RuntimeFields {
 
         lastUpdateTime = System.nanoTime();
         lastFPSUpdateTime = System.nanoTime();
+        startEngineTime = System.nanoTime();
     }
 
     public static void update(){
