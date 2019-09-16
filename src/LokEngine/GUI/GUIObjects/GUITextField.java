@@ -41,7 +41,7 @@ public class GUITextField extends GUIObject {
             active = false;
         }
 
-        while (Keyboard.next() && active){
+        while (active && Keyboard.next()){
             char Key = Keyboard.getEventCharacter();
 
             if (Key == 0 || Key == 27 || Key == 13) break;
