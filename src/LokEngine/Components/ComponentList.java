@@ -16,6 +16,10 @@ public class ComponentList implements Saveable {
         return components.size()-1;
     }
 
+    public int getSize(){
+        return components.size();
+    }
+
     public void update(SceneObject source){
         for (Component component : components) {
             component.update(source);
