@@ -1,7 +1,7 @@
 package LokEngine.GUI.GUIObjects;
 
 import LokEngine.Render.Frame.FrameParts.GUI.GUITextFramePart;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
@@ -37,9 +37,9 @@ public class GUIFreeTextDrawer extends GUIObject {
     }
 
     @Override
-    public void update(){
+    public void update(PartsBuilder partsBuilder){
         for (GUITextFramePart framePart : frameParts){
-            RuntimeFields.getFrameBuilder().addPart(framePart);
+            partsBuilder.addPart(framePart);
         }
         frameParts.clear();
     }

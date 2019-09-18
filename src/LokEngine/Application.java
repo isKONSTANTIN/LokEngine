@@ -159,7 +159,6 @@ public class Application {
             }
 
             RuntimeFields.getScene().update();
-            RuntimeFields.getCanvas().update();
 
             try {
                 nextFrame();
@@ -218,7 +217,7 @@ public class Application {
     private void nextFrame(){
         Shader.use(DefaultFields.defaultShader);
         window.getCamera().updateView();
-        RuntimeFields.getFrameBuilder().build();
+        RuntimeFields.getFrameBuilder().build(RuntimeFields.getCanvas());
     }
 
     public void startConsole() {

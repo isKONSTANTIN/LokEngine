@@ -1,8 +1,8 @@
 package LokEngine.GUI.GUIObjects;
 
 import LokEngine.Render.Frame.FrameParts.GUI.GUIImageFramePart;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Render.Texture;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIImage extends GUIObject {
@@ -40,8 +40,8 @@ public class GUIImage extends GUIObject {
     }
 
     @Override
-    public void update(){
-        RuntimeFields.getFrameBuilder().addPart(framePart);
+    public void update(PartsBuilder partsBuilder){
+        partsBuilder.addPart(framePart);
     }
 
 }

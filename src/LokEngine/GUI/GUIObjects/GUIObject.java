@@ -1,5 +1,6 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIObject {
@@ -21,6 +22,6 @@ public class GUIObject {
         this.size = size;
     }
 
-    public void update(){ }
+    public void update(PartsBuilder partsBuilder){ }
 
 }

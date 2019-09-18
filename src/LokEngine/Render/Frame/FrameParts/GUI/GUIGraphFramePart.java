@@ -2,7 +2,6 @@ package LokEngine.Render.Frame.FrameParts.GUI;
 
 import LokEngine.Render.Enums.FramePartType;
 import LokEngine.Render.Frame.FramePart;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 

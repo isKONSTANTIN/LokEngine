@@ -1,5 +1,6 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -42,7 +43,7 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
-    public void update(){
+    public void update(PartsBuilder partsBuilder){
         if (Misc.mouseInField(position, size) && RuntimeFields.getMouseStatus().getPressedStatus()){
             active = true;
         }else if (RuntimeFields.getMouseStatus().getPressedStatus()){
@@ -61,6 +62,6 @@ public class GUITextField extends GUIObject {
                 text.updateText(text.getText() + Key);
             }
         }
-        text.update();
+        text.update(partsBuilder);
     }
 }

@@ -9,10 +9,12 @@ import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+import static org.lwjgl.opengl.GL30.GL_FRAMEBUFFER_BINDING;
 
 public class FrameBufferWorker {
     private int frameBuffer;
     private int texture;
+    private int lastBuffer;
 
     public FrameBufferWorker(Vector2i resolution) {
         initialiseFrameBuffer(resolution.x,resolution.y);
@@ -23,12 +25,12 @@ public class FrameBufferWorker {
         GL11.glDeleteTextures(texture);
     }
 
-    public void bindFrameBuffer() {//call before rendering to this FBO
+    public void bindFrameBuffer() {
         bindFrameBuffer(frameBuffer);
     }
 
     public void unbindCurrentFrameBuffer() {
-        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, 0);
+        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
     }
 
     public int getTexture() {//get the resulting texture
@@ -38,6 +40,8 @@ public class FrameBufferWorker {
     private void initialiseFrameBuffer(int x, int y) {
         frameBuffer = GL30.glGenFramebuffers();
 
+        lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
+
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
         GL11.glDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
 
@@ -46,6 +50,7 @@ public class FrameBufferWorker {
     }
 
     private void bindFrameBuffer(int frameBuffer){
+        lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
     }

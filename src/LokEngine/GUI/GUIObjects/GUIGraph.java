@@ -1,7 +1,7 @@
 package LokEngine.GUI.GUIObjects;
 
 import LokEngine.Render.Frame.FrameParts.GUI.GUIGraphFramePart;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -59,8 +59,8 @@ public class GUIGraph extends GUIObject {
     }
 
     @Override
-    public void update(){
-        RuntimeFields.getFrameBuilder().addPart(framePart);
+    public void update(PartsBuilder partsBuilder){
+        partsBuilder.addPart(framePart);
     }
 
 

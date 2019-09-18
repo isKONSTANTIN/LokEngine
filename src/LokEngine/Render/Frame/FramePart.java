@@ -10,8 +10,5 @@ public class FramePart {
         this.frameType = frameType;
     }
 
-    public void partRender(){
-
-    }
-
+    public void partRender(){}
 }

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL30;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
-import static org.lwjgl.util.glu.GLU.*;
+import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class Window {
 
@@ -19,31 +19,38 @@ public class Window {
     private boolean fullscreen = false;
     private boolean isOpened = false;
 
-    public boolean isFullscreen(){return fullscreen;}
-    public boolean isOpened(){
+    public boolean isFullscreen() {
+        return fullscreen;
+    }
+
+    public boolean isOpened() {
         return isOpened;
     }
-    public Vector2i getResolution(){
+
+    public Vector2i getResolution() {
         return resolution;
     }
-    public Camera getCamera(){
+
+    public Camera getCamera() {
         return camera;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return Display.getTitle();
     }
-    public void setTitle(String title){
+
+    public void setTitle(String title) {
         Display.setTitle(title);
     }
 
     public void open(boolean fullscreen, boolean vSync, Vector2i resolution) throws LWJGLException {
-        if (!isOpened){
+        if (!isOpened) {
             this.fullscreen = fullscreen;
 
-            if (fullscreen){
+            if (fullscreen) {
                 Display.setFullscreen(true);
-                this.resolution = new Vector2i(Display.getWidth(),Display.getHeight());
-            }else {
+                this.resolution = new Vector2i(Display.getWidth(), Display.getHeight());
+            } else {
                 this.resolution = resolution;
                 Display.setDisplayMode(new DisplayMode(resolution.x, resolution.y));
             }
@@ -60,18 +67,18 @@ public class Window {
         }
     }
 
-    public void close(){
+    public void close() {
         Display.destroy();
         isOpened = false;
     }
 
-    public void update(){
+    public void update() {
         if (isOpened)
             Display.update();
     }
 
-    public void setDrawMode(DrawMode dm){
-        if (dm == DrawMode.Display || dm == DrawMode.RawGUI){
+    public void setDrawMode(DrawMode dm) {
+        if (dm == DrawMode.Display || dm == DrawMode.RawGUI) {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
@@ -80,20 +87,20 @@ public class Window {
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
 
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
             glDisable(GL_DEPTH_TEST);
             glDisable(GL_MULTISAMPLE);
             glEnable(GL_TEXTURE_2D);
+            glEnable(GL_BLEND);
 
-            if (dm == DrawMode.Display){
+            if (dm == DrawMode.Display) {
                 Shader.use(DefaultFields.displayShader);
-            }else{
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            } else {
                 Shader.unUse();
+                glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             }
 
-        }else if (dm == DrawMode.Scene){
+        } else if (dm == DrawMode.Scene) {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 

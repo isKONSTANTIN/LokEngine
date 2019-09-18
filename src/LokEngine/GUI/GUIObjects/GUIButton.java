@@ -1,6 +1,7 @@
 package LokEngine.GUI.GUIObjects;
 
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Color;
@@ -106,7 +107,7 @@ public class GUIButton extends GUIObject {
     }
 
     @Override
-    public void update(){
+    public void update(PartsBuilder partsBuilder){
         panel.position.x = position.x;
         panel.position.y = position.y;
         panel.size.x = size.x;
@@ -116,8 +117,8 @@ public class GUIButton extends GUIObject {
 
         checkMouse();
 
-        panel.update();
-        text.update();
+        panel.update(partsBuilder);
+        text.update(partsBuilder);
     }
 
 }
