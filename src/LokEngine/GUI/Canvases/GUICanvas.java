@@ -42,10 +42,11 @@ public class GUICanvas extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder){
+    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
+        Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + getPosition().x,globalSourcePos.y + getPosition().y);
         for (GUIObject object : objects) {
             if (!object.hidden)
-                object.update(this.partsBuilder);
+                object.update(this.partsBuilder, myGlobalPosition);
         }
         partsBuilder.addPart(new GUICanvasFramePart(this.partsBuilder, getPosition()));
     }

@@ -37,7 +37,7 @@ public class GUIFreeTextDrawer extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder){
+    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
         for (GUITextFramePart framePart : frameParts){
             partsBuilder.addPart(framePart);
         }

@@ -46,7 +46,7 @@ public class FrameBuilder {
 
         int preDisplayFrame = scenePartsBuilder.build(DrawMode.Scene);
 
-        rootCanvas.update(GUIPartsBuilder);
+        rootCanvas.update(GUIPartsBuilder, rootCanvas.getPosition());
         int GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI);
 
         for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {

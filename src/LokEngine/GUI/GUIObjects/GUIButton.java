@@ -76,8 +76,8 @@ public class GUIButton extends GUIObject {
             unpressScript.execute(this);
     }
 
-    private void checkMouse(){
-        boolean enterInBox = Misc.mouseInField(position,size);
+    private void checkMouse(Vector2i myGlobalPosition ){
+        boolean enterInBox = Misc.mouseInField(myGlobalPosition,size);
 
         if (enterInBox && RuntimeFields.getMouseStatus().getPressedStatus()){
             if (!pressed){
@@ -107,7 +107,9 @@ public class GUIButton extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder){
+    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
+        Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + getPosition().x,globalSourcePos.y + getPosition().y);
+
         panel.position.x = position.x;
         panel.position.y = position.y;
         panel.size.x = size.x;
@@ -115,10 +117,10 @@ public class GUIButton extends GUIObject {
         text.position.x  = position.x;
         text.position.y = position.y;
 
-        checkMouse();
+        checkMouse(myGlobalPosition);
 
-        panel.update(partsBuilder);
-        text.update(partsBuilder);
+        panel.update(partsBuilder, myGlobalPosition);
+        text.update(partsBuilder, myGlobalPosition);
     }
 
 }

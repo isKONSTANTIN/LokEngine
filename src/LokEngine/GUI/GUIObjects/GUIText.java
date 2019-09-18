@@ -16,7 +16,6 @@ public class GUIText extends GUIObject {
         this.framePart = customFramePart;
         this.size.y = framePart.getHeight();
         this.size.x = framePart.getWidth();
-        this.canResize = canResize;
         framePart.position = this.position;
     }
 
@@ -81,7 +80,7 @@ public class GUIText extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder){
+    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
         partsBuilder.addPart(framePart);
     }
 

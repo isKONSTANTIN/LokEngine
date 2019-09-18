@@ -40,7 +40,7 @@ public class GUIImage extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder){
+    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
         partsBuilder.addPart(framePart);
     }
 

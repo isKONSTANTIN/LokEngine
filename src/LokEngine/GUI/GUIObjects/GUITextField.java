@@ -43,8 +43,10 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder){
-        if (Misc.mouseInField(position, size) && RuntimeFields.getMouseStatus().getPressedStatus()){
+    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
+        Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + position.x,globalSourcePos.y + position.y);
+
+        if (Misc.mouseInField(myGlobalPosition, size) && RuntimeFields.getMouseStatus().getPressedStatus()){
             active = true;
         }else if (RuntimeFields.getMouseStatus().getPressedStatus()){
             active = false;
@@ -62,6 +64,6 @@ public class GUITextField extends GUIObject {
                 text.updateText(text.getText() + Key);
             }
         }
-        text.update(partsBuilder);
+        text.update(partsBuilder, myGlobalPosition);
     }
 }
