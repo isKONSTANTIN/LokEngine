@@ -8,6 +8,9 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Vector;
 
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
+
 public class PartsBuilder {
 
     FrameBufferWorker frameBufferWorker;
@@ -32,14 +35,14 @@ public class PartsBuilder {
     public int build(Vector<FramePart> frameParts, DrawMode drawMode){
         frameBufferWorker.bindFrameBuffer();
         RuntimeFields.getFrameBuilder().window.setDrawMode(drawMode);
-
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         for (FramePart framePart : frameParts){
             framePart.partRender();
         }
-
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         frameBufferWorker.unbindCurrentFrameBuffer();
 
         return frameBufferWorker.getTexture();

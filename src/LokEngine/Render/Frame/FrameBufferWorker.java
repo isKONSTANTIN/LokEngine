@@ -39,7 +39,6 @@ public class FrameBufferWorker {
 
     private void initialiseFrameBuffer(int x, int y) {
         frameBuffer = GL30.glGenFramebuffers();
-
         lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
 
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
@@ -65,7 +64,6 @@ public class FrameBufferWorker {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
         GL11.glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
-
         GL32.glFramebufferTexture(GL30.GL_FRAMEBUFFER, GL30.GL_COLOR_ATTACHMENT0, texture, 0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
