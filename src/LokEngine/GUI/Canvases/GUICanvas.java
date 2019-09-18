@@ -48,6 +48,6 @@ public class GUICanvas extends GUIObject {
             if (!object.hidden)
                 object.update(this.partsBuilder, myGlobalPosition);
         }
-        partsBuilder.addPart(new GUICanvasFramePart(this.partsBuilder, getPosition()));
+        partsBuilder.addPart(new GUICanvasFramePart(this.partsBuilder, getPosition(), getSize()));
     }
 }
