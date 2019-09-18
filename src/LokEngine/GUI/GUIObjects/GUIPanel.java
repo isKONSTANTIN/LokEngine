@@ -51,8 +51,10 @@ public class GUIPanel extends GUIObject {
     @Override
     public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
         partsBuilder.addPart(framePart);
-        if (blurAction != null)
+        if (blurAction != null){
+            blurAction.position = new Vector2i(globalSourcePos.x + position.y, globalSourcePos.y + position.y);
             RuntimeFields.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker").addPostProcessingAction(blurAction);
+        }
     }
 
 }
