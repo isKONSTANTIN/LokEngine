@@ -88,7 +88,7 @@ public class GUISubWindow extends GUIObject {
         canvas.update(partsBuilder, globalSourcePos);
 
         if (titleText != null){
-            titlePanel.update(partsBuilder, myGlobalSourcePos);
+            titlePanel.update(partsBuilder, globalSourcePos);
             titleText.update(partsBuilder, myGlobalSourcePos);
         }
     }
