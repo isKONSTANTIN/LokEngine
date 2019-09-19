@@ -18,16 +18,19 @@ public class GUISubWindow extends GUIObject {
     public GUISubWindow(Vector2i position, Vector2i size, boolean canMove, GUIText titleText, GUIPanel titlePanel) {
         super(position, size);
         Vector2i canvasSize = new Vector2i(size.x, size.y);
+        Vector2i canvasPosition = new Vector2i(position.x, position.y);
+
         if (titleText != null){
             this.titleText = titleText;
             this.titlePanel = titlePanel;
 
-            titlePanel.setPosition(new Vector2i(position.x,position.y - titleText.getSize().y));
+            titlePanel.setPosition(new Vector2i(position.x,position.y));
             titlePanel.setSize(new Vector2i(size.x, titleText.getSize().y));
             titleText.setPosition(titlePanel.position);
             canvasSize.y = size.y - titleText.getSize().y;
+            canvasPosition.y += titleText.getSize().y;
         }
-        canvas = new GUICanvas(position, canvasSize);
+        canvas = new GUICanvas(canvasPosition, canvasSize);
         this.canMove = canMove;
     }
 
@@ -54,10 +57,13 @@ public class GUISubWindow extends GUIObject {
         super.setPosition(position);
 
         if (titleText != null) {
-            titlePanel.setPosition(new Vector2i(position.x,position.y - titleText.getSize().y));
+            titlePanel.setPosition(position);
             titleText.setPosition(titlePanel.position);
+            canvas.setPosition(new Vector2i(position.x, position.y + titlePanel.size.y));
+        }else{
+            canvas.setPosition(position);
         }
-        canvas.setPosition(position);
+
     }
 
     @Override
@@ -71,15 +77,16 @@ public class GUISubWindow extends GUIObject {
         Vector2i myGlobalSourcePos = new Vector2i(globalSourcePos.x + position.x, globalSourcePos.y + position.y);
 
         if (canMove && titleText != null){
-            lastMFS =  Misc.mouseInField(new Vector2i(myGlobalSourcePos.x, myGlobalSourcePos.y - titlePanel.size.y), new Vector2i(size.x, titlePanel.size.y));
+            lastMFS = Misc.mouseInField(new Vector2i(myGlobalSourcePos.x, myGlobalSourcePos.y), new Vector2i(size.x, titlePanel.size.y));
         }else if (canMove){
-            lastMFS =  Misc.mouseInField(new Vector2i(myGlobalSourcePos.x, myGlobalSourcePos.y), new Vector2i(size.x, 5));
+            lastMFS = Misc.mouseInField(new Vector2i(myGlobalSourcePos.x, myGlobalSourcePos.y), new Vector2i(size.x, 5));
         }
 
         if (canMove)
             lastMousePos = mousePos;
 
-        canvas.update(partsBuilder, myGlobalSourcePos);
+        canvas.update(partsBuilder, globalSourcePos);
+
         if (titleText != null){
             titlePanel.update(partsBuilder, myGlobalSourcePos);
             titleText.update(partsBuilder, myGlobalSourcePos);
