@@ -4,6 +4,7 @@ import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Render.Frame.FrameParts.GUI.GUICanvasFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import java.util.Vector;
@@ -12,6 +13,7 @@ public class GUICanvas extends GUIObject {
 
     Vector<GUIObject> objects = new Vector<>();
     PartsBuilder partsBuilder;
+    GUICanvasFramePart framePart;
 
     public GUICanvas(Vector2i position, Vector2i size) {
         super(position, size);
@@ -20,6 +22,7 @@ public class GUICanvas extends GUIObject {
         }else {
             partsBuilder = new PartsBuilder(RuntimeFields.getFrameBuilder().window.getResolution());
         }
+        framePart = new GUICanvasFramePart(partsBuilder, position, size);
     }
 
     public int addObject(GUIObject object){
@@ -27,10 +30,21 @@ public class GUICanvas extends GUIObject {
         return objects.size()-1;
     }
 
+    public void setColor(Color color){
+        framePart.color = color;
+    }
+
+    @Override
+    public void setPosition(Vector2i position){
+        super.setPosition(position);
+        framePart.position = position;
+    }
+
     @Override
     public void setSize(Vector2i size){
-        partsBuilder.setResolution(size);
         super.setSize(size);
+        partsBuilder.setResolution(size);
+        framePart.size = size;
     }
 
     public void removeObject(int id){
@@ -48,6 +62,6 @@ public class GUICanvas extends GUIObject {
             if (!object.hidden)
                 object.update(this.partsBuilder, myGlobalPosition);
         }
-        partsBuilder.addPart(new GUICanvasFramePart(this.partsBuilder, getPosition(), getSize()));
+        partsBuilder.addPart(framePart);
     }
 }

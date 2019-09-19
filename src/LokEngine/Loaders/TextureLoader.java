@@ -6,7 +6,6 @@ import org.lwjgl.BufferUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -22,17 +21,22 @@ public class TextureLoader {
         texture = null;
     }
 
-    public static Texture loadTexture(String path) throws IOException {
+    public static Texture loadTexture(String path) {
         if (loadedTextures.containsKey(path)){
             return loadedTextures.get(path);
         }
 
         BufferedImage image;
-        if (path.charAt(0) == '#'){
-            image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
-        }else{
-            image = ImageIO.read(new File(path));
+        try {
+            if (path.charAt(0) == '#'){
+                image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
+            }else{
+                image = ImageIO.read(new File(path));
+            }
+        }catch (Exception e){
+            return new Texture(0,0, 0, path);
         }
+
 
         int texture_size = image.getWidth() * image.getHeight() * 4;
         int[] pixels = new int[image.getWidth() * image.getHeight()];

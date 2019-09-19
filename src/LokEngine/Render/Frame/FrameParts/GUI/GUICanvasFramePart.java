@@ -4,14 +4,16 @@ import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Enums.FramePartType;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Frame.PartsBuilder;
+import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUICanvasFramePart extends FramePart {
     PartsBuilder partsBuilder;
-    Vector2i position;
-    Vector2i size;
+    public Vector2i position;
+    public Vector2i size;
+    public Color color = new Color(1,1,1,1);
 
     public GUICanvasFramePart(PartsBuilder partsBuilder, Vector2i position, Vector2i size) {
         super(FramePartType.GUI);
@@ -26,7 +28,7 @@ public class GUICanvasFramePart extends FramePart {
 
         glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_POLYGON);
-        glColor4d(1, 1, 1, 1);
+        glColor4d(color.red, color.green, color.blue, color.alpha);
 
         glTexCoord2f(0, 1);
         glVertex3f(position.x, position.y, 0);

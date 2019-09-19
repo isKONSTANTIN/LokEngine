@@ -1,10 +1,7 @@
 package LokEngine.Render;
 
 import LokEngine.Loaders.TextureLoader;
-import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.Saveable;
-
-import java.io.IOException;
 
 public class Texture implements Saveable {
 
@@ -37,17 +34,11 @@ public class Texture implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        try {
-            Texture loadedTexture = TextureLoader.loadTexture(savedString);
-            this.buffer = loadedTexture.buffer;
-            this.sizeX = loadedTexture.sizeX;
-            this.sizeY = loadedTexture.sizeY;
-            this.path = loadedTexture.path;
-        } catch (IOException e) {
-            Logger.warning("Fail load texture from save!","LokEngine_Texture");
-            Logger.printException(e);
-        }
-
+        Texture loadedTexture = TextureLoader.loadTexture(savedString);
+        this.buffer = loadedTexture.buffer;
+        this.sizeX = loadedTexture.sizeX;
+        this.sizeY = loadedTexture.sizeY;
+        this.path = loadedTexture.path;
         return this;
     }
 }
