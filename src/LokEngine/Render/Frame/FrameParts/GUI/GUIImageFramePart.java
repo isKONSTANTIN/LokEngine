@@ -6,6 +6,8 @@ import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Texture;
 import LokEngine.Tools.Utilities.Vector2i;
 
+import java.io.IOException;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUIImageFramePart extends FramePart {
@@ -16,7 +18,9 @@ public class GUIImageFramePart extends FramePart {
 
     public GUIImageFramePart(Vector2i position, Vector2i size, String path) {
         super(FramePartType.GUI);
-        this.texture = TextureLoader.loadTexture(path);
+        try {
+            this.texture = TextureLoader.loadTexture(path);
+        } catch (IOException e) {}
         this.position = position;
         if (size.x <= 0 || size.y <= 0){
             size = new Vector2i(texture.sizeX,texture.sizeY);
