@@ -101,7 +101,7 @@ public class AtlasPositions implements Saveable {
     @Override
     public Saveable load(String savedString) {
         String[] data = savedString.split(";");
-        String[] vectors = data[0].split(System.getProperty("line.separator"));
+        String[] vectors = data[0].split("\n");
         this.countSprites = Integer.valueOf(data[2]);
 
         positions = new ArrayList<>();

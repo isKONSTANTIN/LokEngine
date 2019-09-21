@@ -54,7 +54,7 @@ public class Prefs {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
             fileWorker.openRead();
-            String[] lines = fileWorker.read().split(System.getProperty("line.separator"));
+            String[] lines = fileWorker.read().split("\n");
 
             for (String line : lines){
                 String[] dataLine = line.split(":");

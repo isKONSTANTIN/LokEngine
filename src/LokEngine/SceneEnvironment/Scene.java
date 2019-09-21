@@ -76,7 +76,7 @@ public class Scene implements Saveable {
     public Saveable load(String savedString) {
         ArraySaver arraySaver = new ArraySaver(SceneObject.class);
         String[] data = Base64.fromBase64(savedString).split(",\n");
-        String[] lines = data[0].split(System.getProperty("line.separator"));
+        String[] lines = data[0].split("\n");
 
         physicsVelocityIterations = Integer.valueOf(lines[0]);
         physicsPositionsIterations = Integer.valueOf(lines[1]);

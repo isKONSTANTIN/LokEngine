@@ -65,7 +65,7 @@ public class Animation implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        String[] data = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
+        String[] data = Base64.fromBase64(savedString).split("\n");
 
         Animation loadedAnimation = new Animation((Texture)new Texture().load(data[0]), (AtlasPositions)(new AtlasPositions().load(data[1])));
 

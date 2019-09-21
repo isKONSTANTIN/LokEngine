@@ -66,7 +66,7 @@ public class Sprite implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        String[] data = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
+        String[] data = Base64.fromBase64(savedString).split("\n");
         this.vertexSize = Float.valueOf(data[3]);
         this.size = Double.valueOf(data[2]);
 

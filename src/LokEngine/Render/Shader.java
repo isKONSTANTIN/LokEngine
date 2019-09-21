@@ -44,7 +44,7 @@ public class Shader implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        String[] patches = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
+        String[] patches = Base64.fromBase64(savedString).split("\n");
 
         try {
             Shader loadedShader = ShaderLoader.loadShader(patches[0], patches[1]);

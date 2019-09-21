@@ -29,7 +29,7 @@ public class DefaultTCPServerHandler extends SimpleTCPServerHandler {
 
     @Override
     public String acceptMessage(String message) {
-        String[] lines = message.split(System.getProperty("line.separator"));
+        String[] lines = message.split("\n");
         String returnMessage = errorHeadName;
         String head = lines[0];
 

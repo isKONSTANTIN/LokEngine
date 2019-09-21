@@ -44,7 +44,7 @@ public class ArraySaver implements Saveable {
         String[] elements = Base64.fromBase64(savedString).split("ELM.");
 
         try {
-            typeClass = Class.forName(elements[0].substring(0,elements[0].length()-1));
+            typeClass = Class.forName(elements[0].replace("\n", ""));
         } catch (ClassNotFoundException e) {
             Logger.warning("Fail load type class!", "LokEngine_ArraySaver");
             Logger.printException(e);
@@ -52,7 +52,7 @@ public class ArraySaver implements Saveable {
         }
 
         for (int i = 1; i < elements.length; i++){
-            String[] lines = elements[i].split(System.getProperty("line.separator"));
+            String[] lines = elements[i].split("\n");
 
             if (lines[0].equals(lines[lines.length-1].substring(4))){
                 StringBuilder elementSaved = new StringBuilder();

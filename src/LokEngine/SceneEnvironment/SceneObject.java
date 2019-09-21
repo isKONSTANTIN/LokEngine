@@ -30,7 +30,7 @@ public class SceneObject implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        String[] lines = Base64.fromBase64(savedString).split(System.getProperty("line.separator"));
+        String[] lines = Base64.fromBase64(savedString).split("\n");
 
         position = new Vector2f(Float.valueOf(lines[0]),Float.valueOf(lines[1]));
         rollRotation = Float.valueOf(lines[2]);
