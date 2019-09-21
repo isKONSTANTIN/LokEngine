@@ -16,7 +16,7 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 public class SpriteFramePart extends FramePart {
 
-    private Sprite sprite;
+    public Sprite sprite;
     public Vector4f position = new Vector4f(0,0,0,0);
 
     public SpriteFramePart(Sprite sprite) {

@@ -37,6 +37,20 @@ public class SpriteComponent extends Component implements Saveable {
         return sprite;
     }
 
+    public void setSprite(Sprite sprite){
+        this.sprite = sprite;
+        framePart.sprite = sprite;
+    }
+
+    public void setSprite(String path){
+        try {
+            sprite = SpriteLoader.loadSprite(path);
+        } catch (Exception e) {
+            sprite = DefaultFields.unknownSprite;
+        }
+        framePart.sprite = sprite;
+    }
+
     public SpriteComponent(String path, Shader customShader){
         try {
             sprite = SpriteLoader.loadSprite(path,1, customShader);
