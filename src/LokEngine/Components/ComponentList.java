@@ -26,6 +26,19 @@ public class ComponentList implements Saveable {
         }
     }
 
+    public void remove(int id){
+        components.remove(id);
+    }
+
+    public void remove(String name){
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).getName().equals(name)) {
+                remove(i);
+                break;
+            }
+        }
+    }
+
     public Component get(int id){
         return components.get(id);
     }
