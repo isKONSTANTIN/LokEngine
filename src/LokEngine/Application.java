@@ -3,7 +3,7 @@ package LokEngine;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.ShaderLoader;
-import LokEngine.Loaders.SpriteLoader;
+import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
 import LokEngine.Render.Shader;
@@ -195,7 +195,7 @@ public class Application {
 
     private void shadersInit() throws Exception {
         DefaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
-        DefaultFields.unknownSprite = SpriteLoader.loadSprite("#/resources/textures/unknown.png", 100 , DefaultFields.defaultShader);
+        DefaultFields.unknownTexture = TextureLoader.loadTexture("#/resources/textures/unknown.png");
         DefaultFields.displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
         DefaultFields.postProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
         DefaultFields.particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");

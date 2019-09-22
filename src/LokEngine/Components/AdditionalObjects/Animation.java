@@ -40,7 +40,7 @@ public class Animation implements Saveable {
         try {
             altasTexture = TextureLoader.loadTexture(atlasPath);
         } catch (Exception e) {
-            altasTexture = DefaultFields.unknownSprite.texture;
+            altasTexture = DefaultFields.unknownTexture;
         }
         this.atlasPositions = atlasPositions;
         uvBuffers = atlasPositions.build(altasTexture);

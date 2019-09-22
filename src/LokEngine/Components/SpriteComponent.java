@@ -1,16 +1,14 @@
 package LokEngine.Components;
 
+import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Frame.FrameParts.SpriteFramePart;
 import LokEngine.Render.Shader;
-import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector4f;
-
-import java.io.IOException;
 
 public class SpriteComponent extends Component implements Saveable {
 
@@ -25,11 +23,7 @@ public class SpriteComponent extends Component implements Saveable {
     public SpriteComponent(){}
 
     public SpriteComponent(String path){
-        try {
-            sprite = SpriteLoader.loadSprite(path);
-        } catch (Exception e) {
-            sprite = DefaultFields.unknownSprite;
-        }
+        sprite = SpriteLoader.loadSprite(path);
         framePart = new SpriteFramePart(sprite);
     }
 
@@ -43,28 +37,32 @@ public class SpriteComponent extends Component implements Saveable {
     }
 
     public void setSprite(String path){
-        try {
-            sprite = SpriteLoader.loadSprite(path);
-        } catch (Exception e) {
-            sprite = DefaultFields.unknownSprite;
+        sprite = SpriteLoader.loadSprite(path);
+
+        if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
+            sprite.size = 100;
         }
+
         framePart.sprite = sprite;
     }
 
     public SpriteComponent(String path, Shader customShader){
-        try {
-            sprite = SpriteLoader.loadSprite(path,1, customShader);
-        } catch (IOException e) {
-            sprite = DefaultFields.unknownSprite;
+        sprite = SpriteLoader.loadSprite(path,1, customShader);
+
+        if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
+            sprite.size = 100;
         }
+
         framePart = new SpriteFramePart(sprite);
     }
 
     public SpriteComponent(Sprite sprite){
         if (sprite != null){
             this.sprite = sprite;
-        }else {
-            this.sprite = DefaultFields.unknownSprite;
+
+            if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
+                sprite.size = 100;
+            }
         }
         framePart = new SpriteFramePart(sprite);
     }
@@ -86,7 +84,9 @@ public class SpriteComponent extends Component implements Saveable {
 
         this.framePart = loadedSpriteComponent.framePart;
         this.sprite = loadedSpriteComponent.sprite;
-
+        if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
+            sprite.size = 100;
+        }
         return this;
     }
 }

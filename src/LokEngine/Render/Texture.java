@@ -48,9 +48,9 @@ public class Texture implements Saveable {
         } catch (Exception e) {
             Logger.warning("Fail load texture!", "LokEngine_Texture");
 
-            this.buffer = DefaultFields.unknownSprite.texture.buffer;
-            this.sizeX = DefaultFields.unknownSprite.texture.sizeX;
-            this.sizeY = DefaultFields.unknownSprite.texture.sizeY;
+            this.buffer = DefaultFields.unknownTexture.buffer;
+            this.sizeX = DefaultFields.unknownTexture.sizeX;
+            this.sizeY = DefaultFields.unknownTexture.sizeY;
             this.path = savedString;
         }
 
