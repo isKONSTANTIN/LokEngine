@@ -10,6 +10,7 @@ public class GUITextField extends GUIObject {
 
     GUIText text;
     private boolean active;
+    private boolean lastActive;
 
     public GUIText getGUIText(){
         return text;
@@ -53,17 +54,20 @@ public class GUITextField extends GUIObject {
         }
 
         while (active && Keyboard.next()){
-            char Key = Keyboard.getEventCharacter();
+            if (lastActive) {
+                char Key = Keyboard.getEventCharacter();
 
-            if (Key == 0 || Key == 27 || Key == 13) break;
+                if (Key == 0 || Key == 27 || Key == 13) break;
 
-            if (Key == 8){
-                if (text.getText().length() > 0)
-                    text.updateText(text.getText().substring(0,text.getText().length()-1));
-            }else {
-                text.updateText(text.getText() + Key);
+                if (Key == 8) {
+                    if (text.getText().length() > 0)
+                        text.updateText(text.getText().substring(0, text.getText().length() - 1));
+                } else {
+                    text.updateText(text.getText() + Key);
+                }
             }
         }
         text.update(partsBuilder, myGlobalPosition);
+        lastActive = active;
     }
 }
