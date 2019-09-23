@@ -97,7 +97,7 @@ public class GUIButton extends GUIObject {
     public void setPosition(Vector2i position){
         this.position = position;
 
-        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y));
+        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y / 2));
         panel.setPosition(position);
     }
 
@@ -105,7 +105,7 @@ public class GUIButton extends GUIObject {
     public void setSize(Vector2i size){
         this.size = size;
 
-        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y));
+        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y / 2));
         panel.setSize(size);
     }
 
