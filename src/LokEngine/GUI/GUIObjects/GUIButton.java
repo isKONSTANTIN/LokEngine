@@ -28,12 +28,14 @@ public class GUIButton extends GUIObject {
         this.text = text;
         if (size.x <= 0 || size.y <= 0){
             size = this.text.size;
-            this.size = size;
         }
         this.pressedColor = pressed;
         this.calmStateColor = calmState;
         this.panel = panel;
         this.activeColor = new Color(calmStateColor.red,calmStateColor.green,calmStateColor.blue, calmStateColor.alpha);
+
+        setPosition(position);
+        setSize(size);
     }
 
     public GUIButton(Vector2i position, Vector2i size, Color calmState, String text) {
@@ -41,7 +43,6 @@ public class GUIButton extends GUIObject {
         this.text = new GUIText(position,text);
         if (size.x <= 0 || size.y <= 0){
             size = this.text.size;
-            this.size = size;
         }
         float colorChange = (calmState.red + calmState.green + calmState.blue) / 3 >= 0.5f ? -0.1f : 0.1f;
         this.pressedColor = new Color(calmState.red + colorChange,calmState.green + colorChange,calmState.blue + colorChange,calmState.alpha);
@@ -95,27 +96,22 @@ public class GUIButton extends GUIObject {
     @Override
     public void setPosition(Vector2i position){
         this.position = position;
-        text.setPosition(position);
+
+        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y));
         panel.setPosition(position);
     }
 
     @Override
     public void setSize(Vector2i size){
         this.size = size;
-        text.setSize(size);
+
+        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y));
         panel.setSize(size);
     }
 
     @Override
     public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
         Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + getPosition().x,globalSourcePos.y + getPosition().y);
-
-        panel.position.x = position.x;
-        panel.position.y = position.y;
-        panel.size.x = size.x;
-        panel.size.y = size.y;
-        text.position.x  = position.x;
-        text.position.y = position.y;
 
         checkMouse(myGlobalPosition);
 
