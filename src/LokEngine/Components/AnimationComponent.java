@@ -79,40 +79,47 @@ public class AnimationComponent extends Component implements Saveable {
 
     @Override
     public String save() {
-        ArraySaver arraySaver = new ArraySaver(Animation.class);
-        StringBuilder stringBuilder = new StringBuilder();
+        if (animations.size() > 0) {
 
-        for (Map.Entry<String, Animation> entry : animations.entrySet()) {
-            String key = entry.getKey();
-            Animation value = entry.getValue();
 
-            arraySaver.arrayList.add(value);
-            stringBuilder.append(key).append(",");
+            ArraySaver arraySaver = new ArraySaver(Animation.class);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (Map.Entry<String, Animation> entry : animations.entrySet()) {
+                String key = entry.getKey();
+                Animation value = entry.getValue();
+
+                arraySaver.arrayList.add(value);
+                stringBuilder.append(key).append(",");
+            }
+
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            stringBuilder.append(";").append(activeAnimationName);
+            stringBuilder.append(";").append(arraySaver.save());
+            stringBuilder.append(";").append(speedAnimation);
+            stringBuilder.append(";").append(currectFrame);
+
+            return stringBuilder.toString();
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
-        stringBuilder.append(";").append(activeAnimationName);
-        stringBuilder.append(";").append(arraySaver.save());
-        stringBuilder.append(";").append(speedAnimation);
-        stringBuilder.append(";").append(currectFrame);
-
-        return stringBuilder.toString();
+        return "";
     }
 
     @Override
     public Saveable load(String savedString) {
-        String[] data = savedString.split(";");
-        ArraySaver arraySaver = (ArraySaver)new ArraySaver(Animation.class).load(data[2]);
-        String[] animationNames = data[0].split(",");
+        if (!savedString.equals("")){
+            String[] data = savedString.split(";");
+            ArraySaver arraySaver = (ArraySaver)new ArraySaver(Animation.class).load(data[2]);
+            String[] animationNames = data[0].split(",");
 
-        for (int i = 0; i < animationNames.length; i++){
-            animations.put(animationNames[i], (Animation)arraySaver.arrayList.get(i));
+            for (int i = 0; i < animationNames.length; i++){
+                animations.put(animationNames[i], (Animation)arraySaver.arrayList.get(i));
+            }
+
+            setActiveAnimation(data[1]);
+
+            speedAnimation = Float.valueOf(data[3]);
+            currectFrame = Float.valueOf(data[4]);
         }
-
-        setActiveAnimation(data[1]);
-
-        speedAnimation = Float.valueOf(data[3]);
-        currectFrame = Float.valueOf(data[4]);
-
         return this;
     }
 }
