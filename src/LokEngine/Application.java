@@ -44,6 +44,7 @@ public class Application {
             try {
                 window.setTitle(windowTitle);
                 window.open(windowFullscreen, vSync, windowResolution);
+
                 windowResolution = window.getResolution();
             } catch (Exception e) {
                 Logger.error("Fail open window!", "LokEngine_start");
@@ -59,6 +60,15 @@ public class Application {
             SplashScreen.updateStatus(0.1f);
             Logger.debug("Init default vertex screen buffer", "LokEngine_start");
             DefaultFields.defaultVertexScreenBuffer = BufferLoader.load(new float[]{-windowResolution.x / 2, windowResolution.y / 2, -windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, windowResolution.y / 2,});
+
+            SplashScreen.updateStatus(0.15f);
+            Logger.debug("Init default UV buffer", "LokEngine_start");
+            DefaultFields.defaultUVBuffer = BufferLoader.load(new float[] {
+                    0,1,
+                    0,0,
+                    1,0,
+                    1,1,
+            });
 
             SplashScreen.updateStatus(0.2f);
             Logger.debug("Init runtime fields", "LokEngine_start");

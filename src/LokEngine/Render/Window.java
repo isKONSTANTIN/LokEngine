@@ -59,6 +59,8 @@ public class Window {
                 Display.setDisplayMode(new DisplayMode(resolution.x, resolution.y));
             }
 
+            this.setIcon(DefaultFields.pathsWindowIcon);
+
             Display.create();
             Display.setVSyncEnabled(vSync);
 
