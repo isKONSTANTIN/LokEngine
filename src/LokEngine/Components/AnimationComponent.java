@@ -20,7 +20,7 @@ public class AnimationComponent extends Component implements Saveable {
 
     public float currectFrame;
     public float speedAnimation = 1;
-    private Sprite sprite = new Sprite(null,0,0,0,0);
+    private Sprite sprite = new Sprite(null,0,0,1,0);
 
     public Sprite getSprite(){
         return sprite;
