@@ -2,6 +2,7 @@ package LokEngine.Components.AdditionalObjects;
 
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Render.Texture;
+import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.Utilities.Vector4i;
 import org.lwjgl.util.vector.Vector2f;
@@ -81,11 +82,11 @@ public class AtlasPositions implements Saveable {
                 .append(startPosition.x).append(",")
                 .append(startPosition.y).append(",")
                 .append(startPosition.z).append(",")
-                .append(startPosition.w).append("\n");
+                .append(startPosition.w);
 
         stringBuilder.append(";").append(countSprites);
 
-        return stringBuilder.toString();
+        return Base64.toBase64(stringBuilder.toString());
     }
 
     private Vector4i parseVector(String data){
@@ -100,17 +101,18 @@ public class AtlasPositions implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        String[] data = savedString.split(";");
+        String[] data = Base64.fromBase64(savedString).split(";");
         String[] vectors = data[0].split("\n");
         this.countSprites = Integer.valueOf(data[2]);
 
         positions = new ArrayList<>();
 
         for (String stringVector : vectors){
-            positions.add(parseVector(stringVector));
+            if (!stringVector.equals(""))
+                positions.add(parseVector(stringVector));
         }
         startPosition = parseVector(data[1]);
 
-        return null;
+        return this;
     }
 }
