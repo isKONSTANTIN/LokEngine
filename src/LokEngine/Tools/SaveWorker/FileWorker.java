@@ -18,13 +18,9 @@ public class FileWorker {
         return new File(filePath).exists();
     }
 
-    public FileWorker(String filePath) throws IOException {
+    public FileWorker(String filePath){
         file = new File(filePath);
         this.filePath = filePath;
-
-        if (!file.exists())
-            if (!file.createNewFile())
-                throw new IOException("File does not exist and cannot be created!");
     }
 
     public void write(String data) throws IOException {
@@ -61,6 +57,10 @@ public class FileWorker {
             fileReader.close();
             fileReader = null;
         }
+
+        if (!file.exists())
+            if (!file.createNewFile())
+                throw new IOException("File does not exist and cannot be created!");
 
         if (file.canWrite()){
             fileWriter = new FileWriter(file);
