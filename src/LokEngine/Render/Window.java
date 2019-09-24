@@ -1,12 +1,16 @@
 package LokEngine.Render;
 
+import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Tools.DefaultFields;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL30;
+
+import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
@@ -75,6 +79,21 @@ public class Window {
     public void update() {
         if (isOpened)
             Display.update();
+    }
+
+    public void setIcon(String[] paths){
+        ByteBuffer[] buffers = new ByteBuffer[paths.length];
+        int iconsLoaded = 0;
+        for (String path : paths) {
+            try {
+                buffers[iconsLoaded] = (ByteBuffer) TextureLoader.loadTextureInBuffer(path)[0];
+                iconsLoaded++;
+            } catch (Exception e) {
+                Logger.warning("Fail load icon", "LokEngine_Window");
+                Logger.printException(e);
+            }
+        }
+        Display.setIcon(buffers);
     }
 
     public void setDrawMode(DrawMode dm) {

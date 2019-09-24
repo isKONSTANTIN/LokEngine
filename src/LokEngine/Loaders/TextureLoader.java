@@ -7,6 +7,7 @@ import org.lwjgl.BufferUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -22,19 +23,13 @@ public class TextureLoader {
         texture = null;
     }
 
-    public static Texture loadTexture(String path) {
-        if (loadedTextures.containsKey(path)) {
-            return loadedTextures.get(path);
-        }
+    public static Object[] loadTextureInBuffer(String path) throws IOException {
         BufferedImage image = null;
-        try {
-            if (path.charAt(0) == '#') {
-                image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
-            } else {
-                image = ImageIO.read(new File(path));
-            }
-        } catch (Exception e) {
-            return new Texture(DefaultFields.unknownTexture.buffer,DefaultFields.unknownTexture.sizeX,DefaultFields.unknownTexture.sizeY,path);
+
+        if (path.charAt(0) == '#') {
+            image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
+        } else {
+            image = ImageIO.read(new File(path));
         }
 
         int texture_size = image.getWidth() * image.getHeight() * 4;
@@ -53,6 +48,27 @@ public class TextureLoader {
             }
         }
         textureBuffer.flip();
+
+        return new Object[] {textureBuffer, image};
+    }
+
+    public static Texture loadTexture(String path) {
+        if (loadedTextures.containsKey(path)) {
+            return loadedTextures.get(path);
+        }
+
+        ByteBuffer textureBuffer = null;
+        BufferedImage image = null;
+
+        try {
+            Object[] imageData = loadTextureInBuffer(path);
+
+            textureBuffer = (ByteBuffer)imageData[0];
+            image = (BufferedImage)imageData[1];
+
+        } catch (IOException e) {
+            return new Texture(DefaultFields.unknownTexture.buffer,DefaultFields.unknownTexture.sizeX,DefaultFields.unknownTexture.sizeY,path);
+        }
 
         int textureID = glGenTextures();
 
