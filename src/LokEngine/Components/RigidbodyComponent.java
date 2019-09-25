@@ -18,7 +18,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class RigidbodyComponent extends Component implements Saveable {
 
-    Shape polygons;
+    public Shape polygons;
     Rigidbody body;
     private boolean bodyInited = false;
 
