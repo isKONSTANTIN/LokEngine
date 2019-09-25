@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class BoxShape extends Shape {
 
-    Vector2f collideSize;
+    public Vector2f collideSize;
 
     public BoxShape(){}
 

@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class ArbitraryShape extends Shape {
 
-    Vector2f[] collidePoints;
+    public Vector2f[] collidePoints;
 
     public ArbitraryShape(){}
 

@@ -5,7 +5,7 @@ import LokEngine.Tools.SaveWorker.Saveable;
 
 public class CircleShape extends Shape {
 
-    float radius;
+    public float radius;
 
     public CircleShape() {}
 
