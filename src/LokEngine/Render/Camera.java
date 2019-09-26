@@ -41,6 +41,21 @@ public class Camera {
         );
     }
 
+    public void setFieldOfView(float fieldOfView, Shader shader){
+        this.fieldOfView = fieldOfView;
+        screenRatio = (float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y;
+        Shader activeShader = Shader.currentShader;
+
+        Shader.use(shader);
+        updateProjection(screenRatio, 1);
+
+        if (activeShader != null){
+            Shader.use(activeShader);
+        }else{
+            Shader.unUse();
+        }
+    }
+
     public void setFieldOfView(float fieldOfView){
         this.fieldOfView = fieldOfView;
         screenRatio = (float) RuntimeFields.getFrameBuilder().window.getResolution().x / (float) RuntimeFields.getFrameBuilder().window.getResolution().y;
@@ -57,7 +72,6 @@ public class Camera {
         }else{
             Shader.unUse();
         }
-
     }
 
     public void updateView(){
