@@ -10,7 +10,7 @@ public class Timer {
     }
 
     public boolean checkTime(){
-        return startTime - System.nanoTime() >= duration;
+        return System.nanoTime() - startTime >= duration;
     }
 
     public void resetTimer(){
