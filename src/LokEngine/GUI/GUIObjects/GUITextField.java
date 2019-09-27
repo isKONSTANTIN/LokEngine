@@ -1,5 +1,6 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.Render.Frame.FrameParts.GUI.GUITextFieldFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
@@ -8,39 +9,79 @@ import org.lwjgl.input.Keyboard;
 
 public class GUITextField extends GUIObject {
 
-    GUIText text;
+    GUITextFieldFramePart framePart;
     private boolean active;
     private boolean lastActive;
-
-    public GUIText getGUIText(){
-        return text;
-    }
-
+    public boolean canResize;
     public boolean getActive(){
         return active;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, GUIText text) {
-        super(position, size);
-        this.text = text;
+    public GUITextField(Vector2i position, GUITextFieldFramePart customFramePart) {
+        super(position, new Vector2i(0,0));
+        this.framePart = customFramePart;
+        this.size.y = framePart.getHeight();
+        this.size.x = framePart.getWidth();
+        framePart.position = this.position;
     }
 
-    public GUITextField(Vector2i position, Vector2i size) {
-        super(position, size);
-        this.text = new GUIText(position,"");
-        this.text.size = size;
+    public GUITextField(Vector2i position, Vector2i size, String fontName, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
+        super(position, new Vector2i(0,0));
+        framePart = new GUITextFieldFramePart(text, fontName, new org.newdawn.slick.Color(color.red, color.green, color.blue, color.alpha), fontStyle, fontSize, antiAlias);
+        this.canResize = canResize;
+        this.size = size;
+
+        if (size.x < 1 || size.y < 1){
+            if (canResize){
+                this.size.y = framePart.getHeight();
+                this.size.x = framePart.getWidth();
+            }
+        }
+
+        framePart.position = this.position;
+    }
+
+    public GUITextField(Vector2i position, Vector2i size, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize) {
+        this(position, size, "Times New Roman", text, color, fontStyle, fontSize, true, false);
+    }
+
+    public GUITextField(Vector2i position, Vector2i size, String text, LokEngine.Tools.Utilities.Color color, int fontStyle) {
+        this(position, size, text, color, fontStyle, 24);
+    }
+
+    public GUITextField(Vector2i position, Vector2i size, String text) {
+        this(position, size , text, new LokEngine.Tools.Utilities.Color(1,1,1,1), 0);
+    }
+
+    public GUITextField(Vector2i position, String text) {
+        this(position, new Vector2i(), text, new LokEngine.Tools.Utilities.Color(1,1,1,1), 0);
+    }
+
+    public GUITextField(Vector2i position) {
+        this(position,"");
+    }
+
+    public String getText(){
+        return framePart.text;
+    }
+
+    public void updateText(String text){
+        framePart.text = text;
+        if (canResize){
+            this.size.y = framePart.getHeight();
+            this.size.x = framePart.getWidth();
+        }
     }
 
     @Override
     public void setPosition(Vector2i position){
         this.position = position;
-        text.setPosition(position);
+        framePart.position = position;
     }
 
     @Override
     public void setSize(Vector2i size){
         this.size = size;
-        text.setSize(size);
     }
 
     @Override
@@ -49,30 +90,54 @@ public class GUITextField extends GUIObject {
 
         if (Misc.mouseInField(myGlobalPosition, size) && RuntimeFields.getMouseStatus().getPressedStatus()){
             active = true;
+            framePart.pointer = framePart.text.length();
+
         }else if (RuntimeFields.getMouseStatus().getPressedStatus()){
             active = false;
         }
 
-        while (active && Keyboard.next()){
+        while (active && Keyboard.next()) {
             if (lastActive) {
-                char Key = Keyboard.getEventCharacter();
+                char eventCharacter = Keyboard.getEventCharacter();
+                int eventKey = Keyboard.getEventKey();
 
-                if (Key == 0 || Key == 27) break;
+                if (eventCharacter == 27) break;
 
-                if (Key == 13){
+                if (eventCharacter == 13) {
                     active = false;
                     break;
                 }
 
-                if (Key == 8) {
-                    if (text.getText().length() > 0)
-                        text.updateText(text.getText().substring(0, text.getText().length() - 1));
-                } else {
-                    text.updateText(text.getText() + Key);
+                String pointerText = framePart.text.substring(0, framePart.pointer);
+
+                if (eventCharacter != 0) {
+                    int pointerOffset = 0;
+                    if (eventCharacter == 8) {
+                        if (pointerText.length() > 0){
+                            pointerOffset = -1;
+                            pointerText = pointerText.substring(0, pointerText.length() - 1);
+                        }
+                    }else {
+                        pointerOffset = 1;
+                        pointerText += eventCharacter;
+                    }
+
+                    framePart.text = pointerText + framePart.text.substring(framePart.pointer);
+                    framePart.pointer += pointerOffset;
                 }
+
+                if (eventKey == Keyboard.KEY_LEFT && Keyboard.getEventKeyState()) {
+                    if (framePart.pointer > 0)
+                        framePart.pointer--;
+                }else if (eventKey == Keyboard.KEY_RIGHT && Keyboard.getEventKeyState()) {
+                    framePart.pointer++;
+                }
+
+                framePart.pointer = Math.min(framePart.text.length(),framePart.pointer);
             }
         }
-        text.update(partsBuilder, myGlobalPosition);
+        framePart.active = active;
+        partsBuilder.addPart(framePart);
         lastActive = active;
     }
 }

@@ -11,8 +11,8 @@ import java.awt.*;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_BINDING_2D;
 
 public class GUITextFramePart extends FramePart {
-    private TrueTypeFont font;
-    private int buffer;
+    protected TrueTypeFont font;
+    protected int buffer;
 
     public String text;
     public Vector2i position;
