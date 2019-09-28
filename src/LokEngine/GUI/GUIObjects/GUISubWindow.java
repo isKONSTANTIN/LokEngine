@@ -1,9 +1,8 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Misc;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUISubWindow extends GUIObject {
@@ -67,29 +66,28 @@ public class GUISubWindow extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
-        Vector2i mousePos = RuntimeFields.getMouseStatus().getMousePosition();
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder, parentProperties);
+        Vector2i mousePos = parentProperties.window.getMouse().getMousePosition();
 
-        if (canMove && RuntimeFields.getMouseStatus().getPressedStatus() && lastMFS){
+        if (canMove && parentProperties.window.getMouse().getPressedStatus() && lastMFS){
             setPosition(new Vector2i(position.x + (mousePos.x - lastMousePos.x), position.y - (mousePos.y - lastMousePos.y)));
         }
 
-        Vector2i myGlobalSourcePos = new Vector2i(globalSourcePos.x + position.x, globalSourcePos.y + position.y);
-
         if (canMove && titleText != null){
-            lastMFS = Misc.mouseInField(new Vector2i(myGlobalSourcePos.x, myGlobalSourcePos.y), new Vector2i(size.x, titlePanel.size.y));
+            lastMFS = parentProperties.window.getMouse().inField(properties.globalPosition, new Vector2i(size.x, titlePanel.size.y));
         }else if (canMove){
-            lastMFS = Misc.mouseInField(new Vector2i(myGlobalSourcePos.x, myGlobalSourcePos.y), new Vector2i(size.x, 5));
+            lastMFS = parentProperties.window.getMouse().inField(properties.globalPosition, new Vector2i(size.x, 5));
         }
 
         if (canMove)
             lastMousePos = mousePos;
 
-        canvas.update(partsBuilder, globalSourcePos);
+        canvas.update(partsBuilder, parentProperties);
 
         if (titleText != null){
-            titlePanel.update(partsBuilder, globalSourcePos);
-            titleText.update(partsBuilder, myGlobalSourcePos);
+            titlePanel.update(partsBuilder, parentProperties);
+            titleText.update(partsBuilder, properties);
         }
     }
 }

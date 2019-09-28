@@ -3,13 +3,13 @@ package LokEngine.Tools;
 import LokEngine.Render.Camera;
 import LokEngine.Render.Shader;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 
 public class MatrixCreator {
 
@@ -78,7 +78,7 @@ public class MatrixCreator {
         FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
         matrix.store(matrixBuffer);
         matrixBuffer.flip();
-        GL20.glUniformMatrix4(glGetUniformLocation(shader.program, name), false, matrixBuffer);
+        glUniformMatrix4fv(glGetUniformLocation(shader.program, name), false, matrixBuffer);
     }
 
 }

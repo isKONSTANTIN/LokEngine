@@ -1,5 +1,6 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUIGraphFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.Color;
@@ -54,12 +55,13 @@ public class GUIGraph extends GUIObject {
 
     @Override
     public void setSize(Vector2i size){
-        this.size = size;
+        super.setSize(size);
         framePart.size = size;
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
     }
 

@@ -1,5 +1,6 @@
 package LokEngine.GUI.Canvases;
 
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Render.Frame.FrameParts.GUI.GUICanvasFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
@@ -14,6 +15,7 @@ public class GUICanvas extends GUIObject {
     Vector<GUIObject> objects = new Vector<>();
     PartsBuilder partsBuilder;
     GUICanvasFramePart framePart;
+    GUIObjectProperties myProperties;
 
     public GUICanvas(Vector2i position, Vector2i size) {
         super(position, size);
@@ -23,6 +25,7 @@ public class GUICanvas extends GUIObject {
             partsBuilder = new PartsBuilder(RuntimeFields.getFrameBuilder().window.getResolution());
         }
         framePart = new GUICanvasFramePart(partsBuilder, position, size);
+        myProperties = new GUIObjectProperties(position,size,null);
     }
 
     public int addObject(GUIObject object){
@@ -45,6 +48,8 @@ public class GUICanvas extends GUIObject {
         super.setSize(size);
         partsBuilder.setResolution(size);
         framePart.size = size;
+        myProperties.size.x = size.x;
+        myProperties.size.y = size.y;
     }
 
     public void removeObject(int id){
@@ -56,11 +61,14 @@ public class GUICanvas extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
-        Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + getPosition().x,globalSourcePos.y + getPosition().y);
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        myProperties.globalPosition.x = parentProperties.globalPosition.x + getPosition().x;
+        myProperties.globalPosition.y = parentProperties.globalPosition.y + getPosition().y;
+        myProperties.window = parentProperties.window;
+
         for (GUIObject object : objects) {
             if (!object.hidden)
-                object.update(this.partsBuilder, myGlobalPosition);
+                object.update(this.partsBuilder, myProperties);
         }
         partsBuilder.addPart(framePart);
     }

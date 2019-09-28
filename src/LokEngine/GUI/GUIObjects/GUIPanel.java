@@ -1,5 +1,6 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUIPanelFramePart;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
 import LokEngine.Render.Frame.PartsBuilder;
@@ -42,17 +43,18 @@ public class GUIPanel extends GUIObject {
 
     @Override
     public void setSize(Vector2i size){
-        this.size = size;
+        super.setSize(size);
         framePart.size = size;
         if (blurAction != null)
             blurAction.size = size;
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
         if (blurAction != null){
-            blurAction.position = new Vector2i(globalSourcePos.x + position.x, globalSourcePos.y + position.y);
+            blurAction.position = new Vector2i(parentProperties.globalPosition.x + position.x, parentProperties.globalPosition.y + position.y);
             RuntimeFields.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker").addPostProcessingAction(blurAction);
         }
     }

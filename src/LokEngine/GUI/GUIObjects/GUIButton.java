@@ -1,9 +1,9 @@
 package LokEngine.GUI.GUIObjects;
 
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Misc;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Mouse;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -77,17 +77,17 @@ public class GUIButton extends GUIObject {
             unpressScript.execute(this);
     }
 
-    private void checkMouse(Vector2i myGlobalPosition ){
-        boolean enterInBox = Misc.mouseInField(myGlobalPosition,size);
+    private void checkMouse(Vector2i myGlobalPosition, Mouse mouse){
+        boolean enterInBox = mouse.inField(myGlobalPosition,size);
 
-        if (enterInBox && RuntimeFields.getMouseStatus().getPressedStatus()){
+        if (enterInBox && mouse.getPressedStatus()){
             if (!pressed){
                 pressed();
                 pressed = true;
             }
         }
 
-        if ((!RuntimeFields.getMouseStatus().getPressedStatus() || !enterInBox) && pressed){
+        if ((!mouse.getPressedStatus() || !enterInBox) && pressed){
             unpressed();
             pressed = false;
         }
@@ -103,20 +103,19 @@ public class GUIButton extends GUIObject {
 
     @Override
     public void setSize(Vector2i size){
-        this.size = size;
+        super.setSize(size);
 
         text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y / 2));
         panel.setSize(size);
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
-        Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + getPosition().x,globalSourcePos.y + getPosition().y);
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder, parentProperties);
+        checkMouse(properties.globalPosition, parentProperties.window.getMouse());
 
-        checkMouse(myGlobalPosition);
-
-        panel.update(partsBuilder, myGlobalPosition);
-        text.update(partsBuilder, myGlobalPosition);
+        panel.update(partsBuilder, properties);
+        text.update(partsBuilder, properties);
     }
 
 }

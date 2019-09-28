@@ -1,11 +1,14 @@
 package LokEngine.GUI.GUIObjects;
 
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUITextFieldFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Misc;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.Keyboard;
+import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.input.Keyboard;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 
 public class GUITextField extends GUIObject {
 
@@ -27,7 +30,7 @@ public class GUITextField extends GUIObject {
 
     public GUITextField(Vector2i position, Vector2i size, String fontName, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0,0));
-        framePart = new GUITextFieldFramePart(text, fontName, new org.newdawn.slick.Color(color.red, color.green, color.blue, color.alpha), fontStyle, fontSize, antiAlias);
+        framePart = new GUITextFieldFramePart(text, fontName, new Color(color.red, color.green, color.blue, color.alpha), fontStyle, fontSize, antiAlias);
         this.canResize = canResize;
         this.size = size;
 
@@ -85,21 +88,23 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalSourcePos){
-        Vector2i myGlobalPosition = new Vector2i(globalSourcePos.x + position.x,globalSourcePos.y + position.y);
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder, parentProperties);
 
-        if (Misc.mouseInField(myGlobalPosition, size) && RuntimeFields.getMouseStatus().getPressedStatus()){
+        if (parentProperties.window.getMouse().inField(properties.globalPosition, size) && parentProperties.window.getMouse().getPressedStatus()){
             active = true;
             framePart.pointer = framePart.text.length();
 
-        }else if (RuntimeFields.getMouseStatus().getPressedStatus()){
+        }else if (parentProperties.window.getMouse().getPressedStatus()){
             active = false;
         }
 
-        while (active && Keyboard.next()) {
+        Keyboard keyboard = parentProperties.window.getKeyboard();
+
+        while (active && keyboard.next()) {
             if (lastActive) {
-                char eventCharacter = Keyboard.getEventCharacter();
-                int eventKey = Keyboard.getEventKey();
+                char eventCharacter = keyboard.getPressedChar();
+                int eventKey = keyboard.getPressedKey();
 
                 if (eventCharacter == 27) break;
 
@@ -126,10 +131,10 @@ public class GUITextField extends GUIObject {
                     framePart.pointer += pointerOffset;
                 }
 
-                if (eventKey == Keyboard.KEY_LEFT && Keyboard.getEventKeyState()) {
+                if (eventKey == GLFW_KEY_LEFT) {
                     if (framePart.pointer > 0)
                         framePart.pointer--;
-                }else if (eventKey == Keyboard.KEY_RIGHT && Keyboard.getEventKeyState()) {
+                }else if (eventKey == GLFW_KEY_RIGHT) {
                     framePart.pointer++;
                 }
 

@@ -23,7 +23,7 @@ public class Camera {
         MatrixCreator.PutMatrixInShader(Shader.currentShader, "Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
-    public Vector2f screenPointToScene(Vector2i point){
+    public Vector2f screenPointToScene(Vector2i point){  // TODO: fix it
         Vector2f screenCenter = new Vector2f(RuntimeFields.getFrameBuilder().window.getResolution().x / 2f, RuntimeFields.getFrameBuilder().window.getResolution().y / 2f);
         return new Vector2f(
                 0.520833f * fieldOfView * ((point.x - screenCenter.x) / screenCenter.x) * screenRatio + position.x,
@@ -32,7 +32,7 @@ public class Camera {
     }
 
 
-    public Vector2i scenePointToScreen(Vector2f point){
+    public Vector2i scenePointToScreen(Vector2f point){  // TODO: fix it
         Vector2f screenCenter = new Vector2f(RuntimeFields.getFrameBuilder().window.getResolution().x / 2f, RuntimeFields.getFrameBuilder().window.getResolution().y / 2f);
 
         return new Vector2i(

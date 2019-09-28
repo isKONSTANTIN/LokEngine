@@ -3,13 +3,11 @@ package LokEngine.Tools;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.SceneEnvironment.Scene;
-import LokEngine.Tools.Utilities.MouseStatus;
 
 public class RuntimeFields {
     private static FrameBuilder frameBuilder;
     private static Scene scene;
     private static GUICanvas canvas;
-    private static MouseStatus mouseStatus;
 
     private static float deltaTime;
     private static int fps;
@@ -21,7 +19,6 @@ public class RuntimeFields {
     public static FrameBuilder getFrameBuilder(){ return frameBuilder; }
     public static Scene getScene(){ return scene; }
     public static GUICanvas getCanvas(){ return canvas; }
-    public static MouseStatus getMouseStatus(){ return mouseStatus; }
 
     public static float getDeltaTime(){ return deltaTime / 16.66666f; }
     public static int getFps(){ return fps; }
@@ -39,11 +36,10 @@ public class RuntimeFields {
         }
     }
 
-    public static void init(FrameBuilder frameBuilder, Scene scene, GUICanvas canvas, MouseStatus mouseStatus){
+    public static void init(FrameBuilder frameBuilder, Scene scene, GUICanvas canvas){
         RuntimeFields.frameBuilder = frameBuilder;
         RuntimeFields.scene = scene;
         RuntimeFields.canvas = canvas;
-        RuntimeFields.mouseStatus = mouseStatus;
 
         lastUpdateTime = System.nanoTime();
         lastFPSUpdateTime = System.nanoTime();
@@ -51,10 +47,6 @@ public class RuntimeFields {
     }
 
     public static void update(){
-        if (mouseStatus != null){
-            mouseStatus.update();
-        }
-
         long timeNow = System.nanoTime();
 
         deltaTime = (timeNow - lastUpdateTime) / 1000000f;

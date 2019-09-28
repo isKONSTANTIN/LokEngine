@@ -4,11 +4,6 @@ import LokEngine.Render.Enums.FramePartType;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.newdawn.slick.Font;
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.util.ResourceLoader;
-
-import java.io.InputStream;
 
 import static org.lwjgl.opengl.GL11.*;
 

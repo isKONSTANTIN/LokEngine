@@ -3,17 +3,22 @@ package LokEngine.Render;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Tools.DefaultFields;
+import LokEngine.Tools.Keyboard;
 import LokEngine.Tools.Logger;
+import LokEngine.Tools.Mouse;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.openal.*;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL30;
 
 import java.nio.ByteBuffer;
 
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
+import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class Window {
@@ -22,65 +27,102 @@ public class Window {
     private Vector2i resolution;
     private boolean fullscreen = false;
     private boolean isOpened = false;
+    private String title;
+    private long id;
+
+    private Keyboard keyboard;
+    private Mouse mouse;
+
+    private long openALDevice;
+    private long openALContext;
+    ALCCapabilities alcCapabilities;
+    ALCapabilities alCapabilities;
 
     public boolean isFullscreen() {
         return fullscreen;
     }
-
     public boolean isOpened() {
         return isOpened;
     }
-
     public Vector2i getResolution() {
         return resolution;
     }
-
     public Camera getCamera() {
         return camera;
     }
-
-    public String getTitle() {
-        return Display.getTitle();
-    }
+    public String getTitle() { return title; }
 
     public void setTitle(String title) {
-        Display.setTitle(title);
+        this.title = title;
+        glfwSetWindowTitle(id,title);
     }
 
-    public void open(boolean fullscreen, boolean vSync, Vector2i resolution) throws LWJGLException {
+    public long getId(){ return id; }
+
+    public Keyboard getKeyboard(){ return keyboard; }
+    public Mouse getMouse(){ return mouse; }
+
+    public void open(boolean fullscreen, boolean vSync, Vector2i resolution) {
         if (!isOpened) {
             this.fullscreen = fullscreen;
 
+            glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+            glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+            glfwWindowHint(GLFW_SAMPLES, 8);
+
             if (fullscreen) {
-                Display.setFullscreen(true);
-                this.resolution = new Vector2i(Display.getWidth(), Display.getHeight());
+                GLFWVidMode mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+                this.resolution = new Vector2i(mode.width(), mode.height());
             } else {
                 this.resolution = resolution;
-                Display.setDisplayMode(new DisplayMode(resolution.x, resolution.y));
             }
 
+            id = glfwCreateWindow(resolution.x, resolution.y, "LokEngine Application", fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+
+            if (id == NULL){
+                Logger.error("Failed to create the window", "LokEngine_Window");
+                return;
+            }
+
+            glfwMakeContextCurrent(id);
+            GL.createCapabilities();
             this.setIcon(DefaultFields.pathsWindowIcon);
 
-            Display.create();
-            Display.setVSyncEnabled(vSync);
-
-            isOpened = true;
-            camera = new Camera();
+            glfwSwapInterval(vSync ? 1 : 0);
+            glfwShowWindow(id);
 
             glEnableClientState(GL_VERTEX_ARRAY);
             glEnableClientState(GL_TEXTURE_COORD_ARRAY);
             GL30.glBindVertexArray(GL30.glGenVertexArrays());
+
+            isOpened = true;
+            camera = new Camera();
+            keyboard = new Keyboard(this);
+            mouse = new Mouse(this);
+            String defaultDeviceName = ALC10.alcGetString(0, ALC10.ALC_DEFAULT_DEVICE_SPECIFIER);
+            openALDevice = alcOpenDevice(defaultDeviceName);
+            openALContext = ALC10.alcCreateContext(openALDevice, new int[]{0});
+            alcMakeContextCurrent(openALContext);
+
+            alcCapabilities = ALC.createCapabilities(openALDevice);
+            alCapabilities = AL.createCapabilities(alcCapabilities);
         }
     }
 
     public void close() {
-        Display.destroy();
+        glfwDestroyWindow(id);
+        alcDestroyContext(openALContext);
+        alcCloseDevice(openALDevice);
+        keyboard.close();
         isOpened = false;
     }
 
     public void update() {
-        if (isOpened)
-            Display.update();
+        if (isOpened){
+            mouse.update();
+            glfwSwapBuffers(id);
+            glfwPollEvents();
+        }
     }
 
     public void setIcon(String[] paths){
@@ -95,7 +137,9 @@ public class Window {
                 Logger.printException(e);
             }
         }
-        Display.setIcon(buffers);
+
+        //ByteBuffer byteBuffer = ByteBuffer.allocate(buffersSize);
+        //glfwSetWindowIcon(id,);
     }
 
     public void setDrawMode(DrawMode dm) {
