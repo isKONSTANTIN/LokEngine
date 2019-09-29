@@ -23,21 +23,21 @@ public class Camera {
         MatrixCreator.PutMatrixInShader(Shader.currentShader, "Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
-    public Vector2f screenPointToScene(Vector2i point){  // TODO: fix it
+    public Vector2f screenPointToScene(Vector2i point){
         Vector2f screenCenter = new Vector2f(RuntimeFields.getFrameBuilder().window.getResolution().x / 2f, RuntimeFields.getFrameBuilder().window.getResolution().y / 2f);
         return new Vector2f(
                 0.520833f * fieldOfView * ((point.x - screenCenter.x) / screenCenter.x) * screenRatio + position.x,
-                0.520833f * fieldOfView * ((point.y - screenCenter.y) / screenCenter.y) + position.y
+                0.520833f * fieldOfView * ((RuntimeFields.getFrameBuilder().window.getResolution().y - point.y - screenCenter.y) / screenCenter.y) + position.y
         );
     }
 
 
-    public Vector2i scenePointToScreen(Vector2f point){  // TODO: fix it
+    public Vector2i scenePointToScreen(Vector2f point){
         Vector2f screenCenter = new Vector2f(RuntimeFields.getFrameBuilder().window.getResolution().x / 2f, RuntimeFields.getFrameBuilder().window.getResolution().y / 2f);
 
         return new Vector2i(
                 Math.round((point.x - position.x) / 0.520833f / fieldOfView / screenRatio * screenCenter.x + screenCenter.x),
-                Math.round((point.y - position.y) / 0.520833f / fieldOfView * screenCenter.y + screenCenter.y)
+                Math.round(RuntimeFields.getFrameBuilder().window.getResolution().y - ((point.y - position.y) / 0.520833f / fieldOfView * screenCenter.y + screenCenter.y))
         );
     }
 
