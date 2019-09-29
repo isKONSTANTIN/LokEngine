@@ -3,12 +3,11 @@ package LokEngine.GUI.GUIObjects;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUITextFieldFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
+import LokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import LokEngine.Tools.Input.Keyboard;
-import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class GUITextField extends GUIObject {
 
@@ -30,7 +29,7 @@ public class GUITextField extends GUIObject {
 
     public GUITextField(Vector2i position, Vector2i size, String fontName, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0,0));
-        framePart = new GUITextFieldFramePart(text, new Color(color.red, color.green, color.blue, color.alpha));
+        framePart = new GUITextFieldFramePart(text,fontName,color, fontStyle,fontSize,antiAlias);
         this.canResize = canResize;
         this.size = size;
 
@@ -103,8 +102,10 @@ public class GUITextField extends GUIObject {
 
         while (active && keyboard.next()) {
             if (lastActive) {
-                char eventCharacter = keyboard.getPressedChar();
-                int eventKey = keyboard.getPressedKey();
+                KeyInfo keyInfo = keyboard.getPressedKey();
+
+                int eventKey = keyInfo.buttonID;
+                char eventCharacter = keyInfo.aChar;
 
                 if (eventCharacter == 27) break;
 
@@ -115,14 +116,14 @@ public class GUITextField extends GUIObject {
 
                 String pointerText = framePart.text.substring(0, framePart.pointer);
 
-                if (eventCharacter != 0) {
+                if (eventCharacter != 0 || eventKey != 0) {
                     int pointerOffset = 0;
-                    if (eventCharacter == 8) {
+                    if (eventKey == 259 && keyInfo.action != GLFW_RELEASE) {
                         if (pointerText.length() > 0){
                             pointerOffset = -1;
                             pointerText = pointerText.substring(0, pointerText.length() - 1);
                         }
-                    }else {
+                    }else if (eventCharacter != 0){
                         pointerOffset = 1;
                         pointerText += eventCharacter;
                     }
@@ -131,11 +132,18 @@ public class GUITextField extends GUIObject {
                     framePart.pointer += pointerOffset;
                 }
 
-                if (eventKey == GLFW_KEY_LEFT) {
-                    if (framePart.pointer > 0)
+                if (eventKey == GLFW_KEY_LEFT && keyInfo.action != GLFW_RELEASE) {
+                    if (framePart.pointer > 0){
                         framePart.pointer--;
-                }else if (eventKey == GLFW_KEY_RIGHT) {
+                        framePart.printSelecter = true;
+                        framePart.timer.resetTimer();
+                    }
+
+
+                }else if (eventKey == GLFW_KEY_RIGHT && keyInfo.action != GLFW_RELEASE) {
                     framePart.pointer++;
+                    framePart.printSelecter = true;
+                    framePart.timer.resetTimer();
                 }
 
                 framePart.pointer = Math.min(framePart.text.length(),framePart.pointer);
