@@ -1,4 +1,4 @@
-package LokEngine.Tools;
+package LokEngine.Tools.Input;
 
 import LokEngine.Render.Window;
 import org.lwjgl.glfw.GLFWCharCallback;

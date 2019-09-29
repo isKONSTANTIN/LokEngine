@@ -3,9 +3,6 @@ package LokEngine.Render.Frame.FrameParts.GUI;
 import LokEngine.Tools.Timer;
 import LokEngine.Tools.Utilities.Color;
 import org.lwjgl.opengl.GL11;
-import sun.font.TrueTypeFont;
-
-import static org.lwjgl.opengl.GL11.glColor4f;
 
 public class GUITextFieldFramePart extends GUITextFramePart {
 
@@ -14,14 +11,8 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     Timer timer;
     public boolean active;
 
-    public GUITextFieldFramePart(String text, Color color, TrueTypeFont font, int fontBuffer) {
-        super(text, color, font, fontBuffer);
-        timer = new Timer();
-        timer.setDurationInSeconds(0.5f);
-    }
-
-    public GUITextFieldFramePart(String text, String fontName, Color color, int fontStyle, int size, boolean antiAlias) {
-        super(text, fontName, color, fontStyle, size, antiAlias);
+    public GUITextFieldFramePart(String text, Color color) {
+        super(text, color);
         timer = new Timer();
         timer.setDurationInSeconds(0.5f);
     }
@@ -34,13 +25,13 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         }
 
         if (printSelecter && active){
-            //int xPos = font.getWidth(text.substring(0,pointer)) + position.x;
+            int xPos = 0;//font.getWidth(text.substring(0,pointer)) + position.x;
 
             GL11.glBegin(GL11.GL_LINES);
-           // glColor4f(color.r, color.g, color.b, color.a);
+            GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
 
-           // GL11.glVertex2f(xPos + 1,position.y);
-            //GL11.glVertex2f(xPos + 1,position.y + font.getHeight());
+            GL11.glVertex2f(xPos + 1,position.y);
+            GL11.glVertex2f(xPos + 1,position.y + getHeight());
 
             GL11.glEnd();
         }

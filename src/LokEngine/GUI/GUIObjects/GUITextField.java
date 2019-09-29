@@ -3,7 +3,7 @@ package LokEngine.GUI.GUIObjects;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUITextFieldFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Keyboard;
+import LokEngine.Tools.Input.Keyboard;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -30,7 +30,7 @@ public class GUITextField extends GUIObject {
 
     public GUITextField(Vector2i position, Vector2i size, String fontName, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0,0));
-        framePart = new GUITextFieldFramePart(text, fontName, new Color(color.red, color.green, color.blue, color.alpha), fontStyle, fontSize, antiAlias);
+        framePart = new GUITextFieldFramePart(text, new Color(color.red, color.green, color.blue, color.alpha));
         this.canResize = canResize;
         this.size = size;
 

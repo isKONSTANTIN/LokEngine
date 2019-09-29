@@ -12,8 +12,9 @@ public class GUIText extends GUIObject {
     private int maxTextLength;
     public boolean canResize;
 
-    public GUIText(Vector2i position, GUITextFramePart customFramePart) {   // TODO: fix text
+    public GUIText(Vector2i position, GUITextFramePart customFramePart) {
         super(position, new Vector2i(0,0));
+
         //this.framePart = customFramePart;
         //this.size.y = framePart.getHeight();
         //this.size.x = framePart.getWidth();
