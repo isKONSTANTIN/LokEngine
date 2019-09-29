@@ -27,7 +27,7 @@ public class GUIButton extends GUIObject {
         super(position, size);
         this.text = text;
         if (size.x <= 0 || size.y <= 0){
-            size = this.text.size;
+            size = this.text.getSize();
         }
         this.pressedColor = pressed;
         this.calmStateColor = calmState;
@@ -42,7 +42,7 @@ public class GUIButton extends GUIObject {
         super(position, size);
         this.text = new GUIText(position,text);
         if (size.x <= 0 || size.y <= 0){
-            size = this.text.size;
+            size = this.text.getSize();
         }
         float colorChange = (calmState.red + calmState.green + calmState.blue) / 3 >= 0.5f ? -0.1f : 0.1f;
         this.pressedColor = new Color(calmState.red + colorChange,calmState.green + colorChange,calmState.blue + colorChange,calmState.alpha);
@@ -97,7 +97,7 @@ public class GUIButton extends GUIObject {
     public void setPosition(Vector2i position){
         this.position = position;
 
-        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y / 2));
+        text.setPosition(new Vector2i(position.x + size.x / 2 - text.getSize().x / 2, position.y + size.y / 2 - text.getSize().y / 2));
         panel.setPosition(position);
     }
 
@@ -105,7 +105,7 @@ public class GUIButton extends GUIObject {
     public void setSize(Vector2i size){
         super.setSize(size);
 
-        text.setPosition(new Vector2i(position.x + size.x / 2 - text.size.x / 2, position.y + size.y / 2 - text.size.y / 2));
+        text.setPosition(new Vector2i(position.x + size.x / 2 - text.getSize().x / 2, position.y + size.y / 2 - text.getSize().y / 2));
         panel.setSize(size);
     }
 

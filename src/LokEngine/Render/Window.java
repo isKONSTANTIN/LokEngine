@@ -121,9 +121,9 @@ public class Window {
 
     public void update() {
         if (isOpened){
-            mouse.update();
             glfwSwapBuffers(id);
             glfwPollEvents();
+            mouse.update();
         }
     }
 
