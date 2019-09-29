@@ -59,8 +59,8 @@ public class Mouse {
     }
 
     public boolean inField(Vector2i position, Vector2i size){
-        return (mousePosition.x > position.x && mousePosition.x < size.x + position.x) &&
-                (mousePosition.y > position.y && mousePosition.y < size.y + position.y);
+        return (mousePosition.x >= position.x && mousePosition.x <= size.x + position.x) &&
+                (mousePosition.y >= position.y && mousePosition.y <= size.y + position.y);
     }
 
 }
