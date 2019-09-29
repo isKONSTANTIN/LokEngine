@@ -67,18 +67,14 @@ public class GUISubWindow extends GUIObject {
 
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
-        super.update(partsBuilder, parentProperties);
         Vector2i mousePos = parentProperties.window.getMouse().getMousePosition();
 
         if (canMove && parentProperties.window.getMouse().getPressedStatus() && lastMFS){
-            setPosition(new Vector2i(position.x + (mousePos.x - lastMousePos.x), position.y - (mousePos.y - lastMousePos.y)));
+            setPosition(new Vector2i(position.x + (mousePos.x - lastMousePos.x), position.y + (mousePos.y - lastMousePos.y)));
         }
 
-        if (canMove && titleText != null){
-            lastMFS = parentProperties.window.getMouse().inField(properties.globalPosition, new Vector2i(size.x, titlePanel.size.y));
-        }else if (canMove){
-            lastMFS = parentProperties.window.getMouse().inField(properties.globalPosition, new Vector2i(size.x, 5));
-        }
+        super.update(partsBuilder, parentProperties);
+        lastMFS = parentProperties.window.getMouse().inField(properties.globalPosition,canMove && titleText != null ? new Vector2i(size.x, titlePanel.size.y) : new Vector2i(size.x, 5));
 
         if (canMove)
             lastMousePos = mousePos;
