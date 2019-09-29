@@ -1,6 +1,7 @@
 package LokEngine.Tools.Input;
 
 import LokEngine.Render.Window;
+import LokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import org.lwjgl.glfw.GLFWCharCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
@@ -12,14 +13,14 @@ public class Keyboard {
 
     private GLFWKeyCallback callbackKey;
     private GLFWCharCallback callbackChar;
-    private ArrayList <Integer>keysPressed = new ArrayList();
-    private ArrayList <Character>charsPressed = new ArrayList();
+    private ArrayList <KeyInfo>keysPressed = new ArrayList();
     private Window window;
 
     public Keyboard(Window window){
         this.window = window;
         callbackKey = GLFWKeyCallback.create(this::keyCallback);
         callbackChar = GLFWCharCallback.create(this::charCallback);
+
         glfwSetKeyCallback(window.getId(), callbackKey);
         glfwSetCharCallback(window.getId(),callbackChar);
     }
@@ -28,30 +29,21 @@ public class Keyboard {
         return keysPressed.size() > 0;
     }
 
-    public int getPressedKey(){
+    public KeyInfo getPressedKey(){
         if (keysPressed.size() > 0){
-            int key = keysPressed.get(0);
+            KeyInfo key = keysPressed.get(0);
             keysPressed.remove(0);
             return key;
         }
-        return 0;
-    }
-
-    public char getPressedChar(){
-        if (charsPressed.size() > 0){
-            char key = charsPressed.get(0);
-            charsPressed.remove(0);
-            return key;
-        }
-        return 0;
+        return null;
     }
 
     private void keyCallback(long window, int key, int scancode, int action, int mods){
-        keysPressed.add(key);
+        keysPressed.add(new KeyInfo((char)0, key, action));
     }
 
     private void charCallback(long window, int key){
-        charsPressed.add((char)key);
+        keysPressed.add(new KeyInfo((char)key, 0, 0));
     }
 
     public void close(){
