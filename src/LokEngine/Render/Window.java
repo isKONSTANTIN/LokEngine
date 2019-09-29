@@ -7,11 +7,13 @@ import LokEngine.Tools.Keyboard;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Mouse;
 import LokEngine.Tools.Utilities.Vector2i;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.openal.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL30;
 
+import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -126,20 +128,25 @@ public class Window {
     }
 
     public void setIcon(String[] paths){
-        ByteBuffer[] buffers = new ByteBuffer[paths.length];
-        int iconsLoaded = 0;
+        GLFWImage.Buffer iconGB = GLFWImage.malloc(paths.length);
+
         for (String path : paths) {
             try {
-                buffers[iconsLoaded] = (ByteBuffer) TextureLoader.loadTextureInBuffer(path)[0];
-                iconsLoaded++;
+                Object[] image = TextureLoader.loadTextureInBuffer(path);
+                GLFWImage GLFWimage = GLFWImage.create().set(
+                        ((BufferedImage)image[1]).getWidth(),
+                        ((BufferedImage) image[1]).getHeight(),
+                        (ByteBuffer)image[0]);
+
+                iconGB.put(GLFWimage);
             } catch (Exception e) {
                 Logger.warning("Fail load icon", "LokEngine_Window");
                 Logger.printException(e);
             }
         }
+        iconGB.flip();
 
-        //ByteBuffer byteBuffer = ByteBuffer.allocate(buffersSize);
-        //glfwSetWindowIcon(id,);
+        glfwSetWindowIcon(id,iconGB);
     }
 
     public void setDrawMode(DrawMode dm) {
