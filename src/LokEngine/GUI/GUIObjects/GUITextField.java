@@ -101,9 +101,8 @@ public class GUITextField extends GUIObject {
         Keyboard keyboard = parentProperties.window.getKeyboard();
 
         while (active && keyboard.next()) {
+            KeyInfo keyInfo = keyboard.getPressedKey();
             if (lastActive) {
-                KeyInfo keyInfo = keyboard.getPressedKey();
-
                 int eventKey = keyInfo.buttonID;
                 char eventCharacter = keyInfo.aChar;
 
