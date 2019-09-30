@@ -1,6 +1,8 @@
 package LokEngine.SceneEnvironment;
 
 import LokEngine.Components.ComponentList;
+import LokEngine.Render.Frame.PartsBuilder;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector2f;
@@ -19,8 +21,8 @@ public class SceneObject implements Saveable {
         this.scene = scene;
     }
 
-    public void update(){
-        components.update(this);
+    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
+        components.update(this, applicationRuntime, partsBuilder);
     }
 
     @Override

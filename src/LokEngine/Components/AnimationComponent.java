@@ -3,8 +3,9 @@ package LokEngine.Components;
 import LokEngine.Components.AdditionalObjects.Animation;
 import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Render.Frame.FrameParts.SpriteFramePart;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.SaveWorker.ArraySaver;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector4f;
@@ -20,14 +21,14 @@ public class AnimationComponent extends Component implements Saveable {
 
     public float currectFrame;
     public float speedAnimation = 1;
-    private Sprite sprite = new Sprite(null,0,0,1,0);
+    private Sprite sprite = new Sprite(null,0,1,0);
 
     public Sprite getSprite(){
         return sprite;
     }
 
     public AnimationComponent(){
-        framePart = new SpriteFramePart(sprite);
+        framePart = new SpriteFramePart(sprite, null);
     }
 
     @Override
@@ -55,11 +56,11 @@ public class AnimationComponent extends Component implements Saveable {
     }
 
     @Override
-    public void update(SceneObject source){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         if (activeAnimation != null){
             sprite.texture = activeAnimation.altasTexture;
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
-            currectFrame += speedAnimation * RuntimeFields.getDeltaTime() * RuntimeFields.getSpeedEngine();
+            currectFrame += speedAnimation * applicationRuntime.getDeltaTime() * applicationRuntime.getSpeedEngine();
 
             if ((int)currectFrame > activeAnimation.uvBuffers.size()-1){
                 currectFrame = 0;
@@ -72,7 +73,8 @@ public class AnimationComponent extends Component implements Saveable {
             sprite.uvBuffer = activeAnimation.uvBuffers.get((int)currectFrame);
 
             framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
-            RuntimeFields.getFrameBuilder().addPart(framePart);
+            if (partsBuilder != null)
+                partsBuilder.addPart(framePart);
         }
     }
 
@@ -80,8 +82,6 @@ public class AnimationComponent extends Component implements Saveable {
     @Override
     public String save() {
         if (animations.size() > 0) {
-
-
             ArraySaver arraySaver = new ArraySaver(Animation.class);
             StringBuilder stringBuilder = new StringBuilder();
 

@@ -4,7 +4,6 @@ import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUIPanelFramePart;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.BlurTuning;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -55,7 +54,7 @@ public class GUIPanel extends GUIObject {
         partsBuilder.addPart(framePart);
         if (blurAction != null){
             blurAction.position = new Vector2i(parentProperties.globalPosition.x + position.x, parentProperties.globalPosition.y + position.y);
-            RuntimeFields.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker").addPostProcessingAction(blurAction);
+            parentProperties.window.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker").addPostProcessingAction(blurAction);
         }
     }
 

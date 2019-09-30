@@ -2,6 +2,7 @@ package LokEngine.Render.Frame.FrameParts.GUI;
 
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Enums.FramePartType;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.Color;
@@ -23,8 +24,8 @@ public class GUICanvasFramePart extends FramePart {
     }
 
     @Override
-    public void partRender() {
-        int texture = partsBuilder.build(DrawMode.RawGUI);
+    public void partRender(BuilderProperties builderProperties) {
+        int texture = partsBuilder.build(DrawMode.RawGUI, builderProperties);
 
         glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_POLYGON);

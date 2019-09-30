@@ -1,33 +1,30 @@
 package LokEngine.Render.Frame;
 
-import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
-import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
-import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.Utilities.Color;
+import org.lwjgl.opengl.GL;
 
 import java.util.Vector;
 
 public class FrameBuilder {
-
-    public Window window;
     public Color glSceneClearColor = new Color(0.6f,0.6f,0.6f, 1);
 
     private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<PostProcessingActionWorker>();
     private PartsBuilder scenePartsBuilder;
     private PartsBuilder GUIPartsBuilder;
+    private BuilderProperties builderProperties;
 
-    public FrameBuilder(Window currectWin) {
-        this.window = currectWin;
+    public PartsBuilder getScenePartsBuilder(){ return scenePartsBuilder; }
+    public PartsBuilder getGUIPartsBuilder(){ return GUIPartsBuilder; }
+    public BuilderProperties getBuilderProperties(){ return builderProperties; }
 
-        scenePartsBuilder = new PartsBuilder(window.getResolution());
-        GUIPartsBuilder = new PartsBuilder(window.getResolution());
-    }
+    public FrameBuilder(Window currectWin) throws Exception {
+        builderProperties = new BuilderProperties(currectWin);
 
-    public void addPart(FramePart fp) {
-        scenePartsBuilder.addPart(fp);
+        scenePartsBuilder = new PartsBuilder();
+        GUIPartsBuilder = new PartsBuilder();
     }
 
     public void addPostProcessingActionWorker(PostProcessingActionWorker worker){ postProcessingActionWorkers.add(worker); }
@@ -41,23 +38,24 @@ public class FrameBuilder {
         return null;
     }
 
-    public void build(GUICanvas rootCanvas) {
+    public void build() {
+        GL.createCapabilities();
+        builderProperties.useShader(builderProperties.getObjectShader());
+        builderProperties.getBuilderWindow().getCamera().updateView();
+
         scenePartsBuilder.clearColor = glSceneClearColor;
 
-        int preDisplayFrame = scenePartsBuilder.build(DrawMode.Scene);
+        int preDisplayFrame = scenePartsBuilder.build(DrawMode.Scene,builderProperties);
 
-        if (rootCanvas.properties.window == null)
-            rootCanvas.properties.window = window;
-
-        rootCanvas.update(GUIPartsBuilder, rootCanvas.properties);
-        int GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI);
+        builderProperties.getBuilderWindow().getCanvas().update(GUIPartsBuilder, builderProperties.getBuilderWindow().getCanvas().properties);
+        int GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI,builderProperties);
 
         for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
             preDisplayFrame = postProcessingActionWorker.render(preDisplayFrame);
         }
 
-        Shader.use(DefaultFields.displayShader);
-        DisplayDrawer.renderScreen(preDisplayFrame);
-        DisplayDrawer.renderScreen(GUIBuild);
+        builderProperties.useShader(builderProperties.getDisplayShader());
+        DisplayDrawer.renderScreen(preDisplayFrame, builderProperties.getBuilderWindow());
+        DisplayDrawer.renderScreen(GUIBuild, builderProperties.getBuilderWindow());
     }
 }

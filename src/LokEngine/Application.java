@@ -1,35 +1,32 @@
 package LokEngine;
 
-import LokEngine.GUI.Canvases.GUICanvas;
-import LokEngine.Loaders.BufferLoader;
-import LokEngine.Loaders.ShaderLoader;
-import LokEngine.Loaders.TextureLoader;
-import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
-import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
 import LokEngine.SceneEnvironment.Scene;
-import LokEngine.Tools.*;
-import LokEngine.Tools.SplashScreen;
+import LokEngine.Tools.ApplicationRuntime;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.Prefs;
+import LokEngine.Tools.SplashScreen;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.openal.*;
 
 import java.awt.*;
 import java.io.IOException;
 
 import static org.lwjgl.glfw.GLFW.glfwInit;
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20C.glUniform2f;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
+import static org.lwjgl.openal.ALC10.*;
 
 public class Application {
     public Window window;
     public Scene scene;
-    public GUICanvas canvas;
-    public DefaultFields defaultFields;
-    public RuntimeFields runtimeFields;
+    public ApplicationRuntime applicationRuntime;
     private boolean isRun;
+
+    private long openALDevice;
+    private long openALContext;
+    private ALCCapabilities alcCapabilities;
+    private ALCapabilities alCapabilities;
 
     private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
         try {
@@ -47,8 +44,6 @@ public class Application {
             try {
                 window.open(windowFullscreen, vSync, windowResolution);
                 window.setTitle(windowTitle);
-
-                windowResolution = window.getResolution();
             } catch (Exception e) {
                 Logger.error("Fail open window!", "LokEngine_start");
                 Logger.printException(e);
@@ -61,25 +56,16 @@ public class Application {
             }
 
             SplashScreen.updateStatus(0.1f);
-            Logger.debug("Init default vertex screen buffer", "LokEngine_start");
-            defaultFields.defaultVertexScreenBuffer = BufferLoader.load(new float[]{-windowResolution.x / 2, windowResolution.y / 2, -windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, windowResolution.y / 2,});
+            Logger.debug("Init application runtime", "LokEngine_start");
 
-            SplashScreen.updateStatus(0.15f);
-            Logger.debug("Init default UV buffer", "LokEngine_start");
-            defaultFields.defaultUVBuffer = BufferLoader.load(new float[] {
-                    0,1,
-                    0,0,
-                    1,0,
-                    1,1,
-            });
+            applicationRuntime = new ApplicationRuntime();
+            applicationRuntime.init();
 
             SplashScreen.updateStatus(0.2f);
-            Logger.debug("Init runtime fields", "LokEngine_start");
+            Logger.debug("Init scene", "LokEngine_start");
+            scene = new Scene();
 
-            runtimeFields.init(new FrameBuilder(window), new Scene(), new GUICanvas(new Vector2i(0,0), windowResolution));
-            scene = runtimeFields.getScene();
-            canvas = runtimeFields.getCanvas();
-
+            SplashScreen.updateStatus(0.3f);
             Logger.debug("Init default font", "LokEngine_start");
             try {
                 GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/resources/Fonts/Default.ttf")));
@@ -88,14 +74,17 @@ public class Application {
                 Logger.printException(e);
             }
 
-            SplashScreen.updateStatus(0.3f);
-            Logger.debug("Init shaders", "LokEngine_start");
-            try {
-                shadersInit();
-            } catch (Exception e) {
-                Logger.error("Fail load shaders!", "LokEngine_start");
-                Logger.printException(e);
-            }
+            SplashScreen.updateStatus(0.4f);
+            Logger.debug("Init OpenAL", "LokEngine_start");
+
+            String defaultDeviceName = ALC10.alcGetString(0, ALC10.ALC_DEFAULT_DEVICE_SPECIFIER);
+            openALDevice = alcOpenDevice(defaultDeviceName);
+            openALContext = ALC10.alcCreateContext(openALDevice, new int[]{0});
+            alcMakeContextCurrent(openALContext);
+
+            alcCapabilities = ALC.createCapabilities(openALDevice);
+            alCapabilities = AL.createCapabilities(alcCapabilities);
+
             SplashScreen.updateStatus(0.5f);
             Logger.debug("Call user init method", "LokEngine_start");
             try {
@@ -107,7 +96,7 @@ public class Application {
 
             Logger.debug("Init engine post processing action workers", "LokEngine_start");
 
-            runtimeFields.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
+            window.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
 
             SplashScreen.updateStatus(0.9f);
             Logger.debug("Turn in main while!", "LokEngine_start");
@@ -134,6 +123,10 @@ public class Application {
             Logger.printException(e);
         }
 
+        alcDestroyContext(openALContext);
+        alcCloseDevice(openALDevice);
+        glfwTerminate();
+
         try {
             Prefs.save();
         }catch (Exception e) {
@@ -154,20 +147,15 @@ public class Application {
             if (!isRun) break;
 
             try {
-                runtimeFields.update();
+                applicationRuntime.update();
             } catch (Exception e) {
                 Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
                 Logger.printException(e);
             }
 
-            runtimeFields.getScene().update();
+            window.getCamera().updateAudioListener();
 
-            try {
-                nextFrame();
-            } catch (Exception e) {
-                Logger.error("Fail build frame!", "LokEngine_runtime");
-                Logger.printException(e);
-            }
+            scene.update(applicationRuntime,window.getFrameBuilder().getScenePartsBuilder());
 
             window.update();
         }
@@ -183,7 +171,7 @@ public class Application {
             }
 
             try {
-                runtimeFields.update();
+                applicationRuntime.update();
             } catch (Exception e) {
                 Logger.warning("Fail update runtime fields!", "LokEngine_runtime");
                 Logger.printException(e);
@@ -191,36 +179,8 @@ public class Application {
 
             if (!isRun) break;
 
-            runtimeFields.getScene().update();
+            scene.update(applicationRuntime,null);
         }
-    }
-
-    private void shadersInit() throws Exception {
-        defaultFields.defaultShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
-        defaultFields.unknownTexture = TextureLoader.loadTexture("#/resources/textures/unknown.png");
-        defaultFields.displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
-        defaultFields.postProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
-        defaultFields.particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
-
-        Shader.use(defaultFields.postProcessingShader);
-        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-
-        Shader.use(defaultFields.displayShader);
-        glUniform2f(glGetUniformLocation(Shader.currentShader.program, "screenSize"), window.getResolution().x, window.getResolution().y);
-        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-
-        Shader.use(defaultFields.particlesShader);
-        MatrixCreator.PutMatrixInShader(defaultFields.particlesShader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(0,new Vector3f(0,0,0)));
-
-        Shader.use(defaultFields.defaultShader);
-        window.getCamera().setFieldOfView(1);
-    }
-
-    private void nextFrame(){
-        GL.createCapabilities();
-        Shader.use(defaultFields.defaultShader);
-        window.getCamera().updateView();
-        runtimeFields.getFrameBuilder().build(RuntimeFields.getCanvas());
     }
 
     public void startConsole() {
@@ -231,8 +191,8 @@ public class Application {
             Logger.printException(e);
         }
         try {
-            Logger.debug("Init runtime fields (Scene)", "LokEngine_start");
-            runtimeFields.init(null, new Scene(), null);
+            Logger.debug("Init Scene", "LokEngine_start");
+            scene = new Scene();
             Logger.debug("Call user init method", "LokEngine_start");
             try {
                 Init();

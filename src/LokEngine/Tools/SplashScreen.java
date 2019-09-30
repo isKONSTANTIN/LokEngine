@@ -6,6 +6,8 @@ import LokEngine.Render.Window;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+
 public class SplashScreen {
 
     private static GUIImageFramePart framePart;
@@ -31,7 +33,7 @@ public class SplashScreen {
         window.setDrawMode(DrawMode.RawGUI);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        framePart.partRender();
+        framePart.partRender(null);
 
         if (percentage > 0) {
             GL11.glBegin(GL11.GL_QUADS);
@@ -54,7 +56,7 @@ public class SplashScreen {
 
             GL11.glEnd();
         }
-        window.update();
+        glfwSwapBuffers(window.getId());
     }
 
 

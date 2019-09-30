@@ -1,6 +1,8 @@
 package LokEngine.Components;
 
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.SaveWorker.ArraySaver;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.SaveWorker.SubclassSaver;
@@ -20,9 +22,9 @@ public class ComponentList implements Saveable {
         return components.size();
     }
 
-    public void update(SceneObject source){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         for (Component component : components) {
-            component.update(source);
+            component.update(source,applicationRuntime, partsBuilder);
         }
     }
 

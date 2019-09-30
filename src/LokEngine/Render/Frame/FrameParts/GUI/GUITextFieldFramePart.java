@@ -1,6 +1,7 @@
 package LokEngine.Render.Frame.FrameParts.GUI;
 
 import LokEngine.Loaders.FontLoader;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Tools.Timer;
 import LokEngine.Tools.Utilities.Color;
 import org.lwjgl.opengl.GL11;
@@ -20,8 +21,8 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         timer.setDurationInSeconds(0.5f);
     }
 
-    public void partRender() {
-        super.partRender();
+    public void partRender(BuilderProperties builderProperties) {
+        super.partRender(builderProperties);
         if (timer.checkTime()){
             printSelecter = !printSelecter;
             timer.resetTimer();

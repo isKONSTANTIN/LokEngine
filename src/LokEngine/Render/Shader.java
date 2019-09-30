@@ -4,7 +4,6 @@ import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.Saveable;
-import org.lwjgl.opengl.ARBShaderObjects;
 
 public class Shader implements Saveable {
 
@@ -12,29 +11,17 @@ public class Shader implements Saveable {
     public String vertPath;
     public String fragPath;
 
+    public Shader(){}
+
     public Shader(int program, String vertPath, String fragPath){
         this.program = program;
         this.vertPath = vertPath;
         this.fragPath = fragPath;
     }
 
-    public static Shader currentShader;
-
-    public Shader(){ }
-
     public boolean equals(Object obj){
         Shader objs = (Shader)obj;
         return objs.program == program;
-    }
-
-    public static void use(Shader shader){
-        ARBShaderObjects.glUseProgramObjectARB(shader.program);
-        currentShader = shader;
-    }
-
-    public static void unUse(){
-        ARBShaderObjects.glUseProgramObjectARB(0);
-        currentShader = null;
     }
 
     @Override

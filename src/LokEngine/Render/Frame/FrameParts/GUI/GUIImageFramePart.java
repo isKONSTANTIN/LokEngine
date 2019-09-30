@@ -2,6 +2,7 @@ package LokEngine.Render.Frame.FrameParts.GUI;
 
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Enums.FramePartType;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Texture;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -31,7 +32,7 @@ public class GUIImageFramePart extends FramePart {
     }
 
     @Override
-    public void partRender(){
+    public void partRender(BuilderProperties builderProperties){
         if (texture != null){
             glBindTexture(GL_TEXTURE_2D,texture.buffer);
             glBegin(GL_POLYGON);

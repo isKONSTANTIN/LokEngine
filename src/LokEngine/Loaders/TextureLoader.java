@@ -1,7 +1,6 @@
 package LokEngine.Loaders;
 
 import LokEngine.Render.Texture;
-import LokEngine.Tools.DefaultFields;
 import org.lwjgl.BufferUtils;
 
 import javax.imageio.ImageIO;
@@ -67,7 +66,7 @@ public class TextureLoader {
             image = (BufferedImage)imageData[1];
 
         } catch (IOException e) {
-            return new Texture(DefaultFields.unknownTexture.buffer,DefaultFields.unknownTexture.sizeX,DefaultFields.unknownTexture.sizeY,path);
+            return new Texture(-1,100,100,path);
         }
 
         int textureID = glGenTextures();

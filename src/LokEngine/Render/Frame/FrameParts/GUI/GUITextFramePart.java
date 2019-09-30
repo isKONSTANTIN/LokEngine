@@ -1,8 +1,9 @@
 package LokEngine.Render.Frame.FrameParts.GUI;
 
-import LokEngine.Tools.Text.Font;
 import LokEngine.Render.Enums.FramePartType;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
+import LokEngine.Tools.Text.Font;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -28,7 +29,7 @@ public class GUITextFramePart extends FramePart {
     }
 
     @Override
-    public void partRender() {
+    public void partRender(BuilderProperties builderProperties) {
         font.drawText(text, position.x, position.y, color);
     }
 }

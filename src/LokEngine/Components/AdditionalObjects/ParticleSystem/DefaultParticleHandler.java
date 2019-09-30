@@ -1,15 +1,15 @@
 package LokEngine.Components.AdditionalObjects.ParticleSystem;
 
 import LokEngine.Components.ParticleSystemComponent;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.ApplicationRuntime;
 
 public class DefaultParticleHandler implements ParticleHandler{
     @Override
-    public Particle processParticle(Particle particle) {
+    public Particle processParticle(Particle particle, ApplicationRuntime applicationRuntime) {
 
-        particle.lifeTime -= RuntimeFields.getDeltaTime();
-        particle.positionX += particle.speedX * RuntimeFields.getDeltaTime();
-        particle.positionY += particle.speedY * RuntimeFields.getDeltaTime();
+        particle.lifeTime -= applicationRuntime.getDeltaTime();
+        particle.positionX += particle.speedX * applicationRuntime.getDeltaTime();
+        particle.positionY += particle.speedY * applicationRuntime.getDeltaTime();
         particle.size = particle.lifeTime / 600f;
 
         return particle.lifeTime <= 0 ? null : particle;

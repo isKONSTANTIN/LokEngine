@@ -1,7 +1,6 @@
 package LokEngine.Render;
 
 import LokEngine.Loaders.TextureLoader;
-import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.Saveable;
 
@@ -48,9 +47,9 @@ public class Texture implements Saveable {
         } catch (Exception e) {
             Logger.warning("Fail load texture!", "LokEngine_Texture");
 
-            this.buffer = DefaultFields.unknownTexture.buffer;
-            this.sizeX = DefaultFields.unknownTexture.sizeX;
-            this.sizeY = DefaultFields.unknownTexture.sizeY;
+            this.buffer = -1;
+            this.sizeX = 0;
+            this.sizeY = 0;
             this.path = savedString;
         }
 

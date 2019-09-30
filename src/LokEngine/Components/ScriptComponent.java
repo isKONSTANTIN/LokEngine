@@ -1,7 +1,9 @@
 package LokEngine.Components;
 
 import LokEngine.Components.AdditionalObjects.ScriptSceneObject;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.ApplicationRuntime;
 
 public class ScriptComponent extends Component{
 
@@ -13,11 +15,9 @@ public class ScriptComponent extends Component{
         this.script = script;
     }
 
-    public void update(SceneObject source){
+    @Override
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         if (script != null)
-            script.execute(source);
+            script.execute(source, applicationRuntime, partsBuilder);
     }
-
-
-
 }

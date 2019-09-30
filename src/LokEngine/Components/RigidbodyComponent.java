@@ -2,11 +2,12 @@ package LokEngine.Components;
 
 import LokEngine.Components.AdditionalObjects.Rigidbody.Rigidbody;
 import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.Shape;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.PostUpdateEvent;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.Base64.Base64;
 import LokEngine.Tools.MatrixCreator;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.SaveWorker.SubclassSaver;
 import org.jbox2d.common.Vec2;
@@ -28,7 +29,7 @@ public class RigidbodyComponent extends Component implements Saveable {
     }
 
     @Override
-    public void update(SceneObject source){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         if (!bodyInited){
             initBody(source,polygons);
             bodyInited = true;
@@ -56,7 +57,7 @@ public class RigidbodyComponent extends Component implements Saveable {
         bodyDef.angle = (float)MatrixCreator.DegressToRadians(object.rollRotation);
         bodyDef.type = body.isStatic ? BodyType.STATIC : BodyType.DYNAMIC;
 
-        Body body = RuntimeFields.getScene().b2World.createBody(bodyDef);
+        Body body = object.scene.b2World.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape.shape;

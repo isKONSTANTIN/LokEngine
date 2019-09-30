@@ -5,10 +5,10 @@ import LokEngine.Components.AdditionalObjects.ParticleSystem.Particle;
 import LokEngine.Components.AdditionalObjects.ParticleSystem.ParticleHandler;
 import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Render.Frame.FrameParts.ParticleSystemFramePart;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Render.Shader;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.ApplicationRuntime;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
@@ -37,11 +37,11 @@ public class ParticleSystemComponent extends Component {
     }
 
     public ParticleSystemComponent(Sprite spriteParticles, ParticleHandler particleHandler) {
-        this(spriteParticles, particleHandler, DefaultFields.particlesShader);
+        this(spriteParticles, particleHandler, null);
     }
 
     public ParticleSystemComponent(Sprite spriteParticles) {
-        this(spriteParticles, new DefaultParticleHandler(), DefaultFields.particlesShader);
+        this(spriteParticles, new DefaultParticleHandler(), null);
     }
 
     public void setParticleHandler(ParticleHandler handler){
@@ -55,7 +55,7 @@ public class ParticleSystemComponent extends Component {
     }
 
     @Override
-    public void update(SceneObject source){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         sourcePosition = source.position;
 
         ArrayList<Float> positions = new ArrayList<>();
@@ -64,7 +64,7 @@ public class ParticleSystemComponent extends Component {
         for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext();) {
             Particle particle = iter.next();
 
-            Particle updatedParticle = particleHandler.processParticle(particle);
+            Particle updatedParticle = particleHandler.processParticle(particle, applicationRuntime);
             if (updatedParticle != null){
                 positions.add(updatedParticle.positionX);
                 positions.add(updatedParticle.positionY);
@@ -77,7 +77,8 @@ public class ParticleSystemComponent extends Component {
         }
 
         framePart.update(positions, sizes);
-        RuntimeFields.getFrameBuilder().addPart(framePart);
+        if (partsBuilder != null)
+            partsBuilder.addPart(framePart);
     }
 
 }

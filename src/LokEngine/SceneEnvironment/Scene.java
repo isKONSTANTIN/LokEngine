@@ -1,7 +1,8 @@
 package LokEngine.SceneEnvironment;
 
+import LokEngine.Render.Frame.PartsBuilder;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.Base64.Base64;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.ArraySaver;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.jbox2d.common.Vec2;
@@ -10,7 +11,6 @@ import org.jbox2d.dynamics.World;
 import java.util.Vector;
 
 public class Scene implements Saveable {
-
     private Vector<SceneObject> objects = new Vector<>();
     private Vector<PostUpdateEvent> postUpdateEvents = new Vector<>();
     public World b2World;
@@ -38,11 +38,11 @@ public class Scene implements Saveable {
         postUpdateEvents.add(event);
     }
 
-    public void update(){
+    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         for (int i = 0; i < objects.size(); i++){
-            objects.get(i).update();
+            objects.get(i).update(applicationRuntime, partsBuilder);
         }
-        b2World.step(1 / 60f * RuntimeFields.getSpeedEngine() * Math.min(12,RuntimeFields.getDeltaTime()), physicsVelocityIterations, physicsPositionsIterations);
+        b2World.step(1 / 60f * applicationRuntime.getSpeedEngine() * Math.min(12, applicationRuntime.getDeltaTime()), physicsVelocityIterations, physicsPositionsIterations);
 
         for (int i = 0; i < postUpdateEvents.size(); i++){
             postUpdateEvents.get(i).postUpdate();

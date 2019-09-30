@@ -3,16 +3,15 @@ package LokEngine.Components;
 import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Frame.FrameParts.SpriteFramePart;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Render.Shader;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector4f;
 
 public class SpriteComponent extends Component implements Saveable {
 
-    private Sprite sprite;
     private SpriteFramePart framePart;
 
     @Override
@@ -23,70 +22,49 @@ public class SpriteComponent extends Component implements Saveable {
     public SpriteComponent(){}
 
     public SpriteComponent(String path){
-        sprite = SpriteLoader.loadSprite(path);
-        framePart = new SpriteFramePart(sprite);
+        this(path,null);
     }
 
     public Sprite getSprite(){
-        return sprite;
+        return framePart.sprite;
     }
 
     public void setSprite(Sprite sprite){
-        this.sprite = sprite;
         framePart.sprite = sprite;
     }
 
     public void setSprite(String path){
-        sprite = SpriteLoader.loadSprite(path);
-
-        if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
-            sprite.size = 100;
-        }
-
-        framePart.sprite = sprite;
+        framePart.sprite = SpriteLoader.loadSprite(path);
     }
 
-    public SpriteComponent(String path, Shader customShader){
-        sprite = SpriteLoader.loadSprite(path,1, customShader);
-
-        if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
-            sprite.size = 100;
-        }
-
-        framePart = new SpriteFramePart(sprite);
+    public SpriteComponent(String path, Shader shader){
+        this(SpriteLoader.loadSprite(path,1),shader);
     }
 
     public SpriteComponent(Sprite sprite){
-        if (sprite != null){
-            this.sprite = sprite;
+        framePart = new SpriteFramePart(sprite, null);
+    }
 
-            if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
-                sprite.size = 100;
-            }
-        }
-        framePart = new SpriteFramePart(sprite);
+    public SpriteComponent(Sprite sprite, Shader shader){
+        framePart = new SpriteFramePart(sprite, shader);
     }
 
     @Override
-    public void update(SceneObject source){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         framePart.position = new Vector4f(source.position.x,source.position.y,source.renderPriority,source.rollRotation);
-        RuntimeFields.getFrameBuilder().addPart(framePart);
+        if (partsBuilder != null)
+            partsBuilder.addPart(framePart);
     }
 
     @Override
     public String save() {
-        return sprite.save();
+        return framePart.sprite.save();
     }
 
     @Override
     public Saveable load(String savedString) {
         SpriteComponent loadedSpriteComponent = new SpriteComponent((Sprite)new Sprite().load(savedString));
-
         this.framePart = loadedSpriteComponent.framePart;
-        this.sprite = loadedSpriteComponent.sprite;
-        if (sprite.texture.buffer == DefaultFields.unknownTexture.buffer){
-            sprite.size = 100;
-        }
         return this;
     }
 }

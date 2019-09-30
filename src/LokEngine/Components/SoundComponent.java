@@ -2,7 +2,9 @@ package LokEngine.Components;
 
 import LokEngine.Components.AdditionalObjects.Sound;
 import LokEngine.Loaders.SoundLoader;
+import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.Utilities.SoundType;
 import org.lwjgl.openal.AL10;
@@ -65,7 +67,7 @@ public class SoundComponent extends Component  implements Saveable {
     }
 
     @Override
-    public void update(SceneObject source){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
         AL10.alSource3f(this.source,AL10.AL_POSITION,source.position.x,source.position.y,0);
     }
 

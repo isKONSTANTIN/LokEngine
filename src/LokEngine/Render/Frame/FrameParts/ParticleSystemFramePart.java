@@ -1,28 +1,18 @@
 package LokEngine.Render.Frame.FrameParts;
 
-import LokEngine.Components.AdditionalObjects.ParticleSystem.Particle;
 import LokEngine.Components.AdditionalObjects.Sprite;
 import LokEngine.Loaders.BufferLoader;
-import LokEngine.Loaders.ShaderLoader;
-import LokEngine.Render.Camera;
 import LokEngine.Render.Enums.FramePartType;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Shader;
-import LokEngine.Render.Texture;
-import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.Logger;
-import LokEngine.Tools.MatrixCreator;
-import LokEngine.Tools.RuntimeFields;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.util.vector.Vector3f;
 
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL31.glDrawArraysInstanced;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
@@ -59,12 +49,11 @@ public class ParticleSystemFramePart extends FramePart {
     }
 
     @Override
-    public void partRender() {
+    public void partRender(BuilderProperties builderProperties) {
         if (count > 0) {
-            if (!Shader.currentShader.equals(shader)){
-                Shader.use(shader);
+            if (!builderProperties.getActiveShader().equals(shader)){
+                builderProperties.useShader(shader);
             }
-            RuntimeFields.getFrameBuilder().window.getCamera().updateView();
 
             glEnableVertexAttribArray(0);
             glBindBuffer(GL_ARRAY_BUFFER, sourceSprite.vertexBuffer);
@@ -78,7 +67,7 @@ public class ParticleSystemFramePart extends FramePart {
             glVertexAttribDivisor(0, 0);
 
             glEnableVertexAttribArray(1);
-            glBindBuffer(GL_ARRAY_BUFFER, sourceSprite.uvBuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, builderProperties.getUVBuffer());
             glVertexAttribPointer(
                     1,
                     2,

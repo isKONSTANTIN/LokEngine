@@ -4,7 +4,7 @@ import LokEngine.Loaders.BufferLoader;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Texture;
 import LokEngine.Tools.Base64.Base64;
-import LokEngine.Tools.DefaultFields;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -40,7 +40,8 @@ public class Animation implements Saveable {
         try {
             altasTexture = TextureLoader.loadTexture(atlasPath);
         } catch (Exception e) {
-            altasTexture = DefaultFields.unknownTexture;
+            Logger.warning("Fail load atlas from path!", "LokEngine_Animation");
+            return;
         }
         this.atlasPositions = atlasPositions;
         uvBuffers = atlasPositions.build(altasTexture);

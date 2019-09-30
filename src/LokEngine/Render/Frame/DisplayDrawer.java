@@ -1,9 +1,7 @@
 package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
-import LokEngine.Render.Shader;
 import LokEngine.Render.Window;
-import LokEngine.Tools.DefaultFields;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -13,63 +11,63 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.glBindBuffer;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 public class DisplayDrawer {
 
-    public static void bindTexture(String uniformName, int textureBuffer, int index){
-        glUniform1i(glGetUniformLocation(Shader.currentShader.program, uniformName), index);
+    public static void bindTexture(String uniformName, int textureBuffer, int index, BuilderProperties builderProperties){
+        glUniform1i(glGetUniformLocation(builderProperties.getActiveShader().program, uniformName), index);
 
         glActiveTexture(GL_TEXTURE0 + index);
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
     }
 
     public static int blurPostProcess(Window win, int postFrame, int originalFrame, FrameBufferWorker blurSceneFrameWorker1, FrameBufferWorker blurSceneFrameWorker2, FrameBufferWorker blurSceneFrameWorker3){
+        BuilderProperties builderProperties = win.getFrameBuilder().getBuilderProperties();
         blurSceneFrameWorker1.bindFrameBuffer();
         win.setDrawMode(DrawMode.Display);
-        Shader.use(DefaultFields.postProcessingShader);
-        DisplayDrawer.bindTexture("postFrame", postFrame,1);
+        builderProperties.useShader(builderProperties.getPostProcessingShader());
+        DisplayDrawer.bindTexture("postFrame", postFrame,1, builderProperties);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0, 1);
-        DisplayDrawer.renderScreen(originalFrame);
+        GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program,"direction"),0, 1);
+        DisplayDrawer.renderScreen(originalFrame, win);
 
         blurSceneFrameWorker1.unbindCurrentFrameBuffer();
         blurSceneFrameWorker2.bindFrameBuffer();
         win.setDrawMode(DrawMode.Display);
-        Shader.use(DefaultFields.postProcessingShader);
-        DisplayDrawer.bindTexture("postFrame", postFrame,1);
+        builderProperties.useShader(builderProperties.getPostProcessingShader());
+        DisplayDrawer.bindTexture("postFrame", postFrame,1, builderProperties);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0.866f / ((float)win.getResolution().x / (float)win.getResolution().y), 0.5f);
-        DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTexture());
+        GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program,"direction"),0.866f / ((float)win.getResolution().x / (float)win.getResolution().y), 0.5f);
+        DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTexture(), win);
 
         blurSceneFrameWorker2.unbindCurrentFrameBuffer();
         blurSceneFrameWorker3.bindFrameBuffer();
         win.setDrawMode(DrawMode.Display);
-        Shader.use(DefaultFields.postProcessingShader);
-        DisplayDrawer.bindTexture("postFrame", postFrame,1);
+        builderProperties.useShader(builderProperties.getPostProcessingShader());
+        DisplayDrawer.bindTexture("postFrame", postFrame,1, builderProperties);
         GL11.glClearColor(0,0,0,1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(Shader.currentShader.program,"direction"),0.866f / ((float)win.getResolution().x / (float)win.getResolution().y), -0.5f);
-        DisplayDrawer.renderScreen(blurSceneFrameWorker2.getTexture());
+        GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program,"direction"),0.866f / ((float)win.getResolution().x / (float)win.getResolution().y), -0.5f);
+        DisplayDrawer.renderScreen(blurSceneFrameWorker2.getTexture(), win);
 
         blurSceneFrameWorker3.unbindCurrentFrameBuffer();
 
         return blurSceneFrameWorker3.getTexture();
     }
 
-    public static void renderScreen(int frameTextureBuffer){
-        bindTexture("frame",frameTextureBuffer,0);
+    public static void renderScreen(int frameTextureBuffer, Window window){
+        bindTexture("frame",frameTextureBuffer,0, window.getFrameBuilder().getBuilderProperties());
 
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
-        glBindBuffer(GL_ARRAY_BUFFER, DefaultFields.defaultUVBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, window.getFrameBuilder().getBuilderProperties().getUVBuffer());
         glVertexAttribPointer(
                 1,
                 2,
@@ -79,7 +77,7 @@ public class DisplayDrawer {
                 0);
         glVertexAttribDivisor(1, 0);
 
-        glBindBuffer(GL_ARRAY_BUFFER, DefaultFields.defaultVertexScreenBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, window.getFrameBuilder().getBuilderProperties().getVertexScreenBuffer());
         glVertexAttribPointer(
                 0,
                 2,

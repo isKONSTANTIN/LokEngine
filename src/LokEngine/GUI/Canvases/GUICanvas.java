@@ -4,7 +4,6 @@ import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Render.Frame.FrameParts.GUI.GUICanvasFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -19,11 +18,7 @@ public class GUICanvas extends GUIObject {
 
     public GUICanvas(Vector2i position, Vector2i size) {
         super(position, size);
-        if (RuntimeFields.getFrameBuilder() == null){
-            partsBuilder = new PartsBuilder(size);
-        }else {
-            partsBuilder = new PartsBuilder(RuntimeFields.getFrameBuilder().window.getResolution());
-        }
+        partsBuilder = new PartsBuilder();
         framePart = new GUICanvasFramePart(partsBuilder, position, size);
         myProperties = new GUIObjectProperties(position,size,null);
     }

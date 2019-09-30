@@ -1,13 +1,11 @@
 package LokEngine.Loaders;
 
 import LokEngine.Components.AdditionalObjects.Sprite;
-import LokEngine.Render.Shader;
 import LokEngine.Render.Texture;
-import LokEngine.Tools.DefaultFields;
 
 public class SpriteLoader {
 
-    public static Sprite loadSprite(Texture texture, float vertexSize, Shader shader){
+    public static Sprite loadSprite(Texture texture, float vertexSize){
         int vertexBuffer = BufferLoader.load(new float[]
                 {
                         -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
@@ -17,10 +15,10 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(texture,vertexBuffer,DefaultFields.defaultUVBuffer,1, vertexSize, shader);
+        return new Sprite(texture,vertexBuffer,1, vertexSize);
     }
 
-    public static Sprite loadSprite(String texturePath, float vertexSize, Shader shader) {
+    public static Sprite loadSprite(String texturePath, float vertexSize) {
         Texture tex = TextureLoader.loadTexture(texturePath);
 
         int vertexBuffer = BufferLoader.load(new float[]
@@ -32,15 +30,11 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(tex,vertexBuffer,DefaultFields.defaultUVBuffer,1, vertexSize, shader);
-    }
-
-    public static Sprite loadSprite(String texturePath, float vertexSize){
-        return SpriteLoader.loadSprite(texturePath, vertexSize, DefaultFields.defaultShader);
+        return new Sprite(tex,vertexBuffer,1, vertexSize);
     }
 
     public static Sprite loadSprite(String texturePath) {
-        return SpriteLoader.loadSprite(texturePath, 1, DefaultFields.defaultShader);
+        return SpriteLoader.loadSprite(texturePath, 1);
     }
 
 }

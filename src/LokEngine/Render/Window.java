@@ -1,15 +1,15 @@
 package LokEngine.Render;
 
+import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Enums.DrawMode;
-import LokEngine.Tools.DefaultFields;
+import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.Tools.Input.Keyboard;
-import LokEngine.Tools.Logger;
 import LokEngine.Tools.Input.Mouse;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.openal.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL30;
 
@@ -17,28 +17,24 @@ import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
 import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class Window {
-
     private Camera camera;
-    private Vector2i resolution;
-    private boolean fullscreen = false;
-    private boolean isOpened = false;
-    private String title;
-    private long id;
+    private GUICanvas canvas;
+    private FrameBuilder frameBuilder;
 
     private Keyboard keyboard;
     private Mouse mouse;
 
-    private long openALDevice;
-    private long openALContext;
-    ALCCapabilities alcCapabilities;
-    ALCapabilities alCapabilities;
+    private Vector2i resolution;
+    private String title;
+    private long id;
+    private boolean fullscreen = false;
+    private boolean isOpened = false;
 
     public boolean isFullscreen() {
         return fullscreen;
@@ -53,6 +49,8 @@ public class Window {
         return camera;
     }
     public String getTitle() { return title; }
+    public GUICanvas getCanvas(){ return canvas; }
+    public FrameBuilder getFrameBuilder() {return frameBuilder;}
 
     public void setTitle(String title) {
         this.title = title;
@@ -64,7 +62,7 @@ public class Window {
     public Keyboard getKeyboard(){ return keyboard; }
     public Mouse getMouse(){ return mouse; }
 
-    public void open(boolean fullscreen, boolean vSync, Vector2i resolution) {
+    public void open(boolean fullscreen, boolean vSync, Vector2i resolution, String[] pathsWindowIcon) {
         if (!isOpened) {
             this.fullscreen = fullscreen;
 
@@ -88,7 +86,7 @@ public class Window {
 
             glfwMakeContextCurrent(id);
             GL.createCapabilities();
-            this.setIcon(DefaultFields.pathsWindowIcon);
+            this.setIcon(pathsWindowIcon);
 
             glfwSwapInterval(vSync ? 1 : 0);
             glfwShowWindow(id);
@@ -98,30 +96,48 @@ public class Window {
             GL30.glBindVertexArray(GL30.glGenVertexArrays());
 
             isOpened = true;
-            camera = new Camera();
+            camera = new Camera(this);
             keyboard = new Keyboard(this);
             mouse = new Mouse(this);
-            String defaultDeviceName = ALC10.alcGetString(0, ALC10.ALC_DEFAULT_DEVICE_SPECIFIER);
-            openALDevice = alcOpenDevice(defaultDeviceName);
-            openALContext = ALC10.alcCreateContext(openALDevice, new int[]{0});
-            alcMakeContextCurrent(openALContext);
+            canvas = new GUICanvas(new Vector2i(), resolution);
+            canvas.properties.window = this;
 
-            alcCapabilities = ALC.createCapabilities(openALDevice);
-            alCapabilities = AL.createCapabilities(alcCapabilities);
+            try {
+                frameBuilder = new FrameBuilder(this);
+                frameBuilder.getBuilderProperties().init();
+            } catch (Exception e) {
+                Logger.error("Fail init Frame Builder!", "LokEngine_Window");
+                Logger.printException(e);
+                return;
+            }
         }
+    }
+
+    public void open(boolean fullscreen, boolean vSync, Vector2i resolution) {
+        open(fullscreen, vSync, resolution,
+                new String[]{
+                "#/resources/textures/EngineIcon16.png",
+                "#/resources/textures/EngineIcon32.png",
+                "#/resources/textures/EngineIcon128.png"});
     }
 
     public void close() {
         glfwDestroyWindow(id);
-        alcDestroyContext(openALContext);
-        alcCloseDevice(openALDevice);
         keyboard.close();
         isOpened = false;
     }
 
     public void update() {
-        if (isOpened){
-            glfwSwapBuffers(id);
+        if (isOpened) {
+
+            try {
+                frameBuilder.build();
+                glfwSwapBuffers(id);
+            } catch (Exception e) {
+                Logger.error("Fail build frame!", "LokEngine_Window");
+                Logger.printException(e);
+            }
+
             glfwPollEvents();
             mouse.update();
         }
@@ -165,10 +181,10 @@ public class Window {
             glEnable(GL_BLEND);
 
             if (dm == DrawMode.Display) {
-                Shader.use(DefaultFields.displayShader);
+                frameBuilder.getBuilderProperties().useShader(frameBuilder.getBuilderProperties().getDisplayShader());
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             } else {
-                Shader.unUse();
+                frameBuilder.getBuilderProperties().unUseShader();
                 glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             }
 
@@ -185,7 +201,7 @@ public class Window {
             glEnable(GL_ALPHA_TEST);
             glAlphaFunc(GL_GREATER, 0.1f);
 
-            Shader.use(DefaultFields.defaultShader);
+            frameBuilder.getBuilderProperties().useShader(frameBuilder.getBuilderProperties().getObjectShader());
         }
     }
 }
