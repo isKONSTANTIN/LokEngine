@@ -10,13 +10,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 public class ShaderLoader {
-
-    private static HashMap<String, Shader> loadedShaders = new HashMap<>();
 
     private static String getLogInfo(int obj) {
         return ARBShaderObjects.glGetInfoLogARB(obj, ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
@@ -103,10 +100,6 @@ public class ShaderLoader {
 
         String patches = vertPath + ":" + fragPath;
 
-        if (loadedShaders.containsKey(patches)){
-            return loadedShaders.get(patches);
-        }
-
         int vertShader = loadPartShader(vertPath, ARBVertexShader.GL_VERTEX_SHADER_ARB);
         int fragShader = loadPartShader(fragPath, ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
         int program = ARBShaderObjects.glCreateProgramObjectARB();
@@ -118,8 +111,6 @@ public class ShaderLoader {
         ARBShaderObjects.glValidateProgramARB(program);
 
         Shader newShader = new Shader(program, vertPath, fragPath);
-
-        loadedShaders.put(patches,newShader);
 
         return newShader;
     }

@@ -10,12 +10,13 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
+import static org.lwjgl.glfw.GLFW.glfwGetCurrentContext;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class TextureLoader {
 
-    private static HashMap<String, Texture> loadedTextures = new HashMap<>();
+    private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();
 
     public static void unloadTexture(Texture texture) {
         glDeleteTextures(texture.buffer);
@@ -52,8 +53,14 @@ public class TextureLoader {
     }
 
     public static Texture loadTexture(String path) {
-        if (loadedTextures.containsKey(path)) {
-            return loadedTextures.get(path);
+        long context = glfwGetCurrentContext();
+
+        if (!loadedTextures.containsKey(context)){
+            loadedTextures.put(context, new HashMap<>());
+        }
+
+        if (loadedTextures.get(context).containsKey(path)) {
+            return loadedTextures.get(context).get(path);
         }
 
         ByteBuffer textureBuffer = null;
@@ -81,7 +88,7 @@ public class TextureLoader {
 
         Texture texture = new Texture(textureID, image.getWidth(), image.getHeight(), path);
 
-        loadedTextures.put(path, texture);
+        loadedTextures.get(context).put(path, texture);
 
         return texture;
     }
