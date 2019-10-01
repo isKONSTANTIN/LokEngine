@@ -31,13 +31,16 @@ public class Font {
         int lineWidth = 0;
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
+            Glyph g = glyphs.get(c);
+            if (g == null) continue;
+            if (c == '\r') continue;
+
             if (c == '\n') {
                 width = Math.max(width, lineWidth);
                 lineWidth = 0;
                 continue;
             }
-            if (c == '\r') { continue; }
-            Glyph g = glyphs.get(c);
+
             lineWidth += g.width;
         }
         width = Math.max(width, lineWidth);
@@ -49,15 +52,15 @@ public class Font {
         int lineHeight = 0;
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
+            Glyph g = glyphs.get(c);
+            if (g == null) continue;
+            if (c == '\r') continue;
             if (c == '\n') {
                 height += lineHeight;
                 lineHeight = 0;
                 continue;
             }
-            if (c == '\r') {
-                continue;
-            }
-            Glyph g = glyphs.get(c);
+
             lineHeight = Math.max(lineHeight, g.height);
         }
         height += lineHeight;
