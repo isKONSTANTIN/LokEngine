@@ -20,7 +20,7 @@ public class Font {
     public Texture getTexture(){ return texture; }
     public int getFontHeight() {return fontHeight;}
 
-    public Font(Texture texture,  HashMap<Character, Glyph> glyphs, int fontHeight) {
+    public Font(Texture texture, HashMap<Character, Glyph> glyphs, int fontHeight) {
         this.texture = texture;
         this.glyphs = glyphs;
         this.fontHeight = fontHeight;
