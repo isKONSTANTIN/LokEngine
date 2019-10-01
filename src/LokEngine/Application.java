@@ -43,7 +43,6 @@ public class Application {
 
             try {
                 window.open(windowFullscreen, vSync, windowResolution);
-                window.setTitle(windowTitle);
             } catch (Exception e) {
                 Logger.error("Fail open window!", "LokEngine_start");
                 Logger.printException(e);
