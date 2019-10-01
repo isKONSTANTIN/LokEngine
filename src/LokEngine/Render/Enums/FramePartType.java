@@ -1,6 +1,6 @@
 package LokEngine.Render.Enums;
 
-public enum FramePartType{
+public enum FramePartType {
     Scene(0, DrawMode.Scene),
     GUI(1, DrawMode.Display);
 
@@ -16,7 +16,7 @@ public enum FramePartType{
         return index;
     }
 
-    public DrawMode drawMode(){
+    public DrawMode drawMode() {
         return drawMode;
     }
 }

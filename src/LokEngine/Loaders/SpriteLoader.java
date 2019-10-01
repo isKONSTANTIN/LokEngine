@@ -5,7 +5,7 @@ import LokEngine.Render.Texture;
 
 public class SpriteLoader {
 
-    public static Sprite loadSprite(Texture texture, float vertexSize){
+    public static Sprite loadSprite(Texture texture, float vertexSize) {
         int vertexBuffer = BufferLoader.load(new float[]
                 {
                         -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
@@ -15,7 +15,7 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(texture,vertexBuffer,1, vertexSize);
+        return new Sprite(texture, vertexBuffer, 1, vertexSize);
     }
 
     public static Sprite loadSprite(String texturePath, float vertexSize) {
@@ -30,7 +30,7 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(tex,vertexBuffer,1, vertexSize);
+        return new Sprite(tex, vertexBuffer, 1, vertexSize);
     }
 
     public static Sprite loadSprite(String texturePath) {

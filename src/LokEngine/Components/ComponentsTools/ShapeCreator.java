@@ -16,7 +16,7 @@ public class ShapeCreator {
         Vec2[] b2Points = new Vec2[length];
 
         for (int i = 0; i < length; i++) {
-            b2Points[i] = new Vec2((collidePoints[i].x - 3.55f) * 0.005f,(collidePoints[i].y - 3.55f) * 0.005f);
+            b2Points[i] = new Vec2((collidePoints[i].x - 3.55f) * 0.005f, (collidePoints[i].y - 3.55f) * 0.005f);
         }
 
         polyShape.set(b2Points, length);

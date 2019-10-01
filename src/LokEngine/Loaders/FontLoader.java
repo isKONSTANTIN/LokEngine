@@ -20,21 +20,21 @@ public class FontLoader {
 
     private static HashMap<Long, HashMap<java.awt.Font, Font>> createdFonts = new HashMap<>();
 
-    public static Font createFont(java.awt.Font font, boolean antiAlias, String additionalSymbols){
+    public static Font createFont(java.awt.Font font, boolean antiAlias, String additionalSymbols) {
         String russianAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         String symbols = russianAlphabet.toUpperCase() + russianAlphabet + additionalSymbols;
 
-        return createBasicFont(font,antiAlias, symbols);
+        return createBasicFont(font, antiAlias, symbols);
     }
 
-    public static Font createFont(java.awt.Font font, boolean antiAlias){
-        return createFont(font,antiAlias, "");
+    public static Font createFont(java.awt.Font font, boolean antiAlias) {
+        return createFont(font, antiAlias, "");
     }
 
     public static Font createBasicFont(java.awt.Font font, boolean antiAlias, String symbols) {
         long context = glfwGetCurrentContext();
 
-        if (!createdFonts.containsKey(context)){
+        if (!createdFonts.containsKey(context)) {
             createdFonts.put(context, new HashMap<>());
         }
 
@@ -48,8 +48,10 @@ public class FontLoader {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 32; i < 256; i++) {
-            if (i == 127) { continue; }
-            stringBuilder.append((char)i);
+            if (i == 127) {
+                continue;
+            }
+            stringBuilder.append((char) i);
         }
 
         symbols = stringBuilder.append(symbols).toString();
@@ -60,9 +62,13 @@ public class FontLoader {
         int imageHeight = 0;
 
         for (char c : chars) {
-            if (c == 127) { continue; }
+            if (c == 127) {
+                continue;
+            }
             BufferedImage ch = createCharImage(font, c, antiAlias);
-            if (ch == null) { continue; }
+            if (ch == null) {
+                continue;
+            }
 
             bufferedImages.put(c, ch);
             imageWidth += ch.getWidth();
@@ -74,7 +80,9 @@ public class FontLoader {
         int x = 0;
 
         for (char c : chars) {
-            if (c == 127) { continue; }
+            if (c == 127) {
+                continue;
+            }
             if (!bufferedImages.containsKey(c)) continue;
 
             BufferedImage charImage = bufferedImages.get(c);
@@ -120,8 +128,8 @@ public class FontLoader {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        Font loadedFont = new Font(new Texture(textureID, width, height,null), glyphs, imageHeight);
-        createdFonts.get(context).put(font,loadedFont);
+        Font loadedFont = new Font(new Texture(textureID, width, height, null), glyphs, imageHeight);
+        createdFonts.get(context).put(font, loadedFont);
 
         return loadedFont;
     }

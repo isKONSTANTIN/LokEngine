@@ -14,20 +14,21 @@ public class PartsBuilder {
 
     FrameBufferWorker frameBufferWorker;
     public Vector2i resolution;
-    public Color clearColor = new Color(0,0,0,0);
+    public Color clearColor = new Color(0, 0, 0, 0);
     Vector<FramePart> frameParts = new Vector<>();
 
     public void addPart(FramePart fp) {
         frameParts.add(fp);
     }
 
-    public PartsBuilder(){}
+    public PartsBuilder() {
+    }
 
-    public PartsBuilder(Vector2i resolution){
+    public PartsBuilder(Vector2i resolution) {
         setResolution(resolution);
     }
 
-    public void setResolution(Vector2i resolution){
+    public void setResolution(Vector2i resolution) {
         this.resolution = resolution;
         if (frameBufferWorker != null)
             frameBufferWorker.cleanUp();
@@ -35,8 +36,8 @@ public class PartsBuilder {
         frameBufferWorker = new FrameBufferWorker(resolution);
     }
 
-    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties){
-        if (frameBufferWorker == null){
+    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties) {
+        if (frameBufferWorker == null) {
             frameBufferWorker = new FrameBufferWorker(builderProperties.getBuilderWindow().getResolution());
             resolution = builderProperties.getBuilderWindow().getResolution();
         }
@@ -48,7 +49,7 @@ public class PartsBuilder {
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        for (FramePart framePart : frameParts){
+        for (FramePart framePart : frameParts) {
             framePart.partRender(builderProperties);
         }
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -57,7 +58,7 @@ public class PartsBuilder {
         return frameBufferWorker.getTexture();
     }
 
-    public int build(DrawMode drawMode, BuilderProperties builderProperties){
+    public int build(DrawMode drawMode, BuilderProperties builderProperties) {
         int result = build(frameParts, drawMode, builderProperties);
         frameParts.clear();
         return result;

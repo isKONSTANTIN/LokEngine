@@ -9,9 +9,10 @@ public class BoxShape extends Shape {
 
     public Vector2f collideSize;
 
-    public BoxShape(){}
+    public BoxShape() {
+    }
 
-    public BoxShape(Vector2f collideSize, org.jbox2d.collision.shapes.Shape shape){
+    public BoxShape(Vector2f collideSize, org.jbox2d.collision.shapes.Shape shape) {
         this.collideSize = collideSize;
         this.shape = shape;
     }

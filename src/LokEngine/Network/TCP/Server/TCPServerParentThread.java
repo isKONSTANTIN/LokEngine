@@ -24,12 +24,12 @@ public class TCPServerParentThread extends Thread {
     }
 
     @Override
-    public void run(){
-        while(true){
+    public void run() {
+        while (true) {
             try {
                 String messageFrom = TCPTools.getMessage(fromClient);
 
-                if (messageFrom != null){
+                if (messageFrom != null) {
                     String messageTo = handler.acceptMessage(messageFrom);
 
                     if (messageTo != null)
@@ -51,7 +51,7 @@ public class TCPServerParentThread extends Thread {
         handler.disconnected();
     }
 
-    public void close(){
+    public void close() {
         try {
             clientSocket.close();
             this.join();

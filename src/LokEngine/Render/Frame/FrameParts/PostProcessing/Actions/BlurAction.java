@@ -20,14 +20,14 @@ public class BlurAction extends PostProcessingAction {
     }
 
     @Override
-    public void apply(){
+    public void apply() {
         glBegin(GL_POLYGON);
 
-        glColor4d(blurTuning.strength / 10d,blurTuning.samples / 1000d, blurTuning.bokeh,1);
-        glVertex3f(position.x,position.y,0);
-        glVertex3f(size.x + position.x,position.y,0);
-        glVertex3f(size.x + position.x,size.y + position.y,0);
-        glVertex3f(position.x,size.y + position.y,0);
+        glColor4d(blurTuning.strength / 10d, blurTuning.samples / 1000d, blurTuning.bokeh, 1);
+        glVertex3f(position.x, position.y, 0);
+        glVertex3f(size.x + position.x, position.y, 0);
+        glVertex3f(size.x + position.x, size.y + position.y, 0);
+        glVertex3f(position.x, size.y + position.y, 0);
 
         glEnd();
     }

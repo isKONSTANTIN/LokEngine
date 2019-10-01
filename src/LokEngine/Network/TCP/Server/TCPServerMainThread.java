@@ -13,14 +13,14 @@ public class TCPServerMainThread extends Thread {
     private TCPServerHandler serverHandler;
     private ArrayList<TCPServerParentThread> clientThreads = new ArrayList<>();
 
-    public TCPServerMainThread(ServerSocket serverSocket, TCPServerHandler serverHandler){
+    public TCPServerMainThread(ServerSocket serverSocket, TCPServerHandler serverHandler) {
         this.serverSocket = serverSocket;
         this.serverHandler = serverHandler;
     }
 
     @Override
-    public void run(){
-        while (!Thread.interrupted()){
+    public void run() {
+        while (!Thread.interrupted()) {
             try {
                 Socket socket = serverSocket.accept();
 
@@ -44,8 +44,8 @@ public class TCPServerMainThread extends Thread {
         }
     }
 
-    public void close(){
-        for (TCPServerParentThread thread : clientThreads){
+    public void close() {
+        for (TCPServerParentThread thread : clientThreads) {
             thread.close();
         }
         try {

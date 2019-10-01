@@ -13,26 +13,26 @@ public class ComponentList implements Saveable {
 
     private ArrayList<Component> components = new ArrayList<>();
 
-    public int add(Component component){
+    public int add(Component component) {
         components.add(component);
-        return components.size()-1;
+        return components.size() - 1;
     }
 
-    public int getSize(){
+    public int getSize() {
         return components.size();
     }
 
-    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         for (Component component : components) {
-            component.update(source,applicationRuntime, partsBuilder);
+            component.update(source, applicationRuntime, partsBuilder);
         }
     }
 
-    public void remove(int id){
+    public void remove(int id) {
         components.remove(id);
     }
 
-    public void remove(String name){
+    public void remove(String name) {
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).getName().equals(name)) {
                 remove(i);
@@ -41,11 +41,11 @@ public class ComponentList implements Saveable {
         }
     }
 
-    public Component get(int id){
+    public Component get(int id) {
         return components.get(id);
     }
 
-    public Component get(String name){
+    public Component get(String name) {
         for (Component component : components) {
             if (component.getName().equals(name)) {
                 return component;
@@ -58,7 +58,7 @@ public class ComponentList implements Saveable {
     public String save() {
         ArraySaver arraySaver = new ArraySaver(SubclassSaver.class);
 
-        for (Component component : components){
+        for (Component component : components) {
             arraySaver.arrayList.add(new SubclassSaver(component));
         }
 
@@ -67,10 +67,10 @@ public class ComponentList implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        ArraySaver arraySaver = (ArraySaver)new ArraySaver(SubclassSaver.class).load(savedString);
+        ArraySaver arraySaver = (ArraySaver) new ArraySaver(SubclassSaver.class).load(savedString);
 
-        for (Saveable loadedComponent : arraySaver.arrayList){
-            components.add((Component)((SubclassSaver)loadedComponent).saveableObject);
+        for (Saveable loadedComponent : arraySaver.arrayList) {
+            components.add((Component) ((SubclassSaver) loadedComponent).saveableObject);
         }
 
         return this;

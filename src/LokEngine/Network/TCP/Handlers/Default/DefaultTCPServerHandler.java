@@ -16,12 +16,12 @@ public class DefaultTCPServerHandler extends SimpleTCPServerHandler {
         this.userID = userID;
     }
 
-    private String getPublicData(String name){
+    private String getPublicData(String name) {
         return publicData.containsKey(name) ? publicData.get(name) : errorHeadName;
     }
 
-    private String runMethod(String name, String[] args){
-        if (methods.containsKey(name)){
+    private String runMethod(String name, String[] args) {
+        if (methods.containsKey(name)) {
             return methods.get(name).execute(args);
         }
         return errorHeadName;
@@ -33,9 +33,9 @@ public class DefaultTCPServerHandler extends SimpleTCPServerHandler {
         String returnMessage = errorHeadName;
         String head = lines[0];
 
-        if (head.equals(publicDataHeadName)){
+        if (head.equals(publicDataHeadName)) {
             returnMessage = getPublicData(lines[1]);
-        }else if (head.equals(runServerMethodHeadName)){
+        } else if (head.equals(runServerMethodHeadName)) {
             returnMessage = runMethod(lines[1], lines.length >= 3 ? lines[2].split(";") : new String[0]);
         }
 

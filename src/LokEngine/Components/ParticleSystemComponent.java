@@ -22,12 +22,12 @@ public class ParticleSystemComponent extends Component {
 
     private Vector2f sourcePosition = new Vector2f();
 
-    public Vector2f getSourcePosition(){
+    public Vector2f getSourcePosition() {
         return new Vector2f(sourcePosition.x, sourcePosition.y);
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return "Particle System Component";
     }
 
@@ -44,35 +44,37 @@ public class ParticleSystemComponent extends Component {
         this(spriteParticles, new DefaultParticleHandler(), null);
     }
 
-    public void setParticleHandler(ParticleHandler handler){
+    public void setParticleHandler(ParticleHandler handler) {
         this.particleHandler = handler;
     }
 
-    public void setParticlesSprite(Sprite particlesSprite){ framePart.setSourceSprite(particlesSprite); }
+    public void setParticlesSprite(Sprite particlesSprite) {
+        framePart.setSourceSprite(particlesSprite);
+    }
 
-    public void genNewParticle(){
+    public void genNewParticle() {
         particlesList.add(particleHandler.createNewParticle(this));
     }
 
     @Override
-    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         sourcePosition = source.position;
 
         ArrayList<Float> positions = new ArrayList<>();
         ArrayList<Float> sizes = new ArrayList<>();
 
-        for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext();) {
+        for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext(); ) {
             Particle particle = iter.next();
 
             Particle updatedParticle = particleHandler.processParticle(particle, applicationRuntime);
-            if (updatedParticle != null){
+            if (updatedParticle != null) {
                 positions.add(updatedParticle.positionX);
                 positions.add(updatedParticle.positionY);
                 sizes.add(updatedParticle.size);
             }
         }
 
-        if (sizes.size() == 0){
+        if (sizes.size() == 0) {
             particlesList.clear();
         }
 

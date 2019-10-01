@@ -14,9 +14,11 @@ public class BlurActionWorker extends PostProcessingActionWorker {
     private FrameBufferWorker blurSceneFrameWorker3;
     private Window window;
 
-    public String getName(){ return "Blur Action Worker"; }
+    public String getName() {
+        return "Blur Action Worker";
+    }
 
-    public BlurActionWorker(Window window){
+    public BlurActionWorker(Window window) {
         blurPostProcessingFrameWorker = new FrameBufferWorker(window.getResolution());
         blurSceneFrameWorker1 = new FrameBufferWorker(window.getResolution());
         blurSceneFrameWorker2 = new FrameBufferWorker(window.getResolution());
@@ -25,20 +27,20 @@ public class BlurActionWorker extends PostProcessingActionWorker {
     }
 
     @Override
-    public int render(int sourceFrame){
+    public int render(int sourceFrame) {
         blurPostProcessingFrameWorker.bindFrameBuffer();
 
         window.setDrawMode(DrawMode.RawGUI);
 
-        GL11.glClearColor(0,0,0,1);
+        GL11.glClearColor(0, 0, 0, 1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        for (int i = 0; i < postProcessingActions.size(); i++){
+        for (int i = 0; i < postProcessingActions.size(); i++) {
             postProcessingActions.get(i).apply();
         }
         postProcessingActions.clear();
         blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
 
-        return DisplayDrawer.blurPostProcess(window,blurPostProcessingFrameWorker.getTexture(),sourceFrame,blurSceneFrameWorker1,blurSceneFrameWorker2,blurSceneFrameWorker3);
+        return DisplayDrawer.blurPostProcess(window, blurPostProcessingFrameWorker.getTexture(), sourceFrame, blurSceneFrameWorker1, blurSceneFrameWorker2, blurSceneFrameWorker3);
     }
 }

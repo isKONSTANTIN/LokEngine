@@ -13,9 +13,9 @@ public class GUIListCanvas extends GUICanvas {
     }
 
     @Override
-    public int addObject(GUIObject object){
+    public int addObject(GUIObject object) {
 
-        if (sizeObjects.y * objects.size()+1 > this.getSize().y){
+        if (sizeObjects.y * objects.size() + 1 > this.getSize().y) {
             return -1;
         }
 
@@ -23,7 +23,7 @@ public class GUIListCanvas extends GUICanvas {
         object.setSize(sizeObjects);
 
         objects.add(object);
-        return objects.size()-1;
+        return objects.size() - 1;
     }
 
 }

@@ -14,28 +14,29 @@ public class Sprite implements Saveable {
 
     private float vertexSize;
 
-    public float getVertexSize(){
+    public float getVertexSize() {
         return vertexSize;
     }
 
-    public Sprite(){}
+    public Sprite() {
+    }
 
-    public Sprite(Texture texture, int vertexBuffer, float vertexSize){
+    public Sprite(Texture texture, int vertexBuffer, float vertexSize) {
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;
         this.size = 1;
         this.vertexSize = vertexSize;
     }
 
-    public Sprite(Texture texture, int vertexBuffer, double size, float vertexSize){
+    public Sprite(Texture texture, int vertexBuffer, double size, float vertexSize) {
         this.texture = texture;
         this.vertexBuffer = vertexBuffer;
         this.size = size;
         this.vertexSize = vertexSize;
     }
 
-    public boolean equals(Object obj){
-        Sprite objs = (Sprite)obj;
+    public boolean equals(Object obj) {
+        Sprite objs = (Sprite) obj;
         return objs.texture.equals(texture) &&
                 objs.vertexBuffer == vertexBuffer &&
                 objs.size == size;
@@ -52,7 +53,7 @@ public class Sprite implements Saveable {
         this.vertexSize = Float.valueOf(data[2]);
         this.size = Double.valueOf(data[1]);
 
-        Sprite loadedSprite = SpriteLoader.loadSprite((Texture)new Texture().load(data[0]), vertexSize);
+        Sprite loadedSprite = SpriteLoader.loadSprite((Texture) new Texture().load(data[0]), vertexSize);
         this.texture = loadedSprite.texture;
         this.vertexBuffer = loadedSprite.vertexBuffer;
         return this;

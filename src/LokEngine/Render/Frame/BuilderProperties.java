@@ -27,24 +27,48 @@ public class BuilderProperties {
     private int UVBuffer;
     private int vertexScreenBuffer;
 
-    public Shader getActiveShader(){return activeShader;}
+    public Shader getActiveShader() {
+        return activeShader;
+    }
 
-    public Shader getObjectShader(){ return objectShader; }
-    public Shader getDisplayShader(){ return displayShader; }
-    public Shader getPostProcessingShader(){ return postProcessingShader; }
-    public Shader getParticlesShader(){ return particlesShader; }
-    public Window getBuilderWindow(){ return window; }
-    public Texture getUnknownTexture(){ return unknownTexture; }
+    public Shader getObjectShader() {
+        return objectShader;
+    }
 
-    public int getUVBuffer(){ return UVBuffer; }
-    public int getVertexScreenBuffer(){ return vertexScreenBuffer; }
+    public Shader getDisplayShader() {
+        return displayShader;
+    }
 
-    public void useShader(Shader shader){
+    public Shader getPostProcessingShader() {
+        return postProcessingShader;
+    }
+
+    public Shader getParticlesShader() {
+        return particlesShader;
+    }
+
+    public Window getBuilderWindow() {
+        return window;
+    }
+
+    public Texture getUnknownTexture() {
+        return unknownTexture;
+    }
+
+    public int getUVBuffer() {
+        return UVBuffer;
+    }
+
+    public int getVertexScreenBuffer() {
+        return vertexScreenBuffer;
+    }
+
+    public void useShader(Shader shader) {
         ARBShaderObjects.glUseProgramObjectARB(shader.program);
         activeShader = shader;
     }
 
-    public void unUseShader(){
+    public void unUseShader() {
         ARBShaderObjects.glUseProgramObjectARB(0);
         activeShader = null;
     }
@@ -69,7 +93,7 @@ public class BuilderProperties {
         window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
 
         useShader(particlesShader);
-        MatrixCreator.PutMatrixInShader(particlesShader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(0,new Vector3f(0,0,0)));
+        MatrixCreator.PutMatrixInShader(particlesShader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(0, new Vector3f(0, 0, 0)));
 
         useShader(objectShader);
         window.getCamera().setFieldOfView(1);
@@ -78,11 +102,11 @@ public class BuilderProperties {
 
         vertexScreenBuffer = BufferLoader.load(new float[]{-windowResolution.x / 2, windowResolution.y / 2, -windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, -windowResolution.y / 2, windowResolution.x / 2, windowResolution.y / 2});
 
-        UVBuffer = BufferLoader.load(new float[] {
-                0,1,
-                0,0,
-                1,0,
-                1,1,
+        UVBuffer = BufferLoader.load(new float[]{
+                0, 1,
+                0, 0,
+                1, 0,
+                1, 1,
         });
     }
 

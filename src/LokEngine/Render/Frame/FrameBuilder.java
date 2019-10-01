@@ -9,16 +9,24 @@ import org.lwjgl.opengl.GL;
 import java.util.Vector;
 
 public class FrameBuilder {
-    public Color glSceneClearColor = new Color(0.6f,0.6f,0.6f, 1);
+    public Color glSceneClearColor = new Color(0.6f, 0.6f, 0.6f, 1);
 
     private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<PostProcessingActionWorker>();
     private PartsBuilder scenePartsBuilder;
     private PartsBuilder GUIPartsBuilder;
     private BuilderProperties builderProperties;
 
-    public PartsBuilder getScenePartsBuilder(){ return scenePartsBuilder; }
-    public PartsBuilder getGUIPartsBuilder(){ return GUIPartsBuilder; }
-    public BuilderProperties getBuilderProperties(){ return builderProperties; }
+    public PartsBuilder getScenePartsBuilder() {
+        return scenePartsBuilder;
+    }
+
+    public PartsBuilder getGUIPartsBuilder() {
+        return GUIPartsBuilder;
+    }
+
+    public BuilderProperties getBuilderProperties() {
+        return builderProperties;
+    }
 
     public FrameBuilder(Window currectWin) throws Exception {
         builderProperties = new BuilderProperties(currectWin);
@@ -27,9 +35,11 @@ public class FrameBuilder {
         GUIPartsBuilder = new PartsBuilder();
     }
 
-    public void addPostProcessingActionWorker(PostProcessingActionWorker worker){ postProcessingActionWorkers.add(worker); }
+    public void addPostProcessingActionWorker(PostProcessingActionWorker worker) {
+        postProcessingActionWorkers.add(worker);
+    }
 
-    public PostProcessingActionWorker getPostProcessingActionWorker(String name){
+    public PostProcessingActionWorker getPostProcessingActionWorker(String name) {
         for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
             if (postProcessingActionWorker.getName().equals(name)) {
                 return postProcessingActionWorker;
@@ -45,10 +55,10 @@ public class FrameBuilder {
 
         scenePartsBuilder.clearColor = glSceneClearColor;
 
-        int preDisplayFrame = scenePartsBuilder.build(DrawMode.Scene,builderProperties);
+        int preDisplayFrame = scenePartsBuilder.build(DrawMode.Scene, builderProperties);
 
         builderProperties.getBuilderWindow().getCanvas().update(GUIPartsBuilder, builderProperties.getBuilderWindow().getCanvas().properties);
-        int GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI,builderProperties);
+        int GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI, builderProperties);
 
         for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
             preDisplayFrame = postProcessingActionWorker.render(preDisplayFrame);

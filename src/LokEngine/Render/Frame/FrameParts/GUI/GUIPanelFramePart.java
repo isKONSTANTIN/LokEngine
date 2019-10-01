@@ -15,7 +15,7 @@ public class GUIPanelFramePart extends FramePart {
     public Color color;
 
     public GUIPanelFramePart(Vector2i position, Vector2i size) {
-        this(position,size,new Color(0.1f,0.1f,0.1f,0.6f));
+        this(position, size, new Color(0.1f, 0.1f, 0.1f, 0.6f));
     }
 
     public GUIPanelFramePart(Vector2i position, Vector2i size, Color color) {
@@ -30,10 +30,10 @@ public class GUIPanelFramePart extends FramePart {
         glBegin(GL_QUADS);
 
         glColor4f(color.red, color.green, color.blue, color.alpha);
-        glVertex3f(position.x,position.y,0);
-        glVertex3f(size.x + position.x,position.y,0);
-        glVertex3f(size.x + position.x,size.y + position.y,0);
-        glVertex3f(position.x,size.y + position.y,0);
+        glVertex3f(position.x, position.y, 0);
+        glVertex3f(size.x + position.x, position.y, 0);
+        glVertex3f(size.x + position.x, size.y + position.y, 0);
+        glVertex3f(position.x, size.y + position.y, 0);
 
         glEnd();
     }

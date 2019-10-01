@@ -1,6 +1,5 @@
 package LokEngine.Components.AdditionalObjects.ParticleSystem;
 
-import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.util.vector.Vector2f;
 
 public class Particle {
@@ -11,7 +10,7 @@ public class Particle {
     public float lifeTime;
     public float size;
 
-    public Particle(Vector2f position, float size, float lifeTime ){
+    public Particle(Vector2f position, float size, float lifeTime) {
         this.positionX = position.x;
         this.positionY = position.y;
         this.size = size;

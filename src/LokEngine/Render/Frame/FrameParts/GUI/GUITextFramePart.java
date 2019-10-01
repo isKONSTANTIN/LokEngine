@@ -21,10 +21,11 @@ public class GUITextFramePart extends FramePart {
         this.font = font;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return font.getHeight(text);
     }
-    public int getWidth(){
+
+    public int getWidth() {
         return font.getWidth(text);
     }
 

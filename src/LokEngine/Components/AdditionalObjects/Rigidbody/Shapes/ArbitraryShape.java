@@ -9,9 +9,10 @@ public class ArbitraryShape extends Shape {
 
     public Vector2f[] collidePoints;
 
-    public ArbitraryShape(){}
+    public ArbitraryShape() {
+    }
 
-    public ArbitraryShape(Vector2f[] collidePoints, org.jbox2d.collision.shapes.Shape shape){
+    public ArbitraryShape(Vector2f[] collidePoints, org.jbox2d.collision.shapes.Shape shape) {
         this.collidePoints = collidePoints;
         this.shape = shape;
     }
@@ -20,10 +21,10 @@ public class ArbitraryShape extends Shape {
     public String save() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Vector2f vector2f : collidePoints){
+        for (Vector2f vector2f : collidePoints) {
             stringBuilder.append(vector2f.x).append(":").append(vector2f.y).append("\n");
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 
         return Base64.toBase64(stringBuilder.toString());
     }
@@ -34,7 +35,7 @@ public class ArbitraryShape extends Shape {
 
         collidePoints = new Vector2f[lines.length];
 
-        for (int i = 0; i < lines.length; i++){
+        for (int i = 0; i < lines.length; i++) {
             String[] vectors = lines[i].split(":");
             collidePoints[i] = new Vector2f(Float.valueOf(vectors[0]), Float.valueOf(vectors[1]));
         }

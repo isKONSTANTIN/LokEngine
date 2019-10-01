@@ -16,9 +16,17 @@ public class Font {
     private Texture texture;
     private int fontHeight;
 
-    public HashMap<Character, Glyph> getGlyphs(){ return glyphs; }
-    public Texture getTexture(){ return texture; }
-    public int getFontHeight() {return fontHeight;}
+    public HashMap<Character, Glyph> getGlyphs() {
+        return glyphs;
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public int getFontHeight() {
+        return fontHeight;
+    }
 
     public Font(Texture texture, HashMap<Character, Glyph> glyphs, int fontHeight) {
         this.texture = texture;
@@ -88,7 +96,9 @@ public class Font {
                 drawX = x;
                 continue;
             }
-            if (ch == '\r') { continue; }
+            if (ch == '\r') {
+                continue;
+            }
             Glyph g = glyphs.get(ch);
 
             float width = drawX + g.width;
@@ -96,8 +106,8 @@ public class Font {
 
             float glTexX = g.x / (float) texture.sizeX;
             float glTexY = g.y / (float) texture.sizeY;
-            float glTexWidth = (g.x + g.width) / (float)texture.sizeX;
-            float glTexHeight = (g.y + g.height) / (float)texture.sizeY;
+            float glTexWidth = (g.x + g.width) / (float) texture.sizeX;
+            float glTexHeight = (g.y + g.height) / (float) texture.sizeY;
 
             glTexCoord2f(glTexX, glTexHeight);
             glVertex3f(drawX, drawY, 0);
@@ -118,7 +128,7 @@ public class Font {
     }
 
     public void drawText(String text, int x, int y) {
-        drawText(text, x, y, new Color(1,1,1,1));
+        drawText(text, x, y, new Color(1, 1, 1, 1));
     }
 
     public void dispose() {

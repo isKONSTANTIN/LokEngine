@@ -5,9 +5,10 @@ public class SubclassSaver implements Saveable {
     String className;
     public Saveable saveableObject;
 
-    public SubclassSaver(){}
+    public SubclassSaver() {
+    }
 
-    public SubclassSaver(Saveable saveableObject){
+    public SubclassSaver(Saveable saveableObject) {
         this.saveableObject = saveableObject;
         className = saveableObject.getClass().getName();
     }
@@ -22,9 +23,9 @@ public class SubclassSaver implements Saveable {
         String[] data = savedString.split(":");
 
         try {
-            saveableObject = ((Saveable)Class.forName(data[0]).newInstance());
+            saveableObject = ((Saveable) Class.forName(data[0]).newInstance());
 
-            if (data.length > 1){
+            if (data.length > 1) {
                 saveableObject.load(data[1]);
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

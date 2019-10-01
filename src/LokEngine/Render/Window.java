@@ -18,7 +18,6 @@ import java.nio.ByteBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.GL_MULTISAMPLE;
 import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
@@ -39,28 +38,47 @@ public class Window {
     public boolean isFullscreen() {
         return fullscreen;
     }
+
     public boolean isOpened() {
         return isOpened;
     }
+
     public Vector2i getResolution() {
         return resolution;
     }
+
     public Camera getCamera() {
         return camera;
     }
-    public String getTitle() { return title; }
-    public GUICanvas getCanvas(){ return canvas; }
-    public FrameBuilder getFrameBuilder() {return frameBuilder;}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public GUICanvas getCanvas() {
+        return canvas;
+    }
+
+    public FrameBuilder getFrameBuilder() {
+        return frameBuilder;
+    }
 
     public void setTitle(String title) {
         this.title = title;
-        glfwSetWindowTitle(id,title);
+        glfwSetWindowTitle(id, title);
     }
 
-    public long getId(){ return id; }
+    public long getId() {
+        return id;
+    }
 
-    public Keyboard getKeyboard(){ return keyboard; }
-    public Mouse getMouse(){ return mouse; }
+    public Keyboard getKeyboard() {
+        return keyboard;
+    }
+
+    public Mouse getMouse() {
+        return mouse;
+    }
 
     public void open(boolean fullscreen, boolean vSync, Vector2i resolution, String[] pathsWindowIcon) {
         if (!isOpened) {
@@ -68,7 +86,6 @@ public class Window {
 
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
             glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-            glfwWindowHint(GLFW_SAMPLES, 8);
 
             if (fullscreen) {
                 GLFWVidMode mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -79,7 +96,7 @@ public class Window {
 
             id = glfwCreateWindow(resolution.x, resolution.y, "LokEngine Application", fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
-            if (id == NULL){
+            if (id == NULL) {
                 Logger.error("Failed to create the window", "LokEngine_Window");
                 return;
             }
@@ -116,9 +133,9 @@ public class Window {
     public void open(boolean fullscreen, boolean vSync, Vector2i resolution) {
         open(fullscreen, vSync, resolution,
                 new String[]{
-                "#/resources/textures/EngineIcon16.png",
-                "#/resources/textures/EngineIcon32.png",
-                "#/resources/textures/EngineIcon128.png"});
+                        "#/resources/textures/EngineIcon16.png",
+                        "#/resources/textures/EngineIcon32.png",
+                        "#/resources/textures/EngineIcon128.png"});
     }
 
     public void close() {
@@ -143,16 +160,16 @@ public class Window {
         }
     }
 
-    public void setIcon(String[] paths){
+    public void setIcon(String[] paths) {
         GLFWImage.Buffer iconGB = GLFWImage.malloc(paths.length);
 
         for (String path : paths) {
             try {
                 Object[] image = TextureLoader.loadTextureInBuffer(path);
                 GLFWImage GLFWimage = GLFWImage.create().set(
-                        ((BufferedImage)image[1]).getWidth(),
+                        ((BufferedImage) image[1]).getWidth(),
                         ((BufferedImage) image[1]).getHeight(),
-                        (ByteBuffer)image[0]);
+                        (ByteBuffer) image[0]);
 
                 iconGB.put(GLFWimage);
             } catch (Exception e) {
@@ -162,7 +179,7 @@ public class Window {
         }
         iconGB.flip();
 
-        glfwSetWindowIcon(id,iconGB);
+        glfwSetWindowIcon(id, iconGB);
     }
 
     public void setDrawMode(DrawMode dm) {
@@ -176,7 +193,6 @@ public class Window {
             glLoadIdentity();
 
             glDisable(GL_DEPTH_TEST);
-            glDisable(GL_MULTISAMPLE);
             glEnable(GL_TEXTURE_2D);
             glEnable(GL_BLEND);
 

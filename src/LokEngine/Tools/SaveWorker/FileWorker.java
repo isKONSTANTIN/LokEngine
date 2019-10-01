@@ -14,46 +14,46 @@ public class FileWorker {
     FileWriter fileWriter;
     FileReader fileReader;
 
-    public static boolean fileExists(String filePath){
+    public static boolean fileExists(String filePath) {
         return new File(filePath).exists();
     }
 
-    public FileWorker(String filePath){
+    public FileWorker(String filePath) {
         file = new File(filePath);
         this.filePath = filePath;
     }
 
     public void write(String data) throws IOException {
-        if (fileWriter != null){
+        if (fileWriter != null) {
             fileWriter.write(data);
-        }else{
+        } else {
             throw new IOException("File not writable");
         }
     }
 
     public void flush() throws IOException {
-        if (fileWriter != null){
+        if (fileWriter != null) {
             fileWriter.flush();
-        }else{
+        } else {
             throw new IOException("File not writable");
         }
     }
 
     public String read() throws IOException {
-        if (fileReader != null){
+        if (fileReader != null) {
             Scanner scan = new Scanner(fileReader);
             StringBuilder stringBuilder = new StringBuilder();
             while (scan.hasNextLine()) {
                 stringBuilder.append(scan.nextLine()).append(scan.hasNextLine() ? "\n" : "");
             }
             return stringBuilder.toString();
-        }else{
+        } else {
             throw new IOException("File unreadable");
         }
     }
 
     public void openWrite() throws IOException {
-        if (fileReader != null){
+        if (fileReader != null) {
             fileReader.close();
             fileReader = null;
         }
@@ -62,22 +62,22 @@ public class FileWorker {
             if (!file.createNewFile())
                 throw new IOException("File does not exist and cannot be created!");
 
-        if (file.canWrite()){
+        if (file.canWrite()) {
             fileWriter = new FileWriter(file);
-        }else if (!file.canWrite()){
+        } else if (!file.canWrite()) {
             throw new IOException("File not writable");
         }
     }
 
     public void openRead() throws IOException {
-        if (fileWriter != null){
+        if (fileWriter != null) {
             fileWriter.close();
             fileWriter = null;
         }
 
-        if (file.canRead()){
+        if (file.canRead()) {
             fileReader = new FileReader(file);
-        }else if (!file.canRead()){
+        } else if (!file.canRead()) {
             throw new IOException("File unreadable");
         }
     }

@@ -9,9 +9,10 @@ public class Sound implements Saveable {
     public int buffer;
     public String path;
 
-    public Sound(){ }
+    public Sound() {
+    }
 
-    public Sound(String path, int buffer){
+    public Sound(String path, int buffer) {
         this.path = path;
         this.buffer = buffer;
     }

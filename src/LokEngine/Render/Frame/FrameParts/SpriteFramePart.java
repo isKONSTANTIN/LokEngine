@@ -18,7 +18,7 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 public class SpriteFramePart extends FramePart {
 
     public Sprite sprite;
-    public Vector4f position = new Vector4f(0,0,0,0);
+    public Vector4f position = new Vector4f(0, 0, 0, 0);
     public Shader shader;
 
     public SpriteFramePart(Sprite sprite, Shader shader) {
@@ -62,7 +62,7 @@ public class SpriteFramePart extends FramePart {
         glVertexAttribDivisor(1, 0);
         glUniform1f(glGetUniformLocation(shader.program, "ObjectSize"), (float) sprite.size * 2);
 
-        MatrixCreator.PutMatrixInShader(shader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(position.w,new Vector3f(position.x,position.y,position.z)));
+        MatrixCreator.PutMatrixInShader(shader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 

@@ -19,20 +19,20 @@ public class GUIGridCanvas extends GUICanvas {
     }
 
     public GUIGridCanvas(Vector2i position, Vector2i size) {
-        this(position, size, 2,2);
+        this(position, size, 2, 2);
     }
 
-    public void setColumnsAndLines(Vector2i columnsAndLines){
+    public void setColumnsAndLines(Vector2i columnsAndLines) {
         columns = columnsAndLines.x;
         lines = columnsAndLines.y;
 
-        for (int i = 0; i < objects.size(); i++){
+        for (int i = 0; i < objects.size(); i++) {
             updatePosition(i);
             updateSize(i);
         }
     }
 
-    public void setObjectsPos(int objectID, Vector2i newColumnAndLinePos){
+    public void setObjectsPos(int objectID, Vector2i newColumnAndLinePos) {
         Vector2i objectPos = objectsPos.get(objectID);
         objectPos.x = newColumnAndLinePos.x;
         objectPos.y = newColumnAndLinePos.y;
@@ -41,37 +41,37 @@ public class GUIGridCanvas extends GUICanvas {
         updateSize(objectID);
     }
 
-    public void updatePosition(int objectID){
+    public void updatePosition(int objectID) {
         GUIObject object = objects.get(objectID);
         Vector2i objectPos = objectsPos.get(objectID);
 
         object.setPosition(new Vector2i(
-                Math.round(objectPos.x * (getSize().x / (float)columns)),
-                Math.round(objectPos.y * (getSize().y / (float)lines))
+                Math.round(objectPos.x * (getSize().x / (float) columns)),
+                Math.round(objectPos.y * (getSize().y / (float) lines))
         ));
     }
 
-    public void updateSize(int objectID){
+    public void updateSize(int objectID) {
         GUIObject object = objects.get(objectID);
 
         object.setSize(new Vector2i(
-                Math.round(getSize().x / (float)columns),
-                Math.round(getSize().y / (float)lines)
+                Math.round(getSize().x / (float) columns),
+                Math.round(getSize().y / (float) lines)
         ));
     }
 
     @Override
-    public void removeObject(int id){
+    public void removeObject(int id) {
         objects.remove(id);
         objectsPos.remove(id);
     }
 
     @Override
-    public int addObject(GUIObject object){
-        return addObject(object,0,0);
+    public int addObject(GUIObject object) {
+        return addObject(object, 0, 0);
     }
 
-    public int addObject(GUIObject object, int column, int line){
+    public int addObject(GUIObject object, int column, int line) {
         int objectID = objects.size();
         objects.add(object);
         objectsPos.add(new Vector2i(column, line));

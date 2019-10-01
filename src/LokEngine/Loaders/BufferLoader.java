@@ -36,7 +36,7 @@ public class BufferLoader {
 
             float[] arrayPoints = new float[points.size()];
 
-            for (int i = 0; i < arrayPoints.length; i++){
+            for (int i = 0; i < arrayPoints.length; i++) {
                 arrayPoints[i] = points.get(i);
             }
 
@@ -54,7 +54,7 @@ public class BufferLoader {
         return buffer;
     }
 
-    public static void unload(int buffer){
+    public static void unload(int buffer) {
         GL15.glDeleteBuffers(buffer);
     }
 

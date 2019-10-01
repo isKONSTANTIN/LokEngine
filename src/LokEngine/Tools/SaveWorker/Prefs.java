@@ -10,7 +10,7 @@ public class Prefs {
     public static String filePath = "Prefs.save";
     private static HashMap<String, String> data = new HashMap<>();
 
-    public static void save(){
+    public static void save() {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
             fileWorker.openWrite();
@@ -18,11 +18,11 @@ public class Prefs {
             StringBuilder stringBuilder = new StringBuilder();
 
             for (HashMap.Entry<String, String> entry : data.entrySet()) {
-                stringBuilder.append( entry.getKey()).append(":").append(entry.getValue()).append("\n");
+                stringBuilder.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
             }
 
             if (stringBuilder.length() > 0)
-                stringBuilder.deleteCharAt(stringBuilder.length()-1);
+                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 
             fileWorker.write(stringBuilder.toString());
 
@@ -33,30 +33,30 @@ public class Prefs {
         }
     }
 
-    public static void writeField(String nameField, String dataField){
-        data.put(nameField,dataField);
+    public static void writeField(String nameField, String dataField) {
+        data.put(nameField, dataField);
     }
 
-    public static String getField(String nameField){
-        if (data.containsKey(nameField)){
+    public static String getField(String nameField) {
+        if (data.containsKey(nameField)) {
             return data.get(nameField);
         }
 
         return null;
     }
 
-    public static String getField(String nameField, String defautValue){
+    public static String getField(String nameField, String defautValue) {
         String fieldData = getField(nameField);
         return fieldData != null ? fieldData : defautValue;
     }
 
-    public static void init(){
+    public static void init() {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
             fileWorker.openRead();
             String[] lines = fileWorker.read().split("\n");
 
-            for (String line : lines){
+            for (String line : lines) {
                 String[] dataLine = line.split(":");
                 if (dataLine.length > 1)
                     data.put(dataLine[0], dataLine[1]);
@@ -68,7 +68,6 @@ public class Prefs {
             Logger.printException(e);
         }
     }
-
 
 
 }

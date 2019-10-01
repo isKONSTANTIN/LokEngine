@@ -7,11 +7,12 @@ import LokEngine.Tools.SaveWorker.Saveable;
 
 public class Component implements Saveable {
 
-    public String getName(){
+    public String getName() {
         return "Component";
     }
 
-    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){}
+    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
+    }
 
     @Override
     public String save() {

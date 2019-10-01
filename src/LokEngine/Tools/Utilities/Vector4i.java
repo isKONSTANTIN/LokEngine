@@ -3,12 +3,13 @@ package LokEngine.Tools.Utilities;
 public class Vector4i extends Vector3i {
     public int w;
 
-    public Vector4i(){
-        super(0,0,0);
+    public Vector4i() {
+        super(0, 0, 0);
         this.w = 0;
     }
-    public Vector4i(int x, int y, int z, int w){
-        super(x,y,z);
+
+    public Vector4i(int x, int y, int z, int w) {
+        super(x, y, z);
         this.w = w;
     }
 

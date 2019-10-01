@@ -8,11 +8,11 @@ public class GUISpace extends GUIObject {
         super(position, size);
     }
 
-    public GUISpace( Vector2i size) {
-        this(new Vector2i(),size);
+    public GUISpace(Vector2i size) {
+        this(new Vector2i(), size);
     }
 
     public GUISpace() {
-        this(new Vector2i(),new Vector2i());
+        this(new Vector2i(), new Vector2i());
     }
 }

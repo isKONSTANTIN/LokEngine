@@ -19,7 +19,7 @@ public class SimpleTCPClientHandler implements TCPClientHandler {
         this.toServer = toServer;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         try {
             return TCPTools.getMessage(fromServer);
         } catch (IOException e) {
@@ -29,9 +29,9 @@ public class SimpleTCPClientHandler implements TCPClientHandler {
         return null;
     }
 
-    public void sendMessage(String message){
+    public void sendMessage(String message) {
         try {
-            TCPTools.sendMessage(message,toServer);
+            TCPTools.sendMessage(message, toServer);
         } catch (IOException e) {
             Logger.warning("Fail send message to server", "LokEngine_SimpleTCPClientHandler");
             Logger.printException(e);
@@ -39,5 +39,6 @@ public class SimpleTCPClientHandler implements TCPClientHandler {
     }
 
     @Override
-    public void disconnected() {}
+    public void disconnected() {
+    }
 }

@@ -19,8 +19,8 @@ public class GUIImageFramePart extends FramePart {
         super(FramePartType.GUI);
         this.texture = TextureLoader.loadTexture(path);
         this.position = position;
-        if (size.x <= 0 || size.y <= 0){
-            size = new Vector2i(texture.sizeX,texture.sizeY);
+        if (size.x <= 0 || size.y <= 0) {
+            size = new Vector2i(texture.sizeX, texture.sizeY);
         }
         this.size = size;
     }
@@ -32,23 +32,23 @@ public class GUIImageFramePart extends FramePart {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties){
-        if (texture != null){
-            glBindTexture(GL_TEXTURE_2D,texture.buffer);
+    public void partRender(BuilderProperties builderProperties) {
+        if (texture != null) {
+            glBindTexture(GL_TEXTURE_2D, texture.buffer);
             glBegin(GL_POLYGON);
-            glColor4d(1,1,1,1);
+            glColor4d(1, 1, 1, 1);
 
-            glTexCoord2f(0,0);
-            glVertex3f(position.x,position.y,0);
-            glTexCoord2f(1,0);
-            glVertex3f(size.x + position.x,position.y,0);
-            glTexCoord2f(1,1);
-            glVertex3f(size.x + position.x,size.y + position.y,0);
-            glTexCoord2f(0,1);
-            glVertex3f(position.x,size.y + position.y,0);
+            glTexCoord2f(0, 0);
+            glVertex3f(position.x, position.y, 0);
+            glTexCoord2f(1, 0);
+            glVertex3f(size.x + position.x, position.y, 0);
+            glTexCoord2f(1, 1);
+            glVertex3f(size.x + position.x, size.y + position.y, 0);
+            glTexCoord2f(0, 1);
+            glVertex3f(position.x, size.y + position.y, 0);
 
             glEnd();
-            glBindTexture(GL_TEXTURE_2D,0);
+            glBindTexture(GL_TEXTURE_2D, 0);
         }
     }
 }

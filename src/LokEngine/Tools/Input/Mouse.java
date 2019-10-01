@@ -20,9 +20,10 @@ public class Mouse {
     public int buttonID = GLFW_MOUSE_BUTTON_LEFT;
     private Window window;
 
-    public Mouse(Window window){
+    public Mouse(Window window) {
         this.window = window;
-        mouseScrollScript = (xoffset, yoffset) -> {};
+        mouseScrollScript = (xoffset, yoffset) -> {
+        };
 
         glfwSetMouseButtonCallback(window.getId(), new GLFWMouseButtonCallback() {
             @Override
@@ -39,26 +40,28 @@ public class Mouse {
         });
     }
 
-    public void setMouseScrollScript(MouseScrollScript script){ mouseScrollScript = script; }
+    public void setMouseScrollScript(MouseScrollScript script) {
+        mouseScrollScript = script;
+    }
 
-    public boolean getPressedStatus(){
+    public boolean getPressedStatus() {
         return mousePressed;
     }
 
-    public Vector2i getMousePosition(){
+    public Vector2i getMousePosition() {
         return new Vector2i(mousePosition.x, mousePosition.y);
     }
 
-    public void update(){
+    public void update() {
         DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
         DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
         glfwGetCursorPos(window.getId(), xBuffer, yBuffer);
 
-        mousePosition.x = (int)xBuffer.get(0);
-        mousePosition.y = (int)yBuffer.get(0);
+        mousePosition.x = (int) xBuffer.get(0);
+        mousePosition.y = (int) yBuffer.get(0);
     }
 
-    public boolean inField(Vector2i position, Vector2i size){
+    public boolean inField(Vector2i position, Vector2i size) {
         return (mousePosition.x >= position.x && mousePosition.x <= size.x + position.x) &&
                 (mousePosition.y >= position.y && mousePosition.y <= size.y + position.y);
     }

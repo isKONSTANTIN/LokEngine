@@ -21,7 +21,7 @@ public class FrameBufferWorker {
     private int depth;
 
     public FrameBufferWorker(Vector2i resolution) {
-        initialiseFrameBuffer(resolution.x,resolution.y);
+        initialiseFrameBuffer(resolution.x, resolution.y);
     }
 
     public void cleanUp() {
@@ -40,6 +40,7 @@ public class FrameBufferWorker {
     public int getTexture() {//get the resulting texture
         return texture;
     }
+
     public int getDepth() {//get the resulting texture
         return depth;
     }
@@ -51,13 +52,13 @@ public class FrameBufferWorker {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
         GL11.glDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
 
-        texture = createTextureAttachment(x,y);
+        texture = createTextureAttachment(x, y);
         depth = createDepthAttachment(x, y);
 
         unbindCurrentFrameBuffer();
     }
 
-    private void bindFrameBuffer(int frameBuffer){
+    private void bindFrameBuffer(int frameBuffer) {
         lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
@@ -72,8 +73,8 @@ public class FrameBufferWorker {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, (ByteBuffer)null);
-        GL32.glFramebufferTexture(GL30.GL_FRAMEBUFFER, GL30.GL_DEPTH_STENCIL_ATTACHMENT, depth,0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, (ByteBuffer) null);
+        GL32.glFramebufferTexture(GL30.GL_FRAMEBUFFER, GL30.GL_DEPTH_STENCIL_ATTACHMENT, depth, 0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
         return depth;

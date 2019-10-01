@@ -35,7 +35,7 @@ public interface AutoSaveable extends Serializable, Saveable {
 
             Field[] loadedObjectFields = loadedObject.getClass().getDeclaredFields();
 
-            for (Field loadedField : loadedObjectFields){
+            for (Field loadedField : loadedObjectFields) {
                 loadedField.setAccessible(true);
                 loadedField.set(this, loadedField.get(loadedObject));
                 loadedField.setAccessible(false);

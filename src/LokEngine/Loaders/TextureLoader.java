@@ -49,13 +49,13 @@ public class TextureLoader {
         }
         textureBuffer.flip();
 
-        return new Object[] {textureBuffer, image};
+        return new Object[]{textureBuffer, image};
     }
 
     public static Texture loadTexture(String path) {
         long context = glfwGetCurrentContext();
 
-        if (!loadedTextures.containsKey(context)){
+        if (!loadedTextures.containsKey(context)) {
             loadedTextures.put(context, new HashMap<>());
         }
 
@@ -69,11 +69,11 @@ public class TextureLoader {
         try {
             Object[] imageData = loadTextureInBuffer(path);
 
-            textureBuffer = (ByteBuffer)imageData[0];
-            image = (BufferedImage)imageData[1];
+            textureBuffer = (ByteBuffer) imageData[0];
+            image = (BufferedImage) imageData[1];
 
         } catch (IOException e) {
-            return new Texture(-1,100,100,path);
+            return new Texture(-1, 100, 100, path);
         }
 
         int textureID = glGenTextures();

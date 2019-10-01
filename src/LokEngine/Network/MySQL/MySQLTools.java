@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class MySQLTools {
 
-    public static ArrayList getAll(ResultSet resultSet, int columnsSize){
+    public static ArrayList getAll(ResultSet resultSet, int columnsSize) {
         ArrayList arrayList = new ArrayList();
-        while (true){
+        while (true) {
             try {
                 if (!resultSet.next()) break;
 
-                for (int i = 1; i <= columnsSize; i++){
+                for (int i = 1; i <= columnsSize; i++) {
                     arrayList.add(resultSet.getObject(i));
                 }
 
@@ -27,19 +27,19 @@ public class MySQLTools {
         return arrayList;
     }
 
-    public static void setDataToCell(MySQLConnect database, String tableName, String data, String column, String lineNameFilter, String line){
+    public static void setDataToCell(MySQLConnect database, String tableName, String data, String column, String lineNameFilter, String line) {
         database.executeQuery("UPDATE `" + tableName + "` SET `" + column + "` = " + data + " WHERE `" + lineNameFilter + "` = " + line);
     }
 
-    public static void setDataToCell(MySQLConnect database, String tableName, String data, String column, int lineId){
-        setDataToCell(database, tableName, data, column,"id", String.valueOf(lineId));
+    public static void setDataToCell(MySQLConnect database, String tableName, String data, String column, int lineId) {
+        setDataToCell(database, tableName, data, column, "id", String.valueOf(lineId));
     }
 
-    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, int lineId){
+    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, int lineId) {
         return getDataFromCell(database, tableName, column, "id", String.valueOf(lineId));
     }
 
-    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, String lineNameFilter, String line){
+    public static Object getDataFromCell(MySQLConnect database, String tableName, String column, String lineNameFilter, String line) {
         ResultSet resultSet = database.executeQuery("SELECT `" + column + "` FROM `" + tableName + "` WHERE `" + lineNameFilter + "` = " + line);
 
         try {

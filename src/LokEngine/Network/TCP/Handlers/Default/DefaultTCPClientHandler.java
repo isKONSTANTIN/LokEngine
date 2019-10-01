@@ -1,19 +1,21 @@
 package LokEngine.Network.TCP.Handlers.Default;
 
 import LokEngine.Network.TCP.Handlers.SimpleTCPClientHandler;
-import static LokEngine.Network.TCP.Handlers.Default.DefaultTCPHandlersHeads.*;
+
+import static LokEngine.Network.TCP.Handlers.Default.DefaultTCPHandlersHeads.publicDataHeadName;
+import static LokEngine.Network.TCP.Handlers.Default.DefaultTCPHandlersHeads.runServerMethodHeadName;
 
 public class DefaultTCPClientHandler extends SimpleTCPClientHandler {
 
-    public String getPublicData(String name){
+    public String getPublicData(String name) {
         sendMessage(publicDataHeadName + "\n" + name);
         return getMessage();
     }
 
-    public String runServerMethod(String name, String[] args){
+    public String runServerMethod(String name, String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (String arg : args){
+        for (String arg : args) {
             stringBuilder.append(arg).append(";");
         }
 
@@ -21,7 +23,7 @@ public class DefaultTCPClientHandler extends SimpleTCPClientHandler {
         return getMessage();
     }
 
-    public String runServerMethod(String name){
+    public String runServerMethod(String name) {
         return runServerMethod(name, new String[0]);
     }
 

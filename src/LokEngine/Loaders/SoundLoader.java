@@ -1,7 +1,7 @@
 package LokEngine.Loaders;
 
-import LokEngine.Tools.Logger;
 import LokEngine.Components.AdditionalObjects.Sound;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.SoundType;
 import LokEngine.Tools.Utilities.WaveData;
 import org.lwjgl.openal.AL10;
@@ -13,9 +13,9 @@ public class SoundLoader {
 
     private static HashMap<String, Sound> loadedSounds = new HashMap<>();
 
-    public static Sound loadSound(String path, SoundType soundType){
+    public static Sound loadSound(String path, SoundType soundType) {
 
-        if (loadedSounds.containsKey(path)){
+        if (loadedSounds.containsKey(path)) {
             return loadedSounds.get(path);
         }
 
@@ -23,17 +23,17 @@ public class SoundLoader {
         sound.buffer = AL10.alGenBuffers();
 
         try {
-            if (soundType == SoundType.WAV){
+            if (soundType == SoundType.WAV) {
                 WaveData waveData;
-                if (path.charAt(0) == '#'){
+                if (path.charAt(0) == '#') {
                     waveData = WaveData.create(SoundLoader.class.getResourceAsStream(path.substring(1)));
-                }else{
+                } else {
                     waveData = WaveData.create(new FileInputStream(path));
                 }
-                AL10.alBufferData(sound.buffer,waveData.format,waveData.data,waveData.samplerate);
+                AL10.alBufferData(sound.buffer, waveData.format, waveData.data, waveData.samplerate);
                 waveData.dispose();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.printException(e);
         }
 
@@ -41,7 +41,7 @@ public class SoundLoader {
         return sound;
     }
 
-    public void unloadSound(Sound sound){
+    public void unloadSound(Sound sound) {
         AL10.alDeleteBuffers(sound.buffer);
     }
 

@@ -6,9 +6,10 @@ public class FramePart {
 
     public FramePartType frameType;
 
-    public FramePart(FramePartType frameType){
+    public FramePart(FramePartType frameType) {
         this.frameType = frameType;
     }
 
-    public void partRender(BuilderProperties builderProperties){}
+    public void partRender(BuilderProperties builderProperties) {
+    }
 }

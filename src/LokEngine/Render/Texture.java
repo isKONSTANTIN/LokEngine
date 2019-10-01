@@ -11,17 +11,18 @@ public class Texture implements Saveable {
     public int sizeY;
     public String path;
 
-    public Texture(){}
+    public Texture() {
+    }
 
-    public Texture(int buffer, int sizeX, int sizeY, String path){
+    public Texture(int buffer, int sizeX, int sizeY, String path) {
         this.buffer = buffer;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.path = path;
     }
 
-    public boolean equals(Object obj){
-        Texture objt = (Texture)obj;
+    public boolean equals(Object obj) {
+        Texture objt = (Texture) obj;
 
         return objt.buffer == buffer &&
                 objt.sizeX == sizeX &&

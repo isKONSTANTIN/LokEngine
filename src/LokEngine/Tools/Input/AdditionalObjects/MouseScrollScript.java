@@ -7,5 +7,7 @@ public interface MouseScrollScript extends Scriptable {
     void execute(double xoffset, double yoffset);
 
     @Override
-    default void execute() { execute(0,0); }
+    default void execute() {
+        execute(0, 0);
+    }
 }

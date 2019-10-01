@@ -22,7 +22,7 @@ public class TCPServer {
         this(port, new DefaultTCPServerHandler());
     }
 
-    public void close(){
+    public void close() {
         try {
             serverSocket.close();
         } catch (IOException e) {

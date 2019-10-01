@@ -15,32 +15,33 @@ public class AtlasPositions implements Saveable {
     public Vector4i startPosition;
     public int countSprites;
 
-    public AtlasPositions(){}
+    public AtlasPositions() {
+    }
 
-    public AtlasPositions(Vector4i startPosition, int countSprites){
+    public AtlasPositions(Vector4i startPosition, int countSprites) {
         this.startPosition = startPosition;
         this.countSprites = countSprites;
     }
 
-    public AtlasPositions(Vector4i startPosition){
+    public AtlasPositions(Vector4i startPosition) {
         this.startPosition = startPosition;
     }
 
-    public AtlasPositions addNewPosition(Vector4i position){
+    public AtlasPositions addNewPosition(Vector4i position) {
         positions.add(position);
 
         return this;
     }
 
-    public ArrayList<Integer> build(Texture texture){
-        Vector2f fistPoint   = new Vector2f((float)startPosition.z / (float)texture.sizeX, (float)startPosition.w / (float)texture.sizeY);
-        Vector2f secondPoint = new Vector2f((float)startPosition.z / (float)texture.sizeX, (float)startPosition.y / (float)texture.sizeY);
-        Vector2f thirdPoint  = new Vector2f((float)startPosition.x / (float)texture.sizeX, (float)startPosition.y / (float)texture.sizeY);
-        Vector2f fourthPoint = new Vector2f((float)startPosition.x / (float)texture.sizeX, (float)startPosition.w / (float)texture.sizeY);
+    public ArrayList<Integer> build(Texture texture) {
+        Vector2f fistPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
+        Vector2f secondPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
+        Vector2f thirdPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
+        Vector2f fourthPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
 
         ArrayList<Integer> uvBuffers = new ArrayList<>();
 
-        for (int i = countSprites - 1; i >= 0; i--){
+        for (int i = countSprites - 1; i >= 0; i--) {
             float offset = fistPoint.x * i;
             uvBuffers.add(
                     BufferLoader.load(new float[]{
@@ -52,13 +53,13 @@ public class AtlasPositions implements Saveable {
             );
         }
 
-        for (int i = positions.size() - 1; i >= 0; i--){
+        for (int i = positions.size() - 1; i >= 0; i--) {
             uvBuffers.add(
                     BufferLoader.load(new float[]{
-                            (float)positions.get(i).z / (float)texture.sizeX, (float)positions.get(i).w / (float)texture.sizeY,
-                            (float)positions.get(i).z / (float)texture.sizeX, (float)positions.get(i).y / (float)texture.sizeY,
-                            (float)positions.get(i).x / (float)texture.sizeX, (float)positions.get(i).y / (float)texture.sizeY,
-                            (float)positions.get(i).x / (float)texture.sizeX, (float)positions.get(i).w / (float)texture.sizeY
+                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY,
+                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
+                            (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
+                            (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY
                     })
             );
         }
@@ -89,7 +90,7 @@ public class AtlasPositions implements Saveable {
         return Base64.toBase64(stringBuilder.toString());
     }
 
-    private Vector4i parseVector(String data){
+    private Vector4i parseVector(String data) {
         String[] vectorParts = data.split(",");
         return new Vector4i(
                 Integer.valueOf(vectorParts[0]),
@@ -107,7 +108,7 @@ public class AtlasPositions implements Saveable {
 
         positions = new ArrayList<>();
 
-        for (String stringVector : vectors){
+        for (String stringVector : vectors) {
             if (!stringVector.equals(""))
                 positions.add(parseVector(stringVector));
         }

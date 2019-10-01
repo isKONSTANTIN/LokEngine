@@ -5,27 +5,27 @@ public class Timer {
     private long startTime;
     private long duration;
 
-    public Timer(){
+    public Timer() {
         resetTimer();
     }
 
-    public boolean checkTime(){
+    public boolean checkTime() {
         return System.nanoTime() - startTime >= duration;
     }
 
-    public void resetTimer(){
+    public void resetTimer() {
         startTime = System.nanoTime();
     }
 
-    public Timer setDurationInSeconds(float seconds){
-        return setDurationInMilliseconds((long)(seconds * 1000L));
+    public Timer setDurationInSeconds(float seconds) {
+        return setDurationInMilliseconds((long) (seconds * 1000L));
     }
 
-    public Timer setDurationInMilliseconds(long milliseconds){
+    public Timer setDurationInMilliseconds(long milliseconds) {
         return setDurationInNanoseconds(milliseconds * 1000000L);
     }
 
-    public Timer setDurationInNanoseconds(long nanoseconds){
+    public Timer setDurationInNanoseconds(long nanoseconds) {
         duration = nanoseconds;
         return this;
     }

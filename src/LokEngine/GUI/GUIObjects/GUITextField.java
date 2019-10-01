@@ -15,12 +15,13 @@ public class GUITextField extends GUIObject {
     private boolean active;
     private boolean lastActive;
     public boolean canResize;
-    public boolean getActive(){
+
+    public boolean getActive() {
         return active;
     }
 
     public GUITextField(Vector2i position, GUITextFieldFramePart customFramePart) {
-        super(position, new Vector2i(0,0));
+        super(position, new Vector2i(0, 0));
         this.framePart = customFramePart;
         this.size.y = framePart.getHeight();
         this.size.x = framePart.getWidth();
@@ -28,13 +29,13 @@ public class GUITextField extends GUIObject {
     }
 
     public GUITextField(Vector2i position, Vector2i size, String fontName, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
-        super(position, new Vector2i(0,0));
-        framePart = new GUITextFieldFramePart(text,fontName,color, fontStyle,fontSize,antiAlias);
+        super(position, new Vector2i(0, 0));
+        framePart = new GUITextFieldFramePart(text, fontName, color, fontStyle, fontSize, antiAlias);
         this.canResize = canResize;
         this.size = size;
 
-        if (size.x < 1 || size.y < 1){
-            if (canResize){
+        if (size.x < 1 || size.y < 1) {
+            if (canResize) {
                 this.size.y = framePart.getHeight();
                 this.size.x = framePart.getWidth();
             }
@@ -52,49 +53,49 @@ public class GUITextField extends GUIObject {
     }
 
     public GUITextField(Vector2i position, Vector2i size, String text) {
-        this(position, size , text, new LokEngine.Tools.Utilities.Color(1,1,1,1), 0);
+        this(position, size, text, new LokEngine.Tools.Utilities.Color(1, 1, 1, 1), 0);
     }
 
     public GUITextField(Vector2i position, String text) {
-        this(position, new Vector2i(), text, new LokEngine.Tools.Utilities.Color(1,1,1,1), 0);
+        this(position, new Vector2i(), text, new LokEngine.Tools.Utilities.Color(1, 1, 1, 1), 0);
     }
 
     public GUITextField(Vector2i position) {
-        this(position,"");
+        this(position, "");
     }
 
-    public String getText(){
+    public String getText() {
         return framePart.text;
     }
 
-    public void updateText(String text){
+    public void updateText(String text) {
         framePart.text = text;
-        if (canResize){
+        if (canResize) {
             this.size.y = framePart.getHeight();
             this.size.x = framePart.getWidth();
         }
     }
 
     @Override
-    public void setPosition(Vector2i position){
+    public void setPosition(Vector2i position) {
         this.position = position;
         framePart.position = position;
     }
 
     @Override
-    public void setSize(Vector2i size){
+    public void setSize(Vector2i size) {
         this.size = size;
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
-        if (parentProperties.window.getMouse().inField(properties.globalPosition, size) && parentProperties.window.getMouse().getPressedStatus()){
+        if (parentProperties.window.getMouse().inField(properties.globalPosition, size) && parentProperties.window.getMouse().getPressedStatus()) {
             active = true;
             framePart.pointer = framePart.text.length();
 
-        }else if (parentProperties.window.getMouse().getPressedStatus()){
+        } else if (parentProperties.window.getMouse().getPressedStatus()) {
             active = false;
         }
 
@@ -118,11 +119,11 @@ public class GUITextField extends GUIObject {
                 if (eventCharacter != 0 || eventKey != 0) {
                     int pointerOffset = 0;
                     if (eventKey == 259 && keyInfo.action != GLFW_RELEASE) {
-                        if (pointerText.length() > 0){
+                        if (pointerText.length() > 0) {
                             pointerOffset = -1;
                             pointerText = pointerText.substring(0, pointerText.length() - 1);
                         }
-                    }else if (eventCharacter != 0){
+                    } else if (eventCharacter != 0) {
                         pointerOffset = 1;
                         pointerText += eventCharacter;
                     }
@@ -132,20 +133,20 @@ public class GUITextField extends GUIObject {
                 }
 
                 if (eventKey == GLFW_KEY_LEFT && keyInfo.action != GLFW_RELEASE) {
-                    if (framePart.pointer > 0){
+                    if (framePart.pointer > 0) {
                         framePart.pointer--;
                         framePart.printSelecter = true;
                         framePart.timer.resetTimer();
                     }
 
 
-                }else if (eventKey == GLFW_KEY_RIGHT && keyInfo.action != GLFW_RELEASE) {
+                } else if (eventKey == GLFW_KEY_RIGHT && keyInfo.action != GLFW_RELEASE) {
                     framePart.pointer++;
                     framePart.printSelecter = true;
                     framePart.timer.resetTimer();
                 }
 
-                framePart.pointer = Math.min(framePart.text.length(),framePart.pointer);
+                framePart.pointer = Math.min(framePart.text.length(), framePart.pointer);
             }
         }
         framePart.active = active;

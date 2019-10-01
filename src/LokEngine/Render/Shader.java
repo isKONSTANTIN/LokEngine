@@ -11,16 +11,17 @@ public class Shader implements Saveable {
     public String vertPath;
     public String fragPath;
 
-    public Shader(){}
+    public Shader() {
+    }
 
-    public Shader(int program, String vertPath, String fragPath){
+    public Shader(int program, String vertPath, String fragPath) {
         this.program = program;
         this.vertPath = vertPath;
         this.fragPath = fragPath;
     }
 
-    public boolean equals(Object obj){
-        Shader objs = (Shader)obj;
+    public boolean equals(Object obj) {
+        Shader objs = (Shader) obj;
         return objs.program == program;
     }
 
@@ -39,7 +40,7 @@ public class Shader implements Saveable {
             this.vertPath = loadedShader.vertPath;
             this.fragPath = loadedShader.fragPath;
         } catch (Exception e) {
-            Logger.warning("Fail load shader from save!","LokEngine_Shader");
+            Logger.warning("Fail load shader from save!", "LokEngine_Shader");
             Logger.printException(e);
         }
         return this;

@@ -14,7 +14,7 @@ public class GUICanvasFramePart extends FramePart {
     PartsBuilder partsBuilder;
     public Vector2i position;
     public Vector2i size;
-    public Color color = new Color(1,1,1,1);
+    public Color color = new Color(1, 1, 1, 1);
 
     public GUICanvasFramePart(PartsBuilder partsBuilder, Vector2i position, Vector2i size) {
         super(FramePartType.GUI);

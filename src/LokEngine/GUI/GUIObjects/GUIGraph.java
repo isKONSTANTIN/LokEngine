@@ -28,7 +28,7 @@ public class GUIGraph extends GUIObject {
     }
 
     public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints) {
-        this(position, size, maxHeight, minHeight, maxPoints, new Color(1,1,1,1));
+        this(position, size, maxHeight, minHeight, maxPoints, new Color(1, 1, 1, 1));
     }
 
     public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight) {
@@ -39,8 +39,8 @@ public class GUIGraph extends GUIObject {
         this(position, size, 100, 0);
     }
 
-    public void addPoint(float height){
-        if (maxPoints != 0 && maxPoints == points.size()){
+    public void addPoint(float height) {
+        if (maxPoints != 0 && maxPoints == points.size()) {
             points.remove(0);
         }
 
@@ -48,19 +48,19 @@ public class GUIGraph extends GUIObject {
     }
 
     @Override
-    public void setPosition(Vector2i position){
+    public void setPosition(Vector2i position) {
         this.position = position;
         framePart.position = position;
     }
 
     @Override
-    public void setSize(Vector2i size){
+    public void setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
     }

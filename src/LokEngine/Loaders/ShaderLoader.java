@@ -24,57 +24,51 @@ public class ShaderLoader {
         StringBuilder source = new StringBuilder();
         InputStream in;
 
-        if (filename.charAt(0) == '#'){
+        if (filename.charAt(0) == '#') {
             in = ShaderLoader.class.getResourceAsStream(filename.substring(1));
-        }else{
+        } else {
             in = new FileInputStream(filename);
         }
 
         Exception exception = null;
 
         BufferedReader reader;
-        try{
+        try {
             reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
-            Exception innerExc= null;
+            Exception innerExc = null;
             try {
                 String line;
-                while((line = reader.readLine()) != null)
+                while ((line = reader.readLine()) != null)
                     source.append(line).append('\n');
-            }
-            catch(Exception exc) {
+            } catch (Exception exc) {
                 exception = exc;
-            }
-            finally {
+            } finally {
                 try {
                     reader.close();
-                }
-                catch(Exception exc) {
-                    if(innerExc == null)
+                } catch (Exception exc) {
+                    if (innerExc == null)
                         innerExc = exc;
                     else
                         exc.printStackTrace();
                 }
             }
 
-            if(innerExc != null)
+            if (innerExc != null)
                 throw innerExc;
-        }
-        catch(Exception exc) {
+        } catch (Exception exc) {
             exception = exc;
-        }
-        finally {
+        } finally {
             try {
                 in.close();
-            }
-            catch(Exception exc) {
-                if(exception == null)
+            } catch (Exception exc) {
+                if (exception == null)
                     exception = exc;
                 else
                     exc.printStackTrace();
             }
 
-            if(exception != null)
+            if (exception != null)
                 throw exception;
         }
 
@@ -84,7 +78,7 @@ public class ShaderLoader {
     private static int loadPartShader(String filename, int shaderType) throws Exception {
         int shader = ARBShaderObjects.glCreateShaderObjectARB(shaderType);
 
-        if(shader == 0)
+        if (shader == 0)
             return 0;
 
         ARBShaderObjects.glShaderSourceARB(shader, readFileAsString(filename));

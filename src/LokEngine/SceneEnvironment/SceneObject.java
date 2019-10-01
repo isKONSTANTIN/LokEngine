@@ -8,20 +8,22 @@ import LokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector2f;
 
 public class SceneObject implements Saveable {
-    public Vector2f position = new Vector2f(0,0);
+    public Vector2f position = new Vector2f(0, 0);
     public float rollRotation = 0;
     public float renderPriority = 0;
     public ComponentList components;
     public Scene scene;
     public String name = "Unnamed object";
 
-    public SceneObject(){ components = new ComponentList();}
+    public SceneObject() {
+        components = new ComponentList();
+    }
 
-    public void init(Scene scene){
+    public void init(Scene scene) {
         this.scene = scene;
     }
 
-    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
+    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         components.update(this, applicationRuntime, partsBuilder);
     }
 
@@ -34,7 +36,7 @@ public class SceneObject implements Saveable {
     public Saveable load(String savedString) {
         String[] lines = Base64.fromBase64(savedString).split("\n");
 
-        position = new Vector2f(Float.valueOf(lines[0]),Float.valueOf(lines[1]));
+        position = new Vector2f(Float.valueOf(lines[0]), Float.valueOf(lines[1]));
         rollRotation = Float.valueOf(lines[2]);
         renderPriority = Float.valueOf(lines[3]);
         components.load(lines[4]);

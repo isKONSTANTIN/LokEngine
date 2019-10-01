@@ -20,26 +20,26 @@ public class GUICanvas extends GUIObject {
         super(position, size);
         partsBuilder = new PartsBuilder();
         framePart = new GUICanvasFramePart(partsBuilder, position, size);
-        myProperties = new GUIObjectProperties(position,size,null);
+        myProperties = new GUIObjectProperties(position, size, null);
     }
 
-    public int addObject(GUIObject object){
+    public int addObject(GUIObject object) {
         objects.add(object);
-        return objects.size()-1;
+        return objects.size() - 1;
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         framePart.color = color;
     }
 
     @Override
-    public void setPosition(Vector2i position){
+    public void setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
     }
 
     @Override
-    public void setSize(Vector2i size){
+    public void setSize(Vector2i size) {
         super.setSize(size);
         partsBuilder.setResolution(size);
         framePart.size = size;
@@ -47,16 +47,20 @@ public class GUICanvas extends GUIObject {
         myProperties.size.y = size.y;
     }
 
-    public void removeObject(int id){
+    public void removeObject(int id) {
         objects.remove(id);
     }
-    public void removeAll(){ objects.clear(); }
-    public GUIObject getObject(int id){
+
+    public void removeAll() {
+        objects.clear();
+    }
+
+    public GUIObject getObject(int id) {
         return objects.get(id);
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         myProperties.globalPosition.x = parentProperties.globalPosition.x + getPosition().x;
         myProperties.globalPosition.y = parentProperties.globalPosition.y + getPosition().y;
         myProperties.window = parentProperties.window;

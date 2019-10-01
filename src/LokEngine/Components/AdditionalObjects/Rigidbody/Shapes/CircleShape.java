@@ -7,7 +7,8 @@ public class CircleShape extends Shape {
 
     public float radius;
 
-    public CircleShape() {}
+    public CircleShape() {
+    }
 
     public CircleShape(float radius, org.jbox2d.collision.shapes.Shape shape) {
         this.radius = radius;

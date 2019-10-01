@@ -37,9 +37,9 @@ public class GUIGraphFramePart extends FramePart {
         glBegin(GL_LINE_STRIP);
         glColor4f(color.red, color.green, color.blue, color.alpha);
 
-        for (int i = 0; i < points.size(); i++){
+        for (int i = 0; i < points.size(); i++) {
             glVertex2f(
-                    ((float)i / (float)maxPoints * size.x) + position.x,position.y + size.y - size.y * (points.get(i) / (maxHeight + minHeight))
+                    ((float) i / (float) maxPoints * size.x) + position.x, position.y + size.y - size.y * (points.get(i) / (maxHeight + minHeight))
             );
         }
 

@@ -18,44 +18,46 @@ public class Scene implements Saveable {
     public int physicsVelocityIterations = 12;
     public int physicsPositionsIterations = 4;
 
-    public Scene(){ b2World = new World(new Vec2(0,-5)); }
+    public Scene() {
+        b2World = new World(new Vec2(0, -5));
+    }
 
-    public int getCountObjects(){
+    public int getCountObjects() {
         return objects.size();
     }
 
-    public int addObject(SceneObject newObject){
+    public int addObject(SceneObject newObject) {
         objects.add(newObject);
         newObject.init(this);
-        return objects.size()-1;
+        return objects.size() - 1;
     }
 
-    public void removeObject(int id){
+    public void removeObject(int id) {
         objects.remove(id);
     }
 
-    public void addPostUpdateEvent(PostUpdateEvent event){
+    public void addPostUpdateEvent(PostUpdateEvent event) {
         postUpdateEvents.add(event);
     }
 
-    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
-        for (int i = 0; i < objects.size(); i++){
+    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
+        for (int i = 0; i < objects.size(); i++) {
             objects.get(i).update(applicationRuntime, partsBuilder);
         }
         b2World.step(1 / 60f * applicationRuntime.getSpeedEngine() * Math.min(12, applicationRuntime.getDeltaTime()), physicsVelocityIterations, physicsPositionsIterations);
 
-        for (int i = 0; i < postUpdateEvents.size(); i++){
+        for (int i = 0; i < postUpdateEvents.size(); i++) {
             postUpdateEvents.get(i).postUpdate();
         }
         postUpdateEvents.clear();
     }
 
-    public SceneObject getObjectByID(int id){
+    public SceneObject getObjectByID(int id) {
         return objects.get(id);
     }
 
-    public SceneObject getObjectByName(String name){
-        for (SceneObject sceneObject : objects){
+    public SceneObject getObjectByName(String name) {
+        for (SceneObject sceneObject : objects) {
             if (sceneObject.name.equals(name))
                 return sceneObject;
         }
@@ -83,8 +85,8 @@ public class Scene implements Saveable {
 
         arraySaver.load(data[1]);
 
-        for (Saveable savedSceneObject : arraySaver.arrayList){
-            SceneObject sceneObject = (SceneObject)savedSceneObject;
+        for (Saveable savedSceneObject : arraySaver.arrayList) {
+            SceneObject sceneObject = (SceneObject) savedSceneObject;
             objects.add(sceneObject);
             sceneObject.init(this);
         }

@@ -45,7 +45,7 @@ public class TCPClient {
         clientHandler.connected(fromServer, toServer);
     }
 
-    public void close(){
+    public void close() {
         try {
             fromServer.close();
             toServer.close();

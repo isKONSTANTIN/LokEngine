@@ -10,11 +10,11 @@ public class MySQLConnect {
     protected Statement statement;
     protected String databaseName;
 
-    public String getDatabaseName(){
+    public String getDatabaseName() {
         return databaseName;
     }
 
-    public MySQLConnect(String address, int port, String databaseName, String username, String password, String timezone){
+    public MySQLConnect(String address, int port, String databaseName, String username, String password, String timezone) {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + databaseName + "?serverTimezone=" + timezone, username, password);
             statement = connection.createStatement();
@@ -24,7 +24,7 @@ public class MySQLConnect {
         }
     }
 
-    public void close(){
+    public void close() {
         try {
             if (connection != null)
                 connection.close();
@@ -34,19 +34,19 @@ public class MySQLConnect {
         }
     }
 
-    public MySQLConnect(String address, String databaseName, String username, String password, String timezone){
+    public MySQLConnect(String address, String databaseName, String username, String password, String timezone) {
         this(address, 3306, databaseName, username, password, timezone);
     }
 
-    public MySQLConnect(String address, String databaseName, String username, String password){
+    public MySQLConnect(String address, String databaseName, String username, String password) {
         this(address, 3306, databaseName, username, password, "UTC");
     }
 
-    public boolean connected(){
+    public boolean connected() {
         return statement != null;
     }
 
-    public ResultSet executeQuery(String query){
+    public ResultSet executeQuery(String query) {
         try {
             return statement.executeQuery(query);
         } catch (SQLException e) {

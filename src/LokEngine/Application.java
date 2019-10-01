@@ -31,7 +31,7 @@ public class Application {
     private void startApp(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
         try {
             Prefs.init();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.warning("Fail load in prefs!", "LokEngine_start");
             Logger.printException(e);
         }
@@ -40,9 +40,9 @@ public class Application {
             glfwInit();
             Logger.debug("Init window", "LokEngine_start");
             window = new Window();
-
             try {
                 window.open(windowFullscreen, vSync, windowResolution);
+                window.setTitle(windowTitle);
             } catch (Exception e) {
                 Logger.error("Fail open window!", "LokEngine_start");
                 Logger.printException(e);
@@ -109,7 +109,7 @@ public class Application {
 
         try {
             mainWhile();
-        }catch (Exception e){
+        } catch (Exception e) {
             Logger.error("Critical error in main while engine!", "LokEngine_runtime");
             Logger.printException(e);
             System.exit(-2);
@@ -128,13 +128,13 @@ public class Application {
 
         try {
             Prefs.save();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
             Logger.printException(e);
         }
     }
 
-    private void mainWhile(){
+    private void mainWhile() {
         while (true) {
             try {
                 Update();
@@ -154,13 +154,13 @@ public class Application {
 
             window.getCamera().updateAudioListener();
 
-            scene.update(applicationRuntime,window.getFrameBuilder().getScenePartsBuilder());
+            scene.update(applicationRuntime, window.getFrameBuilder().getScenePartsBuilder());
 
             window.update();
         }
     }
 
-    private void consoleMainWhile(){
+    private void consoleMainWhile() {
         while (true) {
             try {
                 Update();
@@ -178,14 +178,14 @@ public class Application {
 
             if (!isRun) break;
 
-            scene.update(applicationRuntime,null);
+            scene.update(applicationRuntime, null);
         }
     }
 
     public void startConsole() {
         try {
             Prefs.init();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.warning("Fail load in prefs!", "LokEngine_start");
             Logger.printException(e);
         }
@@ -224,27 +224,41 @@ public class Application {
 
         try {
             Prefs.save();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
             Logger.printException(e);
         }
     }
 
-    public void close(){
-        if (window != null){
+    public void close() {
+        if (window != null) {
             window.close();
         }
         isRun = false;
     }
 
     public void start() {
-        startApp(false, true, new Vector2i(512,512), "LokEngine application");
+        startApp(false, true, new Vector2i(512, 512), "LokEngine application");
     }
-    public void start(boolean windowFullscreen) { startApp(windowFullscreen, true, new Vector2i(512,512), "LokEngine application"); }
-    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution) { startApp(windowFullscreen, vSync, windowResolution, "LokEngine application"); }
-    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {startApp(windowFullscreen, vSync, windowResolution, windowTitle); }
 
-    public void Init(){}
-    public void Update(){}
-    public void Exit(){}
+    public void start(boolean windowFullscreen) {
+        startApp(windowFullscreen, true, new Vector2i(512, 512), "LokEngine application");
+    }
+
+    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution) {
+        startApp(windowFullscreen, vSync, windowResolution, "LokEngine application");
+    }
+
+    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
+        startApp(windowFullscreen, vSync, windowResolution, windowTitle);
+    }
+
+    public void Init() {
+    }
+
+    public void Update() {
+    }
+
+    public void Exit() {
+    }
 }

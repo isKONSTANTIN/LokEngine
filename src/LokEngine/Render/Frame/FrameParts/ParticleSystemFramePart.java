@@ -32,17 +32,17 @@ public class ParticleSystemFramePart extends FramePart {
         this.shader = shader;
     }
 
-    public void setSourceSprite(Sprite sprite){
+    public void setSourceSprite(Sprite sprite) {
         this.sourceSprite = sprite;
     }
 
-    public void update(ArrayList<Float> positions, ArrayList<Float> sizes){
+    public void update(ArrayList<Float> positions, ArrayList<Float> sizes) {
         count = sizes.size();
 
         BufferLoader.unload(positionsBuffer);
         BufferLoader.unload(sizesBuffer);
 
-        if (count > 0){
+        if (count > 0) {
             positionsBuffer = BufferLoader.load(positions);
             sizesBuffer = BufferLoader.load(sizes);
         }
@@ -51,7 +51,7 @@ public class ParticleSystemFramePart extends FramePart {
     @Override
     public void partRender(BuilderProperties builderProperties) {
         if (count > 0) {
-            if (!builderProperties.getActiveShader().equals(shader)){
+            if (!builderProperties.getActiveShader().equals(shader)) {
                 builderProperties.useShader(shader);
             }
 

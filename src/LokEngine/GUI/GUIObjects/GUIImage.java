@@ -20,28 +20,28 @@ public class GUIImage extends GUIObject {
         framePart = new GUIImageFramePart(position, size, path);
     }
 
-    public Texture getTexture(){
+    public Texture getTexture() {
         return framePart.texture;
     }
 
-    public void setTexture(Texture texture){
+    public void setTexture(Texture texture) {
         framePart.texture = texture;
     }
 
     @Override
-    public void setPosition(Vector2i position){
+    public void setPosition(Vector2i position) {
         this.position = position;
         framePart.position = position;
     }
 
     @Override
-    public void setSize(Vector2i size){
+    public void setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
     }

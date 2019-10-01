@@ -17,9 +17,10 @@ public class Animation implements Saveable {
     public ArrayList<Integer> uvBuffers;
     private AtlasPositions atlasPositions;
 
-    public Animation(){}
+    public Animation() {
+    }
 
-    public Animation(Texture atlas, AtlasPositions atlasPositions){
+    public Animation(Texture atlas, AtlasPositions atlasPositions) {
         altasTexture = atlas;
         this.atlasPositions = atlasPositions;
         uvBuffers = atlasPositions.build(altasTexture);
@@ -36,7 +37,7 @@ public class Animation implements Saveable {
         );
     }
 
-    public Animation(String atlasPath, AtlasPositions atlasPositions){
+    public Animation(String atlasPath, AtlasPositions atlasPositions) {
         try {
             altasTexture = TextureLoader.loadTexture(atlasPath);
         } catch (Exception e) {
@@ -68,7 +69,7 @@ public class Animation implements Saveable {
     public Saveable load(String savedString) {
         String[] data = Base64.fromBase64(savedString).split("\n");
 
-        Animation loadedAnimation = new Animation((Texture)new Texture().load(data[0]), (AtlasPositions)(new AtlasPositions().load(data[1])));
+        Animation loadedAnimation = new Animation((Texture) new Texture().load(data[0]), (AtlasPositions) (new AtlasPositions().load(data[1])));
 
         this.altasTexture = loadedAnimation.altasTexture;
         this.atlasPositions = loadedAnimation.atlasPositions;

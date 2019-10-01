@@ -10,8 +10,8 @@ public interface ScriptSceneObject extends Scriptable {
     void execute(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder);
 
     @Override
-    default void execute(){
-        execute(null,null,null);
+    default void execute() {
+        execute(null, null, null);
     }
 
 }

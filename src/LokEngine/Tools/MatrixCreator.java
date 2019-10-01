@@ -13,8 +13,7 @@ import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 
 public class MatrixCreator {
 
-    public static double RadiansToDegrees(float radians)
-    {
+    public static double RadiansToDegrees(float radians) {
         return ((radians / 3.14159265358979323846) * 180.0f);
     }
 
@@ -24,7 +23,7 @@ public class MatrixCreator {
 
     public static Matrix4f toOrtho(Matrix4f m, float left, float right, float bottom, float top,
                                    float near, float far) {
-        if (m==null)
+        if (m == null)
             m = new Matrix4f();
         float x_orth = 2 / (right - left);
         float y_orth = 2 / (top - bottom);
@@ -54,14 +53,14 @@ public class MatrixCreator {
     }
 
     public static Matrix4f CreateOrthoMatrix(float width, float height) {
-        return toOrtho(null,-width / 2, width / 2, -height / 2, height / 2, -1.0f, 1000.0f);
+        return toOrtho(null, -width / 2, width / 2, -height / 2, height / 2, -1.0f, 1000.0f);
     }
 
     public static Matrix4f CreateViewMatrix(Camera camera) {
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.setIdentity();
 
-        Matrix4f.rotate((float)DegressToRadians(camera.rollRotation), new Vector3f(0, 0, 1),viewMatrix,viewMatrix);
+        Matrix4f.rotate((float) DegressToRadians(camera.rollRotation), new Vector3f(0, 0, 1), viewMatrix, viewMatrix);
         Matrix4f.translate(new Vector3f(-camera.position.x, -camera.position.y, -500), viewMatrix, viewMatrix);
         return viewMatrix;
     }
@@ -70,7 +69,7 @@ public class MatrixCreator {
         Matrix4f matrix = new Matrix4f();
         matrix.setIdentity();
         Matrix4f.translate(pos, matrix, matrix);
-        Matrix4f.rotate((float)DegressToRadians(angle),new Vector3f(0, 0, 1),matrix,matrix);
+        Matrix4f.rotate((float) DegressToRadians(angle), new Vector3f(0, 0, 1), matrix, matrix);
         return matrix;
     }
 
