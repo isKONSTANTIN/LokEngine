@@ -106,9 +106,9 @@ public class GUITextField extends GUIObject {
                 int eventKey = keyInfo.buttonID;
                 char eventCharacter = keyInfo.aChar;
 
-                if (eventCharacter == 27) break;
+                if (eventKey == 27) break;
 
-                if (eventCharacter == 13) {
+                if (eventKey == 257) {
                     active = false;
                     break;
                 }
