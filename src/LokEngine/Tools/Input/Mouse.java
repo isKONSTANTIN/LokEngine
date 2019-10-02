@@ -1,6 +1,6 @@
 package LokEngine.Tools.Input;
 
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Input.AdditionalObjects.MouseScrollScript;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.BufferUtils;

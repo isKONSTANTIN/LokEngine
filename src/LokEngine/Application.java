@@ -1,7 +1,7 @@
 package LokEngine;
 
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.Logger;

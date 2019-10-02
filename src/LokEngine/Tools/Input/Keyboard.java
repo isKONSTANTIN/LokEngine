@@ -1,6 +1,6 @@
 package LokEngine.Tools.Input;
 
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import org.lwjgl.glfw.GLFWCharCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;

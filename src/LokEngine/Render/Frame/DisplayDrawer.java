@@ -1,7 +1,7 @@
 package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 

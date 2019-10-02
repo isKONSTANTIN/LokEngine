@@ -1,6 +1,6 @@
 package LokEngine.GUI.AdditionalObjects;
 
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIObjectProperties {

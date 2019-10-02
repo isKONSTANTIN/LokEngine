@@ -2,7 +2,7 @@ package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Utilities.Color;
 import org.lwjgl.opengl.GL;
 

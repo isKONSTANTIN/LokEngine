@@ -5,7 +5,7 @@ import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Shader;
 import LokEngine.Render.Texture;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.ARBShaderObjects;

@@ -1,15 +1,15 @@
-package LokEngine.Render;
+package LokEngine.Render.Window;
 
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Loaders.TextureLoader;
+import LokEngine.Render.Camera;
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Frame.FrameBuilder;
 import LokEngine.Tools.Input.Keyboard;
 import LokEngine.Tools.Input.Mouse;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.glfw.GLFWImage;
-import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL30;
 
@@ -33,14 +33,14 @@ public class Window {
     private String title;
     private long id;
     private boolean fullscreen = false;
-    private boolean isOpened = false;
+    private boolean isInited = false;
 
     public boolean isFullscreen() {
         return fullscreen;
     }
 
-    public boolean isOpened() {
-        return isOpened;
+    public boolean isInited() {
+        return isInited;
     }
 
     public Vector2i getResolution() {
@@ -72,6 +72,68 @@ public class Window {
         return id;
     }
 
+    public void setCloseEvent(WindowEvent event) {
+        Window window = this;
+        glfwSetWindowCloseCallback(id, new GLFWWindowCloseCallback() {
+            @Override
+            public void invoke(long l) {
+                event.execute(window, null);
+            }
+        });
+    }
+
+    public void setResizeEvent(WindowEvent event) {
+        Window window = this;
+        glfwSetWindowSizeCallback(id, new GLFWWindowSizeCallback() {
+            @Override
+            public void invoke(long l, int i, int i1) {
+                window.resolution.x = i;
+                window.resolution.y = i;
+                event.execute(window, new Integer[] {i, i1});
+            }
+        });
+    }
+
+    public void setMoveEvent(WindowEvent event) {
+        Window window = this;
+        glfwSetWindowPosCallback(id, new GLFWWindowPosCallback() {
+            @Override
+            public void invoke(long l, int i, int i1) {
+                event.execute(window, new Integer[] {i, i1});
+            }
+        });
+    }
+
+    public void setIconifyEvent(WindowEvent event) {
+        Window window = this;
+        glfwSetWindowIconifyCallback(id, new GLFWWindowIconifyCallback() {
+            @Override
+            public void invoke(long l, boolean b) {
+                event.execute(window, new Boolean[] {b});
+            }
+        });
+    }
+
+    public void setMaximizeEvent(WindowEvent event) {
+        Window window = this;
+        glfwSetWindowMaximizeCallback(id, new GLFWWindowMaximizeCallback() {
+            @Override
+            public void invoke(long l, boolean b) {
+                event.execute(window, new Boolean[] {b});
+            }
+        });
+    }
+
+    public void setFocusEvent(WindowEvent event) {
+        Window window = this;
+        glfwSetWindowFocusCallback(id, new GLFWWindowFocusCallback() {
+            @Override
+            public void invoke(long l, boolean b) {
+                event.execute(window, new Boolean[] {b});
+            }
+        });
+    }
+
     public Keyboard getKeyboard() {
         return keyboard;
     }
@@ -80,8 +142,24 @@ public class Window {
         return mouse;
     }
 
+    public void iconify(){
+        glfwIconifyWindow(id);
+    }
+
+    public void restore(){
+        glfwRestoreWindow(id);
+    }
+
+    public void show(){
+        glfwShowWindow(id);
+    }
+
+    public void hide(){
+        glfwHideWindow(id);
+    }
+
     public void open(boolean fullscreen, boolean vSync, Vector2i resolution, String[] pathsWindowIcon) {
-        if (!isOpened) {
+        if (!isInited) {
             this.fullscreen = fullscreen;
 
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -112,7 +190,7 @@ public class Window {
             glEnableClientState(GL_TEXTURE_COORD_ARRAY);
             GL30.glBindVertexArray(GL30.glGenVertexArrays());
 
-            isOpened = true;
+            isInited = true;
             camera = new Camera(this);
             keyboard = new Keyboard(this);
             mouse = new Mouse(this);
@@ -141,11 +219,11 @@ public class Window {
     public void close() {
         glfwDestroyWindow(id);
         keyboard.close();
-        isOpened = false;
+        isInited = false;
     }
 
     public void update() {
-        if (isOpened) {
+        if (isInited) {
 
             try {
                 frameBuilder.build();

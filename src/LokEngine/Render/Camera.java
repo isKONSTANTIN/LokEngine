@@ -1,6 +1,7 @@
 package LokEngine.Render;
 
 import LokEngine.Render.Frame.BuilderProperties;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.openal.AL10;

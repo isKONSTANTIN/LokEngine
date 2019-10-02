@@ -3,7 +3,7 @@ package LokEngine.Render.Frame.FrameParts.PostProcessing.Workers;
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Frame.DisplayDrawer;
 import LokEngine.Render.Frame.FrameBufferWorker;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import org.lwjgl.opengl.GL11;
 
 public class BlurActionWorker extends PostProcessingActionWorker {
