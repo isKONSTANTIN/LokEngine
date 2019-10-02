@@ -10,7 +10,7 @@ public class Prefs {
     public static String filePath = "Prefs.save";
     private static HashMap<String, String> data = new HashMap<>();
 
-    public static void save() {
+    public static synchronized void save() {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
             fileWorker.openWrite();
@@ -33,11 +33,11 @@ public class Prefs {
         }
     }
 
-    public static void writeField(String nameField, String dataField) {
+    public static synchronized void writeField(String nameField, String dataField) {
         data.put(nameField, dataField);
     }
 
-    public static String getField(String nameField) {
+    public static synchronized String getField(String nameField) {
         if (data.containsKey(nameField)) {
             return data.get(nameField);
         }
@@ -45,12 +45,12 @@ public class Prefs {
         return null;
     }
 
-    public static String getField(String nameField, String defautValue) {
+    public static synchronized String getField(String nameField, String defautValue) {
         String fieldData = getField(nameField);
         return fieldData != null ? fieldData : defautValue;
     }
 
-    public static void init() {
+    public static synchronized void init() {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
             fileWorker.openRead();

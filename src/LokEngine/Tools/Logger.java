@@ -29,9 +29,9 @@ public class Logger {
     public static void debug(Object message) {
         if (debugMessages) {
             if (useColors) {
-                System.out.println(ANSICyanColor + "Debug: " + message + ANSIReset);
+                System.out.println(ANSICyanColor + "[T-" + Thread.currentThread().getId() + "] " +  "Debug: " + message + ANSIReset);
             } else {
-                System.out.println("Debug: " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Debug: " + message);
             }
 
             lastMessageType = 1;
@@ -41,9 +41,9 @@ public class Logger {
     public static void debug(Object message, String tag) {
         if (debugMessages) {
             if (useColors) {
-                System.out.println(ANSICyanColor + "Debug." + tag + ": " + message + ANSIReset);
+                System.out.println(ANSICyanColor + "[T-" + Thread.currentThread().getId() + "] " +  "Debug." + tag + ": " + message + ANSIReset);
             } else {
-                System.out.println("Debug." + tag + ": " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Debug." + tag + ": " + message);
             }
             lastMessageType = 1;
         }
@@ -52,9 +52,9 @@ public class Logger {
     public static void info(Object message) {
         if (infoMessages) {
             if (useColors) {
-                System.out.println(ANSIWhiteColor + "Info: " + message + ANSIReset);
+                System.out.println(ANSIWhiteColor + "[T-" + Thread.currentThread().getId() + "] " +  "Info: " + message + ANSIReset);
             } else {
-                System.out.println("Info: " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Info: " + message);
             }
 
             lastMessageType = 2;
@@ -64,9 +64,9 @@ public class Logger {
     public static void info(Object message, String tag) {
         if (infoMessages) {
             if (useColors) {
-                System.out.println(ANSIWhiteColor + "Info." + tag + ": " + message + ANSIReset);
+                System.out.println(ANSIWhiteColor + "[T-" + Thread.currentThread().getId() + "] " +  "Info." + tag + ": " + message + ANSIReset);
             } else {
-                System.out.println("Info." + tag + ": " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Info." + tag + ": " + message);
             }
             lastMessageType = 2;
         }
@@ -75,9 +75,9 @@ public class Logger {
     public static void warning(Object message) {
         if (warningMessages) {
             if (useColors) {
-                System.out.println(ANSIYellowColor + "Warning: " + message + ANSIReset);
+                System.out.println(ANSIYellowColor + "[T-" + Thread.currentThread().getId() + "] " + "Warning: " + message + ANSIReset);
             } else {
-                System.out.println("Warning: " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Warning: " + message);
             }
             lastMessageType = 3;
         }
@@ -86,9 +86,9 @@ public class Logger {
     public static void warning(Object message, String tag) {
         if (warningMessages) {
             if (useColors) {
-                System.out.println(ANSIYellowColor + "Warning." + tag + ": " + message + ANSIReset);
+                System.out.println(ANSIYellowColor + "[T-" + Thread.currentThread().getId() + "] " +  "Warning." + tag + ": " + message + ANSIReset);
             } else {
-                System.out.println("Warning." + tag + ": " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Warning." + tag + ": " + message);
             }
 
             lastMessageType = 3;
@@ -98,9 +98,9 @@ public class Logger {
     public static void error(Object message) {
         if (errorMessages) {
             if (useColors) {
-                System.out.println(ANSIRedColor + "Error: " + message + ANSIReset);
+                System.out.println(ANSIRedColor + "[T-" + Thread.currentThread().getId() + "] " +  "Error: " + message + ANSIReset);
             } else {
-                System.out.println("Error: " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Error: " + message);
             }
 
             lastMessageType = 4;
@@ -110,9 +110,9 @@ public class Logger {
     public static void error(Object message, String tag) {
         if (errorMessages) {
             if (useColors) {
-                System.out.println(ANSIRedColor + "Error." + tag + ": " + message + ANSIReset);
+                System.out.println(ANSIRedColor + "[T-" + Thread.currentThread().getId() + "] " +  "Error." + tag + ": " + message + ANSIReset);
             } else {
-                System.out.println("Error." + tag + ": " + message);
+                System.out.println("[T-" + Thread.currentThread().getId() + "] " + "Error." + tag + ": " + message);
             }
 
             lastMessageType = 4;

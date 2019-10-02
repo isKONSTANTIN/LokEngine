@@ -168,6 +168,7 @@ public class Window {
             if (fullscreen) {
                 GLFWVidMode mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
                 this.resolution = new Vector2i(mode.width(), mode.height());
+                resolution = this.resolution;
             } else {
                 this.resolution = resolution;
             }
