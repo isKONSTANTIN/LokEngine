@@ -254,6 +254,10 @@ public class Application {
         isRun = false;
     }
 
+    public boolean isRun(){
+        return isRun;
+    }
+
     public void start() {
         startApp(false, true, new Vector2i(512, 512), "LokEngine application");
     }
