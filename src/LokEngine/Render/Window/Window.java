@@ -9,12 +9,14 @@ import LokEngine.Tools.Input.Keyboard;
 import LokEngine.Tools.Input.Mouse;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.Vector2i;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL30;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -144,6 +146,15 @@ public class Window {
 
     public void setPosition(Vector2i position){
         glfwSetWindowPos(id,position.x,position.y);
+    }
+
+    public Vector2i getPosition(){
+        IntBuffer xBuffer = BufferUtils.createIntBuffer(1);
+        IntBuffer yBuffer = BufferUtils.createIntBuffer(1);
+
+        glfwGetWindowPos(id,xBuffer, yBuffer);
+
+        return new Vector2i(xBuffer.get(0),yBuffer.get(0));
     }
 
     public void iconify(){
