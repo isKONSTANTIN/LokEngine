@@ -142,6 +142,10 @@ public class Window {
         return mouse;
     }
 
+    public void setPosition(Vector2i position){
+        glfwSetWindowPos(id,position.x,position.y);
+    }
+
     public void iconify(){
         glfwIconifyWindow(id);
     }
