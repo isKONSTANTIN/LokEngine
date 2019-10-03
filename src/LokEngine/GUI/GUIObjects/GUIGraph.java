@@ -17,14 +17,21 @@ public class GUIGraph extends GUIObject {
     int maxPoints;
 
     GUIGraphFramePart framePart;
+    GUIFreeTextDrawer freeTextDrawer;
 
-    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints, Color color) {
+    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints, Color color, Color color2) {
         super(position, size);
         this.maxHeight = maxHeight;
         this.minHeight = minHeight;
         this.maxPoints = maxPoints > 0 ? maxPoints : 1;
 
-        framePart = new GUIGraphFramePart(position, size, points, maxHeight, minHeight, maxPoints, color);
+        this.freeTextDrawer = new GUIFreeTextDrawer("Times New Roman",0,Math.min(Math.max(size.y / 10, 10),24),true);
+
+        framePart = new GUIGraphFramePart(position, size, points, maxHeight, minHeight, maxPoints, color, color2, freeTextDrawer);
+    }
+
+    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints, Color color) {
+        this(position,size,maxHeight,minHeight,maxPoints,color,new Color(color.red,color.green,color.blue,color.alpha / 3f));
     }
 
     public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints) {
@@ -62,6 +69,7 @@ public class GUIGraph extends GUIObject {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
+        freeTextDrawer.update(partsBuilder,properties);
         partsBuilder.addPart(framePart);
     }
 
