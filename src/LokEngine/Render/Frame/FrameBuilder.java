@@ -4,7 +4,6 @@ import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
 import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Utilities.Color;
-import org.lwjgl.opengl.GL;
 
 import java.util.Vector;
 
@@ -49,7 +48,6 @@ public class FrameBuilder {
     }
 
     public void build() {
-        GL.createCapabilities();
         builderProperties.useShader(builderProperties.getObjectShader());
         builderProperties.getBuilderWindow().getCamera().updateView();
 
