@@ -96,10 +96,11 @@ public class Font {
                 drawX = x;
                 continue;
             }
-            if (ch == '\r') {
-                continue;
-            }
+            if (ch == '\r') continue;
+
             Glyph g = glyphs.get(ch);
+
+            if (g == null) continue;
 
             float width = drawX + g.width;
             float height = drawY + g.height;

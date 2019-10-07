@@ -1,6 +1,7 @@
 package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
@@ -42,15 +43,19 @@ public class PartsBuilder {
             resolution = builderProperties.getBuilderWindow().getResolution();
         }
 
-
         frameBufferWorker.bindFrameBuffer();
         builderProperties.getBuilderWindow().setDrawMode(drawMode);
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        for (FramePart framePart : frameParts) {
-            framePart.partRender(builderProperties);
+        try {
+            for (FramePart framePart : frameParts) {
+                framePart.partRender(builderProperties);
+            }
+        } catch (Exception e) {
+            Logger.error("Fail render frame part!", "LokEngine_PartsBuilder");
+            Logger.printException(e);
         }
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         frameBufferWorker.unbindCurrentFrameBuffer();

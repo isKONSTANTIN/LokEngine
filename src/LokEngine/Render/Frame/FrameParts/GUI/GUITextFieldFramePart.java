@@ -21,6 +21,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         timer.setDurationInSeconds(0.5f);
     }
 
+    @Override
     public void partRender(BuilderProperties builderProperties) {
         super.partRender(builderProperties);
         if (timer.checkTime()) {
