@@ -1,6 +1,7 @@
 package LokEngine.GUI.GUIObjects;
 
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
+import LokEngine.GUI.AdditionalObjects.GUITextFieldScript;
 import LokEngine.Render.Frame.FrameParts.GUI.GUITextFieldFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Input.AdditionalObjects.KeyInfo;
@@ -16,8 +17,24 @@ public class GUITextField extends GUIObject {
     private boolean lastActive;
     public boolean canResize;
 
+    private GUITextFieldScript activeScript;
+    private GUITextFieldScript inactiveScript;
+    private GUITextFieldScript statusChangedScript;
+
     public boolean getActive() {
         return active;
+    }
+
+    public void setActiveScript(GUITextFieldScript script){
+        activeScript = script;
+    }
+
+    public void setInactiveScript(GUITextFieldScript script){
+        inactiveScript = script;
+    }
+
+    public void setStatusChangedScript(GUITextFieldScript script){
+        statusChangedScript = script;
     }
 
     public GUITextField(Vector2i position, GUITextFieldFramePart customFramePart) {
@@ -149,8 +166,20 @@ public class GUITextField extends GUIObject {
                 framePart.pointer = Math.min(framePart.text.length(), framePart.pointer);
             }
         }
+
+        if (lastActive != active) {
+            lastActive = active;
+            if (statusChangedScript != null)
+                statusChangedScript.execute(this);
+        }else if (active){
+            if (activeScript != null)
+                activeScript.execute(this);
+        }else {
+            if (inactiveScript != null)
+                inactiveScript.execute(this);
+        }
+
         framePart.active = active;
         partsBuilder.addPart(framePart);
-        lastActive = active;
     }
 }
