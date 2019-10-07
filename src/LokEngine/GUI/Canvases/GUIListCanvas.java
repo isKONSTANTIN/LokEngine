@@ -6,20 +6,20 @@ import LokEngine.Tools.Utilities.Vector2i;
 public class GUIListCanvas extends GUICanvas {
 
     Vector2i sizeObjects;
+    int gap;
 
     public GUIListCanvas(Vector2i position, Vector2i size, Vector2i sizeObjects) {
-        super(position, size);
-        this.sizeObjects = sizeObjects;
+        this(position,size,sizeObjects,0);
     }
 
+    public GUIListCanvas(Vector2i position, Vector2i size, Vector2i sizeObjects, int gap) {
+        super(position, size);
+        this.sizeObjects = sizeObjects;
+        this.gap = gap;
+    }
     @Override
     public int addObject(GUIObject object) {
-
-        if (sizeObjects.y * objects.size() + 1 > this.getSize().y) {
-            return -1;
-        }
-
-        object.setPosition(new Vector2i(getPosition().x, getPosition().y + sizeObjects.y * objects.size()));
+        object.setPosition(new Vector2i(getPosition().x, getPosition().y + (sizeObjects.y + gap) * objects.size()));
         object.setSize(sizeObjects);
 
         objects.add(object);
