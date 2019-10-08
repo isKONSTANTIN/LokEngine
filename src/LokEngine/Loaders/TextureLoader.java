@@ -72,7 +72,7 @@ public class TextureLoader {
             textureBuffer = (ByteBuffer) imageData[0];
             image = (BufferedImage) imageData[1];
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             return new Texture(-1, 100, 100, path);
         }
 
