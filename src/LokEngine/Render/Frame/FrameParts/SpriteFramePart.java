@@ -32,7 +32,7 @@ public class SpriteFramePart extends FramePart {
         if (shader == null)
             shader = builderProperties.getObjectShader();
 
-        if (!shader.equals(builderProperties.getActiveShader())) {
+        if (builderProperties.getActiveShader() == null || !shader.equals(builderProperties.getActiveShader())) {
             builderProperties.useShader(shader);
         }
 

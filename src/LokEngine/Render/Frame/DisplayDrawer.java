@@ -28,7 +28,7 @@ public class DisplayDrawer {
         win.setDrawMode(DrawMode.Display);
         builderProperties.useShader(builderProperties.getPostProcessingShader());
         DisplayDrawer.bindTexture("postFrame", postFrame, 1, builderProperties);
-        GL11.glClearColor(0, 0, 0, 1);
+        GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program, "direction"), 0, 1);
@@ -39,7 +39,7 @@ public class DisplayDrawer {
         win.setDrawMode(DrawMode.Display);
         builderProperties.useShader(builderProperties.getPostProcessingShader());
         DisplayDrawer.bindTexture("postFrame", postFrame, 1, builderProperties);
-        GL11.glClearColor(0, 0, 0, 1);
+        GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program, "direction"), 0.866f / ((float) win.getResolution().x / (float) win.getResolution().y), 0.5f);
@@ -50,7 +50,7 @@ public class DisplayDrawer {
         win.setDrawMode(DrawMode.Display);
         builderProperties.useShader(builderProperties.getPostProcessingShader());
         DisplayDrawer.bindTexture("postFrame", postFrame, 1, builderProperties);
-        GL11.glClearColor(0, 0, 0, 1);
+        GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program, "direction"), 0.866f / ((float) win.getResolution().x / (float) win.getResolution().y), -0.5f);

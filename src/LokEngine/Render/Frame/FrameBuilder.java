@@ -27,7 +27,7 @@ public class FrameBuilder {
         return builderProperties;
     }
 
-    public FrameBuilder(Window currectWin) throws Exception {
+    public FrameBuilder(Window currectWin) {
         builderProperties = new BuilderProperties(currectWin);
 
         scenePartsBuilder = new PartsBuilder();
