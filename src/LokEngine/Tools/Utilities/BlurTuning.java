@@ -3,7 +3,7 @@ package LokEngine.Tools.Utilities;
 public class BlurTuning {
 
     public double strength = 1;
-    public int samples = 20;
+    public int samples = 55;
     public double bokeh = 0.3;
 
     public BlurTuning(double strength, int samples, double bokeh) {
@@ -13,7 +13,7 @@ public class BlurTuning {
     }
 
     public BlurTuning(double strength) {
-        this(strength, 20, 0.3);
+        this(strength, 55, 0.3);
     }
 
     public BlurTuning() {
