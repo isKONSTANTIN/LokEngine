@@ -13,7 +13,7 @@ public class Camera {
     public float rollRotation;
     public float fieldOfView;
     public float screenRatio = 1;
-    private Window window;
+    public Window window;
 
     public Camera(Window window) {
         this.window = window;
