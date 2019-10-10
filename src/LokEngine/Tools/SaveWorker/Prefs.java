@@ -11,25 +11,27 @@ public class Prefs {
     private static HashMap<String, String> data = new HashMap<>();
 
     public static synchronized void save() {
-        try {
-            FileWorker fileWorker = new FileWorker(filePath);
-            fileWorker.openWrite();
+        if (data.size() > 0){
+            try {
+                FileWorker fileWorker = new FileWorker(filePath);
+                fileWorker.openWrite();
 
-            StringBuilder stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
 
-            for (HashMap.Entry<String, String> entry : data.entrySet()) {
-                stringBuilder.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
+                for (HashMap.Entry<String, String> entry : data.entrySet()) {
+                    stringBuilder.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
+                }
+
+                if (stringBuilder.length() > 0)
+                    stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+
+                fileWorker.write(stringBuilder.toString());
+
+                fileWorker.close();
+            } catch (IOException e) {
+                Logger.warning("Fail save prefs fields!", "LokEngine_Prefs");
+                Logger.printException(e);
             }
-
-            if (stringBuilder.length() > 0)
-                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-
-            fileWorker.write(stringBuilder.toString());
-
-            fileWorker.close();
-        } catch (IOException e) {
-            Logger.warning("Fail save prefs fields!", "LokEngine_Prefs");
-            Logger.printException(e);
         }
     }
 
@@ -53,15 +55,16 @@ public class Prefs {
     public static synchronized void init() {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
-            fileWorker.openRead();
-            String[] lines = fileWorker.read().split("\n");
+            if (fileWorker.file.exists()){
+                fileWorker.openRead();
+                String[] lines = fileWorker.read().split("\n");
 
-            for (String line : lines) {
-                String[] dataLine = line.split(":");
-                if (dataLine.length > 1)
-                    data.put(dataLine[0], dataLine[1]);
+                for (String line : lines) {
+                    String[] dataLine = line.split(":");
+                    if (dataLine.length > 1)
+                        data.put(dataLine[0], dataLine[1]);
+                }
             }
-
             fileWorker.close();
         } catch (IOException e) {
             Logger.warning("Fail init prefs fields!", "LokEngine_Prefs");
