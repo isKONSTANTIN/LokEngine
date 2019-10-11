@@ -206,6 +206,12 @@ public class Application {
             Logger.warning("Fail load in prefs!", "LokEngine_start");
             Logger.printException(e);
         }
+
+        Logger.debug("Init application runtime", "LokEngine_start");
+
+        applicationRuntime = new ApplicationRuntime();
+        applicationRuntime.init();
+
         try {
             Logger.debug("Init Scene", "LokEngine_start");
             scene = new Scene();
