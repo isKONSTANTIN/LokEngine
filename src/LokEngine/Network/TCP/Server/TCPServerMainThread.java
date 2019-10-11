@@ -25,7 +25,7 @@ public class TCPServerMainThread extends Thread {
                 Socket socket = serverSocket.accept();
 
                 TCPServerHandler handler = serverHandler.getClass().newInstance();
-                handler.connected(clientThreads.size());
+                handler.connected(clientThreads.size(), socket);
 
                 BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 BufferedWriter toClient = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));

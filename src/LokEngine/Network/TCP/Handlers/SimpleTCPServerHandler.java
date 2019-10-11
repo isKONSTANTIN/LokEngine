@@ -3,11 +3,13 @@ package LokEngine.Network.TCP.Handlers;
 import LokEngine.Network.TCP.Server.TCPServerHandler;
 import LokEngine.Tools.Logger;
 
+import java.net.Socket;
+
 public class SimpleTCPServerHandler implements TCPServerHandler {
     protected int userID;
 
     @Override
-    public void connected(int userID) {
+    public void connected(int userID, Socket socket) {
         this.userID = userID;
         Logger.info("New user session: " + userID, "Server");
     }
