@@ -14,13 +14,12 @@ public class GUICanvas extends GUIObject {
     Vector<GUIObject> objects = new Vector<>();
     PartsBuilder partsBuilder;
     GUICanvasFramePart framePart;
-    GUIObjectProperties myProperties;
 
     public GUICanvas(Vector2i position, Vector2i size) {
         super(position, size);
         partsBuilder = new PartsBuilder();
         framePart = new GUICanvasFramePart(partsBuilder, position, size);
-        myProperties = new GUIObjectProperties(position, size, null);
+        properties = new GUIObjectProperties(position, size, null);
     }
 
     public int addObject(GUIObject object) {
@@ -43,8 +42,8 @@ public class GUICanvas extends GUIObject {
         super.setSize(size);
         partsBuilder.setResolution(size);
         framePart.size = size;
-        myProperties.size.x = size.x;
-        myProperties.size.y = size.y;
+        properties.size.x = size.x;
+        properties.size.y = size.y;
     }
 
     public void removeObject(int id) {
@@ -61,13 +60,11 @@ public class GUICanvas extends GUIObject {
 
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
-        myProperties.globalPosition.x = parentProperties.globalPosition.x + getPosition().x;
-        myProperties.globalPosition.y = parentProperties.globalPosition.y + getPosition().y;
-        myProperties.window = parentProperties.window;
+        super.update(partsBuilder, parentProperties);
 
         for (GUIObject object : objects) {
             if (!object.hidden)
-                object.update(this.partsBuilder, myProperties);
+                object.update(this.partsBuilder, properties);
         }
         partsBuilder.addPart(framePart);
     }

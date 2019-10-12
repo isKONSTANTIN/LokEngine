@@ -3,7 +3,6 @@ package LokEngine.GUI.GUIObjects;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Input.Mouse;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -17,10 +16,9 @@ public class GUIButton extends GUIObject {
     private Color activeColor;
     private GUIButtonScript pressScript;
     private GUIButtonScript unpressScript;
-    private boolean pressed;
 
     public boolean isPressed() {
-        return pressed;
+        return active;
     }
 
     public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel) {
@@ -33,6 +31,7 @@ public class GUIButton extends GUIObject {
         this.calmStateColor = calmState;
         this.panel = panel;
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
+        this.touchable = true;
 
         setPosition(position);
         setSize(size);
@@ -49,6 +48,7 @@ public class GUIButton extends GUIObject {
         this.calmStateColor = calmState;
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
         this.panel = new GUIPanel(position, size, activeColor);
+        this.touchable = true;
     }
 
     public void setPressScript(GUIButtonScript script) {
@@ -59,38 +59,26 @@ public class GUIButton extends GUIObject {
         this.unpressScript = script;
     }
 
-    private void pressed() {
+    @Override
+    public void pressed() {
         activeColor.red = pressedColor.red;
         activeColor.green = pressedColor.green;
         activeColor.blue = pressedColor.blue;
+        activeColor.alpha = pressedColor.alpha;
 
         if (pressScript != null)
             pressScript.execute(this);
     }
 
-    private void unpressed() {
+    @Override
+    public void unpressed() {
         activeColor.red = calmStateColor.red;
         activeColor.green = calmStateColor.green;
         activeColor.blue = calmStateColor.blue;
+        activeColor.alpha = calmStateColor.alpha;
 
         if (unpressScript != null)
             unpressScript.execute(this);
-    }
-
-    private void checkMouse(Vector2i myGlobalPosition, Mouse mouse) {
-        boolean enterInBox = mouse.inField(myGlobalPosition, size);
-
-        if (enterInBox && mouse.getPressedStatus()) {
-            if (!pressed) {
-                pressed();
-                pressed = true;
-            }
-        }
-
-        if ((!mouse.getPressedStatus() || !enterInBox) && pressed) {
-            unpressed();
-            pressed = false;
-        }
     }
 
     @Override
@@ -112,7 +100,6 @@ public class GUIButton extends GUIObject {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
-        checkMouse(properties.globalPosition, parentProperties.window.getMouse());
 
         panel.update(partsBuilder, properties);
         text.update(partsBuilder, properties);

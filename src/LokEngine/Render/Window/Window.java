@@ -1,5 +1,6 @@
 package LokEngine.Render.Window;
 
+import LokEngine.GUI.AdditionalObjects.MouseRaycastStatus;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Camera;
@@ -212,6 +213,7 @@ public class Window {
             mouse = new Mouse(this);
             canvas = new GUICanvas(new Vector2i(), resolution);
             canvas.properties.window = this;
+            canvas.properties.mouseRaycastStatus = new MouseRaycastStatus(mouse);
 
             try {
                 frameBuilder = new FrameBuilder(this);
@@ -240,7 +242,6 @@ public class Window {
 
     public void update() {
         if (isInited) {
-
             try {
                 frameBuilder.build();
                 glfwSwapBuffers(id);
@@ -251,6 +252,7 @@ public class Window {
 
             glfwPollEvents();
             mouse.update();
+            canvas.properties.mouseRaycastStatus.touched = false;
         }
     }
 

@@ -13,7 +13,6 @@ import static org.lwjgl.glfw.GLFW.*;
 public class GUITextField extends GUIObject {
 
     GUITextFieldFramePart framePart;
-    private boolean active;
     private boolean lastActive;
     public boolean canResize;
 
@@ -42,6 +41,7 @@ public class GUITextField extends GUIObject {
         this.framePart = customFramePart;
         this.size.y = framePart.getHeight();
         this.size.x = framePart.getWidth();
+        this.touchable = true;
         framePart.position = this.position;
     }
 
@@ -50,6 +50,7 @@ public class GUITextField extends GUIObject {
         framePart = new GUITextFieldFramePart(text, fontName, color, fontStyle, fontSize, antiAlias);
         this.canResize = canResize;
         this.size = size;
+        this.touchable = true;
 
         if (size.x < 1 || size.y < 1) {
             if (canResize) {
@@ -105,20 +106,26 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
+    protected void focused(){
+        framePart.pointer = framePart.text.length();
+
+        if (statusChangedScript != null)
+            statusChangedScript.execute(this);
+    }
+
+    @Override
+    protected void unfocused(){
+        if (statusChangedScript != null)
+            statusChangedScript.execute(this);
+    }
+
+    @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
-        if (parentProperties.window.getMouse().inField(properties.globalPosition, size) && parentProperties.window.getMouse().getPressedStatus()) {
-            active = true;
-            framePart.pointer = framePart.text.length();
-
-        } else if (parentProperties.window.getMouse().getPressedStatus()) {
-            active = false;
-        }
-
         Keyboard keyboard = parentProperties.window.getKeyboard();
 
-        while (active && keyboard.next()) {
+        while (focused && keyboard.next()) {
             KeyInfo keyInfo = keyboard.getPressedKey();
             if (lastActive) {
                 int eventKey = keyInfo.buttonID;
@@ -127,7 +134,8 @@ public class GUITextField extends GUIObject {
                 if (eventKey == 27) break;
 
                 if (eventKey == 257) {
-                    active = false;
+                    focused = false;
+                    unfocused();
                     break;
                 }
 
@@ -167,11 +175,7 @@ public class GUITextField extends GUIObject {
             }
         }
 
-        if (lastActive != active) {
-            lastActive = active;
-            if (statusChangedScript != null)
-                statusChangedScript.execute(this);
-        }else if (active){
+        if (focused){
             if (activeScript != null)
                 activeScript.execute(this);
         }else {
@@ -179,7 +183,8 @@ public class GUITextField extends GUIObject {
                 inactiveScript.execute(this);
         }
 
-        framePart.active = active;
+        framePart.active = focused;
+        lastActive = focused;
         partsBuilder.addPart(framePart);
     }
 }
