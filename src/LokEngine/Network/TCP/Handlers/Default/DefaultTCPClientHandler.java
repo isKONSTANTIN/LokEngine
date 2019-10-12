@@ -16,7 +16,7 @@ public class DefaultTCPClientHandler extends SimpleTCPClientHandler {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (String arg : args) {
-            stringBuilder.append(arg).append(";");
+            stringBuilder.append(LokEngine.Tools.Base64.Base64.toBase64(arg)).append(";");
         }
 
         sendMessage(runServerMethodHeadName + "\n" + name + "\n" + stringBuilder.toString());

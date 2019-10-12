@@ -21,8 +21,12 @@ public class DefaultTCPServerHandler extends SimpleTCPServerHandler {
         return publicData.containsKey(name) ? publicData.get(name) : errorHeadName;
     }
 
-    private String runMethod(String name, String[] args) {
+    private String runMethod(String name, String[] rawargs) {
         if (methods.containsKey(name)) {
+            String[] args = new String[rawargs.length];
+            for (int i = 0; i < rawargs.length; i++){
+                args[i] = LokEngine.Tools.Base64.Base64.fromBase64(rawargs[i]);
+            }
             return methods.get(name).execute(args);
         }
         return errorHeadName;
