@@ -34,15 +34,15 @@ public class AtlasPositions implements Saveable {
     }
 
     public ArrayList<Integer> build(Texture texture) {
-        Vector2f fistPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
-        Vector2f secondPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
-        Vector2f thirdPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
-        Vector2f fourthPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
+        Vector2f fistPoint   = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
+        Vector2f secondPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
+        Vector2f thirdPoint  = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
+        Vector2f fourthPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
 
         ArrayList<Integer> uvBuffers = new ArrayList<>();
 
-        for (int i = countSprites - 1; i >= 0; i--) {
-            float offset = fistPoint.x * i;
+        for (int i = 0; i < countSprites; i++) {
+            float offset = thirdPoint.x * i;
             uvBuffers.add(
                     BufferLoader.load(new float[]{
                             fistPoint.x + offset, fistPoint.y,
@@ -53,13 +53,13 @@ public class AtlasPositions implements Saveable {
             );
         }
 
-        for (int i = positions.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < positions.size(); i++) {
             uvBuffers.add(
                     BufferLoader.load(new float[]{
-                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY,
-                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
+                            (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY,
                             (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
-                            (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY
+                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
+                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY
                     })
             );
         }

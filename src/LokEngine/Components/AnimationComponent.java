@@ -49,6 +49,8 @@ public class AnimationComponent extends Component implements Saveable {
         return activeAnimation;
     }
 
+    public String getActiveAnimationName(){ return activeAnimationName; }
+
     public void setActiveAnimation(String name) {
         activeAnimation = animations.get(name);
         activeAnimationName = name;
