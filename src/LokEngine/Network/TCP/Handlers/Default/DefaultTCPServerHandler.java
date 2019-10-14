@@ -2,6 +2,8 @@ package LokEngine.Network.TCP.Handlers.Default;
 
 import LokEngine.Network.TCP.Handlers.SimpleTCPServerHandler;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.net.Socket;
 import java.util.HashMap;
 
@@ -13,7 +15,7 @@ public class DefaultTCPServerHandler extends SimpleTCPServerHandler {
     public static HashMap<String, String> publicData = new HashMap<>();
 
     @Override
-    public void connected(int userID, Socket socket) {
+    public void connected(int userID, BufferedReader fromClient, BufferedWriter toClient, Socket socket) {
         this.userID = userID;
     }
 

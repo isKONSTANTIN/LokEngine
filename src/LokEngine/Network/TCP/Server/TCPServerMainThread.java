@@ -24,11 +24,11 @@ public class TCPServerMainThread extends Thread {
             try {
                 Socket socket = serverSocket.accept();
 
-                TCPServerHandler handler = serverHandler.getClass().newInstance();
-                handler.connected(clientThreads.size(), socket);
-
                 BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 BufferedWriter toClient = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+                TCPServerHandler handler = serverHandler.getClass().newInstance();
+                handler.connected(clientThreads.size(), fromClient, toClient, socket);
 
                 TCPServerParentThread clientThread = new TCPServerParentThread(fromClient, toClient, handler, socket);
                 clientThread.start();

@@ -7,6 +7,7 @@ import LokEngine.Tools.Logger;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.net.Socket;
 
 public class SimpleTCPClientHandler implements TCPClientHandler {
 
@@ -14,7 +15,7 @@ public class SimpleTCPClientHandler implements TCPClientHandler {
     protected BufferedWriter toServer;
 
     @Override
-    public void connected(BufferedReader fromServer, BufferedWriter toServer) {
+    public void connected(BufferedReader fromServer, BufferedWriter toServer, Socket socket) {
         this.fromServer = fromServer;
         this.toServer = toServer;
     }
