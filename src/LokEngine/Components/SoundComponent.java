@@ -1,6 +1,6 @@
 package LokEngine.Components;
 
-import LokEngine.Components.AdditionalObjects.Sound;
+import LokEngine.Components.AdditionalObjects.Sound.Sound;
 import LokEngine.Loaders.SoundLoader;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
@@ -23,6 +23,8 @@ public class SoundComponent extends Component implements Saveable {
         AL10.alSourcef(this.source, AL10.AL_GAIN, 1);
         AL10.alSourcef(this.source, AL10.AL_PITCH, 1);
         AL10.alSource3f(this.source, AL10.AL_POSITION, 0, 0, 0);
+
+        this.sound = sound;
     }
 
     public SoundComponent(String path) {
@@ -69,6 +71,7 @@ public class SoundComponent extends Component implements Saveable {
 
     @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
+        sound.update();
         AL10.alSource3f(this.source, AL10.AL_POSITION, source.position.x, source.position.y, 0);
     }
 

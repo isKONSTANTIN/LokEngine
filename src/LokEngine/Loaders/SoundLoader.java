@@ -1,6 +1,6 @@
 package LokEngine.Loaders;
 
-import LokEngine.Components.AdditionalObjects.Sound;
+import LokEngine.Components.AdditionalObjects.Sound.Sound;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.SoundType;
 import LokEngine.Tools.Utilities.WaveData;

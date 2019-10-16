@@ -1,18 +1,16 @@
-package LokEngine.Components.AdditionalObjects;
+package LokEngine.Components.AdditionalObjects.Sound;
 
 import LokEngine.Loaders.SoundLoader;
 import LokEngine.Tools.SaveWorker.Saveable;
 import LokEngine.Tools.Utilities.SoundType;
 
-public class Sound implements Saveable {
+public class RawWavSound extends Sound {
 
-    public int buffer;
     public String path;
 
-    public Sound() {
-    }
+    public RawWavSound() {}
 
-    public Sound(String path, int buffer) {
+    public RawWavSound(String path, int buffer) {
         this.path = path;
         this.buffer = buffer;
     }
@@ -27,4 +25,5 @@ public class Sound implements Saveable {
         buffer = SoundLoader.loadSound(savedString, SoundType.WAV).buffer;
         return this;
     }
+
 }
