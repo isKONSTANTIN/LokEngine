@@ -10,9 +10,8 @@ public class RawWavSound extends Sound {
 
     public RawWavSound() {}
 
-    public RawWavSound(String path, int buffer) {
+    public RawWavSound(String path) {
         this.path = path;
-        this.buffer = buffer;
     }
 
     @Override
