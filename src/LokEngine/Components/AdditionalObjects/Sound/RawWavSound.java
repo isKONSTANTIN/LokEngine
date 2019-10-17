@@ -1,13 +1,10 @@
 package LokEngine.Components.AdditionalObjects.Sound;
 
 import LokEngine.Loaders.SoundLoader;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.Saveable;
-import LokEngine.Tools.Utilities.SoundType;
 
 public class RawWavSound extends Sound {
-
-    public String path;
-
     public RawWavSound() {}
 
     public RawWavSound(String path) {
@@ -21,7 +18,12 @@ public class RawWavSound extends Sound {
 
     @Override
     public Saveable load(String savedString) {
-        buffer = SoundLoader.loadSound(savedString, SoundType.WAV).buffer;
+        try {
+            buffer = SoundLoader.loadWAV(savedString).buffer;
+        } catch (Exception e) {
+            Logger.warning("Fail load raw wav!", "LokEngine_RawWavSound");
+            e.printStackTrace();
+        }
         return this;
     }
 

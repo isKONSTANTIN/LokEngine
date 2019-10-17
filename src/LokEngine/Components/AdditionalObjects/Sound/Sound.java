@@ -4,6 +4,7 @@ import LokEngine.Tools.SaveWorker.Saveable;
 
 public class Sound implements Saveable {
 
+    public String path;
     public int buffer;
 
     public Sound() {}

@@ -1,12 +1,10 @@
 package LokEngine.Components;
 
 import LokEngine.Components.AdditionalObjects.Sound.Sound;
-import LokEngine.Loaders.SoundLoader;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.SaveWorker.Saveable;
-import LokEngine.Tools.Utilities.SoundType;
 import org.lwjgl.openal.AL10;
 
 public class SoundComponent extends Component implements Saveable {
@@ -25,10 +23,6 @@ public class SoundComponent extends Component implements Saveable {
         AL10.alSource3f(this.source, AL10.AL_POSITION, 0, 0, 0);
 
         this.sound = sound;
-    }
-
-    public SoundComponent(String path) {
-        this(SoundLoader.loadSound(path, SoundType.WAV));
     }
 
     public void setSound(Sound sound) {
