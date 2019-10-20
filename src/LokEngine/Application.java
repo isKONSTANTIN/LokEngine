@@ -195,11 +195,16 @@ public class Application {
 
             if (!isRun) break;
 
-            scene.update(applicationRuntime, null);
+            if (scene != null)
+                scene.update(applicationRuntime, null);
         }
     }
 
-    public void startConsole() {
+    public void startConsole(){
+        startConsole(true);
+    }
+
+    public void startConsole(boolean haveScene) {
         try {
             Prefs.init();
         } catch (Exception e) {
@@ -213,8 +218,10 @@ public class Application {
         applicationRuntime.init();
 
         try {
-            Logger.debug("Init Scene", "LokEngine_start");
-            scene = new Scene();
+            if (haveScene){
+                Logger.debug("Init Scene", "LokEngine_start");
+                scene = new Scene();
+            }
             Logger.debug("Call user init method", "LokEngine_start");
             try {
                 Init();
