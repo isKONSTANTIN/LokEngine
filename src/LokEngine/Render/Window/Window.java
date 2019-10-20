@@ -271,11 +271,27 @@ public class Window {
             } catch (Exception e) {
                 Logger.warning("Fail load icon", "LokEngine_Window");
                 Logger.printException(e);
+                return;
             }
         }
         iconGB.flip();
 
         glfwSetWindowIcon(id, iconGB);
+    }
+
+    public void setCursor(String path){
+        GLFWImage GLFWimage;
+        try {
+            Object[] image = TextureLoader.loadTextureInBuffer(path);
+            GLFWimage = GLFWImage.create().set(((BufferedImage) image[1]).getWidth(), ((BufferedImage) image[1]).getHeight(), (ByteBuffer) image[0]);
+        } catch (Exception e) {
+            Logger.warning("Fail load icon", "LokEngine_Window");
+            Logger.printException(e);
+            return;
+        }
+
+        long cursor = GLFW.glfwCreateCursor(GLFWimage,0,0);
+        GLFW.glfwSetCursor(id, cursor);
     }
 
     public void setDrawMode(DrawMode dm) {
