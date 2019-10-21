@@ -6,10 +6,28 @@ import org.jbox2d.dynamics.Body;
 
 public class Rigidbody implements Saveable {
 
-    public float density = 1.0f;
-    public float friction = 0.3f;
-    public boolean isStatic = false;
+    public float density;
+    public float friction;
+    public boolean isStatic;
     public Body b2body;
+
+    public Rigidbody(boolean isStatic, float friction, float density){
+        this.isStatic = isStatic;
+        this.friction = friction;
+        this.density = density;
+    }
+
+    public Rigidbody(boolean isStatic, float friction){
+        this(isStatic,friction,1);
+    }
+
+    public Rigidbody(boolean isStatic){
+        this(isStatic,0.3f);
+    }
+
+    public Rigidbody(){
+        this(false);
+    }
 
     @Override
     public String save() {
