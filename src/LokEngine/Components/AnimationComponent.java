@@ -21,6 +21,8 @@ public class AnimationComponent extends Component implements Saveable {
 
     public float currectFrame;
     public float speedAnimation = 1;
+    public boolean frameSkipping;
+
     private Sprite sprite = new Sprite(null, 0, 1, 0);
 
     public Sprite getSprite() {
@@ -62,7 +64,7 @@ public class AnimationComponent extends Component implements Saveable {
         if (activeAnimation != null) {
             sprite.texture = activeAnimation.altasTexture;
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
-            currectFrame += speedAnimation * applicationRuntime.getDeltaTime() * applicationRuntime.getSpeedEngine();
+            currectFrame += speedAnimation * (frameSkipping ? applicationRuntime.getDeltaTime() * applicationRuntime.getSpeedEngine() : 1);
 
             if ((int) currectFrame > activeAnimation.uvBuffers.size() - 1) {
                 currectFrame = 0;
