@@ -92,7 +92,7 @@ public class Font {
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             if (ch == '\n') {
-                drawY -= fontHeight;
+                drawY += fontHeight;
                 drawX = x;
                 continue;
             }
