@@ -36,6 +36,8 @@ public class Scene implements Saveable {
         objects.remove(id);
     }
 
+    public void removeAll(){ objects.clear(); }
+
     public void addPostUpdateEvent(PostUpdateEvent event) {
         postUpdateEvents.add(event);
     }
