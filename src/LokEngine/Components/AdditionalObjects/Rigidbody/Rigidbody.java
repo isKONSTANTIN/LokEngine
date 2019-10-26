@@ -10,16 +10,25 @@ public class Rigidbody implements Saveable {
     public float friction;
     public boolean isStatic;
     public Body b2body;
+    public Object objectData;
+    public boolean isSensor;
 
-    public Rigidbody(boolean isStatic, float friction, float density){
+    public Rigidbody(boolean isStatic, float friction, float density, boolean isSensor, Object objectData){
         this.isStatic = isStatic;
         this.friction = friction;
         this.density = density;
+        this.objectData = objectData;
+        this.isSensor = isSensor;
+    }
+
+    public Rigidbody(boolean isStatic, float friction, float density){
+        this(isStatic,friction,density, false, null);
     }
 
     public Rigidbody(boolean isStatic, float friction){
-        this(isStatic,friction,1);
+        this(isStatic, friction,1);
     }
+
 
     public Rigidbody(boolean isStatic){
         this(isStatic,0.3f);

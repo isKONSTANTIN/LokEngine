@@ -58,8 +58,10 @@ public class RigidbodyComponent extends Component implements Saveable {
         bodyDef.type = body.isStatic ? BodyType.STATIC : BodyType.DYNAMIC;
 
         Body body = object.scene.b2World.createBody(bodyDef);
-
         FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.isSensor = this.body.isSensor;
+        if (this.body.objectData != null)
+            fixtureDef.setUserData(this.body.objectData);
         fixtureDef.shape = shape.shape;
         fixtureDef.density = this.body.density;
         fixtureDef.friction = this.body.friction;
