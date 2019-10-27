@@ -23,9 +23,9 @@
  ******************************************************************************/
 package org.jbox2d.dynamics;
 
-import java.util.List;
-
 import org.jbox2d.common.MathUtils;
+
+import java.util.List;
 
 public class Profile {
   private static final int LONG_AVG_NUMS = 20;

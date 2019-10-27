@@ -23,9 +23,9 @@
  ******************************************************************************/
 package org.jbox2d.dynamics.joints;
 
-import java.util.ArrayList;
-
 import org.jbox2d.dynamics.Body;
+
+import java.util.ArrayList;
 
 /**
  * Definition for a {@link ConstantVolumeJoint}, which connects a group a bodies together so they

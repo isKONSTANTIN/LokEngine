@@ -1,8 +1,5 @@
 package org.jbox2d.particle;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 import org.jbox2d.callbacks.ParticleDestructionListener;
 import org.jbox2d.callbacks.ParticleQueryCallback;
 import org.jbox2d.callbacks.ParticleRaycastCallback;
@@ -11,17 +8,15 @@ import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.RayCastInput;
 import org.jbox2d.collision.RayCastOutput;
 import org.jbox2d.collision.shapes.Shape;
-import org.jbox2d.common.BufferUtils;
-import org.jbox2d.common.MathUtils;
-import org.jbox2d.common.Rot;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Transform;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.common.*;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.TimeStep;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.particle.VoronoiDiagram.VoronoiDiagramCallback;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class ParticleSystem {
   /** All particle types that require creating pairs */

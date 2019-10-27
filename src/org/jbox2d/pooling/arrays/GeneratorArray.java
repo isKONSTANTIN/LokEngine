@@ -1,8 +1,8 @@
 package org.jbox2d.pooling.arrays;
 
-import java.util.HashMap;
-
 import org.jbox2d.particle.VoronoiDiagram;
+
+import java.util.HashMap;
 
 public class GeneratorArray {
 

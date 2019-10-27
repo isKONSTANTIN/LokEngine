@@ -26,11 +26,11 @@
  */
 package org.jbox2d.profile;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.jbox2d.common.MathUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Daniel Murphy

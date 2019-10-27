@@ -42,7 +42,7 @@ public class FontLoader {
             return createdFonts.get(context).get(font);
         }
 
-        HashMap<Character, Glyph> glyphs = new HashMap();
+        HashMap<Character, Glyph> glyphs = new HashMap<>();
         HashMap<Character, BufferedImage> bufferedImages = new HashMap<>();
 
         StringBuilder stringBuilder = new StringBuilder();

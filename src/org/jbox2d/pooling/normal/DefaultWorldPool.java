@@ -26,28 +26,16 @@
  */
 package org.jbox2d.pooling.normal;
 
-import java.util.HashMap;
-
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.Collision;
 import org.jbox2d.collision.Distance;
 import org.jbox2d.collision.TimeOfImpact;
-import org.jbox2d.common.Mat22;
-import org.jbox2d.common.Mat33;
-import org.jbox2d.common.Rot;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.common.Vec3;
-import org.jbox2d.dynamics.contacts.ChainAndCircleContact;
-import org.jbox2d.dynamics.contacts.ChainAndPolygonContact;
-import org.jbox2d.dynamics.contacts.CircleContact;
-import org.jbox2d.dynamics.contacts.Contact;
-import org.jbox2d.dynamics.contacts.EdgeAndCircleContact;
-import org.jbox2d.dynamics.contacts.EdgeAndPolygonContact;
-import org.jbox2d.dynamics.contacts.PolygonAndCircleContact;
-import org.jbox2d.dynamics.contacts.PolygonContact;
+import org.jbox2d.common.*;
+import org.jbox2d.dynamics.contacts.*;
 import org.jbox2d.pooling.IDynamicStack;
 import org.jbox2d.pooling.IWorldPool;
+
+import java.util.HashMap;
 
 /**
  * Provides object pooling for all objects used in the engine. Objects retrieved from here should

@@ -23,8 +23,6 @@
  ******************************************************************************/
 package org.jbox2d.collision.broadphase;
 
-import java.util.Arrays;
-
 import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.callbacks.PairCallback;
 import org.jbox2d.callbacks.TreeCallback;
@@ -32,6 +30,8 @@ import org.jbox2d.callbacks.TreeRayCastCallback;
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.RayCastInput;
 import org.jbox2d.common.Vec2;
+
+import java.util.Arrays;
 
 /**
  * The broad-phase is used for computing pairs and performing volume queries and ray casts. This

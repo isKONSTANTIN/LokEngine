@@ -11,6 +11,7 @@ import LokEngine.Tools.Input.Mouse;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL30;

@@ -5,28 +5,21 @@ import LokEngine.Components.AdditionalObjects.Sound.RawWavSound;
 import LokEngine.Components.AdditionalObjects.Sound.Sound;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.Utilities.WaveData;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.apache.commons.io.IOUtils;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
-import org.lwjgl.stb.STBVorbisInfo;
-import org.lwjgl.system.CallbackI;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
-import java.nio.channels.FileChannel;
 import java.util.HashMap;
 
-import static org.lwjgl.BufferUtils.createShortBuffer;
 import static org.lwjgl.openal.AL10.*;
-import static org.lwjgl.stb.STBVorbis.*;
+import static org.lwjgl.stb.STBVorbis.stb_vorbis_decode_filename;
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.libc.LibCStdlib.free;
 
 public class SoundLoader {
 

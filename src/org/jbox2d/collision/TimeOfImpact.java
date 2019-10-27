@@ -25,12 +25,7 @@ package org.jbox2d.collision;
 
 import org.jbox2d.collision.Distance.DistanceProxy;
 import org.jbox2d.collision.Distance.SimplexCache;
-import org.jbox2d.common.MathUtils;
-import org.jbox2d.common.Rot;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Sweep;
-import org.jbox2d.common.Transform;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.common.*;
 import org.jbox2d.pooling.IWorldPool;
 
 /**

@@ -13,7 +13,7 @@ public class Keyboard {
 
     private GLFWKeyCallback callbackKey;
     private GLFWCharCallback callbackChar;
-    private ArrayList<KeyInfo> keysPressed = new ArrayList();
+    private ArrayList<KeyInfo> keysPressed = new ArrayList<>();
     private Window window;
 
     public Keyboard(Window window) {

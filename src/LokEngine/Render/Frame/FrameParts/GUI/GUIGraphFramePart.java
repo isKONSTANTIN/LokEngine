@@ -10,7 +10,6 @@ import LokEngine.Tools.Utilities.Vector2i;
 import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glVertex2f;
 
 public class GUIGraphFramePart extends FramePart {
 
