@@ -1,4 +1,4 @@
-package LokEngine.Tools.Utilities;
+package LokEngine.Tools.Utilities.Color;
 
 public class ColorRGB extends Color {
 

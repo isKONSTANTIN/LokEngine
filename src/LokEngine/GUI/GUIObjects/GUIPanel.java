@@ -5,7 +5,7 @@ import LokEngine.Render.Frame.FrameParts.GUI.GUIPanelFramePart;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.BlurTuning;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIPanel extends GUIObject {

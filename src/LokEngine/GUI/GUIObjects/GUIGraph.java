@@ -3,7 +3,7 @@ package LokEngine.GUI.GUIObjects;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.FrameParts.GUI.GUIGraphFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import java.util.ArrayList;

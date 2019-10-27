@@ -4,7 +4,7 @@ import LokEngine.GUI.GUIObjects.GUIFreeTextDrawer;
 import LokEngine.Render.Enums.FramePartType;
 import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package LokEngine.Render.Frame;
 
 import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Tools.Logger;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 

@@ -4,7 +4,7 @@ import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.GUIObjects.GUIObject;
 import LokEngine.Render.Frame.FrameParts.GUI.GUICanvasFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import java.util.Vector;

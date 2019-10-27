@@ -6,6 +6,7 @@ import LokEngine.Render.Frame.FrameParts.GUI.GUITextFieldFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import LokEngine.Tools.Input.Keyboard;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -45,7 +46,7 @@ public class GUITextField extends GUIObject {
         framePart.position = this.position;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String fontName, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
+    public GUITextField(Vector2i position, Vector2i size, String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0, 0));
         framePart = new GUITextFieldFramePart(text, fontName, color, fontStyle, fontSize, antiAlias);
         this.canResize = canResize;
@@ -62,20 +63,20 @@ public class GUITextField extends GUIObject {
         framePart.position = this.position;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String text, LokEngine.Tools.Utilities.Color color, int fontStyle, int fontSize) {
+    public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle, int fontSize) {
         this(position, size, "Times New Roman", text, color, fontStyle, fontSize, true, false);
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String text, LokEngine.Tools.Utilities.Color color, int fontStyle) {
+    public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle) {
         this(position, size, text, color, fontStyle, 24);
     }
 
     public GUITextField(Vector2i position, Vector2i size, String text) {
-        this(position, size, text, new LokEngine.Tools.Utilities.Color(1, 1, 1, 1), 0);
+        this(position, size, text, new Color(1, 1, 1, 1), 0);
     }
 
     public GUITextField(Vector2i position, String text) {
-        this(position, new Vector2i(), text, new LokEngine.Tools.Utilities.Color(1, 1, 1, 1), 0);
+        this(position, new Vector2i(), text, new Color(1, 1, 1, 1), 0);
     }
 
     public GUITextField(Vector2i position) {

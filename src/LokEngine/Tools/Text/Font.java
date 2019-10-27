@@ -3,7 +3,7 @@ package LokEngine.Tools.Text;
 
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Texture;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;

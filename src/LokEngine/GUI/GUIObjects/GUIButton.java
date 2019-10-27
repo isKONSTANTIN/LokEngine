@@ -3,7 +3,7 @@ package LokEngine.GUI.GUIObjects;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Render.Frame.PartsBuilder;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIButton extends GUIObject {

@@ -3,7 +3,7 @@ package LokEngine.Render.Frame.FrameParts.GUI;
 import LokEngine.Loaders.FontLoader;
 import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Tools.Timer;
-import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.Color.Color;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
