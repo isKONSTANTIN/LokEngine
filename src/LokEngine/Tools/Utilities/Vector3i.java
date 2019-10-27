@@ -14,4 +14,8 @@ public class Vector3i extends Vector2i {
         this.z = z;
     }
 
+    public boolean equals(Vector3i vector3i){
+        return (x == vector3i.x) && (y == vector3i.y) && (z == vector3i.z);
+    }
+
 }
