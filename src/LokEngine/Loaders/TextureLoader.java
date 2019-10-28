@@ -19,6 +19,10 @@ public class TextureLoader {
     private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();
 
     public static void unloadTexture(Texture texture) {
+        long context = glfwGetCurrentContext();
+
+        loadedTextures.get(context).remove(texture.path);
+
         glDeleteTextures(texture.buffer);
         texture = null;
     }
