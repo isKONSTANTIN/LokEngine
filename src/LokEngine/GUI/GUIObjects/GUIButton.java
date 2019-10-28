@@ -37,9 +37,10 @@ public class GUIButton extends GUIObject {
         setSize(size);
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color calmState, String text) {
+    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text) {
         super(position, size);
-        this.text = new GUIText(position, text);
+        this.text = text;
+        text.setPosition(position);
         if (size.x <= 0 || size.y <= 0) {
             size = this.text.getSize();
         }
@@ -49,6 +50,13 @@ public class GUIButton extends GUIObject {
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
         this.panel = new GUIPanel(position, size, activeColor);
         this.touchable = true;
+
+        setPosition(position);
+        setSize(size);
+    }
+
+    public GUIButton(Vector2i position, Vector2i size, Color calmState, String text) {
+        this(position,size,calmState, new GUIText(position, text));
     }
 
     public void setPressScript(GUIButtonScript script) {
