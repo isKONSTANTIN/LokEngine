@@ -61,4 +61,32 @@ public class URLReportSender {
     public String sendReportOverHttps(Report report) throws Exception {
         return sendReport(report, (HttpsURLConnection)(proxy != null ? url.openConnection(proxy) : url.openConnection()));
     }
+
+    public ReportSendlerResult sendReportInBackgroud(Report report) {
+        ReportSendlerResult returnMessage = new ReportSendlerResult();
+
+        new Thread(() -> {
+            try {
+                returnMessage.result = sendReport(report, (HttpURLConnection)(proxy != null ? url.openConnection(proxy) : url.openConnection()));
+            } catch (Exception e) {
+                returnMessage.result = "Failed";
+            }
+        }).start();
+
+        return returnMessage;
+    }
+
+    public ReportSendlerResult sendReportOverHttpsInBackgroud(Report report) {
+        ReportSendlerResult returnMessage = new ReportSendlerResult();
+
+        new Thread(() -> {
+            try {
+                returnMessage.result = sendReport(report, (HttpsURLConnection)(proxy != null ? url.openConnection(proxy) : url.openConnection()));
+            } catch (Exception e) {
+                returnMessage.result = "Failed";
+            }
+        }).start();
+
+        return returnMessage;
+    }
 }
