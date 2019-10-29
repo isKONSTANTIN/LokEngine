@@ -41,6 +41,7 @@
       <root url="jar://$PROJECT_DIR$/libs/lwjgl-stb/lwjgl-stb-natives-linux-arm64.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/lwjgl-stb/lwjgl-stb-natives-windows.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/commons-io-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.2.3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

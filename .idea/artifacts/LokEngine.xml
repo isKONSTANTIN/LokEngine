@@ -49,6 +49,9 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-stb/lwjgl-stb-natives-linux-arm64.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-openal/lwjgl-openal-natives-windows-x86.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/commons-io-2.6.jar" path-in-jar="/" />
+      <element id="directory" name="LokEngine">
+        <element id="file-copy" path="$PROJECT_DIR$/LICENSE.md" />
+      </element>
     </root>
   </artifact>
 </component>
