@@ -14,29 +14,31 @@ import java.nio.charset.Charset;
 public class URLReportSender {
 
     protected int connectionTimeout;
+    protected int readTimeout;
     protected Proxy proxy;
     protected URL url;
     protected Gson gson;
 
-    public URLReportSender(URL url, int connectionTimeout, Proxy proxy) {
+    public URLReportSender(URL url, int connectionTimeout, int readTimeout, Proxy proxy) {
         this.connectionTimeout = connectionTimeout;
+        this.readTimeout = readTimeout;
         this.proxy = proxy;
         this.url = url;
         this.gson = new Gson();
     }
 
-    public URLReportSender(URL url, int connectionTimeout) {
-        this(url, connectionTimeout, null);
+    public URLReportSender(URL url, int connectionTimeout, int readTimeout) {
+        this(url,connectionTimeout,readTimeout,null);
     }
 
     public URLReportSender(URL url) {
-        this(url, 5000);
+        this(url,5000, 5000);
     }
 
     protected String sendReport(Report report, HttpURLConnection connection) throws Exception {
         connection.setRequestMethod("POST");
         connection.setConnectTimeout(this.connectionTimeout);
-
+        connection.setReadTimeout(this.readTimeout);
         connection.setDoOutput(true);
         OutputStream out = connection.getOutputStream();
         out.write(gson.toJson(report).getBytes());
