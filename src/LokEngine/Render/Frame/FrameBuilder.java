@@ -4,11 +4,12 @@ import LokEngine.Render.Enums.DrawMode;
 import LokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
 import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Utilities.Color.Color;
+import org.lwjgl.opengl.GL11;
 
 import java.util.Vector;
 
 public class FrameBuilder {
-    public Color glSceneClearColor = new Color(0.6f, 0.6f, 0.6f, 1);
+    public Color backgroundColor = new Color(0.6f, 0.6f, 0.6f, 1);
 
     private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<PostProcessingActionWorker>();
     private PartsBuilder scenePartsBuilder;
@@ -48,22 +49,33 @@ public class FrameBuilder {
     }
 
     public void build() {
-        builderProperties.useShader(builderProperties.getObjectShader());
-        builderProperties.getBuilderWindow().getCamera().updateView();
+        GL11.glClearColor(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        scenePartsBuilder.clearColor = glSceneClearColor;
+        int sceneFrame = -1;
+        int GUIBuild = -1;
 
-        int preDisplayFrame = scenePartsBuilder.build(DrawMode.Scene, builderProperties);
+        Window window = builderProperties.getBuilderWindow();
 
-        builderProperties.getBuilderWindow().getCanvas().update(GUIPartsBuilder, builderProperties.getBuilderWindow().getCanvas().properties);
-        int GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI, builderProperties);
+        if (scenePartsBuilder.frameParts.size() > 0) {
+            builderProperties.useShader(builderProperties.getObjectShader());
+            window.getCamera().updateView();
 
-        for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
-            preDisplayFrame = postProcessingActionWorker.render(preDisplayFrame);
+            sceneFrame = scenePartsBuilder.build(DrawMode.Scene, builderProperties);
+
+            for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
+                sceneFrame = postProcessingActionWorker.render(sceneFrame);
+            }
         }
 
+        window.getCanvas().update(GUIPartsBuilder, window.getCanvas().properties);
+        if (GUIPartsBuilder.frameParts.size() > 0)
+            GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI, builderProperties);
+
         builderProperties.useShader(builderProperties.getDisplayShader());
-        DisplayDrawer.renderScreen(preDisplayFrame, builderProperties.getBuilderWindow());
-        DisplayDrawer.renderScreen(GUIBuild, builderProperties.getBuilderWindow());
+        if (sceneFrame != -1)
+            DisplayDrawer.renderScreen(sceneFrame, window);
+        if (GUIBuild != -1)
+            DisplayDrawer.renderScreen(GUIBuild, window);
     }
 }
