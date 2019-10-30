@@ -102,17 +102,13 @@ public class ApplicationGUIOnly extends Application {
                 System.gc();
                 isRun = true;
             } catch (Exception e) {
-                Logger.error("Fail start engine!", "LokEngine_start");
-                Logger.printException(e);
-                System.exit(-1);
+                errorClose(e);
             }
 
             try {
                 mainWhile();
             } catch (Exception e) {
-                Logger.error("Critical error in main while engine!", "LokEngine_runtime");
-                Logger.printException(e);
-                System.exit(-2);
+                errorClose(e);
             }
 
             Logger.debug("Exit from main while", "LokEngine_start");
