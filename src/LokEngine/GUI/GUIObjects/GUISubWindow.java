@@ -79,11 +79,11 @@ public class GUISubWindow extends GUIObject {
         if (canMove)
             lastMousePos = mousePos;
 
-        canvas.update(partsBuilder, parentProperties);
-
         if (titleText != null) {
             titlePanel.update(partsBuilder, parentProperties);
             titleText.update(partsBuilder, properties);
         }
+
+        canvas.update(partsBuilder, parentProperties);
     }
 }
