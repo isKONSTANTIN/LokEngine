@@ -1,5 +1,7 @@
 package LokEngine.Network.Report;
 
+import LokEngine.Tools.Base64.Base64;
+
 import java.util.HashMap;
 
 public class Report {
@@ -10,7 +12,7 @@ public class Report {
 
     public Report(String title, Exception error, HashMap<String, String> otherInfo){
         this.title = title;
-        this.errorBody = error.getClass().getName() + " - " + error.getMessage() + "\n" + LokEngine.Tools.Logger.stackTraceToString(error.getStackTrace());
+        this.errorBody = Base64.toBase64(error.getClass().getName() + " - " + error.getMessage() + "\n" + LokEngine.Tools.Logger.stackTraceToString(error.getStackTrace()));
         this.otherInfo = otherInfo;
         this.systemInfo = getSystemInfo();
     }
