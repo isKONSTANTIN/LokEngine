@@ -311,10 +311,8 @@ public class Window {
 
             if (dm == DrawMode.Display) {
                 frameBuilder.getBuilderProperties().useShader(frameBuilder.getBuilderProperties().getDisplayShader());
-                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             } else {
                 frameBuilder.getBuilderProperties().unUseShader();
-                glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             }
 
         } else if (dm == DrawMode.Scene) {
