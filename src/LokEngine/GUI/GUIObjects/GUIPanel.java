@@ -9,8 +9,8 @@ import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIPanel extends GUIObject {
-    GUIPanelFramePart framePart;
-    BlurAction blurAction;
+    protected GUIPanelFramePart framePart;
+    protected BlurAction blurAction;
 
     public GUIPanel(Vector2i position, Vector2i size, Color color, BlurTuning blur) {
         super(position, size);

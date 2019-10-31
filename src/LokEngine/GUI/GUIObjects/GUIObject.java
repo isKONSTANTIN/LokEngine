@@ -5,8 +5,8 @@ import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIObject {
-    Vector2i position;
-    Vector2i size;
+    protected Vector2i position;
+    protected Vector2i size;
 
     protected boolean touchable;
     protected boolean active;

@@ -10,9 +10,9 @@ public class GUISubWindow extends GUIObject {
     public GUICanvas canvas;
     public GUIText titleText;
     public boolean canMove;
-    GUIPanel titlePanel;
-    Vector2i lastMousePos;
-    boolean lastMFS;
+    protected GUIPanel titlePanel;
+    protected Vector2i lastMousePos;
+    private boolean lastMFS;
 
     public GUISubWindow(Vector2i position, Vector2i size, boolean canMove, GUIText titleText, GUIPanel titlePanel) {
         super(position, size);

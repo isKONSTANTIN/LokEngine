@@ -13,9 +13,9 @@ public class GUIButton extends GUIObject {
     public GUIText text;
     public GUIPanel panel;
 
-    private Color activeColor;
-    private GUIButtonScript pressScript;
-    private GUIButtonScript unpressScript;
+    protected Color activeColor;
+    protected GUIButtonScript pressScript;
+    protected GUIButtonScript unpressScript;
 
     public boolean isPressed() {
         return active;

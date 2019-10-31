@@ -13,13 +13,13 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class GUITextField extends GUIObject {
 
-    GUITextFieldFramePart framePart;
+    protected GUITextFieldFramePart framePart;
     private boolean lastActive;
     public boolean canResize;
 
-    private GUITextFieldScript activeScript;
-    private GUITextFieldScript inactiveScript;
-    private GUITextFieldScript statusChangedScript;
+    protected GUITextFieldScript activeScript;
+    protected GUITextFieldScript inactiveScript;
+    protected GUITextFieldScript statusChangedScript;
 
     public boolean getActive() {
         return active;
@@ -28,11 +28,9 @@ public class GUITextField extends GUIObject {
     public void setActiveScript(GUITextFieldScript script){
         activeScript = script;
     }
-
     public void setInactiveScript(GUITextFieldScript script){
         inactiveScript = script;
     }
-
     public void setStatusChangedScript(GUITextFieldScript script){
         statusChangedScript = script;
     }

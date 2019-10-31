@@ -8,7 +8,7 @@ import LokEngine.Tools.Utilities.Vector2i;
 
 public class GUIImage extends GUIObject {
 
-    GUIImageFramePart framePart;
+    protected GUIImageFramePart framePart;
 
     public GUIImage(Vector2i position, Vector2i size) {
         super(position, size);

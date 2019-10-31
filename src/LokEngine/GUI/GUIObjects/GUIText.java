@@ -11,8 +11,8 @@ import java.awt.*;
 
 public class GUIText extends GUIObject {
 
-    private GUITextFramePart framePart;
-    private int maxTextLength;
+    protected GUITextFramePart framePart;
+    protected int maxTextLength;
     public boolean canResize;
 
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {

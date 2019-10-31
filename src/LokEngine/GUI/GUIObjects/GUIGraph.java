@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public class GUIGraph extends GUIObject {
 
-    ArrayList<Float> points = new ArrayList<>();
+    protected ArrayList<Float> points = new ArrayList<>();
 
-    float maxHeight;
-    float minHeight;
-    int maxPoints;
+    protected float maxHeight;
+    protected float minHeight;
+    protected int maxPoints;
 
-    GUIGraphFramePart framePart;
-    GUIFreeTextDrawer freeTextDrawer;
+    protected GUIGraphFramePart framePart;
+    protected GUIFreeTextDrawer freeTextDrawer;
 
     public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints, Color color, Color color2) {
         super(position, size);
