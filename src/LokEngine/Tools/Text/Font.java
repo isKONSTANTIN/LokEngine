@@ -4,6 +4,8 @@ package LokEngine.Tools.Text;
 import LokEngine.Loaders.TextureLoader;
 import LokEngine.Render.Texture;
 import LokEngine.Tools.Utilities.Color.Color;
+import LokEngine.Tools.Utilities.Color.Colors;
+import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
@@ -75,11 +77,11 @@ public class Font {
         return height;
     }
 
-    public void drawText(String text, int x, int y, Color color) {
+    public void drawText(String text, int x, int y, TextColorShader shader) {
         int textHeight = getHeight(text);
 
-        float drawX = x;
-        float drawY = y;
+        int drawX = x;
+        int drawY = y;
 
         if (textHeight > fontHeight) {
             drawY += textHeight - fontHeight;
@@ -87,7 +89,8 @@ public class Font {
 
         GL11.glBindTexture(GL_TEXTURE_2D, texture.buffer);
         glBegin(GL_QUADS);
-        glColor4d(color.red, color.green, color.blue, color.alpha);
+
+        Color lastColor = Colors.black();
 
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
@@ -102,13 +105,16 @@ public class Font {
 
             if (g == null) continue;
 
-            float width = drawX + g.width;
-            float height = drawY + g.height;
+            int width = drawX + g.width;
+            int height = drawY + g.height;
 
             float glTexX = g.x / (float) texture.sizeX;
             float glTexY = g.y / (float) texture.sizeY;
             float glTexWidth = (g.x + g.width) / (float) texture.sizeX;
             float glTexHeight = (g.y + g.height) / (float) texture.sizeY;
+
+            Color color = shader.getColor(new Vector2i(drawX - x, drawY - y));
+            glColor4d(color.red, color.green, color.blue, color.alpha);
 
             glTexCoord2f(glTexX, glTexHeight);
             glVertex3f(drawX, drawY, 0);
@@ -126,6 +132,10 @@ public class Font {
         }
         glEnd();
         GL11.glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    public void drawText(String text, int x, int y, Color color) {
+        drawText(text, x, y, charPos -> color);
     }
 
     public void drawText(String text, int x, int y) {

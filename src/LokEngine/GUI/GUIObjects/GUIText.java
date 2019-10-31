@@ -4,6 +4,7 @@ import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.Loaders.FontLoader;
 import LokEngine.Render.Frame.FrameParts.GUI.GUITextFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
+import LokEngine.Tools.Text.TextColorShader;
 import LokEngine.Tools.Utilities.Color.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 
@@ -13,6 +14,7 @@ public class GUIText extends GUIObject {
 
     protected GUITextFramePart framePart;
     protected int maxTextLength;
+    protected TextColorShader shader;
     public boolean canResize;
 
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
@@ -23,6 +25,24 @@ public class GUIText extends GUIObject {
 
         this.canResize = canResize;
         framePart.position = getPosition();
+    }
+
+    public GUIText(Vector2i position, String fontName, String text, TextColorShader shader, int fontStyle, int size, boolean antiAlias, boolean canResize) {
+        super(position, new Vector2i(0, 0));
+        framePart = new GUITextFramePart(text, FontLoader.createFont(new Font(fontName, fontStyle, size), antiAlias), shader);
+
+        super.setSize(new Vector2i(framePart.getWidth(), framePart.getHeight()));
+
+        this.canResize = canResize;
+        framePart.position = getPosition();
+    }
+
+    public GUIText(Vector2i position, String text, TextColorShader shader, int fontStyle) {
+        this(position, text, shader, fontStyle, 24);
+    }
+
+    public GUIText(Vector2i position, String text, TextColorShader shader, int fontStyle, int size) {
+        this(position, "Times New Roman", text, shader, fontStyle, size, true, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle, int size) {
@@ -39,6 +59,10 @@ public class GUIText extends GUIObject {
 
     public GUIText(Vector2i position) {
         this(position, "Text");
+    }
+
+    public void setShader(TextColorShader shader){
+        this.shader = shader;
     }
 
     public String getText() {
