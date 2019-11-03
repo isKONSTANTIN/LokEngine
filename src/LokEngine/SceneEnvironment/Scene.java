@@ -3,11 +3,14 @@ package LokEngine.SceneEnvironment;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.Base64.Base64;
+import LokEngine.Tools.Compression.GZIPCompression;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.SaveWorker.ArraySaver;
 import LokEngine.Tools.SaveWorker.Saveable;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
+import java.io.IOException;
 import java.util.Vector;
 
 public class Scene implements Saveable {
@@ -73,13 +76,27 @@ public class Scene implements Saveable {
 
         String sceneData = physicsVelocityIterations + "\n" + physicsPositionsIterations;
 
-        return Base64.toBase64(sceneData + ",\n" + arraySaver.save());
+        try {
+            return Base64.bytesToBase64(GZIPCompression.compress(sceneData + ",\n" + arraySaver.save()));
+        } catch (IOException e) {
+            Logger.warning("Fail save scene!", "LokEngine_Scene");
+            Logger.printException(e);
+        }
+
+        return null;
     }
 
     @Override
     public Saveable load(String savedString) {
         ArraySaver arraySaver = new ArraySaver(SceneObject.class);
-        String[] data = Base64.fromBase64(savedString).split(",\n");
+        String[] data;
+        try {
+            data = GZIPCompression.decompress(Base64.bytesFromBase64(savedString)).split(",\n");
+        } catch (IOException e) {
+            Logger.warning("Fail load scene!", "LokEngine_Scene");
+            Logger.printException(e);
+            return null;
+        }
         String[] lines = data[0].split("\n");
 
         physicsVelocityIterations = Integer.valueOf(lines[0]);
