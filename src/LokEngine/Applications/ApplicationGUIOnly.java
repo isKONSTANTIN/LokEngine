@@ -38,6 +38,7 @@ public class ApplicationGUIOnly extends Application {
     }
 
     public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
+        if (myThread != null) return;
         myThread = new Thread(() -> {
             try {
                 synchronized (key) {

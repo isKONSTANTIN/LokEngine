@@ -15,6 +15,7 @@ public class ApplicationConsole extends Application {
     }
 
     public void start(boolean haveScene) {
+        if (myThread != null) return;
         myThread = new Thread(() -> {
             try {
                 Prefs.init();

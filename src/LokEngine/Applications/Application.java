@@ -55,7 +55,7 @@ public abstract class Application {
     }
 
     public abstract void start();
-    public void initEvent() {}
-    public void updateEvent() {}
-    public void exitEvent() {}
+    protected void initEvent() {}
+    protected void updateEvent() {}
+    protected void exitEvent() {}
 }
