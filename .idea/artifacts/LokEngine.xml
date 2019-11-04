@@ -9,8 +9,12 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
-      <element id="directory" name="LokEngine">
-        <element id="file-copy" path="$PROJECT_DIR$/LICENSE.md" />
+      <element id="directory" name="ru">
+        <element id="directory" name="lokinCompany">
+          <element id="directory" name="lokEngine">
+            <element id="file-copy" path="$PROJECT_DIR$/LICENSE.md" />
+          </element>
+        </element>
       </element>
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-stb/lwjgl-stb-natives-linux-arm32.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl/lwjgl-natives-linux-arm64.jar" path-in-jar="/" />
