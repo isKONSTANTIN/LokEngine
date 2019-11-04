@@ -37,7 +37,7 @@ public class ApplicationDefault extends Application {
     }
 
     public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution){
-        start(windowFullscreen, vSync, windowResolution, "lokEngine application");
+        start(windowFullscreen, vSync, windowResolution, "LokEngine application");
     }
 
     public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {

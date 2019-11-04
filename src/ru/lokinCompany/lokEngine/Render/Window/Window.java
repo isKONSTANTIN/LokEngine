@@ -190,7 +190,7 @@ public class Window {
                 this.resolution = resolution;
             }
 
-            id = glfwCreateWindow(resolution.x, resolution.y, "lokEngine Application", fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+            id = glfwCreateWindow(resolution.x, resolution.y, "LokEngine application", fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
             if (id == NULL) {
                 Logger.error("Failed to create the window", "LokEngine_Window");
