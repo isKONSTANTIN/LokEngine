@@ -5,6 +5,8 @@ import LokEngine.Render.Enums.FramePartType;
 import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Texture;
+import LokEngine.Tools.Utilities.Color.Color;
+import LokEngine.Tools.Utilities.Color.Colors;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -14,6 +16,7 @@ public class GUIImageFramePart extends FramePart {
     public Texture texture;
     public Vector2i position;
     public Vector2i size;
+    public Color color = Colors.white();
 
     public GUIImageFramePart(Vector2i position, Vector2i size, String path) {
         super(FramePartType.GUI);
@@ -36,7 +39,7 @@ public class GUIImageFramePart extends FramePart {
         if (texture != null) {
             glBindTexture(GL_TEXTURE_2D, texture.buffer);
             glBegin(GL_POLYGON);
-            glColor4d(1, 1, 1, 1);
+            glColor4d(color.red, color.green, color.blue, color.alpha);
 
             glTexCoord2f(0, 0);
             glVertex3f(position.x, position.y, 0);

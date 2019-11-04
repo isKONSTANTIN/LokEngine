@@ -5,6 +5,7 @@ import LokEngine.Render.Frame.FrameParts.GUI.GUIImageFramePart;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.Render.Texture;
 import LokEngine.Tools.Utilities.Vector2i;
+import LokEngine.Tools.Utilities.Color.Color;
 
 public class GUIImage extends GUIObject {
 
@@ -26,6 +27,14 @@ public class GUIImage extends GUIObject {
 
     public void setTexture(Texture texture) {
         framePart.texture = texture;
+    }
+
+    public void setColor(Color color){
+        framePart.color = color;
+    }
+
+    public Color getColor(){
+        return framePart.color;
     }
 
     @Override
