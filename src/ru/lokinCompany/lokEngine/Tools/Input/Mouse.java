@@ -2,6 +2,7 @@ package ru.lokinCompany.lokEngine.Tools.Input;
 
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.MouseScrollScript;
+import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
@@ -35,7 +36,13 @@ public class Mouse {
         glfwSetScrollCallback(window.getId(), new GLFWScrollCallback() {
             @Override
             public void invoke(long l, double xoffset, double yoffset) {
-                mouseScrollScript.execute(xoffset, yoffset);
+                try {
+                    mouseScrollScript.execute(xoffset, yoffset);
+                }catch (Exception e){
+                    Logger.warning("Fail execute scroll script!","LokEngine_Mouse");
+                    Logger.printException(e);
+                }
+
             }
         });
     }
