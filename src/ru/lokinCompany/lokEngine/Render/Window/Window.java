@@ -183,8 +183,9 @@ public class Window {
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
             glfwWindowHint(GLFW_RESIZABLE, allowResize ? GLFW_TRUE : GLFW_FALSE);
 
+            GLFWVidMode mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
             if (fullscreen) {
-                GLFWVidMode mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
                 this.resolution = new Vector2i(mode.width(), mode.height());
                 resolution = this.resolution;
             } else {
@@ -197,6 +198,8 @@ public class Window {
                 Logger.error("Failed to create the window", "LokEngine_Window");
                 return;
             }
+            if (!fullscreen)
+                glfwSetWindowPos(id,mode.width() / 2 - this.resolution.x / 2, mode.height() / 2- this.resolution.y / 2);
 
             glfwMakeContextCurrent(id);
             GL.createCapabilities();
