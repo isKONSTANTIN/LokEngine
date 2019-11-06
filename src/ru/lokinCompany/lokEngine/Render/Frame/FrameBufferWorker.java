@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.Render.Frame;
 
+import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
@@ -18,10 +19,18 @@ public class FrameBufferWorker {
     private int frameBuffer;
     private int texture;
     private int lastBuffer;
+    private Vector2i lastView = new Vector2i();
+    private Vector2i sourceResolution;
+    private Vector2i bufferResolution;
     private int depth;
+    private DrawMode activeDrawMode;
+    private BuilderProperties activeProperties;
 
     public FrameBufferWorker(Vector2i resolution) {
-        initialiseFrameBuffer(resolution.x, resolution.y);
+        sourceResolution = resolution;
+        bufferResolution = new Vector2i(resolution.x, resolution.y);
+
+        initialiseFrameBuffer(bufferResolution.x, bufferResolution.y);
     }
 
     public void cleanUp() {
@@ -29,37 +38,59 @@ public class FrameBufferWorker {
         GL11.glDeleteTextures(texture);
     }
 
-    public void bindFrameBuffer() {
+    public Vector2i getResolution(){
+        return bufferResolution;
+    }
+
+    public void setResolution(Vector2i resolution){
+        sourceResolution = resolution;
+        bufferResolution.x = resolution.x;
+        bufferResolution.y = resolution.y;
+
+        cleanUp();
+        initialiseFrameBuffer(bufferResolution.x, bufferResolution.y);
+    }
+
+    public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties) {
+        if (!sourceResolution.equals(bufferResolution)){
+            setResolution(sourceResolution);
+        }
         bindFrameBuffer(frameBuffer);
+        activeDrawMode = drawMode;
+        activeProperties = properties;
+        properties.setDrawMode(drawMode, bufferResolution);
     }
 
     public void unbindCurrentFrameBuffer() {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
+        activeProperties.setDrawMode(activeDrawMode, lastView);
     }
 
-    public int getTexture() {//get the resulting texture
+    public int getTexture() {
         return texture;
     }
 
-    public int getDepth() {//get the resulting texture
+    public int getDepth() {
         return depth;
     }
 
     private void initialiseFrameBuffer(int x, int y) {
         frameBuffer = GL30.glGenFramebuffers();
-        lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
-
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
         GL11.glDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
 
         texture = createTextureAttachment(x, y);
         depth = createDepthAttachment(x, y);
 
-        unbindCurrentFrameBuffer();
+        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
     }
 
     private void bindFrameBuffer(int frameBuffer) {
         lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
+        int[] view = new int[4];
+        glGetIntegerv(GL_VIEWPORT, view);
+        lastView.x = view[2];
+        lastView.y = view[3];
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
     }

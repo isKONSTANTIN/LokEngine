@@ -10,11 +10,11 @@ import java.util.Vector;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
+import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class PartsBuilder {
 
     FrameBufferWorker frameBufferWorker;
-    public Vector2i resolution;
     public Color clearColor = new Color(0, 0, 0, 0);
     Vector<FramePart> frameParts = new Vector<>();
 
@@ -30,21 +30,22 @@ public class PartsBuilder {
     }
 
     public void setResolution(Vector2i resolution) {
-        this.resolution = resolution;
         if (frameBufferWorker != null)
             frameBufferWorker.cleanUp();
 
         frameBufferWorker = new FrameBufferWorker(resolution);
     }
 
-    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties) {
-        if (frameBufferWorker == null) {
-            frameBufferWorker = new FrameBufferWorker(builderProperties.getBuilderWindow().getResolution());
-            resolution = builderProperties.getBuilderWindow().getResolution();
-        }
+    public Vector2i getResolution(){
+        return frameBufferWorker.getResolution();
+    }
 
-        frameBufferWorker.bindFrameBuffer();
-        builderProperties.getBuilderWindow().setDrawMode(drawMode);
+    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties) {
+        if (frameBufferWorker == null)
+            frameBufferWorker = new FrameBufferWorker(builderProperties.getBuilderWindow().getResolution());
+
+        frameBufferWorker.bindFrameBuffer(drawMode, builderProperties);
+
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);

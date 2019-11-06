@@ -11,14 +11,14 @@ import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUICanvasFramePart extends FramePart {
-    PartsBuilder partsBuilder;
+    public PartsBuilder partsBuilder;
     public Vector2i position;
     public Vector2i size;
     public Color color = new Color(1, 1, 1, 1);
 
-    public GUICanvasFramePart(PartsBuilder partsBuilder, Vector2i position, Vector2i size) {
+    public GUICanvasFramePart(Vector2i position, Vector2i size) {
         super(FramePartType.GUI);
-        this.partsBuilder = partsBuilder;
+        this.partsBuilder = new PartsBuilder(size);
         this.position = position;
         this.size = size;
     }
@@ -34,13 +34,13 @@ public class GUICanvasFramePart extends FramePart {
         glTexCoord2f(0, 1);
         glVertex3f(position.x, position.y, 0);
 
-        glTexCoord2f(size.x / (float) partsBuilder.resolution.x, 1);
+        glTexCoord2f(1, 1);
         glVertex3f(size.x + position.x, position.y, 0);
 
-        glTexCoord2f(size.x / (float) partsBuilder.resolution.x, 1 - size.y / (float) partsBuilder.resolution.y);
+        glTexCoord2f(1, 0);
         glVertex3f(size.x + position.x, size.y + position.y, 0);
 
-        glTexCoord2f(0, 1 - size.y / (float) partsBuilder.resolution.y);
+        glTexCoord2f(0, 0);
         glVertex3f(position.x, size.y + position.y, 0);
 
         glEnd();

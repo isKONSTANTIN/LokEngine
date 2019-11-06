@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.GUI.GUIObjects;
 
+import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
@@ -7,6 +8,9 @@ import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 public class GUIObject {
     protected Vector2i position;
     protected Vector2i size;
+
+    protected GUILocationAlgorithm positionAlgorithm;
+    protected GUILocationAlgorithm sizeAlgorithm;
 
     protected boolean touchable;
     protected boolean active;
@@ -19,16 +23,23 @@ public class GUIObject {
         this.position = position;
     }
 
-    public Vector2i getPosition() {
-        return position;
-    }
-
     public void setSize(Vector2i size) {
         this.size = size;
         properties.size.x = size.x;
         properties.size.y = size.y;
     }
 
+    public void setPosition(GUILocationAlgorithm position) {
+        positionAlgorithm = position;
+    }
+
+    public void setSize(GUILocationAlgorithm size) {
+        sizeAlgorithm = size;
+    }
+
+    public Vector2i getPosition() {
+        return position;
+    }
     public Vector2i getSize() {
         return size;
     }
@@ -38,6 +49,22 @@ public class GUIObject {
     protected void focused(){}
     protected void unfocused(){}
 
+    protected void updateAlgorithms(){
+        if (positionAlgorithm != null){
+            Vector2i newPosition = positionAlgorithm.calculate(this);
+            if (!newPosition.equals(position)){
+                setPosition(newPosition);
+            }
+        }
+
+        if (sizeAlgorithm != null){
+            Vector2i newSize = sizeAlgorithm.calculate(this);
+            if (!newSize.equals(size)){
+                setSize(newSize);
+            }
+        }
+    }
+
     public GUIObject(Vector2i position, Vector2i size) {
         this.position = position;
         this.size = size;
@@ -45,6 +72,7 @@ public class GUIObject {
     }
 
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
+        updateAlgorithms();
         properties.globalPosition.x = parentProperties.globalPosition.x + position.x;
         properties.globalPosition.y = parentProperties.globalPosition.y + position.y;
         properties.window = parentProperties.window;

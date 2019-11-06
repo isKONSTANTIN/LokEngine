@@ -24,8 +24,7 @@ public class DisplayDrawer {
 
     public static int blurPostProcess(Window win, int postFrame, int originalFrame, FrameBufferWorker blurSceneFrameWorker1, FrameBufferWorker blurSceneFrameWorker2, FrameBufferWorker blurSceneFrameWorker3) {
         BuilderProperties builderProperties = win.getFrameBuilder().getBuilderProperties();
-        blurSceneFrameWorker1.bindFrameBuffer();
-        win.setDrawMode(DrawMode.Display);
+        blurSceneFrameWorker1.bindFrameBuffer(DrawMode.Display, builderProperties);
         builderProperties.useShader(builderProperties.getPostProcessingShader());
         DisplayDrawer.bindTexture("postFrame", postFrame, 1, builderProperties);
         GL11.glClearColor(0, 0, 0, 0);
@@ -35,8 +34,7 @@ public class DisplayDrawer {
         DisplayDrawer.renderScreen(originalFrame, win);
 
         blurSceneFrameWorker1.unbindCurrentFrameBuffer();
-        blurSceneFrameWorker2.bindFrameBuffer();
-        win.setDrawMode(DrawMode.Display);
+        blurSceneFrameWorker2.bindFrameBuffer(DrawMode.Display, builderProperties);
         builderProperties.useShader(builderProperties.getPostProcessingShader());
         DisplayDrawer.bindTexture("postFrame", postFrame, 1, builderProperties);
         GL11.glClearColor(0, 0, 0, 0);
@@ -46,8 +44,7 @@ public class DisplayDrawer {
         DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTexture(), win);
 
         blurSceneFrameWorker2.unbindCurrentFrameBuffer();
-        blurSceneFrameWorker3.bindFrameBuffer();
-        win.setDrawMode(DrawMode.Display);
+        blurSceneFrameWorker3.bindFrameBuffer(DrawMode.Display, builderProperties);
         builderProperties.useShader(builderProperties.getPostProcessingShader());
         DisplayDrawer.bindTexture("postFrame", postFrame, 1, builderProperties);
         GL11.glClearColor(0, 0, 0, 0);

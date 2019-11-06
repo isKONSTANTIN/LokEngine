@@ -92,7 +92,8 @@ public class Window {
             @Override
             public void invoke(long l, int i, int i1) {
                 window.resolution.x = i;
-                window.resolution.y = i;
+                window.resolution.y = i1;
+                window.getFrameBuilder().getBuilderProperties().update();
                 event.execute(window, new Integer[] {i, i1});
             }
         });
@@ -175,12 +176,12 @@ public class Window {
         glfwHideWindow(id);
     }
 
-    public void open(boolean fullscreen, boolean vSync, Vector2i resolution, String[] pathsWindowIcon) {
+    public void open(boolean fullscreen, boolean allowResize, boolean vSync, Vector2i resolution, String[] pathsWindowIcon) {
         if (!isInited) {
             this.fullscreen = fullscreen;
 
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-            glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+            glfwWindowHint(GLFW_RESIZABLE, allowResize ? GLFW_TRUE : GLFW_FALSE);
 
             if (fullscreen) {
                 GLFWVidMode mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -224,15 +225,20 @@ public class Window {
                 Logger.printException(e);
                 return;
             }
+            setResizeEvent((window, args) -> {});
         }
     }
 
-    public void open(boolean fullscreen, boolean vSync, Vector2i resolution) {
-        open(fullscreen, vSync, resolution,
+    public void open(boolean fullscreen, boolean allowResize, boolean vSync, Vector2i resolution) {
+        open(fullscreen, allowResize, vSync, resolution,
                 new String[]{
                         "#/resources/textures/EngineIcon16.png",
                         "#/resources/textures/EngineIcon32.png",
                         "#/resources/textures/EngineIcon128.png"});
+    }
+
+    public void open(boolean allowResize, Vector2i resolution, boolean fullscreen) {
+        open(fullscreen, allowResize,true, resolution);
     }
 
     public void close() {
@@ -250,10 +256,10 @@ public class Window {
                 Logger.error("Fail build frame!", "LokEngine_Window");
                 Logger.printException(e);
             }
-
             glfwPollEvents();
             mouse.update();
             canvas.properties.mouseRaycastStatus.touched = false;
+            glViewport(0,0, resolution.x, resolution.y);
         }
     }
 
@@ -293,42 +299,5 @@ public class Window {
 
         long cursor = GLFW.glfwCreateCursor(GLFWimage,0,0);
         GLFW.glfwSetCursor(id, cursor);
-    }
-
-    public void setDrawMode(DrawMode dm) {
-        if (dm == DrawMode.Display || dm == DrawMode.RawGUI) {
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-
-            gluOrtho2D(0.0f, resolution.x, resolution.y, 0.0f);
-
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
-
-            glDisable(GL_DEPTH_TEST);
-            glEnable(GL_TEXTURE_2D);
-            glEnable(GL_BLEND);
-
-            if (dm == DrawMode.Display) {
-                frameBuilder.getBuilderProperties().useShader(frameBuilder.getBuilderProperties().getDisplayShader());
-            } else {
-                frameBuilder.getBuilderProperties().unUseShader();
-            }
-
-        } else if (dm == DrawMode.Scene) {
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-
-            gluOrtho2D(0.0f, this.resolution.x / this.resolution.y, 1, 0.0f);
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
-
-            glEnable(GL_TEXTURE_2D);
-            glEnable(GL_DEPTH_TEST);
-            glEnable(GL_ALPHA_TEST);
-            glAlphaFunc(GL_GREATER, 0.1f);
-
-            frameBuilder.getBuilderProperties().useShader(frameBuilder.getBuilderProperties().getObjectShader());
-        }
     }
 }

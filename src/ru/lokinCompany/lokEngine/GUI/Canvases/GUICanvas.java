@@ -12,13 +12,11 @@ import java.util.Vector;
 public class GUICanvas extends GUIObject {
 
     Vector<GUIObject> objects = new Vector<>();
-    PartsBuilder partsBuilder;
     GUICanvasFramePart framePart;
 
     public GUICanvas(Vector2i position, Vector2i size) {
         super(position, size);
-        partsBuilder = new PartsBuilder();
-        framePart = new GUICanvasFramePart(partsBuilder, position, size);
+        framePart = new GUICanvasFramePart(position, size);
         properties = new GUIObjectProperties(position, size, null);
     }
 
@@ -40,7 +38,7 @@ public class GUICanvas extends GUIObject {
     @Override
     public void setSize(Vector2i size) {
         super.setSize(size);
-        partsBuilder.setResolution(size);
+        framePart.partsBuilder.setResolution(size);
         framePart.size = size;
         properties.size.x = size.x;
         properties.size.y = size.y;
@@ -64,7 +62,7 @@ public class GUICanvas extends GUIObject {
 
         for (GUIObject object : objects) {
             if (!object.hidden)
-                object.update(this.partsBuilder, properties);
+                object.update(framePart.partsBuilder, properties);
         }
         partsBuilder.addPart(framePart);
     }

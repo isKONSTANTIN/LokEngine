@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Vector;
 
+import static org.lwjgl.opengl.GL11.glViewport;
+
 public class FrameBuilder {
     public Color backgroundColor = new Color(0.6f, 0.6f, 0.6f, 1);
 
@@ -28,11 +30,11 @@ public class FrameBuilder {
         return builderProperties;
     }
 
-    public FrameBuilder(Window currectWin) {
-        builderProperties = new BuilderProperties(currectWin);
+    public FrameBuilder(Window correctWin) {
+        builderProperties = new BuilderProperties(correctWin);
 
-        scenePartsBuilder = new PartsBuilder();
-        GUIPartsBuilder = new PartsBuilder();
+        scenePartsBuilder = new PartsBuilder(correctWin.getResolution());
+        GUIPartsBuilder = new PartsBuilder(correctWin.getResolution());
     }
 
     public void addPostProcessingActionWorker(PostProcessingActionWorker worker) {

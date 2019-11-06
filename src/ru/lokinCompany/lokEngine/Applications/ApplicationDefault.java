@@ -29,18 +29,15 @@ public class ApplicationDefault extends Application {
     }
 
     public void start(boolean windowFullscreen){
-        start(windowFullscreen, true);
+        start(windowFullscreen,false);
     }
-
-    public void start(boolean windowFullscreen, boolean vSync){
-        start(windowFullscreen, vSync, new Vector2i(512,512));
+    public void start(boolean windowFullscreen, boolean allowResize){
+        start(windowFullscreen, allowResize, true);
     }
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync){ start(windowFullscreen,allowResize, vSync, new Vector2i(512,512)); }
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution){ start(windowFullscreen, allowResize, vSync, windowResolution, "LokEngine application"); }
 
-    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution){
-        start(windowFullscreen, vSync, windowResolution, "LokEngine application");
-    }
-
-    public void start(boolean windowFullscreen, boolean vSync, Vector2i windowResolution, String windowTitle) {
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution, String windowTitle) {
         if (myThread != null) return;
         myThread = new Thread(() -> {
             try {
@@ -62,7 +59,7 @@ public class ApplicationDefault extends Application {
                 Logger.debug("Init window", "LokEngine_start");
                 window = new Window();
                 try {
-                    window.open(windowFullscreen, vSync, windowResolution);
+                    window.open(windowFullscreen, allowResize, vSync, windowResolution);
                     window.setTitle(windowTitle);
                 } catch (Exception e) {
                     Logger.error("Fail open window!", "LokEngine_start");

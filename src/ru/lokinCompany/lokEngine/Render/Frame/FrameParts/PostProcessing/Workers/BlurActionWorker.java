@@ -28,9 +28,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
     }
 
     public int onceRender(int sourceFrame, BlurAction blurAction){
-        blurPostProcessingFrameWorker.bindFrameBuffer();
-
-        window.setDrawMode(DrawMode.RawGUI);
+        blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
 
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -44,9 +42,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
 
     @Override
     public int render(int sourceFrame) {
-        blurPostProcessingFrameWorker.bindFrameBuffer();
-
-        window.setDrawMode(DrawMode.RawGUI);
+        blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
 
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
