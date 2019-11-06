@@ -1,6 +1,7 @@
 package ru.lokinCompany.lokEngine.Applications;
 
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
+import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.SceneEnvironment.Scene;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
@@ -20,9 +21,6 @@ public class ApplicationDefault extends Application {
     public Window window;
     public Scene scene;
 
-    private static boolean staticInited;
-    private static final Object key = new Object();
-
     @Override
     public void start(){
         start(false);
@@ -41,21 +39,8 @@ public class ApplicationDefault extends Application {
         if (myThread != null) return;
         myThread = new Thread(() -> {
             try {
-                synchronized (key) {
-                    if (!staticInited) {
-                        try {
-                            Prefs.init();
-                        } catch (Exception e) {
-                            Logger.warning("Fail load in prefs!", "LokEngine_start");
-                            Logger.printException(e);
-                        }
-
-                        Logger.debug("Init glfw", "LokEngine_start");
-                        glfwInit();
-                        staticInited = true;
-                    }
-                }
-
+                Logger.debug("Init glfw", "LokEngine_start");
+                GLFW.init();
                 Logger.debug("Init window", "LokEngine_start");
                 window = new Window();
                 try {
@@ -131,6 +116,8 @@ public class ApplicationDefault extends Application {
 
             alcDestroyContext(openALContext);
             alcCloseDevice(openALDevice);
+
+            window.close();
 
             try {
                 Prefs.save();

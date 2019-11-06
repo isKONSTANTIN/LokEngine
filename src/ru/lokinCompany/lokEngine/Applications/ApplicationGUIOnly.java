@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.Applications;
 
+import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.Logger;
@@ -17,9 +18,6 @@ import static org.lwjgl.openal.ALC10.alcCloseDevice;
 public class ApplicationGUIOnly extends Application {
 
     public Window window;
-    private static boolean staticInited;
-    private static final Object key = new Object();
-
     @Override
     public void start(){
         start(false);
@@ -38,20 +36,8 @@ public class ApplicationGUIOnly extends Application {
         if (myThread != null) return;
         myThread = new Thread(() -> {
             try {
-                synchronized (key) {
-                    if (!staticInited) {
-                        try {
-                            Prefs.init();
-                        } catch (Exception e) {
-                            Logger.warning("Fail load in prefs!", "LokEngine_start");
-                            Logger.printException(e);
-                        }
-
-                        Logger.debug("Init glfw", "LokEngine_start");
-                        glfwInit();
-                        staticInited = true;
-                    }
-                }
+                Logger.debug("Init glfw", "LokEngine_start");
+                GLFW.init();
 
                 Logger.debug("Init window", "LokEngine_start");
                 window = new Window();
@@ -120,6 +106,8 @@ public class ApplicationGUIOnly extends Application {
 
             alcDestroyContext(openALContext);
             alcCloseDevice(openALDevice);
+
+            window.close();
 
             try {
                 Prefs.save();

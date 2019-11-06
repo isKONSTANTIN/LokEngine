@@ -6,6 +6,7 @@ import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
+import ru.lokinCompany.lokEngine.Tools.SaveWorker.Prefs;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,6 +20,12 @@ public abstract class Application {
             reportSender = new URLReportSender(new URL("https://lokincompany.ru/bugs/new/uploadReport.php"));
         } catch (MalformedURLException e) {
             Logger.debug("Fail create url", "LokEngine_Application_ReportSender");
+            Logger.printException(e);
+        }
+        try {
+            Prefs.init();
+        } catch (Exception e) {
+            Logger.warning("Fail load in prefs!", "LokEngine_Application");
             Logger.printException(e);
         }
     }
