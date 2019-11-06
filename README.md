@@ -3,6 +3,7 @@
 ![](https://img.shields.io/github/issues/lokin135/LokEngine?color=green&style=flat-square)
 ![](https://img.shields.io/static/v1?label=community&message=ru&color=green&style=flat-square)
 ![](https://img.shields.io/github/commit-activity/m/lokin135/LokEngine?style=flat-square)
+![](https://img.shields.io/github/commits-since/lokin135/LokEngine/latest?style=flat-square)
 
 ![](https://img.shields.io/badge/-Window-blue)
 ![](https://img.shields.io/badge/-Linux-blue)
