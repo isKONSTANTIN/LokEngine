@@ -22,6 +22,9 @@ public class ParticleSystemComponent extends Component {
 
     private Vector2f sourcePosition = new Vector2f();
 
+    public boolean staticParticles;
+    private boolean staticInited;
+
     public Vector2f getSourcePosition() {
         return new Vector2f(sourcePosition.x, sourcePosition.y);
     }
@@ -60,25 +63,29 @@ public class ParticleSystemComponent extends Component {
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         sourcePosition = source.position;
 
-        ArrayList<Float> positions = new ArrayList<>();
-        ArrayList<Float> sizes = new ArrayList<>();
+        if (!staticParticles || !staticInited){
+            ArrayList<Float> positions = new ArrayList<>();
+            ArrayList<Float> sizes = new ArrayList<>();
 
-        for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext(); ) {
-            Particle particle = iter.next();
+            for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext(); ) {
+                Particle particle = iter.next();
 
-            Particle updatedParticle = particleHandler.processParticle(particle, applicationRuntime);
-            if (updatedParticle != null) {
-                positions.add(updatedParticle.positionX);
-                positions.add(updatedParticle.positionY);
-                sizes.add(updatedParticle.size);
+                Particle updatedParticle = particleHandler.processParticle(particle, applicationRuntime);
+                if (updatedParticle != null) {
+                    positions.add(updatedParticle.positionX);
+                    positions.add(updatedParticle.positionY);
+                    sizes.add(updatedParticle.size);
+                }
             }
+
+            if (sizes.size() == 0) {
+                particlesList.clear();
+            }
+
+            framePart.update(positions, sizes);
+            staticInited = true;
         }
 
-        if (sizes.size() == 0) {
-            particlesList.clear();
-        }
-
-        framePart.update(positions, sizes);
         if (partsBuilder != null)
             partsBuilder.addPart(framePart);
     }
