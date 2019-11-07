@@ -8,6 +8,7 @@ import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.Tools.MatrixCreator;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
@@ -20,11 +21,13 @@ public class SpriteFramePart extends FramePart {
     public Sprite sprite;
     public Vector4f position = new Vector4f(0, 0, 0, 0);
     public Shader shader;
+    public Color color;
 
-    public SpriteFramePart(Sprite sprite, Shader shader) {
+    public SpriteFramePart(Sprite sprite, Shader shader, Color color) {
         super(FramePartType.Scene);
         this.sprite = sprite;
         this.shader = shader;
+        this.color = color;
     }
 
     @Override
@@ -61,6 +64,7 @@ public class SpriteFramePart extends FramePart {
                 0);
         glVertexAttribDivisor(1, 0);
         glUniform1f(glGetUniformLocation(shader.program, "ObjectSize"), (float) sprite.size * 2);
+        glUniform4f(glGetUniformLocation(shader.program, "ObjectColor"), color.red, color.green, color.blue, color.alpha);
 
         MatrixCreator.PutMatrixInShader(shader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 

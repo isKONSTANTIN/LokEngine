@@ -9,6 +9,7 @@ import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.ArraySaver;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 import org.lwjgl.util.vector.Vector4f;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class AnimationComponent extends Component implements Saveable {
     }
 
     public AnimationComponent() {
-        framePart = new SpriteFramePart(sprite, null);
+        framePart = new SpriteFramePart(sprite, null, Colors.white());
     }
 
     @Override
