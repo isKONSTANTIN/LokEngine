@@ -1,6 +1,9 @@
 package ru.lokinCompany.lokEngine.GUI.Canvases;
 
+import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
+import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
+import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPositionAlgorithms;
 import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.GUI.GUICanvasFramePart;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
@@ -23,6 +26,11 @@ public class GUICanvas extends GUIObject {
     public int addObject(GUIObject object) {
         objects.add(object);
         return objects.size() - 1;
+    }
+
+    public int addObject(GUIObject object, GUIPosition position) {
+        object.setPosition(GUIPositionAlgorithms.getAlgorithm(this, position));
+        return addObject(object);
     }
 
     public void setColor(Color color) {
