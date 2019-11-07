@@ -51,9 +51,17 @@ public class ParticleSystemFramePart extends FramePart {
     @Override
     public void partRender(BuilderProperties builderProperties) {
         if (count > 0) {
-            if (!builderProperties.getActiveShader().equals(shader)) {
+            if (shader == null)
+                shader = builderProperties.getParticlesShader();
+
+            if (builderProperties.getActiveShader() == null || !builderProperties.getActiveShader().equals(shader)) {
                 builderProperties.useShader(shader);
             }
+
+            int uvBuffer = sourceSprite.uvBuffer != -1 ? sourceSprite.uvBuffer : builderProperties.getUVBuffer();
+            int textureBuffer = sourceSprite.texture.buffer != -1 ? sourceSprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
+
+            builderProperties.getBuilderWindow().getCamera().updateView();
 
             glEnableVertexAttribArray(0);
             glBindBuffer(GL_ARRAY_BUFFER, sourceSprite.vertexBuffer);
@@ -67,7 +75,7 @@ public class ParticleSystemFramePart extends FramePart {
             glVertexAttribDivisor(0, 0);
 
             glEnableVertexAttribArray(1);
-            glBindBuffer(GL_ARRAY_BUFFER, builderProperties.getUVBuffer());
+            glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
             glVertexAttribPointer(
                     1,
                     2,
@@ -99,7 +107,7 @@ public class ParticleSystemFramePart extends FramePart {
                     0);
             glVertexAttribDivisor(3, 1);
 
-            glBindTexture(GL_TEXTURE_2D, sourceSprite.texture.buffer);
+            glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
             glDrawArraysInstanced(GL_QUADS, 0, 8, count);
 
