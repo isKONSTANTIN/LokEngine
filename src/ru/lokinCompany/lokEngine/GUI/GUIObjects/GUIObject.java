@@ -15,6 +15,7 @@ public class GUIObject {
     protected boolean touchable;
     protected boolean active;
     protected boolean focused;
+    protected boolean retention;
 
     public boolean hidden;
     public GUIObjectProperties properties;
@@ -48,6 +49,8 @@ public class GUIObject {
     protected void unpressed(){}
     protected void focused(){}
     protected void unfocused(){}
+    protected void retention(){}
+    protected void endRetention(){}
 
     protected void updateAlgorithms(){
         if (positionAlgorithm != null){
@@ -102,7 +105,16 @@ public class GUIObject {
             }
         }
 
+        if (!retention && mousePressed && inField){
+            retention = true;
+            retention();
+        }else if (retention && !mousePressed) {
+            retention = false;
+            endRetention();
+        }
+
         if (!inField && mousePressed || properties.mouseRaycastStatus.touched && !inField){
+
             if (focused){
                 focused = false;
                 unfocused();
