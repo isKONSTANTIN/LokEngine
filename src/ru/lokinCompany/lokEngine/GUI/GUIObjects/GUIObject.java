@@ -84,20 +84,20 @@ public class GUIObject {
         boolean inField = properties.mouseRaycastStatus.mouse.inField(properties.globalPosition, size);
         boolean mousePressed = properties.mouseRaycastStatus.mouse.getPressedStatus();
 
-        if (!properties.mouseRaycastStatus.touched && touchable){
-            if (inField){
+        if (!properties.mouseRaycastStatus.touched && touchable) {
+            if (inField) {
                 properties.mouseRaycastStatus.touched = mousePressed;
 
-                if (mousePressed && !active){
+                if (mousePressed && !properties.mouseRaycastStatus.lastFramePressed && !active) {
                     active = true;
                     focused = true;
                     pressed();
                     focused();
-                }else if (!mousePressed && active){
+                } else if (!mousePressed && active) {
                     active = false;
                     unpressed();
                 }
-            }else if (active) {
+            } else if (active) {
                 active = false;
                 focused = false;
                 unpressed();
@@ -105,7 +105,7 @@ public class GUIObject {
             }
         }
 
-        if (!retention && mousePressed && inField){
+        if (!retention && mousePressed && !properties.mouseRaycastStatus.lastFramePressed && inField){
             retention = true;
             retention();
         }else if (retention && !mousePressed) {
@@ -114,7 +114,6 @@ public class GUIObject {
         }
 
         if (!inField && mousePressed || properties.mouseRaycastStatus.touched && !inField){
-
             if (focused){
                 focused = false;
                 unfocused();

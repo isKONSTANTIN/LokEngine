@@ -4,7 +4,6 @@ import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.MouseRaycastStatus;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
 import ru.lokinCompany.lokEngine.Loaders.TextureLoader;
 import ru.lokinCompany.lokEngine.Render.Camera;
-import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameBuilder;
 import ru.lokinCompany.lokEngine.Tools.Input.Keyboard;
 import ru.lokinCompany.lokEngine.Tools.Input.Mouse;
@@ -23,7 +22,6 @@ import java.nio.IntBuffer;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class Window {
     private Camera camera;
@@ -259,8 +257,11 @@ public class Window {
                 Logger.error("Fail build frame!", "LokEngine_Window");
                 Logger.printException(e);
             }
+            canvas.properties.mouseRaycastStatus.lastFramePressed = mouse.getPressedStatus();
+
             glfwPollEvents();
             mouse.update();
+
             canvas.properties.mouseRaycastStatus.touched = false;
             glViewport(0,0, resolution.x, resolution.y);
         }
