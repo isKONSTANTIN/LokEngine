@@ -8,6 +8,7 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.ColorRGB;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 public class GUISlider extends GUIObject {
@@ -52,7 +53,7 @@ public class GUISlider extends GUIObject {
     }
 
     public GUISlider(Vector2i position, Vector2i size) {
-        this(position,size, new Color(0.2f,0.2f,0.2f,1), new ColorRGB(219,160,37,255));
+        this(position,size, Colors.engineBackgroundColor(), Colors.engineMainColor());
     }
 
     public float getValue(){

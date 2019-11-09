@@ -33,4 +33,7 @@ public class Colors {
     public static Color black(){
         return new Color(0,0,0,1);
     }
+
+    public static Color engineMainColor(){return new ColorRGB(219,160,37,255);}
+    public static Color engineBackgroundColor(){return new Color(0.2f,0.2f,0.2f,1);}
 }
