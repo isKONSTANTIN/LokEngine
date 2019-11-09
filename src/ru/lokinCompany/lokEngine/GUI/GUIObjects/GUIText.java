@@ -42,11 +42,11 @@ public class GUIText extends GUIObject {
     }
 
     public GUIText(Vector2i position, String text, TextColorShader shader, int fontStyle, int size) {
-        this(position, "Times New Roman", text, shader, fontStyle, size, true, false);
+        this(position, "Quicksand", text, shader, fontStyle, size, true, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle, int size) {
-        this(position, "Times New Roman", text, color, fontStyle, size, true, false);
+        this(position, "Quicksand", text, color, fontStyle, size, true, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle) {

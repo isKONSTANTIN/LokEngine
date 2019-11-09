@@ -27,8 +27,16 @@ public class GUIFreeTextDrawer extends GUIObject {
         font = FontLoader.createFont(new java.awt.Font(fontName, fontStyle, size), antiAlias);
     }
 
+    public GUIFreeTextDrawer(int fontStyle, int size, boolean antiAlias) {
+        this("Quicksand", fontStyle, size, antiAlias);
+    }
+
     public Font getFont(){
         return font;
+    }
+
+    public void setFont(Font font){
+        this.font = font;
     }
 
     public void draw(String text, Vector2i position, TextColorShader shader) {
