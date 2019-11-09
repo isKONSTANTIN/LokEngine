@@ -9,6 +9,15 @@
 ![](https://img.shields.io/badge/-Linux-blue)
 ![](https://img.shields.io/badge/-macOS-blue)
 
+The engine for writing programs, 2D games, as well as server applications.
+
+LokEngine stores everything in a single .jar file, which can be simply connected to the project as a Java library.
+
+Dependencies: LWJGL 3, JBox2D, Gson, MySQL Connector, etc.
+
+Public task board: https://trello.com/b/f3pwm8x5/lokengine-java
+
+---
 Движок для написания программ, 2D игр, а так-же серверных приложений.
 
 LokEngine хранит все необходимое в одном .jar файле, который можно просто подключить к проекту как Java библиотеку.
