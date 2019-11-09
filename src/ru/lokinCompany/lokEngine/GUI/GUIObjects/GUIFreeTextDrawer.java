@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class GUIFreeTextDrawer extends GUIObject {
 
-    private ArrayList<GUITextFramePart> frameParts = new ArrayList<>();
-    private Font font;
+    protected ArrayList<GUITextFramePart> frameParts = new ArrayList<>();
+    protected Font font;
     public Color color = new Color(1, 1, 1, 1);
 
     public GUIFreeTextDrawer(Font font) {
@@ -25,6 +25,10 @@ public class GUIFreeTextDrawer extends GUIObject {
     public GUIFreeTextDrawer(String fontName, int fontStyle, int size, boolean antiAlias) {
         super(new Vector2i(0, 0), new Vector2i(0, 0));
         font = FontLoader.createFont(new java.awt.Font(fontName, fontStyle, size), antiAlias);
+    }
+
+    public Font getFont(){
+        return font;
     }
 
     public void draw(String text, Vector2i position, TextColorShader shader) {
