@@ -36,7 +36,7 @@ public class GUIImageFramePart extends FramePart {
 
     @Override
     public void partRender(BuilderProperties builderProperties) {
-        if (texture != null) {
+        if (texture != null && texture.buffer != -1) {
             glBindTexture(GL_TEXTURE_2D, texture.buffer);
             glBegin(GL_POLYGON);
             glColor4d(color.red, color.green, color.blue, color.alpha);
