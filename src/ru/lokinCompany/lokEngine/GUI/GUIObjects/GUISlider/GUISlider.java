@@ -44,12 +44,8 @@ public class GUISlider extends GUIObject {
 
     public GUISlider(Vector2i position, Vector2i size, Color background, Color filledBackground) {
         this(position,size,background,filledBackground,
-                new GUISliderHead(new Vector2i(), new Vector2i(-1,-1), new Color(
-                filledBackground.red + (filledBackground.red * 0.1f),
-                filledBackground.green + (filledBackground.green * 0.1f),
-                filledBackground.blue + (filledBackground.blue * 0.1f),
-                filledBackground.alpha
-        )));
+                new GUISliderHead(new Vector2i(), new Vector2i(-1,-1),Colors.engineBrightMainColor())
+        );
     }
 
     public GUISlider(Vector2i position, Vector2i size) {

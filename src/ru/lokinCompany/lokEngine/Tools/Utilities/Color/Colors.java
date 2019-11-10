@@ -35,5 +35,10 @@ public class Colors {
     }
 
     public static Color engineMainColor(){return new ColorRGB(219,160,37,255);}
+    public static Color engineBrightMainColor(){
+        Color color = engineMainColor();
+        return new Color(color.red + (color.red * 0.1f),color.green + (color.green * 0.1f),color.blue + (color.blue * 0.1f),1);
+    }
     public static Color engineBackgroundColor(){return new Color(0.2f,0.2f,0.2f,1);}
+
 }
