@@ -33,6 +33,10 @@ public class GUIButton extends GUIObject {
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
         this.touchable = true;
 
+        text.setPosition(object -> new Vector2i(getPosition().x + (int)(getSize().x / 2f - text.getSize().x / 2f), getPosition().y + (int)(getSize().y / 2f - text.getSize().y / 2f)));
+        panel.setSize(object -> getSize());
+        panel.setPosition(object -> getPosition());
+
         setPosition(position);
         setSize(size);
     }
@@ -50,6 +54,10 @@ public class GUIButton extends GUIObject {
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
         this.panel = new GUIPanel(position, size, activeColor);
         this.touchable = true;
+
+        text.setPosition(object -> new Vector2i(getPosition().x + (int)(getSize().x / 2f - text.getSize().x / 2f), getPosition().y + (int)(getSize().y / 2f - text.getSize().y / 2f)));
+        panel.setSize(object -> getSize());
+        panel.setPosition(object -> getPosition());
 
         setPosition(position);
         setSize(size);
@@ -91,18 +99,12 @@ public class GUIButton extends GUIObject {
 
     @Override
     public void setPosition(Vector2i position) {
-        this.position = position;
-
-        text.setPosition(new Vector2i(position.x + size.x / 2 - text.getSize().x / 2, position.y + size.y / 2 - text.getSize().y / 2));
-        panel.setPosition(position);
+        super.setPosition(position);
     }
 
     @Override
     public void setSize(Vector2i size) {
         super.setSize(size);
-
-        text.setPosition(new Vector2i(position.x + size.x / 2 - text.getSize().x / 2, position.y + size.y / 2 - text.getSize().y / 2));
-        panel.setSize(size);
     }
 
     @Override
