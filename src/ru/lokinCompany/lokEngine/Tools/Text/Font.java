@@ -17,6 +17,7 @@ public class Font {
     private HashMap<Character, Glyph> glyphs;
     private Texture texture;
     private int fontHeight;
+    private float spaceSize;
 
     public HashMap<Character, Glyph> getGlyphs() {
         return glyphs;
@@ -42,7 +43,11 @@ public class Font {
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
             Glyph g = glyphs.get(c);
-            if (g == null) continue;
+            if (g == null) {
+                lineWidth += spaceSize;
+                continue;
+            }
+
             if (c == '\r') continue;
 
             if (c == '\n') {
@@ -78,19 +83,11 @@ public class Font {
     }
 
     public void drawText(String text, int x, int y, TextColorShader shader) {
-        int textHeight = getHeight(text);
-
         int drawX = x;
         int drawY = y;
 
-        if (textHeight > fontHeight) {
-            drawY += textHeight - fontHeight;
-        }
-
         GL11.glBindTexture(GL_TEXTURE_2D, texture.buffer);
         glBegin(GL_QUADS);
-
-        Color lastColor = Colors.black();
 
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
@@ -103,7 +100,10 @@ public class Font {
 
             Glyph g = glyphs.get(ch);
 
-            if (g == null) continue;
+            if (g == null) {
+                drawX += spaceSize;
+                continue;
+            }
 
             int width = drawX + g.width;
             int height = drawY + g.height;
@@ -128,6 +128,8 @@ public class Font {
             glTexCoord2f(glTexX, glTexY);
             glVertex3f(drawX, height, 0);
 
+            spaceSize += g.width;
+            spaceSize /= 2f;
             drawX += g.width;
         }
         glEnd();

@@ -10,7 +10,7 @@ import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 public class GUITextFramePart extends FramePart {
 
-    protected Font font;
+    public Font font;
     public String text;
     public Vector2i position;
     public Color color;

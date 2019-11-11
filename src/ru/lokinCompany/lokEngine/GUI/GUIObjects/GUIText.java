@@ -20,9 +20,6 @@ public class GUIText extends GUIObject {
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0, 0));
         framePart = new GUITextFramePart(text, FontLoader.createFont(new Font(fontName, fontStyle, size), antiAlias), color);
-
-        super.setSize(new Vector2i(framePart.getWidth(), framePart.getHeight()));
-
         this.canResize = canResize;
         framePart.position = getPosition();
     }
@@ -42,11 +39,11 @@ public class GUIText extends GUIObject {
     }
 
     public GUIText(Vector2i position, String text, TextColorShader shader, int fontStyle, int size) {
-        this(position, "Quicksand", text, shader, fontStyle, size, true, false);
+        this(position, "Arial", text, shader, fontStyle, size, true, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle, int size) {
-        this(position, "Quicksand", text, color, fontStyle, size, true, false);
+        this(position, "Arial", text, color, fontStyle, size, true, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle) {
@@ -90,6 +87,11 @@ public class GUIText extends GUIObject {
         super.setSize(size);
         updateMaxSize();
         framePart.text = getText().length() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
+    }
+
+    @Override
+    public Vector2i getSize(){
+        return new Vector2i(framePart.getWidth(), framePart.getHeight());
     }
 
     private void updateMaxSize() {

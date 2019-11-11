@@ -28,7 +28,7 @@ public class GUIFreeTextDrawer extends GUIObject {
     }
 
     public GUIFreeTextDrawer(int fontStyle, int size, boolean antiAlias) {
-        this("Quicksand", fontStyle, size, antiAlias);
+        this("Arial", fontStyle, size, antiAlias);
     }
 
     public Font getFont(){
