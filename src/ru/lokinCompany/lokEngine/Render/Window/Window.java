@@ -137,6 +137,14 @@ public class Window {
         });
     }
 
+    public void setResolutionLimits(Vector2i minResolution, Vector2i maxResolution){
+        glfwSetWindowSizeLimits(id,minResolution.x, minResolution.y, maxResolution.x, maxResolution.y);
+    }
+
+    public void setResolutionLimits(Vector2i minResolution){
+        glfwSetWindowSizeLimits(id,minResolution.x, minResolution.y, GLFW_DONT_CARE, GLFW_DONT_CARE);
+    }
+
     public Keyboard getKeyboard() {
         return keyboard;
     }
