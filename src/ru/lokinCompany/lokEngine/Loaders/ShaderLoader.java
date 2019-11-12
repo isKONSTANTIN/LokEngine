@@ -3,6 +3,7 @@ package ru.lokinCompany.lokEngine.Loaders;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
+import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Shader;
 
 import java.io.BufferedReader;
@@ -20,7 +21,6 @@ public class ShaderLoader {
     }
 
     static String readFileAsString(String filename) throws Exception {
-
         StringBuilder source = new StringBuilder();
         InputStream in;
 
@@ -91,7 +91,7 @@ public class ShaderLoader {
     }
 
     public static Shader loadShader(String vertPath, String fragPath) throws Exception {
-
+        if (!GLFW.isInited()) return null;
         String patches = vertPath + ":" + fragPath;
 
         int vertShader = loadPartShader(vertPath, ARBVertexShader.GL_VERTEX_SHADER_ARB);

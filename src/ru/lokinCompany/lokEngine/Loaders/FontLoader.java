@@ -1,6 +1,7 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
 import org.lwjgl.BufferUtils;
+import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Tools.Text.Font;
 import ru.lokinCompany.lokEngine.Tools.Text.Glyph;
@@ -32,6 +33,7 @@ public class FontLoader {
     }
 
     public static Font createBasicFont(java.awt.Font font, boolean antiAlias, String symbols) {
+        if (!GLFW.isInited()) return null;
         long context = glfwGetCurrentContext();
 
         if (!createdFonts.containsKey(context)) {

@@ -1,6 +1,7 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
 import org.lwjgl.BufferUtils;
+import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Texture;
 
 import javax.imageio.ImageIO;
@@ -19,6 +20,7 @@ public class TextureLoader {
     private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();
 
     public static void unloadTexture(Texture texture) {
+        if (!GLFW.isInited()) return;
         long context = glfwGetCurrentContext();
 
         loadedTextures.get(context).remove(texture.path);
@@ -28,6 +30,8 @@ public class TextureLoader {
     }
 
     public static Object[] loadTextureInBuffer(String path) throws IOException {
+        if (!GLFW.isInited()) return null;
+
         BufferedImage image = null;
 
         if (path.charAt(0) == '#') {
@@ -57,6 +61,7 @@ public class TextureLoader {
     }
 
     public static Texture loadTexture(String path) {
+        if (!GLFW.isInited()) return new Texture(-1, 0, 0, path);
         long context = glfwGetCurrentContext();
 
         if (!loadedTextures.containsKey(context)) {
