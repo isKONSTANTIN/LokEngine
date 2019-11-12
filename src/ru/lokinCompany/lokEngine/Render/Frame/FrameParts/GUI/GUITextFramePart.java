@@ -40,9 +40,9 @@ public class GUITextFramePart extends FramePart {
 
     @Override
     public void partRender(BuilderProperties builderProperties) {
-        if (color != null){
+        if (color != null) {
             font.drawText(text, position.x, position.y, color);
-        }else {
+        } else {
             font.drawText(text, position.x, position.y, shader);
         }
     }

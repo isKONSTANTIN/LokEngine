@@ -12,8 +12,8 @@ public interface TextColorShader extends SimpleColorShader {
     @Override
     default Color getColor(Object input) {
         try {
-            return getColor((Vector2i)input);
-        }catch (Exception e){
+            return getColor((Vector2i) input);
+        } catch (Exception e) {
             return Colors.black();
         }
     }

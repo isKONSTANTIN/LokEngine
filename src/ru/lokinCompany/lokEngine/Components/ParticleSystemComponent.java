@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.Components;
 
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.ParticleSystem.DefaultParticleHandler;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.ParticleSystem.Particle;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.ParticleSystem.ParticleHandler;
@@ -9,7 +10,6 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -63,7 +63,7 @@ public class ParticleSystemComponent extends Component {
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         sourcePosition = source.position;
 
-        if (!staticParticles || !staticInited){
+        if (!staticParticles || !staticInited) {
             ArrayList<Float> positions = new ArrayList<>();
             ArrayList<Float> sizes = new ArrayList<>();
 

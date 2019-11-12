@@ -1,9 +1,9 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sprite;
 import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
-import org.lwjgl.util.vector.Vector2f;
 
 public class SpriteLoader {
 
@@ -20,10 +20,10 @@ public class SpriteLoader {
         return new Sprite(texture, vertexBuffer, vertexSize);
     }
 
-    public static Sprite loadSprite(Texture texture, float vertexSize, Vector4i imagePosFromAtlas){
-        Vector2f fistPoint   = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
+    public static Sprite loadSprite(Texture texture, float vertexSize, Vector4i imagePosFromAtlas) {
+        Vector2f fistPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
         Vector2f secondPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
-        Vector2f thirdPoint  = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
+        Vector2f thirdPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
         Vector2f fourthPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
 
         int vertexBuffer = BufferLoader.load(new float[]
@@ -35,7 +35,7 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(texture, vertexBuffer,vertexSize, BufferLoader.load(new float[]{
+        return new Sprite(texture, vertexBuffer, vertexSize, BufferLoader.load(new float[]{
                 fistPoint.x, fistPoint.y,
                 secondPoint.x, secondPoint.y,
                 thirdPoint.x, thirdPoint.y,

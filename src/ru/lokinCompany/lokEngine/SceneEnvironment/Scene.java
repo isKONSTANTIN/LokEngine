@@ -1,5 +1,7 @@
 package ru.lokinCompany.lokEngine.SceneEnvironment;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.World;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.Base64.Base64;
@@ -7,8 +9,6 @@ import ru.lokinCompany.lokEngine.Tools.Compression.GZIPCompression;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.ArraySaver;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.World;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -39,7 +39,9 @@ public class Scene implements Saveable {
         objects.remove(id);
     }
 
-    public void removeAll(){ objects.clear(); }
+    public void removeAll() {
+        objects.clear();
+    }
 
     public void addPostUpdateEvent(PostUpdateEvent event) {
         postUpdateEvents.add(event);

@@ -1,11 +1,11 @@
 package ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers;
 
+import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Frame.DisplayDrawer;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameBufferWorker;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
-import org.lwjgl.opengl.GL11;
 
 public class BlurActionWorker extends PostProcessingActionWorker {
 
@@ -27,7 +27,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         this.window = window;
     }
 
-    public int onceRender(int sourceFrame, BlurAction blurAction){
+    public int onceRender(int sourceFrame, BlurAction blurAction) {
         blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
 
         GL11.glClearColor(0, 0, 0, 0);

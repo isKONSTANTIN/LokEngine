@@ -4,8 +4,8 @@ import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.GUI.GUIImageFramePart;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Render.Texture;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 public class GUIImage extends GUIObject {
 
@@ -29,11 +29,11 @@ public class GUIImage extends GUIObject {
         framePart.texture = texture;
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         framePart.color = color;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return framePart.color;
     }
 

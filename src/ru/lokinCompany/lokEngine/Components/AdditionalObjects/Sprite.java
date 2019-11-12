@@ -22,11 +22,11 @@ public class Sprite implements Saveable {
     }
 
     public Sprite(Texture texture, int vertexBuffer, float vertexSize) {
-        this(texture,vertexBuffer,1,vertexSize, -1);
+        this(texture, vertexBuffer, 1, vertexSize, -1);
     }
 
     public Sprite(Texture texture, int vertexBuffer, float vertexSize, int uvBuffer) {
-        this(texture, vertexBuffer,1, vertexSize, uvBuffer);
+        this(texture, vertexBuffer, 1, vertexSize, uvBuffer);
     }
 
     public Sprite(Texture texture, int vertexBuffer, double size, float vertexSize, int uvBuffer) {

@@ -6,13 +6,15 @@ import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 
 public class OggSound extends Sound {
 
-    public OggSound() {}
+    public OggSound() {
+    }
 
     public OggSound(String path) {
         this.path = path;
     }
 
-    public void update(){}
+    public void update() {
+    }
 
     @Override
     public String save() {

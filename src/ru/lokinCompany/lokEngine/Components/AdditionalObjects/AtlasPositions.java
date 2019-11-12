@@ -1,11 +1,11 @@
 package ru.lokinCompany.lokEngine.Components.AdditionalObjects;
 
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Loaders.BufferLoader;
 import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Tools.Base64.Base64;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
 
@@ -34,9 +34,9 @@ public class AtlasPositions implements Saveable {
     }
 
     public ArrayList<Integer> build(Texture texture) {
-        Vector2f fistPoint   = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
+        Vector2f fistPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
         Vector2f secondPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
-        Vector2f thirdPoint  = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
+        Vector2f thirdPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
         Vector2f fourthPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
 
         ArrayList<Integer> uvBuffers = new ArrayList<>();

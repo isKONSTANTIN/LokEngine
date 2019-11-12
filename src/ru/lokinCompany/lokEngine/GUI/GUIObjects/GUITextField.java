@@ -25,13 +25,15 @@ public class GUITextField extends GUIObject {
         return active;
     }
 
-    public void setActiveScript(GUITextFieldScript script){
+    public void setActiveScript(GUITextFieldScript script) {
         activeScript = script;
     }
-    public void setInactiveScript(GUITextFieldScript script){
+
+    public void setInactiveScript(GUITextFieldScript script) {
         inactiveScript = script;
     }
-    public void setStatusChangedScript(GUITextFieldScript script){
+
+    public void setStatusChangedScript(GUITextFieldScript script) {
         statusChangedScript = script;
     }
 
@@ -105,7 +107,7 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
-    protected void focused(){
+    protected void focused() {
         framePart.pointer = framePart.text.length();
 
         if (statusChangedScript != null)
@@ -113,7 +115,7 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
-    protected void unfocused(){
+    protected void unfocused() {
         if (statusChangedScript != null)
             statusChangedScript.execute(this);
     }
@@ -174,10 +176,10 @@ public class GUITextField extends GUIObject {
             }
         }
 
-        if (focused){
+        if (focused) {
             if (activeScript != null)
                 activeScript.execute(this);
-        }else {
+        } else {
             if (inactiveScript != null)
                 inactiveScript.execute(this);
         }

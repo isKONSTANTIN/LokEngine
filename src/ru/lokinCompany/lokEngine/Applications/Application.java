@@ -1,11 +1,11 @@
 package ru.lokinCompany.lokEngine.Applications;
 
+import org.lwjgl.openal.ALCCapabilities;
+import org.lwjgl.openal.ALCapabilities;
 import ru.lokinCompany.lokEngine.Network.Report.Report;
 import ru.lokinCompany.lokEngine.Network.Report.URLReportSender;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.Logger;
-import org.lwjgl.openal.ALCCapabilities;
-import org.lwjgl.openal.ALCapabilities;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Prefs;
 
 import java.net.MalformedURLException;
@@ -37,12 +37,15 @@ public abstract class Application {
     protected ALCCapabilities alcCapabilities;
     protected ALCapabilities alCapabilities;
 
-    public boolean isRun(){return isRun;}
+    public boolean isRun() {
+        return isRun;
+    }
+
     public void close() {
         isRun = false;
     }
 
-    static void errorClose(Exception e){
+    static void errorClose(Exception e) {
         Logger.errorMessages = true;
         Logger.error("Critical error in engine! Sorry for that :C", "ru/lokinCompany/lokEngine");
         Logger.printException(e);
@@ -62,7 +65,13 @@ public abstract class Application {
     }
 
     public abstract void start();
-    protected void initEvent() {}
-    protected void updateEvent() {}
-    protected void exitEvent() {}
+
+    protected void initEvent() {
+    }
+
+    protected void updateEvent() {
+    }
+
+    protected void exitEvent() {
+    }
 }

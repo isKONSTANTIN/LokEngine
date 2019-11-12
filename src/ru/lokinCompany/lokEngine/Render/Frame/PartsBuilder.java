@@ -1,16 +1,15 @@
 package ru.lokinCompany.lokEngine.Render.Frame;
 
+import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Vector;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
-import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class PartsBuilder {
 
@@ -36,7 +35,7 @@ public class PartsBuilder {
         frameBufferWorker = new FrameBufferWorker(resolution);
     }
 
-    public Vector2i getResolution(){
+    public Vector2i getResolution() {
         return frameBufferWorker.getResolution();
     }
 

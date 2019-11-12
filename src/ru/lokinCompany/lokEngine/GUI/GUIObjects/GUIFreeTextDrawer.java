@@ -5,9 +5,9 @@ import ru.lokinCompany.lokEngine.Loaders.FontLoader;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.GUI.GUITextFramePart;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Text.Font;
+import ru.lokinCompany.lokEngine.Tools.Text.TextColorShader;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import ru.lokinCompany.lokEngine.Tools.Text.TextColorShader;
 
 import java.util.ArrayList;
 
@@ -31,11 +31,11 @@ public class GUIFreeTextDrawer extends GUIObject {
         this("Arial", fontStyle, size, antiAlias);
     }
 
-    public Font getFont(){
+    public Font getFont() {
         return font;
     }
 
-    public void setFont(Font font){
+    public void setFont(Font font) {
         this.font = font;
     }
 

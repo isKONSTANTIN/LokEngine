@@ -1,17 +1,14 @@
 package ru.lokinCompany.lokEngine.Render.Frame.FrameParts.GUI;
 
-import ru.lokinCompany.lokEngine.Loaders.TextureLoader;
 import ru.lokinCompany.lokEngine.Render.Enums.FramePartType;
 import ru.lokinCompany.lokEngine.Render.Frame.BuilderProperties;
 import ru.lokinCompany.lokEngine.Render.Frame.FramePart;
 import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.ColorRGB;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 
 public class GUICheckBoxFramePart extends FramePart {
 
@@ -51,7 +48,7 @@ public class GUICheckBoxFramePart extends FramePart {
         this.position = position;
         this.imageFramePart = new GUIImageFramePart(position, size);
         this.size = size;
-        this.color = new ColorRGB(219,160,37,255);
+        this.color = new ColorRGB(219, 160, 37, 255);
     }
 
     @Override
@@ -59,7 +56,7 @@ public class GUICheckBoxFramePart extends FramePart {
         glColor4f(color.red, color.green, color.blue, color.alpha);
         imageFramePart.position = position;
         imageFramePart.size = size;
-        if (status){
+        if (status) {
             glBegin(GL_QUADS);
 
             glVertex3f(position.x, position.y, 0);
@@ -70,7 +67,7 @@ public class GUICheckBoxFramePart extends FramePart {
             glEnd();
 
             imageFramePart.partRender(builderProperties);
-        }else{
+        } else {
             glBegin(GL_LINE_STRIP);
 
             glVertex3f(position.x, position.y, 0);

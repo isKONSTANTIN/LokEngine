@@ -11,7 +11,7 @@ public class Prefs {
     private static HashMap<String, String> data = new HashMap<>();
 
     public static synchronized void save() {
-        if (data.size() > 0){
+        if (data.size() > 0) {
             try {
                 FileWorker fileWorker = new FileWorker(filePath);
                 fileWorker.openWrite();
@@ -55,7 +55,7 @@ public class Prefs {
     public static synchronized void init() {
         try {
             FileWorker fileWorker = new FileWorker(filePath);
-            if (fileWorker.file.exists()){
+            if (fileWorker.file.exists()) {
                 fileWorker.openRead();
                 String[] lines = fileWorker.read().split("\n");
 

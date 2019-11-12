@@ -1,11 +1,11 @@
 package ru.lokinCompany.lokEngine.Components;
 
+import org.lwjgl.openal.AL10;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sound.Sound;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
-import org.lwjgl.openal.AL10;
 
 public class SoundComponent extends Component implements Saveable {
 

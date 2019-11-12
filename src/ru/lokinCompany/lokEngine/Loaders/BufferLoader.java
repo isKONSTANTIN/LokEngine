@@ -1,8 +1,8 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
-import ru.lokinCompany.lokEngine.Tools.Logger;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL15;
+import ru.lokinCompany.lokEngine.Tools.Logger;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;

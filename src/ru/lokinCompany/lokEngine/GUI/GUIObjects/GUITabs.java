@@ -3,12 +3,8 @@ package ru.lokinCompany.lokEngine.GUI.GUIObjects;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIFreeTextDrawer;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIPanel;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Text.Font;
-import ru.lokinCompany.lokEngine.Tools.Text.TextColorShader;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
@@ -35,11 +31,11 @@ public class GUITabs extends GUIObject {
     public GUITabs(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
         super(position, size);
         this.titleSize = titleSize;
-        this.drawer = new GUIFreeTextDrawer("",0,titleSize,true);
-        this.panel = new GUIPanel(position,new Vector2i(size.x, titleSize));
+        this.drawer = new GUIFreeTextDrawer("", 0, titleSize, true);
+        this.panel = new GUIPanel(position, new Vector2i(size.x, titleSize));
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
         panel.setPosition(object -> getPosition());
-        this.sizeAlgorithm = object -> new Vector2i(getSize().x,getSize().y - this.titleSize);
+        this.sizeAlgorithm = object -> new Vector2i(getSize().x, getSize().y - this.titleSize);
         this.positionAlgorithm = object -> new Vector2i(getPosition().x, getPosition().y + this.titleSize);
 
         this.textActiveColor = textActiveColor;
@@ -47,38 +43,38 @@ public class GUITabs extends GUIObject {
     }
 
     public GUITabs(Vector2i position, Vector2i size, int titleSize) {
-        this(position,size,titleSize, Colors.engineMainColor(), Colors.white());
+        this(position, size, titleSize, Colors.engineMainColor(), Colors.white());
     }
 
     public GUITabs(Vector2i position, Vector2i size) {
-        this(position,size, 12, Colors.engineMainColor(), Colors.white());
+        this(position, size, 12, Colors.engineMainColor(), Colors.white());
     }
 
-    public void setActiveTab(String name){
+    public void setActiveTab(String name) {
         activeCanvas = getTab(name);
     }
 
-    public GUICanvas getActiveTab(){
+    public GUICanvas getActiveTab() {
         return activeCanvas;
     }
 
-    public void setTabsFont(Font font){
-        if (font != null){
+    public void setTabsFont(Font font) {
+        if (font != null) {
             drawer.setFont(font);
 
             int fontH = font.getFontHeight();
 
-            if (titleSize < fontH){
+            if (titleSize < fontH) {
                 titleSize = fontH;
             }
         }
     }
 
-    public Font getTabsFont(){
+    public Font getTabsFont() {
         return drawer.getFont();
     }
 
-    public String getActiveTabName(){
+    public String getActiveTabName() {
         for (Map.Entry<String, GUICanvas> entry : tabs.entrySet()) {
             GUICanvas canvas = entry.getValue();
             if (canvas == activeCanvas)
@@ -87,11 +83,11 @@ public class GUITabs extends GUIObject {
         return null;
     }
 
-    public void removeTab(String name){
+    public void removeTab(String name) {
         tabs.remove(name);
     }
 
-    public void addTab(String name){
+    public void addTab(String name) {
         GUICanvas canvas = new GUICanvas(new Vector2i(), size);
 
         canvas.setSize(sizeAlgorithm);
@@ -101,7 +97,7 @@ public class GUITabs extends GUIObject {
         tabsNames.add(name);
     }
 
-    public GUICanvas getTab(String name){
+    public GUICanvas getTab(String name) {
         return tabs.get(name);
     }
 
@@ -128,14 +124,14 @@ public class GUITabs extends GUIObject {
             if (x + widthText > size.x) break;
             boolean inField = properties.mouseRaycastStatus.mouse.inField(new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y), new Vector2i(widthText, titleSize));
 
-            if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed){
+            if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed) {
                 setActiveTab(key);
             }
             drawer.draw(key, new Vector2i(x + position.x, position.y), activeCanvas == tabs.get(key) || inField ? textActiveColor : textInactiveColor);
             x += widthText + gap;
         }
         if (panel != null)
-            panel.update(partsBuilder,parentProperties);
+            panel.update(partsBuilder, parentProperties);
 
         drawer.update(partsBuilder, parentProperties);
         if (activeCanvas != null)

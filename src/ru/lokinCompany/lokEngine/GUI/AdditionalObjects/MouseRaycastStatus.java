@@ -8,7 +8,7 @@ public class MouseRaycastStatus {
     public boolean touched;
     public boolean lastFramePressed;
 
-    public MouseRaycastStatus(Mouse mouse){
+    public MouseRaycastStatus(Mouse mouse) {
         this.mouse = mouse;
     }
 

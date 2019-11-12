@@ -1,12 +1,11 @@
 package ru.lokinCompany.lokEngine.Tools.Text;
 
 
+import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Loaders.TextureLoader;
 import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 

@@ -1,9 +1,9 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
+import org.lwjgl.BufferUtils;
 import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Tools.Text.Font;
 import ru.lokinCompany.lokEngine.Tools.Text.Glyph;
-import org.lwjgl.BufferUtils;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

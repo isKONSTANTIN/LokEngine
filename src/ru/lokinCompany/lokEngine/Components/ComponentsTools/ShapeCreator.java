@@ -1,12 +1,12 @@
 package ru.lokinCompany.lokEngine.Components.ComponentsTools;
 
 
-import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.ArbitraryShape;
-import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.BoxShape;
-import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.lwjgl.util.vector.Vector2f;
+import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.ArbitraryShape;
+import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.BoxShape;
+import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.CircleShape;
 
 public class ShapeCreator {
 

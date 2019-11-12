@@ -1,13 +1,13 @@
 package ru.lokinCompany.lokEngine.Render.Frame.FrameParts;
 
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sprite;
 import ru.lokinCompany.lokEngine.Render.Enums.FramePartType;
 import ru.lokinCompany.lokEngine.Render.Frame.BuilderProperties;
 import ru.lokinCompany.lokEngine.Render.Frame.FramePart;
 import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.Tools.MatrixCreator;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 
 import static org.lwjgl.opengl.GL11.*;

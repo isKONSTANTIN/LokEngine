@@ -58,7 +58,7 @@ public class GUIText extends GUIObject {
         this(position, "Text");
     }
 
-    public void setShader(TextColorShader shader){
+    public void setShader(TextColorShader shader) {
         this.shader = shader;
     }
 
@@ -90,7 +90,7 @@ public class GUIText extends GUIObject {
     }
 
     @Override
-    public Vector2i getSize(){
+    public Vector2i getSize() {
         return new Vector2i(framePart.getWidth(), framePart.getHeight());
     }
 

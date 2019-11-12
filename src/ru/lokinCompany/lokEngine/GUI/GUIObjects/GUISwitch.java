@@ -26,36 +26,36 @@ public class GUISwitch extends GUIObject {
         updateHeadSize();
     }
 
-    protected void updateHeadPosition(){
+    protected void updateHeadPosition() {
         framePart.headPosition = new Vector2i(framePart.status ? (position.x + size.x - framePart.headSize.x) : position.x, position.y);
     }
 
-    protected void updateHeadSize(){
+    protected void updateHeadSize() {
         framePart.headSize = switchSizeAlgorithm != null ? switchSizeAlgorithm.calculate(this) : new Vector2i(size.x / 3, size.y);
     }
 
-    public void setStatus(boolean status){
+    public void setStatus(boolean status) {
         framePart.status = status;
         updateHeadPosition();
     }
 
-    public void switchStatus(){
+    public void switchStatus() {
         setStatus(!framePart.status);
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return framePart.status;
     }
 
     @Override
-    public void setPosition(Vector2i position){
+    public void setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
         updateHeadPosition();
     }
 
     @Override
-    public void setSize(Vector2i size){
+    public void setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
         updateHeadSize();
@@ -65,7 +65,7 @@ public class GUISwitch extends GUIObject {
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
-        if (properties.mouseRaycastStatus.mouse.inField(new Vector2i(parentProperties.globalPosition.x + framePart.headPosition.x,parentProperties.globalPosition.y  + framePart.headPosition.y),framePart.headSize) && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed)
+        if (properties.mouseRaycastStatus.mouse.inField(new Vector2i(parentProperties.globalPosition.x + framePart.headPosition.x, parentProperties.globalPosition.y + framePart.headPosition.y), framePart.headSize) && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed)
             switchStatus();
 
         partsBuilder.addPart(framePart);

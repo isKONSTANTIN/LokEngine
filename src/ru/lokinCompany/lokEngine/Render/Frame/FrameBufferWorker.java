@@ -1,10 +1,10 @@
 package ru.lokinCompany.lokEngine.Render.Frame;
 
-import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
+import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 import java.nio.ByteBuffer;
 
@@ -38,11 +38,11 @@ public class FrameBufferWorker {
         GL11.glDeleteTextures(texture);
     }
 
-    public Vector2i getResolution(){
+    public Vector2i getResolution() {
         return bufferResolution;
     }
 
-    public void setResolution(Vector2i resolution){
+    public void setResolution(Vector2i resolution) {
         sourceResolution = resolution;
         bufferResolution.x = resolution.x;
         bufferResolution.y = resolution.y;
@@ -52,7 +52,7 @@ public class FrameBufferWorker {
     }
 
     public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties) {
-        if (!sourceResolution.equals(bufferResolution)){
+        if (!sourceResolution.equals(bufferResolution)) {
             setResolution(sourceResolution);
         }
         bindFrameBuffer(frameBuffer);

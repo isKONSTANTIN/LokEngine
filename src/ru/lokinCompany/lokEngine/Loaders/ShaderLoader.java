@@ -1,9 +1,9 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
-import ru.lokinCompany.lokEngine.Render.Shader;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
+import ru.lokinCompany.lokEngine.Render.Shader;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

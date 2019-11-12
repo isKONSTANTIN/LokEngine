@@ -5,7 +5,8 @@ import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 
 public class RawWavSound extends Sound {
-    public RawWavSound() {}
+    public RawWavSound() {
+    }
 
     public RawWavSound(String path) {
         this.path = path;

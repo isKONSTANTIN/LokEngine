@@ -35,36 +35,36 @@ public class GUICheckBox extends GUIObject {
         this.touchable = true;
     }
 
-    public void setTexture(Texture texture){
+    public void setTexture(Texture texture) {
         framePart.imageFramePart.texture = texture;
     }
 
-    public Texture getTexture(){
+    public Texture getTexture() {
         return framePart.imageFramePart.texture;
     }
 
     @Override
-    public void setSize(Vector2i size){
+    public void setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
     }
 
     @Override
-    public void setPosition(Vector2i position){
+    public void setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
     }
 
     @Override
-    protected void unpressed(){
+    protected void unpressed() {
         framePart.status = !framePart.status;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return framePart.status;
     }
 
-    public void setStatus(boolean status){
+    public void setStatus(boolean status) {
         framePart.status = status;
     }
 

@@ -1,5 +1,11 @@
 package ru.lokinCompany.lokEngine.Components;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Rigidbody;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes.Shape;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
@@ -10,12 +16,6 @@ import ru.lokinCompany.lokEngine.Tools.Base64.Base64;
 import ru.lokinCompany.lokEngine.Tools.MatrixCreator;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.SubclassSaver;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
-import org.lwjgl.util.vector.Vector2f;
 
 public class RigidbodyComponent extends Component implements Saveable {
 

@@ -27,7 +27,7 @@ public class DefaultTCPServerHandler extends SimpleTCPServerHandler {
     private String runMethod(String name, String[] rawargs) {
         if (methods.containsKey(name)) {
             String[] args = new String[rawargs.length];
-            for (int i = 0; i < rawargs.length; i++){
+            for (int i = 0; i < rawargs.length; i++) {
                 args[i] = Base64.fromBase64(rawargs[i]);
             }
             return methods.get(name).execute(args);

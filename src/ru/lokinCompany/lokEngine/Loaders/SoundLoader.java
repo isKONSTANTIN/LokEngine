@@ -1,12 +1,12 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
+import org.apache.commons.io.IOUtils;
+import org.lwjgl.openal.AL10;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sound.OggSound;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sound.RawWavSound;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sound.Sound;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.WaveData;
-import org.apache.commons.io.IOUtils;
-import org.lwjgl.openal.AL10;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
@@ -80,7 +80,7 @@ public class SoundLoader {
 
     public static RawWavSound loadWAV(String path) throws IOException, UnsupportedAudioFileException {
         if (loadedSounds.containsKey(path)) {
-            return (RawWavSound)loadedSounds.get(path);
+            return (RawWavSound) loadedSounds.get(path);
         }
 
         WaveData waveData;

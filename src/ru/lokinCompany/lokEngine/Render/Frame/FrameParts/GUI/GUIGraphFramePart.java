@@ -43,9 +43,9 @@ public class GUIGraphFramePart extends FramePart {
         glBegin(GL_LINES);
         glColor4f(color2.red, color2.green, color2.blue, color2.alpha);
 
-        for (int i = 0; i <= size.y; i += size.y / 5){
+        for (int i = 0; i <= size.y; i += size.y / 5) {
             Vector2i pos = new Vector2i(position.x, position.y + (size.y - i));
-            freeTextDrawer.draw(String.valueOf(Math.round(i * (maxHeight / size.y))), new Vector2i(pos.x,pos.y), color2);
+            freeTextDrawer.draw(String.valueOf(Math.round(i * (maxHeight / size.y))), new Vector2i(pos.x, pos.y), color2);
             glVertex2f(pos.x, pos.y);
             glVertex2f(pos.x + size.x, pos.y);
         }

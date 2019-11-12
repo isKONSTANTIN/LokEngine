@@ -7,12 +7,14 @@ public class Sound implements Saveable {
     public String path;
     public int buffer;
 
-    public Sound() {}
+    public Sound() {
+    }
 
-    public void update(){}
+    public void update() {
+    }
 
     @Override
-    public String save(){
+    public String save() {
         return "null";
     }
 

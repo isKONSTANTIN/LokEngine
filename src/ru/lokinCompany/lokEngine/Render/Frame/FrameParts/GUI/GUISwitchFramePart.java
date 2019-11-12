@@ -32,12 +32,13 @@ public class GUISwitchFramePart extends FramePart {
     }
 
     public GUISwitchFramePart(Vector2i position, Vector2i size) {
-        this(position,size,Colors.engineBrightMainColor() , Colors.engineBackgroundColor(), Colors.engineMainColor());
+        this(position, size, Colors.engineBrightMainColor(), Colors.engineBackgroundColor(), Colors.engineMainColor());
     }
+
     @Override
     public void partRender(BuilderProperties builderProperties) {
         glBegin(GL_QUADS);
-        if (status){
+        if (status) {
             glColor4f(colorFill.red, colorFill.green, colorFill.blue, colorFill.alpha);
             glVertex3f(position.x, position.y, 0);
             glVertex3f(size.x + position.x, position.y, 0);
@@ -49,7 +50,7 @@ public class GUISwitchFramePart extends FramePart {
             glVertex3f(headSize.x + headPosition.x, headPosition.y, 0);
             glVertex3f(headSize.x + headPosition.x, headSize.y + headPosition.y, 0);
             glVertex3f(headPosition.x, headSize.y + headPosition.y, 0);
-        }else {
+        } else {
             glColor4f(colorBackground.red, colorBackground.green, colorBackground.blue, colorBackground.alpha);
             glVertex3f(position.x, position.y, 0);
             glVertex3f(size.x + position.x, position.y, 0);

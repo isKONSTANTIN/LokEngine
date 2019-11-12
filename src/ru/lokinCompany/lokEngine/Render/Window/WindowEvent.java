@@ -7,7 +7,7 @@ public interface WindowEvent extends Scriptable {
     void execute(Window window, Object[] args);
 
     @Override
-    default void execute(){
+    default void execute() {
         execute(null, null);
     }
 

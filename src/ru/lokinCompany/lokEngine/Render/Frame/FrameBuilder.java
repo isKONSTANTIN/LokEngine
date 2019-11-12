@@ -1,14 +1,12 @@
 package ru.lokinCompany.lokEngine.Render.Frame;
 
+import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers.PostProcessingActionWorker;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Vector;
-
-import static org.lwjgl.opengl.GL11.glViewport;
 
 public class FrameBuilder {
     public Color backgroundColor = new Color(0.6f, 0.6f, 0.6f, 1);

@@ -1,5 +1,10 @@
 package ru.lokinCompany.lokEngine.Render.Window;
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL30;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.MouseRaycastStatus;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
 import ru.lokinCompany.lokEngine.Loaders.TextureLoader;
@@ -9,11 +14,6 @@ import ru.lokinCompany.lokEngine.Tools.Input.Keyboard;
 import ru.lokinCompany.lokEngine.Tools.Input.Mouse;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL30;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -92,7 +92,7 @@ public class Window {
                 window.resolution.x = i;
                 window.resolution.y = i1;
                 window.getFrameBuilder().getBuilderProperties().update();
-                event.execute(window, new Integer[] {i, i1});
+                event.execute(window, new Integer[]{i, i1});
             }
         });
     }
@@ -102,7 +102,7 @@ public class Window {
         glfwSetWindowPosCallback(id, new GLFWWindowPosCallback() {
             @Override
             public void invoke(long l, int i, int i1) {
-                event.execute(window, new Integer[] {i, i1});
+                event.execute(window, new Integer[]{i, i1});
             }
         });
     }
@@ -112,7 +112,7 @@ public class Window {
         glfwSetWindowIconifyCallback(id, new GLFWWindowIconifyCallback() {
             @Override
             public void invoke(long l, boolean b) {
-                event.execute(window, new Boolean[] {b});
+                event.execute(window, new Boolean[]{b});
             }
         });
     }
@@ -122,7 +122,7 @@ public class Window {
         glfwSetWindowMaximizeCallback(id, new GLFWWindowMaximizeCallback() {
             @Override
             public void invoke(long l, boolean b) {
-                event.execute(window, new Boolean[] {b});
+                event.execute(window, new Boolean[]{b});
             }
         });
     }
@@ -132,17 +132,17 @@ public class Window {
         glfwSetWindowFocusCallback(id, new GLFWWindowFocusCallback() {
             @Override
             public void invoke(long l, boolean b) {
-                event.execute(window, new Boolean[] {b});
+                event.execute(window, new Boolean[]{b});
             }
         });
     }
 
-    public void setResolutionLimits(Vector2i minResolution, Vector2i maxResolution){
-        glfwSetWindowSizeLimits(id,minResolution.x, minResolution.y, maxResolution.x, maxResolution.y);
+    public void setResolutionLimits(Vector2i minResolution, Vector2i maxResolution) {
+        glfwSetWindowSizeLimits(id, minResolution.x, minResolution.y, maxResolution.x, maxResolution.y);
     }
 
-    public void setResolutionLimits(Vector2i minResolution){
-        glfwSetWindowSizeLimits(id,minResolution.x, minResolution.y, GLFW_DONT_CARE, GLFW_DONT_CARE);
+    public void setResolutionLimits(Vector2i minResolution) {
+        glfwSetWindowSizeLimits(id, minResolution.x, minResolution.y, GLFW_DONT_CARE, GLFW_DONT_CARE);
     }
 
     public Keyboard getKeyboard() {
@@ -153,32 +153,32 @@ public class Window {
         return mouse;
     }
 
-    public void setPosition(Vector2i position){
-        glfwSetWindowPos(id,position.x,position.y);
+    public void setPosition(Vector2i position) {
+        glfwSetWindowPos(id, position.x, position.y);
     }
 
-    public Vector2i getPosition(){
+    public Vector2i getPosition() {
         IntBuffer xBuffer = BufferUtils.createIntBuffer(1);
         IntBuffer yBuffer = BufferUtils.createIntBuffer(1);
 
-        glfwGetWindowPos(id,xBuffer, yBuffer);
+        glfwGetWindowPos(id, xBuffer, yBuffer);
 
-        return new Vector2i(xBuffer.get(0),yBuffer.get(0));
+        return new Vector2i(xBuffer.get(0), yBuffer.get(0));
     }
 
-    public void iconify(){
+    public void iconify() {
         glfwIconifyWindow(id);
     }
 
-    public void restore(){
+    public void restore() {
         glfwRestoreWindow(id);
     }
 
-    public void show(){
+    public void show() {
         glfwShowWindow(id);
     }
 
-    public void hide(){
+    public void hide() {
         glfwHideWindow(id);
     }
 
@@ -205,7 +205,7 @@ public class Window {
                 return;
             }
             if (!fullscreen)
-                glfwSetWindowPos(id,mode.width() / 2 - this.resolution.x / 2, mode.height() / 2- this.resolution.y / 2);
+                glfwSetWindowPos(id, mode.width() / 2 - this.resolution.x / 2, mode.height() / 2 - this.resolution.y / 2);
 
             glfwMakeContextCurrent(id);
             GL.createCapabilities();
@@ -234,7 +234,8 @@ public class Window {
                 Logger.printException(e);
                 return;
             }
-            setResizeEvent((window, args) -> {});
+            setResizeEvent((window, args) -> {
+            });
         }
     }
 
@@ -247,7 +248,7 @@ public class Window {
     }
 
     public void open(boolean allowResize, Vector2i resolution, boolean fullscreen) {
-        open(fullscreen, allowResize,true, resolution);
+        open(fullscreen, allowResize, true, resolution);
     }
 
     public void close() {
@@ -271,7 +272,7 @@ public class Window {
             mouse.update();
 
             canvas.properties.mouseRaycastStatus.touched = false;
-            glViewport(0,0, resolution.x, resolution.y);
+            glViewport(0, 0, resolution.x, resolution.y);
         }
     }
 
@@ -298,7 +299,7 @@ public class Window {
         glfwSetWindowIcon(id, iconGB);
     }
 
-    public void setCursor(String path){
+    public void setCursor(String path) {
         GLFWImage GLFWimage;
         try {
             Object[] image = TextureLoader.loadTextureInBuffer(path);
@@ -309,7 +310,7 @@ public class Window {
             return;
         }
 
-        long cursor = GLFW.glfwCreateCursor(GLFWimage,0,0);
+        long cursor = GLFW.glfwCreateCursor(GLFWimage, 0, 0);
         GLFW.glfwSetCursor(id, cursor);
     }
 }

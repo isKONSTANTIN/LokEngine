@@ -41,28 +41,40 @@ public class GUIObject {
     public Vector2i getPosition() {
         return position;
     }
+
     public Vector2i getSize() {
         return size;
     }
 
-    protected void pressed(){}
-    protected void unpressed(){}
-    protected void focused(){}
-    protected void unfocused(){}
-    protected void retention(){}
-    protected void endRetention(){}
+    protected void pressed() {
+    }
 
-    protected void updateAlgorithms(){
-        if (positionAlgorithm != null){
+    protected void unpressed() {
+    }
+
+    protected void focused() {
+    }
+
+    protected void unfocused() {
+    }
+
+    protected void retention() {
+    }
+
+    protected void endRetention() {
+    }
+
+    protected void updateAlgorithms() {
+        if (positionAlgorithm != null) {
             Vector2i newPosition = positionAlgorithm.calculate(this);
-            if (!newPosition.equals(position)){
+            if (!newPosition.equals(position)) {
                 setPosition(newPosition);
             }
         }
 
-        if (sizeAlgorithm != null){
+        if (sizeAlgorithm != null) {
             Vector2i newSize = sizeAlgorithm.calculate(this);
-            if (!newSize.equals(size)){
+            if (!newSize.equals(size)) {
                 setSize(newSize);
             }
         }
@@ -105,16 +117,16 @@ public class GUIObject {
             }
         }
 
-        if (!retention && mousePressed && !properties.mouseRaycastStatus.lastFramePressed && inField){
+        if (!retention && mousePressed && !properties.mouseRaycastStatus.lastFramePressed && inField) {
             retention = true;
             retention();
-        }else if (retention && !mousePressed) {
+        } else if (retention && !mousePressed) {
             retention = false;
             endRetention();
         }
 
-        if (!inField && mousePressed || properties.mouseRaycastStatus.touched && !inField){
-            if (focused){
+        if (!inField && mousePressed || properties.mouseRaycastStatus.touched && !inField) {
+            if (focused) {
                 focused = false;
                 unfocused();
             }

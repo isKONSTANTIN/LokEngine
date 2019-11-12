@@ -1,6 +1,5 @@
 package ru.lokinCompany.lokEngine.GUI.Canvases;
 
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPositionAlgorithms;

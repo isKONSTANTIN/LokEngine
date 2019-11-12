@@ -1,10 +1,10 @@
 package ru.lokinCompany.lokEngine.Render.Frame.FrameParts.GUI;
 
+import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Loaders.FontLoader;
 import ru.lokinCompany.lokEngine.Render.Frame.BuilderProperties;
 import ru.lokinCompany.lokEngine.Tools.Timer;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 

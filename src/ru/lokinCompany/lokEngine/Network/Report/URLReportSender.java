@@ -28,11 +28,11 @@ public class URLReportSender {
     }
 
     public URLReportSender(URL url, int connectionTimeout, int readTimeout) {
-        this(url,connectionTimeout,readTimeout,null);
+        this(url, connectionTimeout, readTimeout, null);
     }
 
     public URLReportSender(URL url) {
-        this(url,5000, 5000);
+        this(url, 5000, 5000);
     }
 
     protected String sendReport(Report report, HttpURLConnection connection) throws Exception {
@@ -59,7 +59,7 @@ public class URLReportSender {
     }
 
     public String sendReportOverHttps(Report report) throws Exception {
-        return sendReport(report, (HttpsURLConnection)(proxy != null ? url.openConnection(proxy) : url.openConnection()));
+        return sendReport(report, (HttpsURLConnection) (proxy != null ? url.openConnection(proxy) : url.openConnection()));
     }
 
     public ReportSendlerResult sendReportInBackgroud(Report report) {
@@ -67,7 +67,7 @@ public class URLReportSender {
 
         new Thread(() -> {
             try {
-                returnMessage.result = sendReport(report, (HttpURLConnection)(proxy != null ? url.openConnection(proxy) : url.openConnection()));
+                returnMessage.result = sendReport(report, (HttpURLConnection) (proxy != null ? url.openConnection(proxy) : url.openConnection()));
             } catch (Exception e) {
                 returnMessage.result = "Failed";
             }
@@ -81,7 +81,7 @@ public class URLReportSender {
 
         new Thread(() -> {
             try {
-                returnMessage.result = sendReport(report, (HttpsURLConnection)(proxy != null ? url.openConnection(proxy) : url.openConnection()));
+                returnMessage.result = sendReport(report, (HttpsURLConnection) (proxy != null ? url.openConnection(proxy) : url.openConnection()));
             } catch (Exception e) {
                 returnMessage.result = "Failed";
             }

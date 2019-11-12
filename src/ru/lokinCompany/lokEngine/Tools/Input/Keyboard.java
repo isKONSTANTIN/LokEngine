@@ -1,9 +1,9 @@
 package ru.lokinCompany.lokEngine.Tools.Input;
 
-import ru.lokinCompany.lokEngine.Render.Window.Window;
-import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import org.lwjgl.glfw.GLFWCharCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import ru.lokinCompany.lokEngine.Render.Window.Window;
+import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 
 import java.util.ArrayList;
 

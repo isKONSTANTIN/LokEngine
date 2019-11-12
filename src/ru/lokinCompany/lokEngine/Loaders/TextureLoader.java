@@ -1,7 +1,7 @@
 package ru.lokinCompany.lokEngine.Loaders;
 
-import ru.lokinCompany.lokEngine.Render.Texture;
 import org.lwjgl.BufferUtils;
+import ru.lokinCompany.lokEngine.Render.Texture;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

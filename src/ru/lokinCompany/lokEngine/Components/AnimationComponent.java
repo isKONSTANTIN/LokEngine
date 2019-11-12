@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.Components;
 
+import org.lwjgl.util.vector.Vector4f;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Animation;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sprite;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.SpriteFramePart;
@@ -8,7 +9,6 @@ import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.ArraySaver;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
-import org.lwjgl.util.vector.Vector4f;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 
 import java.util.HashMap;
@@ -52,7 +52,9 @@ public class AnimationComponent extends Component implements Saveable {
         return activeAnimation;
     }
 
-    public String getActiveAnimationName(){ return activeAnimationName; }
+    public String getActiveAnimationName() {
+        return activeAnimationName;
+    }
 
     public void setActiveAnimation(String name) {
         activeAnimation = animations.get(name);

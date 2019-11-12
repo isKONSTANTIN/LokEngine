@@ -1,5 +1,8 @@
 package ru.lokinCompany.lokEngine.Applications;
 
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.ALC;
+import org.lwjgl.openal.ALC10;
 import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
@@ -7,30 +10,33 @@ import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Prefs;
 import ru.lokinCompany.lokEngine.Tools.SplashScreen;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.ALC;
-import org.lwjgl.openal.ALC10;
 
-import static org.lwjgl.glfw.GLFW.glfwInit;
 import static org.lwjgl.openal.ALC10.*;
-import static org.lwjgl.openal.ALC10.alcCloseDevice;
 
 public class ApplicationGUIOnly extends Application {
 
     public Window window;
+
     @Override
-    public void start(){
+    public void start() {
         start(false);
     }
 
-    public void start(boolean windowFullscreen){
-        start(windowFullscreen,false);
+    public void start(boolean windowFullscreen) {
+        start(windowFullscreen, false);
     }
-    public void start(boolean windowFullscreen, boolean allowResize){
+
+    public void start(boolean windowFullscreen, boolean allowResize) {
         start(windowFullscreen, allowResize, true);
     }
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync){ start(windowFullscreen,allowResize, vSync, new Vector2i(512,512)); }
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution){ start(windowFullscreen, allowResize, vSync, windowResolution, "LokEngine application"); }
+
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync) {
+        start(windowFullscreen, allowResize, vSync, new Vector2i(512, 512));
+    }
+
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution) {
+        start(windowFullscreen, allowResize, vSync, windowResolution, "LokEngine application");
+    }
 
     public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution, String windowTitle) {
         if (myThread != null) return;

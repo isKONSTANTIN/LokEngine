@@ -1,10 +1,10 @@
 package ru.lokinCompany.lokEngine.Tools;
 
-import ru.lokinCompany.lokEngine.Render.Camera;
-import ru.lokinCompany.lokEngine.Render.Shader;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
+import ru.lokinCompany.lokEngine.Render.Camera;
+import ru.lokinCompany.lokEngine.Render.Shader;
 
 import java.nio.FloatBuffer;
 

@@ -1,10 +1,10 @@
 package ru.lokinCompany.lokEngine.Tools;
 
+import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.GUI.GUIImageFramePart;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 
@@ -31,7 +31,7 @@ public class SplashScreen {
 
     public static void updateStatus(float percentage) {
         window.getFrameBuilder().getBuilderProperties().setDrawMode(DrawMode.RawGUI);
-        GL11.glClearColor(0.1372549f,0.1372549f,0.1372549f,1);
+        GL11.glClearColor(0.1372549f, 0.1372549f, 0.1372549f, 1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         framePart.partRender(null);
 

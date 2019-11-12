@@ -1,9 +1,9 @@
 package ru.lokinCompany.lokEngine.Components.AdditionalObjects.Rigidbody.Shapes;
 
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Components.ComponentsTools.ShapeCreator;
 import ru.lokinCompany.lokEngine.Tools.Base64.Base64;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
-import org.lwjgl.util.vector.Vector2f;
 
 public class BoxShape extends Shape {
 

@@ -1,5 +1,7 @@
 package ru.lokinCompany.lokEngine.Render.Frame;
 
+import org.lwjgl.opengl.ARBShaderObjects;
+import org.lwjgl.util.vector.Vector3f;
 import ru.lokinCompany.lokEngine.Loaders.BufferLoader;
 import ru.lokinCompany.lokEngine.Loaders.ShaderLoader;
 import ru.lokinCompany.lokEngine.Loaders.TextureLoader;
@@ -9,12 +11,8 @@ import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.MatrixCreator;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.opengl.ARBShaderObjects;
-import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20C.glUniform2f;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
 public class BuilderProperties {
@@ -80,7 +78,7 @@ public class BuilderProperties {
         this.window = window;
     }
 
-    public void update(){
+    public void update() {
         Vector2i windowResolution = window.getResolution();
 
         useShader(postProcessingShader);
@@ -127,7 +125,7 @@ public class BuilderProperties {
     }
 
     public void setDrawMode(DrawMode dm, Vector2i resolution) {
-        glViewport(0,0,resolution.x,resolution.y);
+        glViewport(0, 0, resolution.x, resolution.y);
         if (dm == DrawMode.Display || dm == DrawMode.RawGUI) {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
@@ -144,7 +142,7 @@ public class BuilderProperties {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
-            gluOrtho2D(0.0f, resolution.x / (float)resolution.y, 1, 0.0f);
+            gluOrtho2D(0.0f, resolution.x / (float) resolution.y, 1, 0.0f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
 

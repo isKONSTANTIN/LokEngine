@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.Components;
 
+import org.lwjgl.util.vector.Vector4f;
 import ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sprite;
 import ru.lokinCompany.lokEngine.Loaders.SpriteLoader;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.SpriteFramePart;
@@ -8,7 +9,6 @@ import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
-import org.lwjgl.util.vector.Vector4f;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 
@@ -56,11 +56,11 @@ public class SpriteComponent extends Component implements Saveable {
         framePart.sprite = SpriteLoader.loadSprite(path);
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return framePart.color;
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         framePart.color = color;
     }
 

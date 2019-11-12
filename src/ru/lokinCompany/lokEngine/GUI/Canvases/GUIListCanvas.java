@@ -9,7 +9,7 @@ public class GUIListCanvas extends GUICanvas {
     int gap;
 
     public GUIListCanvas(Vector2i position, Vector2i size, Vector2i sizeObjects) {
-        this(position,size,sizeObjects,0);
+        this(position, size, sizeObjects, 0);
     }
 
     public GUIListCanvas(Vector2i position, Vector2i size, Vector2i sizeObjects, int gap) {
@@ -17,6 +17,7 @@ public class GUIListCanvas extends GUICanvas {
         this.sizeObjects = sizeObjects;
         this.gap = gap;
     }
+
     @Override
     public int addObject(GUIObject object) {
         object.setPosition(new Vector2i(getPosition().x, getPosition().y + (sizeObjects.y + gap) * objects.size()));

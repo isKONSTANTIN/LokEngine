@@ -1,11 +1,11 @@
 package ru.lokinCompany.lokEngine.SceneEnvironment;
 
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Components.ComponentList;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.Base64.Base64;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
-import org.lwjgl.util.vector.Vector2f;
 
 public class SceneObject implements Saveable {
     public Vector2f position = new Vector2f(0, 0);

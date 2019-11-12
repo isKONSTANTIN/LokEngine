@@ -14,7 +14,7 @@ public class Vector2i {
         this.y = y;
     }
 
-    public boolean equals(Vector2i vector2i){
+    public boolean equals(Vector2i vector2i) {
         return (x == vector2i.x) && (y == vector2i.y);
     }
 
