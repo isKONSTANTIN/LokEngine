@@ -3,28 +3,29 @@ package ru.lokinCompany.lokEngine.Tools.Input;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.MouseScrollScript;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import java.nio.DoubleBuffer;
+import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Mouse {
 
     private Vector2i mousePosition = new Vector2i();
+    private Vector2f mouseScroll = new Vector2f();
+    private Vector2f lastMouseScroll = new Vector2f();
     private boolean mousePressed = false;
-    private MouseScrollScript mouseScrollScript;
-
     public int buttonID = GLFW_MOUSE_BUTTON_LEFT;
     private Window window;
 
     public Mouse(Window window) {
         this.window = window;
-        mouseScrollScript = (xoffset, yoffset) -> {
-        };
 
         glfwSetMouseButtonCallback(window.getId(), new GLFWMouseButtonCallback() {
             @Override
@@ -36,19 +37,10 @@ public class Mouse {
         glfwSetScrollCallback(window.getId(), new GLFWScrollCallback() {
             @Override
             public void invoke(long l, double xoffset, double yoffset) {
-                try {
-                    mouseScrollScript.execute(xoffset, yoffset);
-                } catch (Exception e) {
-                    Logger.warning("Fail execute scroll script!", "LokEngine_Mouse");
-                    Logger.printException(e);
-                }
-
+                mouseScroll.x = (float)xoffset;
+                mouseScroll.y = (float)yoffset;
             }
         });
-    }
-
-    public void setMouseScrollScript(MouseScrollScript script) {
-        mouseScrollScript = script;
     }
 
     public boolean getPressedStatus() {
@@ -59,6 +51,10 @@ public class Mouse {
         return new Vector2i(mousePosition.x, mousePosition.y);
     }
 
+    public Vector2f getMouseScroll() {
+        return new Vector2f(mouseScroll.x, mouseScroll.y);
+    }
+
     public void update() {
         DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
         DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
@@ -66,6 +62,12 @@ public class Mouse {
 
         mousePosition.x = (int) xBuffer.get(0);
         mousePosition.y = (int) yBuffer.get(0);
+
+        if (lastMouseScroll.equals(mouseScroll) && (mouseScroll.x != 0 || mouseScroll.y != 0)){
+            mouseScroll.x = 0;
+            mouseScroll.y = 0;
+        }
+        lastMouseScroll = getMouseScroll();
     }
 
     public boolean inField(Vector2i position, Vector2i size) {
