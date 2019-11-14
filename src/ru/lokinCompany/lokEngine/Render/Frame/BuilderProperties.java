@@ -11,6 +11,7 @@ import ru.lokinCompany.lokEngine.Render.Texture;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.MatrixCreator;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
@@ -24,6 +25,7 @@ public class BuilderProperties {
     private Shader particlesShader;
     private Window window;
     private Texture unknownTexture;
+    private Vector4i orthoView = new Vector4i();
 
     private int UVBuffer;
     private int vertexScreenBuffer;
@@ -120,17 +122,30 @@ public class BuilderProperties {
         });
     }
 
+    public void setOrthoView(Vector4i view){
+        orthoView = new Vector4i(view.x, view.y, view.z, view.w);
+        gluOrtho2D(-view.z, view.x - view.z, view.y - view.w, -view.w);
+    }
+
+    public Vector4i getOrthoView(){
+        return orthoView;
+    }
+
     public void setDrawMode(DrawMode dm) {
         setDrawMode(dm, window.getResolution());
     }
 
     public void setDrawMode(DrawMode dm, Vector2i resolution) {
+        setDrawMode(dm, resolution, new Vector4i(resolution.x, resolution.y, orthoView.z, orthoView.w));
+    }
+
+    public void setDrawMode(DrawMode dm, Vector2i resolution, Vector4i orthoView) {
         glViewport(0, 0, resolution.x, resolution.y);
         if (dm == DrawMode.Display || dm == DrawMode.RawGUI) {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
-            gluOrtho2D(0.0f, resolution.x, resolution.y, 0.0f);
+            setOrthoView(orthoView);
 
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();

@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import java.nio.ByteBuffer;
 
@@ -20,6 +21,7 @@ public class FrameBufferWorker {
     private int texture;
     private int lastBuffer;
     private Vector2i lastView = new Vector2i();
+    private Vector4i lastOrthoView = new Vector4i();
     private Vector2i sourceResolution;
     private Vector2i bufferResolution;
     private int depth;
@@ -51,19 +53,23 @@ public class FrameBufferWorker {
         initialiseFrameBuffer(bufferResolution.x, bufferResolution.y);
     }
 
-    public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties) {
+    public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties, Vector2i offset) {
         if (!sourceResolution.equals(bufferResolution)) {
             setResolution(sourceResolution);
         }
-        bindFrameBuffer(frameBuffer);
+        bindFrameBuffer(frameBuffer, properties);
         activeDrawMode = drawMode;
         activeProperties = properties;
-        properties.setDrawMode(drawMode, bufferResolution);
+        properties.setDrawMode(drawMode, bufferResolution, new Vector4i(bufferResolution.x, bufferResolution.y, offset.x, offset.y));
+    }
+
+    public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties) {
+        bindFrameBuffer(drawMode, properties, new Vector2i());
     }
 
     public void unbindCurrentFrameBuffer() {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
-        activeProperties.setDrawMode(activeDrawMode, lastView);
+        activeProperties.setDrawMode(activeDrawMode, lastView, lastOrthoView);
     }
 
     public int getTexture() {
@@ -85,12 +91,13 @@ public class FrameBufferWorker {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
     }
 
-    private void bindFrameBuffer(int frameBuffer) {
+    private void bindFrameBuffer(int frameBuffer, BuilderProperties properties) {
         lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
         int[] view = new int[4];
         glGetIntegerv(GL_VIEWPORT, view);
         lastView.x = view[2];
         lastView.y = view[3];
+        lastOrthoView = properties.getOrthoView();
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
     }

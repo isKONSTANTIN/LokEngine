@@ -5,6 +5,7 @@ import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import java.util.Vector;
 
@@ -40,10 +41,14 @@ public class PartsBuilder {
     }
 
     public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties) {
+        return build(frameParts,drawMode,builderProperties, new Vector2i());
+    }
+
+    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties, Vector2i viewOffset) {
         if (frameBufferWorker == null)
             frameBufferWorker = new FrameBufferWorker(builderProperties.getBuilderWindow().getResolution());
 
-        frameBufferWorker.bindFrameBuffer(drawMode, builderProperties);
+        frameBufferWorker.bindFrameBuffer(drawMode, builderProperties, viewOffset);
 
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
@@ -63,10 +68,14 @@ public class PartsBuilder {
         return frameBufferWorker.getTexture();
     }
 
-    public int build(DrawMode drawMode, BuilderProperties builderProperties) {
-        int result = build(frameParts, drawMode, builderProperties);
+    public int build(DrawMode drawMode, BuilderProperties builderProperties, Vector2i viewOffset) {
+        int result = build(frameParts, drawMode, builderProperties, viewOffset);
         frameParts.clear();
         return result;
+    }
+
+    public int build(DrawMode drawMode, BuilderProperties builderProperties) {
+        return build(drawMode, builderProperties, new Vector2i());
     }
 
 }

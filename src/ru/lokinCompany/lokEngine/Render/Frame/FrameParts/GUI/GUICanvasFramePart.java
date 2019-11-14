@@ -7,6 +7,7 @@ import ru.lokinCompany.lokEngine.Render.Frame.FramePart;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -14,6 +15,7 @@ public class GUICanvasFramePart extends FramePart {
     public PartsBuilder partsBuilder;
     public Vector2i position;
     public Vector2i size;
+    public Vector2i viewOffset = new Vector2i(0,0);
     public Color color = new Color(1, 1, 1, 1);
 
     public GUICanvasFramePart(Vector2i position, Vector2i size) {
@@ -25,7 +27,7 @@ public class GUICanvasFramePart extends FramePart {
 
     @Override
     public void partRender(BuilderProperties builderProperties) {
-        int texture = partsBuilder.build(DrawMode.RawGUI, builderProperties);
+        int texture = partsBuilder.build(DrawMode.RawGUI, builderProperties, viewOffset);
 
         glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_POLYGON);
