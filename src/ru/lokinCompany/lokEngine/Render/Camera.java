@@ -11,7 +11,7 @@ public class Camera {
 
     public Vector2f position = new Vector2f(0, 0);
     public float rollRotation;
-    public float fieldOfView;
+    public float fieldOfView = 1;
     public float screenRatio = 1;
     public Window window;
 

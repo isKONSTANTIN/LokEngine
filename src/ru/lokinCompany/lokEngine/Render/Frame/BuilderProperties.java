@@ -93,7 +93,7 @@ public class BuilderProperties {
         MatrixCreator.PutMatrixInShader(particlesShader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(0, new Vector3f(0, 0, 0)));
 
         useShader(objectShader);
-        window.getCamera().setFieldOfView(1);
+        window.getCamera().setFieldOfView(window.getCamera().fieldOfView);
 
         if (vertexScreenBuffer != 0) BufferLoader.unload(vertexScreenBuffer);
 
