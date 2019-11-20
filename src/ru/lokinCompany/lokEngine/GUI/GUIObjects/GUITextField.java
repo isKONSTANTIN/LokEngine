@@ -7,6 +7,7 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import ru.lokinCompany.lokEngine.Tools.Input.Keyboard;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -48,7 +49,7 @@ public class GUITextField extends GUIObject {
 
     public GUITextField(Vector2i position, Vector2i size, String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0, 0));
-        framePart = new GUITextFieldFramePart(text, fontName, color, fontStyle, fontSize, antiAlias);
+        framePart = new GUITextFieldFramePart(size, text, fontName, color, fontStyle, fontSize, antiAlias);
         this.canResize = canResize;
         this.size = size;
         this.touchable = true;
@@ -95,6 +96,14 @@ public class GUITextField extends GUIObject {
         }
     }
 
+    public void setBackgroundColor(Color color){
+        framePart.backgroundColor = color;
+    }
+
+    public Color getBackgroundColor(){
+        return framePart.backgroundColor;
+    }
+
     @Override
     public void setPosition(Vector2i position) {
         this.position = position;
@@ -104,6 +113,7 @@ public class GUITextField extends GUIObject {
     @Override
     public void setSize(Vector2i size) {
         this.size = size;
+        framePart.size = size;
     }
 
     @Override
