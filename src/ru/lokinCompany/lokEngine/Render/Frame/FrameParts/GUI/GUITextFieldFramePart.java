@@ -56,7 +56,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
             GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
 
             GL11.glVertex2f(xPos + 1, position.y);
-            GL11.glVertex2f(xPos + 1, position.y + getHeight());
+            GL11.glVertex2f(xPos + 1,position.y + size.y);
 
             GL11.glEnd();
         }
