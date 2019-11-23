@@ -96,22 +96,25 @@ public class BlurActionWorker extends PostProcessingActionWorker {
 
     @Override
     public int render(int sourceFrame) {
-        if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())){
-            window.getFrameBuilder().getBuilderProperties().useShader(shader);
-            window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+        if (postProcessingActions.size() > 0){
+            if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())){
+                window.getFrameBuilder().getBuilderProperties().useShader(shader);
+                window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+            }
+
+            blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
+
+            GL11.glClearColor(0, 0, 0, 0);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
+            for (int i = 0; i < postProcessingActions.size(); i++) {
+                postProcessingActions.get(i).apply();
+            }
+            postProcessingActions.clear();
+            blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
+
+            return blurPostProcess(blurPostProcessingFrameWorker.getTexture(), sourceFrame);
         }
-
-        blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
-
-        GL11.glClearColor(0, 0, 0, 0);
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
-        for (int i = 0; i < postProcessingActions.size(); i++) {
-            postProcessingActions.get(i).apply();
-        }
-        postProcessingActions.clear();
-        blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
-
-        return blurPostProcess(blurPostProcessingFrameWorker.getTexture(), sourceFrame);
+        return sourceFrame;
     }
 }
