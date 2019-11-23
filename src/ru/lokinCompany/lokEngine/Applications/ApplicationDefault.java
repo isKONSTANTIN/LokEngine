@@ -3,6 +3,7 @@ package ru.lokinCompany.lokEngine.Applications;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALC10;
+import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BloomActionWorker;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
 import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
@@ -83,6 +84,11 @@ public class ApplicationDefault extends Application {
                 alcCapabilities = ALC.createCapabilities(openALDevice);
                 alCapabilities = AL.createCapabilities(alcCapabilities);
 
+                Logger.debug("Init engine post processing action workers", "LokEngine_start");
+
+                window.getFrameBuilder().addPostProcessingActionWorker(new BloomActionWorker(window));
+                window.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
+
                 SplashScreen.updateStatus(0.5f);
                 Logger.debug("Call user init method", "LokEngine_start");
                 try {
@@ -91,10 +97,6 @@ public class ApplicationDefault extends Application {
                     Logger.warning("Fail user-init!", "LokEngine_start");
                     Logger.printException(e);
                 }
-
-                Logger.debug("Init engine post processing action workers", "LokEngine_start");
-
-                window.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
 
                 SplashScreen.updateStatus(0.9f);
                 Logger.debug("Turn in main while!", "LokEngine_start");
