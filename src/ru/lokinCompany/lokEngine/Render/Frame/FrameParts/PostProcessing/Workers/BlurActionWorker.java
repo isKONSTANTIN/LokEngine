@@ -42,6 +42,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
     }
 
     private int blurPostProcess(int postFrame, int originalFrame) {
+        checkResizeWindow();
         BuilderProperties builderProperties = window.getFrameBuilder().getBuilderProperties();
         blurSceneFrameWorker1.bindFrameBuffer(DrawMode.Display, builderProperties);
         builderProperties.useShader(shader);
@@ -79,6 +80,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
     }
 
     public int onceRender(int sourceFrame, BlurAction blurAction) {
+        checkResizeWindow();
         blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -94,14 +96,18 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         return blurPostProcess(blurAction, sourceFrame);
     }
 
+    private void checkResizeWindow(){
+        if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())){
+            window.getFrameBuilder().getBuilderProperties().useShader(shader);
+            window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+            blurPostProcessingFrameWorker.setResolution(window.getResolution());
+        }
+    }
+
     @Override
     public int render(int sourceFrame) {
         if (postProcessingActions.size() > 0){
-            if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())){
-                window.getFrameBuilder().getBuilderProperties().useShader(shader);
-                window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-            }
-
+            checkResizeWindow();
             blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
 
             GL11.glClearColor(0, 0, 0, 0);
