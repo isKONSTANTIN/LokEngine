@@ -19,5 +19,4 @@ public class PostProcessingActionWorker {
     public int render(int sourceFrame) {
         return -1;
     }
-
 }

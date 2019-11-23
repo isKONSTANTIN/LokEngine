@@ -25,7 +25,7 @@ public class FrameBufferWorker {
     private Vector2i sourceResolution;
     private Vector2i bufferResolution;
     private int depth;
-    private DrawMode activeDrawMode;
+    private DrawMode lastDrawMode;
     private BuilderProperties activeProperties;
 
     public FrameBufferWorker(Vector2i resolution) {
@@ -58,7 +58,7 @@ public class FrameBufferWorker {
             setResolution(sourceResolution);
         }
         bindFrameBuffer(frameBuffer, properties);
-        activeDrawMode = drawMode;
+        lastDrawMode = properties.getActiveDrawMode();
         activeProperties = properties;
         properties.setDrawMode(drawMode, bufferResolution, new Vector4i(bufferResolution.x, bufferResolution.y, offset.x, offset.y));
     }
@@ -69,7 +69,7 @@ public class FrameBufferWorker {
 
     public void unbindCurrentFrameBuffer() {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
-        activeProperties.setDrawMode(activeDrawMode, lastView, lastOrthoView);
+        activeProperties.setDrawMode(lastDrawMode, lastView, lastOrthoView);
     }
 
     public int getTexture() {

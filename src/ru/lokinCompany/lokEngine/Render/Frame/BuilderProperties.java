@@ -21,12 +21,11 @@ public class BuilderProperties {
 
     private Shader objectShader;
     private Shader displayShader;
-    private Shader postProcessingShader;
     private Shader particlesShader;
     private Window window;
     private Texture unknownTexture;
     private Vector4i orthoView = new Vector4i();
-
+    private DrawMode activeDrawMode;
     private int UVBuffer;
     private int vertexScreenBuffer;
 
@@ -42,10 +41,6 @@ public class BuilderProperties {
         return displayShader;
     }
 
-    public Shader getPostProcessingShader() {
-        return postProcessingShader;
-    }
-
     public Shader getParticlesShader() {
         return particlesShader;
     }
@@ -56,6 +51,10 @@ public class BuilderProperties {
 
     public Texture getUnknownTexture() {
         return unknownTexture;
+    }
+
+    public DrawMode getActiveDrawMode(){
+        return activeDrawMode;
     }
 
     public int getUVBuffer() {
@@ -83,9 +82,6 @@ public class BuilderProperties {
     public void update() {
         Vector2i windowResolution = window.getResolution();
 
-        useShader(postProcessingShader);
-        window.getCamera().updateProjection(windowResolution.x, windowResolution.y, 1);
-
         useShader(displayShader);
         window.getCamera().updateProjection(windowResolution.x, windowResolution.y, 1);
 
@@ -107,7 +103,6 @@ public class BuilderProperties {
     public void init() throws Exception {
         objectShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
         displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
-        postProcessingShader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
         particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
 
         unknownTexture = TextureLoader.loadTexture("#/resources/textures/unknown.png");
@@ -141,6 +136,7 @@ public class BuilderProperties {
 
     public void setDrawMode(DrawMode dm, Vector2i resolution, Vector4i orthoView) {
         glViewport(0, 0, resolution.x, resolution.y);
+        activeDrawMode = dm;
         if (dm == DrawMode.Display || dm == DrawMode.RawGUI) {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
