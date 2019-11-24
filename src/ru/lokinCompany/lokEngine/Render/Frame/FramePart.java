@@ -2,7 +2,7 @@ package ru.lokinCompany.lokEngine.Render.Frame;
 
 import ru.lokinCompany.lokEngine.Render.Enums.FramePartType;
 
-public class FramePart {
+public abstract class FramePart {
 
     public FramePartType frameType;
 
@@ -10,6 +10,5 @@ public class FramePart {
         this.frameType = frameType;
     }
 
-    public void partRender(BuilderProperties builderProperties) {
-    }
+    public abstract void partRender(BuilderProperties builderProperties);
 }
