@@ -24,10 +24,9 @@ public class BloomSettings {
         this.brightnessLimit = brightnessLimit;
     }
 
-    public BloomSettings(BlurTuning blurTuning){
-        this(new BlurTuning(0.2,10,0), 1, 1, 0.9f);
-    }
+    public BloomSettings(BlurTuning blurTuning){ this(blurTuning, 1, 1, 0.9f); }
 
+    public BloomSettings(){ this(new BlurTuning(0.2,10,0), 1, 1, 0.9f); }
     int getBlurTexture(Window window){
         if (frameBufferWorker == null)
             frameBufferWorker = new FrameBufferWorker(window.getResolution());
