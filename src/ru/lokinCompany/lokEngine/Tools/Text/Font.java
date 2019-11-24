@@ -56,6 +56,8 @@ public class Font {
             }
 
             lineWidth += g.width;
+            spaceSize += g.width;
+            spaceSize /= 2f;
         }
         width = Math.max(width, lineWidth);
         return width;
