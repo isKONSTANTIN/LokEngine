@@ -5,22 +5,15 @@ import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 
-public class Component implements Saveable {
+public abstract class Component implements Saveable {
 
-    public String getName() {
-        return "Component";
-    }
+    public abstract String getName();
 
-    public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
-    }
+    public abstract void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder);
 
     @Override
-    public String save() {
-        return "";
-    }
+    public abstract String save();
 
     @Override
-    public Saveable load(String savedString) {
-        return this;
-    }
+    public abstract Saveable load(String savedString);
 }

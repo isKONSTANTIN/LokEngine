@@ -10,6 +10,7 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
+import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -88,6 +89,16 @@ public class ParticleSystemComponent extends Component {
 
         if (partsBuilder != null)
             partsBuilder.addPart(framePart);
+    }
+
+    @Override
+    public String save() {
+        return null;
+    }
+
+    @Override
+    public Saveable load(String savedString) {
+        return null;
     }
 
 }
