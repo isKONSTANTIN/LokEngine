@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LokEngine.iml" filepath="$PROJECT_DIR$/LokEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LokEngine.iml" filepath="$PROJECT_DIR$/.idea/LokEngine.iml" />
     </modules>
   </component>
 </project>
