@@ -25,7 +25,7 @@ public class BoxShape extends Shape {
     @Override
     public Saveable load(String savedString) {
         String[] stringVectors = Base64.fromBase64(savedString).split("\n");
-        this.collideSize = new Vector2f(Float.valueOf(stringVectors[0]), Float.valueOf(stringVectors[1]));
+        this.collideSize = new Vector2f(Float.parseFloat(stringVectors[0]), Float.parseFloat(stringVectors[1]));
         this.shape = ShapeCreator.CreateBoxShape(collideSize).shape;
 
         return this;

@@ -8,6 +8,7 @@ import ru.lokinCompany.lokEngine.Render.Frame.BuilderProperties;
 import ru.lokinCompany.lokEngine.Render.Frame.DisplayDrawer;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameBufferWorker;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
+import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Actions.PostProcessingAction;
 import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 
@@ -109,8 +110,8 @@ public class BlurActionWorker extends PostProcessingActionWorker {
             GL11.glClearColor(0, 0, 0, 0);
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-            for (int i = 0; i < postProcessingActions.size(); i++) {
-                postProcessingActions.get(i).apply();
+            for (PostProcessingAction postProcessingAction : postProcessingActions) {
+                postProcessingAction.apply();
             }
             postProcessingActions.clear();
             blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();

@@ -17,8 +17,7 @@ public class Animation implements Saveable {
     public ArrayList<Integer> uvBuffers;
     private AtlasPositions atlasPositions;
 
-    public Animation() {
-    }
+    public Animation() {}
 
     public Animation(Texture atlas, AtlasPositions atlasPositions) {
         altasTexture = atlas;

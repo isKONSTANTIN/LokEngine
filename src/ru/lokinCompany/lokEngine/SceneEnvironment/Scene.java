@@ -48,13 +48,13 @@ public class Scene implements Saveable {
     }
 
     public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
-        for (int i = 0; i < objects.size(); i++) {
-            objects.get(i).update(applicationRuntime, partsBuilder);
+        for (SceneObject object : objects) {
+            object.update(applicationRuntime, partsBuilder);
         }
         b2World.step(1 / 60f * applicationRuntime.getSpeedEngine() * Math.min(12, applicationRuntime.getDeltaTime()), physicsVelocityIterations, physicsPositionsIterations);
 
-        for (int i = 0; i < postUpdateEvents.size(); i++) {
-            postUpdateEvents.get(i).postUpdate();
+        for (PostUpdateEvent postUpdateEvent : postUpdateEvents) {
+            postUpdateEvent.postUpdate();
         }
         postUpdateEvents.clear();
     }
@@ -101,8 +101,8 @@ public class Scene implements Saveable {
         }
         String[] lines = data[0].split("\n");
 
-        physicsVelocityIterations = Integer.valueOf(lines[0]);
-        physicsPositionsIterations = Integer.valueOf(lines[1]);
+        physicsVelocityIterations = Integer.parseInt(lines[0]);
+        physicsPositionsIterations = Integer.parseInt(lines[1]);
 
         arraySaver.load(data[1]);
 

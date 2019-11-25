@@ -53,13 +53,13 @@ public class AtlasPositions implements Saveable {
             );
         }
 
-        for (int i = 0; i < positions.size(); i++) {
+        for (Vector4i position : positions) {
             uvBuffers.add(
                     BufferLoader.load(new float[]{
-                            (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY,
-                            (float) positions.get(i).x / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
-                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).y / (float) texture.sizeY,
-                            (float) positions.get(i).z / (float) texture.sizeX, (float) positions.get(i).w / (float) texture.sizeY
+                            (float) position.x / (float) texture.sizeX, (float) position.w / (float) texture.sizeY,
+                            (float) position.x / (float) texture.sizeX, (float) position.y / (float) texture.sizeY,
+                            (float) position.z / (float) texture.sizeX, (float) position.y / (float) texture.sizeY,
+                            (float) position.z / (float) texture.sizeX, (float) position.w / (float) texture.sizeY
                     })
             );
         }
@@ -92,11 +92,12 @@ public class AtlasPositions implements Saveable {
 
     private Vector4i parseVector(String data) {
         String[] vectorParts = data.split(",");
+        if (vectorParts.length < 4) return null;
         return new Vector4i(
-                Integer.valueOf(vectorParts[0]),
-                Integer.valueOf(vectorParts[1]),
-                Integer.valueOf(vectorParts[2]),
-                Integer.valueOf(vectorParts[3])
+                Integer.parseInt(vectorParts[0]),
+                Integer.parseInt(vectorParts[1]),
+                Integer.parseInt(vectorParts[2]),
+                Integer.parseInt(vectorParts[3])
         );
     }
 
@@ -104,7 +105,7 @@ public class AtlasPositions implements Saveable {
     public Saveable load(String savedString) {
         String[] data = Base64.fromBase64(savedString).split(";");
         String[] vectors = data[0].split("\n");
-        this.countSprites = Integer.valueOf(data[2]);
+        this.countSprites = Integer.parseInt(data[2]);
 
         positions = new ArrayList<>();
 

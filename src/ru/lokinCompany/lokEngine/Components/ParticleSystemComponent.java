@@ -68,9 +68,7 @@ public class ParticleSystemComponent extends Component {
             ArrayList<Float> positions = new ArrayList<>();
             ArrayList<Float> sizes = new ArrayList<>();
 
-            for (Iterator<Particle> iter = particlesList.iterator(); iter.hasNext(); ) {
-                Particle particle = iter.next();
-
+            for (Particle particle : particlesList) {
                 Particle updatedParticle = particleHandler.processParticle(particle, applicationRuntime);
                 if (updatedParticle != null) {
                     positions.add(updatedParticle.positionX);

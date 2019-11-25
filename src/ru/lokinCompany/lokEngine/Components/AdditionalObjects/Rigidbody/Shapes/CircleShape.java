@@ -22,7 +22,7 @@ public class CircleShape extends Shape {
 
     @Override
     public Saveable load(String savedString) {
-        this.radius = Float.valueOf(savedString);
+        this.radius = Float.parseFloat(savedString);
         this.shape = ShapeCreator.CreateCircleShape(radius).shape;
         return this;
     }

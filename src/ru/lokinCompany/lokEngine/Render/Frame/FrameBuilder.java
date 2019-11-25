@@ -11,7 +11,7 @@ import java.util.Vector;
 public class FrameBuilder {
     public Color backgroundColor = new Color(0.6f, 0.6f, 0.6f, 1);
 
-    private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<PostProcessingActionWorker>();
+    private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<>();
     private PartsBuilder scenePartsBuilder;
     private PartsBuilder GUIPartsBuilder;
     private BuilderProperties builderProperties;

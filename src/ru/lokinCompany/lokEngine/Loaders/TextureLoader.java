@@ -26,13 +26,12 @@ public class TextureLoader {
         loadedTextures.get(context).remove(texture.path);
 
         glDeleteTextures(texture.buffer);
-        texture = null;
     }
 
     public static Object[] loadTextureInBuffer(String path) throws IOException {
         if (!GLFW.isInited()) return null;
 
-        BufferedImage image = null;
+        BufferedImage image;
 
         if (path.charAt(0) == '#') {
             image = ImageIO.read(TextureLoader.class.getResource(path.substring(1)));
@@ -72,8 +71,8 @@ public class TextureLoader {
             return loadedTextures.get(context).get(path);
         }
 
-        ByteBuffer textureBuffer = null;
-        BufferedImage image = null;
+        ByteBuffer textureBuffer;
+        BufferedImage image;
 
         try {
             Object[] imageData = loadTextureInBuffer(path);

@@ -20,7 +20,7 @@ public class AnimationComponent extends Component implements Saveable {
     private String activeAnimationName;
     private SpriteFramePart framePart;
 
-    public float currectFrame;
+    public float currentFrame;
     public float speedAnimation = 1;
     public boolean frameSkipping;
 
@@ -59,7 +59,7 @@ public class AnimationComponent extends Component implements Saveable {
     public void setActiveAnimation(String name) {
         activeAnimation = animations.get(name);
         activeAnimationName = name;
-        currectFrame = 0;
+        currentFrame = 0;
     }
 
     @Override
@@ -67,17 +67,17 @@ public class AnimationComponent extends Component implements Saveable {
         if (activeAnimation != null) {
             sprite.texture = activeAnimation.altasTexture;
             sprite.vertexBuffer = activeAnimation.vertexBuffer;
-            currectFrame += speedAnimation * (frameSkipping ? applicationRuntime.getDeltaTime() * applicationRuntime.getSpeedEngine() : 1);
+            currentFrame += speedAnimation * (frameSkipping ? applicationRuntime.getDeltaTime() * applicationRuntime.getSpeedEngine() : 1);
 
-            if ((int) currectFrame > activeAnimation.uvBuffers.size() - 1) {
-                currectFrame = 0;
+            if ((int) currentFrame > activeAnimation.uvBuffers.size() - 1) {
+                currentFrame = 0;
             }
 
-            if ((int) currectFrame < 0) {
-                currectFrame = activeAnimation.uvBuffers.size() - 1;
+            if ((int) currentFrame < 0) {
+                currentFrame = activeAnimation.uvBuffers.size() - 1;
             }
 
-            sprite.uvBuffer = activeAnimation.uvBuffers.get((int) currectFrame);
+            sprite.uvBuffer = activeAnimation.uvBuffers.get((int) currentFrame);
 
             framePart.position = new Vector4f(source.position.x, source.position.y, source.renderPriority, source.rollRotation);
             if (partsBuilder != null)
@@ -104,7 +104,7 @@ public class AnimationComponent extends Component implements Saveable {
             stringBuilder.append(";").append(activeAnimationName);
             stringBuilder.append(";").append(arraySaver.save());
             stringBuilder.append(";").append(speedAnimation);
-            stringBuilder.append(";").append(currectFrame);
+            stringBuilder.append(";").append(currentFrame);
 
             return stringBuilder.toString();
         }
@@ -124,8 +124,8 @@ public class AnimationComponent extends Component implements Saveable {
 
             setActiveAnimation(data[1]);
 
-            speedAnimation = Float.valueOf(data[3]);
-            currectFrame = Float.valueOf(data[4]);
+            speedAnimation = Float.parseFloat(data[3]);
+            currentFrame = Float.parseFloat(data[4]);
         }
         return this;
     }

@@ -26,7 +26,7 @@ public interface AutoSaveable extends Serializable, Saveable {
 
     @Override
     default Saveable load(String savedString) {
-        ObjectInputStream ois = null;
+        ObjectInputStream ois;
         try {
             ois = new ObjectInputStream(new ByteArrayInputStream(Base64.bytesFromBase64(savedString)));
 

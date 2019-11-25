@@ -26,7 +26,7 @@ public class SplashScreen {
         SplashScreen.window = window;
 
         sizeBar = new Vector2i(Math.round(window.getResolution().x * 0.8f), 4);
-        positionBar = new Vector2i(Math.round(window.getResolution().x / 2 - sizeBar.x / 2), window.getResolution().y - 10);
+        positionBar = new Vector2i(Math.round(window.getResolution().x / 2f - sizeBar.x / 2f), window.getResolution().y - 10);
     }
 
     public static void updateStatus(float percentage) {

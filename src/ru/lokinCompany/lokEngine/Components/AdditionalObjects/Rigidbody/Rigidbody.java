@@ -49,9 +49,9 @@ public class Rigidbody implements Saveable {
     public Saveable load(String savedString) {
         String[] lines = Base64.fromBase64(savedString).split("\n");
 
-        this.density = Float.valueOf(lines[0]);
-        this.friction = Float.valueOf(lines[1]);
-        this.isStatic = Boolean.valueOf(lines[2]);
+        this.density = Float.parseFloat(lines[0]);
+        this.friction = Float.parseFloat(lines[1]);
+        this.isStatic = Boolean.parseBoolean(lines[2]);
 
         return this;
     }

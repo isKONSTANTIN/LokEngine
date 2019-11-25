@@ -36,9 +36,9 @@ public class SceneObject implements Saveable {
     public Saveable load(String savedString) {
         String[] lines = Base64.fromBase64(savedString).split("\n");
 
-        position = new Vector2f(Float.valueOf(lines[0]), Float.valueOf(lines[1]));
-        rollRotation = Float.valueOf(lines[2]);
-        renderPriority = Float.valueOf(lines[3]);
+        position = new Vector2f(Float.parseFloat(lines[0]), Float.parseFloat(lines[1]));
+        rollRotation = Float.parseFloat(lines[2]);
+        renderPriority = Float.parseFloat(lines[3]);
         components.load(lines[4]);
         name = lines[5];
 

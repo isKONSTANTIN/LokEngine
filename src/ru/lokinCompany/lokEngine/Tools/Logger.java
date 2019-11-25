@@ -150,14 +150,14 @@ public class Logger {
     public static String stackTraceToString(StackTraceElement[] elements) {
         StringBuilder StackTrace = new StringBuilder();
 
-        for (int i = 0; i < elements.length; i++) {
+        for (StackTraceElement element : elements) {
             StackTrace
                     .append("Class name: '")
-                    .append(elements[i].getClassName())
+                    .append(element.getClassName())
                     .append("' Method name: '")
-                    .append(elements[i].getMethodName())
+                    .append(element.getMethodName())
                     .append("' - ")
-                    .append(elements[i].getLineNumber())
+                    .append(element.getLineNumber())
                     .append(" line\n");
         }
         return StackTrace.toString();
@@ -167,7 +167,7 @@ public class Logger {
         if (lastMessageType == 1) {
             if (debugMessages) {
 
-                BufferedReader reader = null;
+                BufferedReader reader;
                 if (useColors) {
                     reader = new BufferedReader(new StringReader(ANSICyanColor + message + ANSIReset));
                 } else {
@@ -179,7 +179,7 @@ public class Logger {
         } else if (lastMessageType == 2) {
             if (infoMessages) {
 
-                BufferedReader reader = null;
+                BufferedReader reader;
                 if (useColors) {
                     reader = new BufferedReader(new StringReader(ANSIWhiteColor + message + ANSIReset));
                 } else {
@@ -191,7 +191,7 @@ public class Logger {
         } else if (lastMessageType == 3) {
             if (warningMessages) {
 
-                BufferedReader reader = null;
+                BufferedReader reader;
                 if (useColors) {
                     reader = new BufferedReader(new StringReader(ANSIYellowColor + message + ANSIReset));
                 } else {
@@ -203,7 +203,7 @@ public class Logger {
         } else if (lastMessageType == 4) {
             if (errorMessages) {
 
-                BufferedReader reader = null;
+                BufferedReader reader;
                 if (useColors) {
                     reader = new BufferedReader(new StringReader(ANSIRedColor + message + ANSIReset));
                 } else {

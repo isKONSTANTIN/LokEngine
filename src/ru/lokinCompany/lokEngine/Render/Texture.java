@@ -36,7 +36,7 @@ public class Texture implements Saveable {
 
     @Override
     public Saveable load(String savedString) {
-        Texture loadedTexture = null;
+        Texture loadedTexture;
         try {
             loadedTexture = TextureLoader.loadTexture(savedString);
 

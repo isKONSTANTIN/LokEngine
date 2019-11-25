@@ -37,7 +37,7 @@ public class ArbitraryShape extends Shape {
 
         for (int i = 0; i < lines.length; i++) {
             String[] vectors = lines[i].split(":");
-            collidePoints[i] = new Vector2f(Float.valueOf(vectors[0]), Float.valueOf(vectors[1]));
+            collidePoints[i] = new Vector2f(Float.parseFloat(vectors[0]), Float.parseFloat(vectors[1]));
         }
 
         this.shape = ShapeCreator.CreateArbitraryShape(collidePoints).shape;
