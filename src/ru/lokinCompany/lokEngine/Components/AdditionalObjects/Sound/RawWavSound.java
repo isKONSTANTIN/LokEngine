@@ -8,6 +8,9 @@ public class RawWavSound extends Sound {
     public RawWavSound() {
     }
 
+    @Override
+    public void update() {}
+
     public RawWavSound(String path) {
         this.path = path;
     }

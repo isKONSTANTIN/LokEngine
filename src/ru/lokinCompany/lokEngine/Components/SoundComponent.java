@@ -6,6 +6,7 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.ApplicationRuntime;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
+import ru.lokinCompany.lokEngine.Tools.SaveWorker.SubclassSaver;
 
 public class SoundComponent extends Component implements Saveable {
 
@@ -71,12 +72,14 @@ public class SoundComponent extends Component implements Saveable {
 
     @Override
     public String save() {
-        return sound.save();
+        SubclassSaver subclassSaver = new SubclassSaver(sound);
+        return subclassSaver.save();
     }
 
     @Override
     public Saveable load(String savedString) {
-        SoundComponent loadedSoundComponent = new SoundComponent((Sound) new Sound().load(savedString));
+        SubclassSaver subclassSaver = new SubclassSaver();
+        SoundComponent loadedSoundComponent = new SoundComponent((Sound)((SubclassSaver) subclassSaver.load(savedString)).saveableObject);
 
         this.sound = loadedSoundComponent.sound;
         this.source = loadedSoundComponent.source;

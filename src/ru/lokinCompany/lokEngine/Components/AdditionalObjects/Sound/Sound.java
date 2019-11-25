@@ -2,20 +2,18 @@ package ru.lokinCompany.lokEngine.Components.AdditionalObjects.Sound;
 
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.Saveable;
 
-public class Sound implements Saveable {
+public abstract class Sound implements Saveable {
 
     public String path;
     public int buffer;
 
     public Sound() {}
 
-    @Override
-    public String save() {
-        return "null";
-    }
+    public abstract void update();
 
     @Override
-    public Saveable load(String savedString) {
-        return this;
-    }
+    public abstract String save();
+
+    @Override
+    public abstract Saveable load(String savedString);
 }
