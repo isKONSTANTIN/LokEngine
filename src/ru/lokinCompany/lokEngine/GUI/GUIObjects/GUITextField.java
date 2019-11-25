@@ -7,7 +7,6 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.KeyInfo;
 import ru.lokinCompany.lokEngine.Tools.Input.Keyboard;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.glfw.GLFW.*;

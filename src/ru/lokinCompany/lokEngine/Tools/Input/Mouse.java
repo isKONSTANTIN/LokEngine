@@ -5,13 +5,9 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
-import ru.lokinCompany.lokEngine.Tools.Input.AdditionalObjects.MouseScrollScript;
-import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import java.nio.DoubleBuffer;
-import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
 

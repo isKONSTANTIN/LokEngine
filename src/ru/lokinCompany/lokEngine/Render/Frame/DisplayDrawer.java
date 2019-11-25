@@ -1,8 +1,5 @@
 package ru.lokinCompany.lokEngine.Render.Frame;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
-import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
 
 import static org.lwjgl.opengl.GL11.*;

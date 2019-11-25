@@ -3,9 +3,6 @@ package ru.lokinCompany.lokEngine.Tests;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
 import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIText;
-import ru.lokinCompany.lokEngine.Render.Window.Window;
-import ru.lokinCompany.lokEngine.Render.Window.WindowEvent;
-import ru.lokinCompany.lokEngine.Tools.Timer;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 

@@ -6,17 +6,12 @@ import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Frame.BuilderProperties;
 import ru.lokinCompany.lokEngine.Render.Frame.DisplayDrawer;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameBufferWorker;
-import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
 import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
-import ru.lokinCompany.lokEngine.Tools.Utilities.BlurTuning;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
+import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
+import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glUniform1i;
 import static org.lwjgl.opengl.GL20C.glUniform1f;
 
 public class BloomActionWorker extends PostProcessingActionWorker {

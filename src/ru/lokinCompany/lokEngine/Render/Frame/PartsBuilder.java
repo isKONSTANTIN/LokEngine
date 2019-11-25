@@ -2,12 +2,9 @@ package ru.lokinCompany.lokEngine.Render.Frame;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
-import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
-import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers.BlurActionWorker;
 import ru.lokinCompany.lokEngine.Tools.Logger;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import java.util.Vector;
 

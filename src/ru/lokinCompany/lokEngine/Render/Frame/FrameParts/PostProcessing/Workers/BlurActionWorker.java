@@ -10,10 +10,6 @@ import ru.lokinCompany.lokEngine.Render.Frame.FrameBufferWorker;
 import ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Actions.BlurAction;
 import ru.lokinCompany.lokEngine.Render.Shader;
 import ru.lokinCompany.lokEngine.Render.Window.Window;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-
-import static org.lwjgl.opengl.GL13C.GL_TEXTURE0;
-import static org.lwjgl.opengl.GL13C.glActiveTexture;
 
 public class BlurActionWorker extends PostProcessingActionWorker {
 

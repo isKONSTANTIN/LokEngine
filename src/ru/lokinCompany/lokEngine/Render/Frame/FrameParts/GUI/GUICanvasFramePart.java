@@ -7,7 +7,6 @@ import ru.lokinCompany.lokEngine.Render.Frame.FramePart;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector4i;
 
 import static org.lwjgl.opengl.GL11.*;
 
