@@ -11,7 +11,6 @@ import ru.lokinCompany.lokEngine.Render.Window.Window;
 
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20C.glUniform1f;
 
 public class BloomActionWorker extends PostProcessingActionWorker {
@@ -70,7 +69,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
 
             frameBufferWorker1.bindFrameBuffer(DrawMode.Display, builderProperties);
             builderProperties.useShader(filterShader);
-            glUniform1f(glGetUniformLocation(filterShader.program, "BrightnessLimit"), bloomSettings.brightnessLimit);
+            filterShader.setUniformData("BrightnessLimit", bloomSettings.brightnessLimit);
             GL11.glClearColor(0, 0, 0, 0);
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
@@ -86,8 +85,8 @@ public class BloomActionWorker extends PostProcessingActionWorker {
             int blured = blur.onceRender(frameBufferWorker1.getTexture(), blurAction);
 
             builderProperties.useShader(mixerShader);
-            glUniform1f(glGetUniformLocation(mixerShader.program, "Gamma"), bloomSettings.gamma);
-            glUniform1f(glGetUniformLocation(mixerShader.program, "Exposure"), bloomSettings.exposure);
+            filterShader.setUniformData("Gamma", bloomSettings.gamma);
+            filterShader.setUniformData("Exposure", bloomSettings.exposure);
             DisplayDrawer.bindTexture("frame2", blured,1,builderProperties);
             DisplayDrawer.renderScreen(sourceFrame, window);
 

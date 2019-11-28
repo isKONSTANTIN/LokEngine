@@ -86,7 +86,7 @@ public class BuilderProperties {
         window.getCamera().updateProjection(windowResolution.x, windowResolution.y, 1);
 
         useShader(particlesShader);
-        MatrixCreator.PutMatrixInShader(particlesShader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(0, new Vector3f(0, 0, 0)));
+        particlesShader.setUniformData("ObjectModelMatrix", MatrixCreator.CreateModelMatrix(0, new Vector3f(0, 0, 0)));
 
         useShader(objectShader);
         window.getCamera().setFieldOfView(window.getCamera().fieldOfView);

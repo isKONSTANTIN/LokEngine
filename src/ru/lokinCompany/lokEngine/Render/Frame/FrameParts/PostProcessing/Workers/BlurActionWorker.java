@@ -2,6 +2,7 @@ package ru.lokinCompany.lokEngine.Render.Frame.FrameParts.PostProcessing.Workers
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokinCompany.lokEngine.Loaders.ShaderLoader;
 import ru.lokinCompany.lokEngine.Render.Enums.DrawMode;
 import ru.lokinCompany.lokEngine.Render.Frame.BuilderProperties;
@@ -47,7 +48,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program, "direction"), 0, 1);
+        shader.setUniformData("direction", new Vector2f(0, 1));
         DisplayDrawer.renderScreen(originalFrame, window);
 
         blurSceneFrameWorker1.unbindCurrentFrameBuffer();
@@ -57,7 +58,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program, "direction"), 0.866f / ((float) window.getResolution().x / (float) window.getResolution().y), 0.5f);
+        shader.setUniformData("direction", new Vector2f(0.866f / ((float) window.getResolution().x / (float) window.getResolution().y), 0.5f));
         DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTexture(), window);
 
         blurSceneFrameWorker2.unbindCurrentFrameBuffer();
@@ -67,7 +68,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        GL20.glUniform2f(GL20.glGetUniformLocation(builderProperties.getActiveShader().program, "direction"), 0.866f / ((float) window.getResolution().x / (float) window.getResolution().y), -0.5f);
+        shader.setUniformData("direction", new Vector2f(0.866f / ((float) window.getResolution().x / (float) window.getResolution().y), -0.5f));
         DisplayDrawer.renderScreen(blurSceneFrameWorker2.getTexture(), window);
 
         builderProperties.unUseShader();

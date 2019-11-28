@@ -1,15 +1,8 @@
 package ru.lokinCompany.lokEngine.Tools;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import ru.lokinCompany.lokEngine.Render.Camera;
-import ru.lokinCompany.lokEngine.Render.Shader;
-
-import java.nio.FloatBuffer;
-
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 
 public class MatrixCreator {
 
@@ -72,12 +65,4 @@ public class MatrixCreator {
         Matrix4f.rotate((float) DegressToRadians(angle), new Vector3f(0, 0, 1), matrix, matrix);
         return matrix;
     }
-
-    public static void PutMatrixInShader(Shader shader, String name, Matrix4f matrix) {
-        FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
-        matrix.store(matrixBuffer);
-        matrixBuffer.flip();
-        glUniformMatrix4fv(glGetUniformLocation(shader.program, name), false, matrixBuffer);
-    }
-
 }

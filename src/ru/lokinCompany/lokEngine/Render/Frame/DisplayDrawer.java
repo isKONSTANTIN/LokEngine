@@ -17,7 +17,7 @@ public class DisplayDrawer {
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
         if (builderProperties.getActiveShader() != null){
-            glUniform1i(glGetUniformLocation(builderProperties.getActiveShader().program, uniformName), index);
+            builderProperties.getActiveShader().setUniformData(uniformName, index);
         }
     }
 

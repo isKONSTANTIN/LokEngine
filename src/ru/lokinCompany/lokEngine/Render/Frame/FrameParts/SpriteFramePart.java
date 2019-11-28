@@ -63,10 +63,10 @@ public class SpriteFramePart extends FramePart {
                 0,
                 0);
         glVertexAttribDivisor(1, 0);
-        glUniform1f(glGetUniformLocation(shader.program, "ObjectSize"), (float) sprite.size * 2);
-        glUniform4f(glGetUniformLocation(shader.program, "ObjectColor"), color.red, color.green, color.blue, color.alpha);
 
-        MatrixCreator.PutMatrixInShader(shader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
+        shader.setUniformData("ObjectSize", (float) sprite.size * 2);
+        shader.setUniformData("ObjectColor", new Vector4f(color.red, color.green, color.blue, color.alpha));
+        shader.setUniformData("ObjectModelMatrix", MatrixCreator.CreateModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
@@ -74,6 +74,7 @@ public class SpriteFramePart extends FramePart {
 
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
     }

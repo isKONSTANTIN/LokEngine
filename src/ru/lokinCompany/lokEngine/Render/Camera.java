@@ -21,11 +21,11 @@ public class Camera {
 
     public void updateProjection(float width, float height) {
         float projectionFieldOfView = fieldOfView * 0.000520833f * 4;
-        MatrixCreator.PutMatrixInShader(window.getFrameBuilder().getBuilderProperties().getActiveShader(), "Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public void updateProjection(float width, float height, float projectionFieldOfView) {
-        MatrixCreator.PutMatrixInShader(window.getFrameBuilder().getBuilderProperties().getActiveShader(), "Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public Vector2f screenPointToScene(Vector2i point) {
@@ -84,7 +84,7 @@ public class Camera {
     }
 
     public void updateView(Shader shader) {
-        MatrixCreator.PutMatrixInShader(shader, "View", MatrixCreator.CreateViewMatrix(this));
+        shader.setUniformData("View", MatrixCreator.CreateViewMatrix(this));
     }
 
     public void updateAudioListener() {
