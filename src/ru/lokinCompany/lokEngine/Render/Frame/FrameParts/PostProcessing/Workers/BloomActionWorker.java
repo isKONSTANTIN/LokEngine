@@ -85,8 +85,8 @@ public class BloomActionWorker extends PostProcessingActionWorker {
             int blured = blur.onceRender(frameBufferWorker1.getTexture(), blurAction);
 
             builderProperties.useShader(mixerShader);
-            filterShader.setUniformData("Gamma", bloomSettings.gamma);
-            filterShader.setUniformData("Exposure", bloomSettings.exposure);
+            mixerShader.setUniformData("Gamma", bloomSettings.gamma);
+            mixerShader.setUniformData("Exposure", bloomSettings.exposure);
             DisplayDrawer.bindTexture("frame2", blured,1,builderProperties);
             DisplayDrawer.renderScreen(sourceFrame, window);
 
