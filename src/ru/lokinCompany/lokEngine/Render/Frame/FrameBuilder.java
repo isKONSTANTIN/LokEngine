@@ -49,9 +49,6 @@ public class FrameBuilder {
     }
 
     public void build() {
-        GL11.glClearColor(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
         int sceneFrame = -1;
         int GUIBuild = -1;
 
@@ -73,6 +70,10 @@ public class FrameBuilder {
             GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI, builderProperties);
 
         builderProperties.useShader(builderProperties.getDisplayShader());
+
+        GL11.glClearColor(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
         if (sceneFrame != -1)
             DisplayDrawer.renderScreen(sceneFrame, window);
         if (GUIBuild != -1)

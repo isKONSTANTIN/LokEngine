@@ -47,8 +47,6 @@ public class GUICanvas extends GUIObject {
         super.setSize(size);
         framePart.partsBuilder.setResolution(size);
         framePart.size = size;
-        properties.size.x = size.x;
-        properties.size.y = size.y;
     }
 
     public void removeObject(int id) {
