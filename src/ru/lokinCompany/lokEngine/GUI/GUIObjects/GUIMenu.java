@@ -1,5 +1,6 @@
 package ru.lokinCompany.lokEngine.GUI.GUIObjects;
 
+import org.lwjgl.util.vector.Vector3f;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
@@ -13,12 +14,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GUITabs extends GUIObject {
-    protected Map<String, GUICanvas> tabs = new HashMap<>();
-    protected ArrayList<String> tabsNames = new ArrayList<>();
+public class GUIMenu extends GUIObject {
+    protected Map<String, GUIObject> items = new HashMap<>();
+    protected ArrayList<String> itemsNames = new ArrayList<>();
     protected GUILocationAlgorithm sizeAlgorithm;
     protected GUILocationAlgorithm positionAlgorithm;
-    protected GUICanvas activeCanvas;
+    protected GUIObject activeItem;
     protected GUIFreeTextDrawer drawer;
 
     protected int titleSize;
@@ -27,7 +28,7 @@ public class GUITabs extends GUIObject {
     public Color textActiveColor;
     public Color textInactiveColor;
 
-    public GUITabs(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
+    public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
         super(position, size);
         this.titleSize = titleSize;
         this.drawer = new GUIFreeTextDrawer("", 0, titleSize, true);
@@ -39,25 +40,43 @@ public class GUITabs extends GUIObject {
 
         this.textActiveColor = textActiveColor;
         this.textInactiveColor = textInactiveColor;
+        this.touchable = true;
     }
 
-    public GUITabs(Vector2i position, Vector2i size, int titleSize) {
+    public GUIMenu(Vector2i position, Vector2i size, int titleSize) {
         this(position, size, titleSize, Colors.engineMainColor(), Colors.white());
     }
 
-    public GUITabs(Vector2i position, Vector2i size) {
+    public GUIMenu(Vector2i position, Vector2i size) {
         this(position, size, 12, Colors.engineMainColor(), Colors.white());
     }
 
-    public void setActiveTab(String name) {
-        activeCanvas = getTab(name);
+    public void showItem(String name, Vector2i position) {
+        if (activeItem != null)
+            hideActiveItem();
+        activeItem = getItem(name);
+        activeItem.hidden = false;
+        activeItem.active = true;
+        if (position != null)
+            activeItem.setPosition(position);
     }
 
-    public GUICanvas getActiveTab() {
-        return activeCanvas;
+    public void showItem(String name) {
+        showItem(name, null);
     }
 
-    public void setTabsFont(Font font) {
+    public void hideActiveItem() {
+        if (activeItem != null){
+            activeItem.hidden = true;
+            activeItem = null;
+        }
+    }
+
+    public GUIObject getActiveItem() {
+        return activeItem;
+    }
+
+    public void setPointsFont(Font font) {
         if (font != null) {
             drawer.setFont(font);
 
@@ -69,35 +88,31 @@ public class GUITabs extends GUIObject {
         }
     }
 
-    public Font getTabsFont() {
+    public Font getPointsFont() {
         return drawer.getFont();
     }
 
-    public String getActiveTabName() {
-        for (Map.Entry<String, GUICanvas> entry : tabs.entrySet()) {
-            GUICanvas canvas = entry.getValue();
-            if (canvas == activeCanvas)
+    public String getActiveItemName() {
+        for (Map.Entry<String, GUIObject> entry : items.entrySet()) {
+            GUIObject item = entry.getValue();
+            if (item == activeItem)
                 return entry.getKey();
         }
         return null;
     }
 
-    public void removeTab(String name) {
-        tabs.remove(name);
+    public void removePoint(String name) {
+        items.remove(name);
     }
 
-    public void addTab(String name) {
-        GUICanvas canvas = new GUICanvas(new Vector2i(), size);
-
-        canvas.setSize(sizeAlgorithm);
-        canvas.setPosition(positionAlgorithm);
-
-        tabs.put(name, canvas);
-        tabsNames.add(name);
+    public void addPoint(String name, GUIObject object) {
+        items.put(name, object);
+        itemsNames.add(name);
+        object.hidden = true;
     }
 
-    public GUICanvas getTab(String name) {
-        return tabs.get(name);
+    public GUIObject getItem(String name) {
+        return items.get(name);
     }
 
     @Override
@@ -114,26 +129,29 @@ public class GUITabs extends GUIObject {
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
+        if (activeItem != null && !activeItem.active){
+            hideActiveItem();
+        }
+
         int x = 0;
         int gap = titleSize / 2;
 
-        for (String key : tabsNames) {
+        for (String key : itemsNames) {
             int widthText = drawer.getFont().getWidth(key);
 
             if (x + widthText > size.x) break;
-            boolean inField = properties.mouseRaycastStatus.mouse.inField(new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y), new Vector2i(widthText, titleSize));
+            Vector2i itemPos = new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y);
+            boolean inField = properties.mouseRaycastStatus.mouse.inField(itemPos, new Vector2i(widthText, titleSize));
 
             if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed) {
-                setActiveTab(key);
+                showItem(key, properties.mouseRaycastStatus.mouse.getMousePosition());
             }
-            drawer.draw(key, new Vector2i(x + position.x, position.y), activeCanvas == tabs.get(key) || inField ? textActiveColor : textInactiveColor);
+            drawer.draw(key, new Vector2i(x + position.x, position.y), activeItem == items.get(key) || inField ? textActiveColor : textInactiveColor);
             x += widthText + gap;
         }
         if (panel != null)
             panel.update(partsBuilder, parentProperties);
 
         drawer.update(partsBuilder, parentProperties);
-        if (activeCanvas != null)
-            activeCanvas.update(partsBuilder, properties);
     }
 }
