@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GUIGridCanvas extends GUICanvas {
 
-    ArrayList<Vector2i> objectsPos = new ArrayList<>();
+    protected ArrayList<Vector2i> objectsPos = new ArrayList<>();
 
     int columns;
     int lines;
