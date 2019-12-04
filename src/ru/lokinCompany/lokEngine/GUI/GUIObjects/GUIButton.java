@@ -21,7 +21,7 @@ public class GUIButton extends GUIObject {
         return active;
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel) {
+    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
         super(position, size);
         this.text = text;
         if (size.x <= 0 || size.y <= 0) {
@@ -33,7 +33,7 @@ public class GUIButton extends GUIObject {
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
         this.touchable = true;
 
-        text.setPosition(object -> new Vector2i(getPosition().x + (int) (getSize().x / 2f - text.getSize().x / 2f), getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
+        text.setPosition(object -> new Vector2i(getPosition().x  + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0), getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
         panel.setSize(object -> getSize());
         panel.setPosition(object -> getPosition());
 
@@ -41,7 +41,7 @@ public class GUIButton extends GUIObject {
         setSize(size);
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text) {
+    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text, boolean centralizeText) {
         super(position, size);
         this.text = text;
         text.setPosition(position);
@@ -55,12 +55,20 @@ public class GUIButton extends GUIObject {
         this.panel = new GUIPanel(position, size, activeColor);
         this.touchable = true;
 
-        text.setPosition(object -> new Vector2i(getPosition().x + (int) (getSize().x / 2f - text.getSize().x / 2f), getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
+        text.setPosition(object -> new Vector2i(getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0) , getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
         panel.setSize(object -> getSize());
         panel.setPosition(object -> getPosition());
 
         setPosition(position);
         setSize(size);
+    }
+
+    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel){
+        this(position, size, pressed, calmState, text, panel, true);
+    }
+
+    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text){
+        this(position, size, calmState, text, true);
     }
 
     public GUIButton(Vector2i position, Vector2i size, Color calmState, String text) {
