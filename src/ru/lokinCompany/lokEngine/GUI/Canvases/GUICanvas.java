@@ -14,9 +14,9 @@ import java.util.Vector;
 
 public class GUICanvas extends GUIObject {
 
-    ArrayList<GUIObject> objects = new ArrayList<>();
-    ArrayList<GUIObject> ignoreOrderObjects = new ArrayList<>();
-    GUICanvasFramePart framePart;
+    protected ArrayList <GUIObject> objects = new ArrayList<>();
+    protected ArrayList<GUIObject> ignoreOrderObjects = new ArrayList<>();
+    protected GUICanvasFramePart framePart;
 
     public GUICanvas(Vector2i position, Vector2i size) {
         super(position, size);
@@ -37,6 +37,8 @@ public class GUICanvas extends GUIObject {
     public void setColor(Color color) {
         framePart.color = color;
     }
+
+    public Color getColor() { return framePart.color; }
 
     @Override
     public void setPosition(Vector2i position) {

@@ -9,6 +9,7 @@ import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUICanvasFramePart extends FramePart {
     public PartsBuilder partsBuilder;
@@ -46,6 +47,5 @@ public class GUICanvasFramePart extends FramePart {
 
         glEnd();
         glBindTexture(GL_TEXTURE_2D, 0);
-
     }
 }
