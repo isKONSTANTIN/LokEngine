@@ -17,7 +17,9 @@ public class GUIObject {
     protected boolean focused;
     protected boolean retention;
 
+    public boolean ignoreCanvasUpdateOrder;
     public boolean hidden;
+
     public GUIObjectProperties properties;
 
     public void setPosition(Vector2i position) {

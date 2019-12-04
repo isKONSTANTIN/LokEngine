@@ -9,11 +9,13 @@ import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class GUICanvas extends GUIObject {
 
-    Vector<GUIObject> objects = new Vector<>();
+    ArrayList<GUIObject> objects = new ArrayList<>();
+    ArrayList<GUIObject> ignoreOrderObjects = new ArrayList<>();
     GUICanvasFramePart framePart;
 
     public GUICanvas(Vector2i position, Vector2i size) {
@@ -66,9 +68,20 @@ public class GUICanvas extends GUIObject {
         super.update(partsBuilder, parentProperties);
 
         for (GUIObject object : objects) {
-            if (!object.hidden)
-                object.update(framePart.partsBuilder, properties);
+            if (!object.hidden){
+                if (!object.ignoreCanvasUpdateOrder)
+                    object.update(framePart.partsBuilder, properties);
+                else
+                    ignoreOrderObjects.add(object);
+            }
         }
+
+        for (GUIObject object : ignoreOrderObjects){
+            object.update(framePart.partsBuilder, properties);
+        }
+
+        ignoreOrderObjects.clear();
+
         partsBuilder.addPart(framePart);
     }
 }
