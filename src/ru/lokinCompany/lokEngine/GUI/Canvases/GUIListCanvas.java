@@ -18,13 +18,29 @@ public class GUIListCanvas extends GUICanvas {
         this.gap = gap;
     }
 
+    public int addObject(GUIObject object, boolean first){
+        if (first) {
+            objects.add(0, object);
+            calculatePositions();
+            return 0;
+        }else{
+            objects.add(object);
+            calculatePositions();
+            return objects.size() - 1;
+        }
+    }
+
+    public void calculatePositions(){
+        for (int i = 0; i < objects.size(); i++){
+            GUIObject object = objects.get(i);
+            object.setPosition(new Vector2i(0, (sizeObjects.y + gap) * i));
+            object.setSize(sizeObjects);
+        }
+    }
+
     @Override
     public int addObject(GUIObject object) {
-        object.setPosition(new Vector2i(getPosition().x, getPosition().y + (sizeObjects.y + gap) * objects.size()));
-        object.setSize(sizeObjects);
-
-        objects.add(object);
-        return objects.size() - 1;
+        return addObject(object,false);
     }
 
 }
