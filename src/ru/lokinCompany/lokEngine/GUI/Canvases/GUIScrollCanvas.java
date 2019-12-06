@@ -39,5 +39,8 @@ public class GUIScrollCanvas extends GUICanvas {
 
         framePart.viewOffset.x = Xmax;
         framePart.viewOffset.y = Ymax;
+
+        properties.globalPosition.x += framePart.viewOffset.x;
+        properties.globalPosition.y += framePart.viewOffset.y;
     }
 }
