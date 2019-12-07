@@ -57,6 +57,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-openal/lwjgl-openal-natives-windows.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl/lwjgl-natives-linux.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl/lwjgl_util.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/Jbox2D.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

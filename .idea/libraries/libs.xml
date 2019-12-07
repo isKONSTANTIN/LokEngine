@@ -42,6 +42,7 @@
       <root url="jar://$PROJECT_DIR$/libs/lwjgl-stb/lwjgl-stb-natives-windows.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/commons-io-2.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/gson-2.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/Jbox2D.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
