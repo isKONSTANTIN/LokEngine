@@ -18,7 +18,7 @@ public class OpenSimplexNoiseTest extends ApplicationGUIOnly {
     @Override
     protected void initEvent(){
 
-        OpenSimplexNoise2D noise = new OpenSimplexNoise2D(0);
+        OpenSimplexNoise2D noise = new OpenSimplexNoise2D("LokEngine");
 
         Vector2i imageSize = window.getResolution();
 

@@ -1,5 +1,7 @@
 package ru.lokinCompany.lokEngine.Tools.OpenSimplexNoise;
 
+import ru.lokinCompany.lokEngine.Tools.Utilities.StringToLongTransformer;
+
 public abstract class OpenSimplexNoise {
 
     static final double STRETCH_CONSTANT_2D = -0.211324865405187;
@@ -34,6 +36,28 @@ public abstract class OpenSimplexNoise {
             permGradIndex3D[i] = (short)((perm[i] % (gradients3D.length / 3)) * 3);
             source[r] = source[i];
         }
+    }
+
+    public OpenSimplexNoise(){
+        this(Double.doubleToLongBits(Math.random()));
+    }
+
+    public OpenSimplexNoise(String seed, StringToLongTransformer transformer){
+        this(transformer.transform(seed));
+    }
+
+    public OpenSimplexNoise(String seed){
+        this(seed, text -> {
+            long longSeed = 0;
+
+            char[] symbols = seed.toCharArray();
+
+            for (int i = 1; i <= symbols.length; i++){
+                longSeed += Math.pow((int)symbols[i-1], i);
+            }
+
+            return longSeed;
+        });
     }
 
     double extrapolate(int xsb, int ysb, double dx, double dy)

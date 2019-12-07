@@ -1,8 +1,22 @@
 package ru.lokinCompany.lokEngine.Tools.OpenSimplexNoise;
 
+import ru.lokinCompany.lokEngine.Tools.Utilities.StringToLongTransformer;
+
 public class OpenSimplexNoise2D extends OpenSimplexNoise {
 
+    public OpenSimplexNoise2D(){
+        super();
+    }
+
     public OpenSimplexNoise2D(long seed) {
+        super(seed);
+    }
+
+    public OpenSimplexNoise2D(String seed, StringToLongTransformer transformer) {
+        super(seed, transformer);
+    }
+
+    public OpenSimplexNoise2D(String seed) {
         super(seed);
     }
 
