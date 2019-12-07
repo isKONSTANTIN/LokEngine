@@ -3,6 +3,7 @@ package ru.lokinCompany.lokEngine.Loaders;
 import org.lwjgl.BufferUtils;
 import ru.lokinCompany.lokEngine.Render.GLFW;
 import ru.lokinCompany.lokEngine.Render.Texture;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -59,6 +60,26 @@ public class TextureLoader {
         return new Object[]{textureBuffer, image};
     }
 
+    public static Texture loadTexture(ByteBuffer buffer, Vector2i size, String path, long context){
+        int textureID = glGenTextures();
+
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        Texture texture = new Texture(textureID, size.x, size.y, path);
+
+        return texture;
+    }
+
+    public static Texture loadTexture(ByteBuffer buffer, Vector2i size){
+        return loadTexture(buffer, size, "", glfwGetCurrentContext());
+    }
+
     public static Texture loadTexture(String path) {
         if (!GLFW.isInited()) return new Texture(-1, 0, 0, path);
         long context = glfwGetCurrentContext();
@@ -84,17 +105,7 @@ public class TextureLoader {
             return new Texture(-1, 100, 100, path);
         }
 
-        int textureID = glGenTextures();
-
-        glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, textureBuffer);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
-        Texture texture = new Texture(textureID, image.getWidth(), image.getHeight(), path);
+        Texture texture = loadTexture(textureBuffer, new Vector2i(image.getWidth(), image.getHeight()), path, context);
 
         loadedTextures.get(context).put(path, texture);
 
