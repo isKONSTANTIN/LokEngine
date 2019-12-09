@@ -116,6 +116,11 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
+    public Vector2i getSize() {
+        return new Vector2i(framePart.getWidth(), framePart.getHeight());
+    }
+
+    @Override
     protected void focused() {
         framePart.pointer = framePart.text.length();
 
