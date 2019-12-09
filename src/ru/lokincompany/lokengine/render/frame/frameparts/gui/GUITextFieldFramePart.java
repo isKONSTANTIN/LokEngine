@@ -33,7 +33,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     public void partRender(BuilderProperties builderProperties) {
         glBegin(GL_QUADS);
 
-        glColor4f(color.red, color.green, color.blue, backgroundColor.alpha);
+        glColor4f(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
         glVertex3f(position.x, position.y, 0);
         glVertex3f(size.x + position.x, position.y, 0);
         glVertex3f(size.x + position.x, size.y + position.y, 0);
@@ -55,7 +55,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
             GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
 
             GL11.glVertex2f(xPos + 1, position.y);
-            GL11.glVertex2f(xPos + 1,position.y + size.y);
+            GL11.glVertex2f(xPos + 1, position.y + size.y);
 
             GL11.glEnd();
         }
