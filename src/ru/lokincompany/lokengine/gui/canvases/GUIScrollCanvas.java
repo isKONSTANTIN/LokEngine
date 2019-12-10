@@ -28,6 +28,8 @@ public class GUIScrollCanvas extends GUICanvas {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
+        if (!properties.mouseRaycastStatus.mouse.inField(properties.globalPosition, size)) return;
+
         Vector2f mouseScroll = parentProperties.mouseRaycastStatus.mouse.getMouseScroll();
 
         int Xmin = (int)(minOffset != null ? Math.max(framePart.viewOffset.x + mouseScroll.x * scrollStrength, minOffset.x) : framePart.viewOffset.x + mouseScroll.x * 10);
