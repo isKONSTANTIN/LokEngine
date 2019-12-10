@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.sceneenvironment;
 
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.components.ComponentList;
+import ru.lokincompany.lokengine.components.ComponentsList;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 import ru.lokincompany.lokengine.tools.base64.Base64;
@@ -11,12 +11,12 @@ public class SceneObject implements Saveable {
     public Vector2f position = new Vector2f(0, 0);
     public float rollRotation = 0;
     public float renderPriority = 0;
-    public ComponentList components;
+    public ComponentsList components;
     public Scene scene;
     public String name = "Unnamed object";
 
     public SceneObject() {
-        components = new ComponentList();
+        components = new ComponentsList();
     }
 
     public void init(Scene scene) {

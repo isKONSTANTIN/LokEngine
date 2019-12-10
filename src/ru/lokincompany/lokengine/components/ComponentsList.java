@@ -8,8 +8,9 @@ import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.saveworker.SubclassSaver;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class ComponentList implements Saveable {
+public class ComponentsList implements Saveable {
 
     private ArrayList<Component> components = new ArrayList<>();
 
@@ -75,4 +76,5 @@ public class ComponentList implements Saveable {
 
         return this;
     }
+
 }
