@@ -21,7 +21,7 @@ public class GUIMenu extends GUIObject {
     protected GUIFreeTextDrawer drawer;
 
     protected int titleSize;
-
+    
     public GUIPanel panel;
     public Color textActiveColor;
     public Color textInactiveColor;
@@ -29,7 +29,7 @@ public class GUIMenu extends GUIObject {
     public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
         super(position, size);
         this.titleSize = titleSize;
-        this.drawer = new GUIFreeTextDrawer("", 0, titleSize, true);
+        this.drawer = new GUIFreeTextDrawer("", 0, (int)(titleSize / 1.2f), true);
         this.panel = new GUIPanel(position, new Vector2i(size.x, titleSize));
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
         panel.setPosition(object -> getPosition());
@@ -131,20 +131,21 @@ public class GUIMenu extends GUIObject {
             hideActiveItem();
         }
 
-        int x = 0;
         int gap = titleSize / 2;
+        int x = gap / 2;
 
         for (String key : itemsNames) {
             int widthText = drawer.getFont().getWidth(key);
+            int heightText = drawer.getFont().getHeight(key);
 
             if (x + widthText > size.x) break;
             Vector2i itemPos = new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y);
             boolean inField = properties.mouseRaycastStatus.mouse.inField(itemPos, new Vector2i(widthText, titleSize));
 
-            if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed) {
+            if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed)
                 showItem(key, properties.mouseRaycastStatus.mouse.getMousePosition());
-            }
-            drawer.draw(key, new Vector2i(x + position.x, position.y), activeItem == items.get(key) || inField ? textActiveColor : textInactiveColor);
+
+            drawer.draw(key, new Vector2i(x + position.x, position.y + (titleSize - heightText) / 2), activeItem == items.get(key) || inField ? textActiveColor : textInactiveColor);
             x += widthText + gap;
         }
         if (panel != null)
