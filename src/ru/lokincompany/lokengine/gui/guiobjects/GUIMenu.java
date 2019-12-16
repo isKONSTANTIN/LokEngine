@@ -144,7 +144,8 @@ public class GUIMenu extends GUIObject {
 
             if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed)
                 showItem(key, properties.mouseRaycastStatus.mouse.getMousePosition());
-
+            else
+                properties.mouseRaycastStatus.touched = false;
             drawer.draw(key, new Vector2i(x + position.x, position.y + (titleSize - heightText) / 2), activeItem == items.get(key) || inField ? textActiveColor : textInactiveColor);
             x += widthText + gap;
         }
