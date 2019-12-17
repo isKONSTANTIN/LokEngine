@@ -16,11 +16,6 @@ public class SpriteComponent extends Component implements Saveable {
 
     private SpriteFramePart framePart;
 
-    @Override
-    public String getName() {
-        return "Sprite Component";
-    }
-
     public SpriteComponent() {
     }
 

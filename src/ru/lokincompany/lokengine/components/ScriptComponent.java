@@ -18,11 +18,6 @@ public class ScriptComponent extends Component {
     }
 
     @Override
-    public String getName() {
-        return "Script Component";
-    }
-
-    @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         if (script != null)
             script.execute(source, applicationRuntime, partsBuilder);

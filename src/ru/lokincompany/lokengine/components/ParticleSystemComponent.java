@@ -29,11 +29,6 @@ public class ParticleSystemComponent extends Component {
         return new Vector2f(sourcePosition.x, sourcePosition.y);
     }
 
-    @Override
-    public String getName() {
-        return "Particle System Component";
-    }
-
     public ParticleSystemComponent(Sprite spriteParticles, ParticleHandler particleHandler, Shader shader) {
         framePart = new ParticleSystemFramePart(spriteParticles, shader);
         this.particleHandler = particleHandler;

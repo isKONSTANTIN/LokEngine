@@ -34,11 +34,6 @@ public class AnimationComponent extends Component implements Saveable {
         framePart = new SpriteFramePart(sprite, null, Colors.white());
     }
 
-    @Override
-    public String getName() {
-        return "Animation Component";
-    }
-
     public void addAnimation(Animation animation, String name) {
         animations.put(name, animation);
         setActiveAnimation(name);

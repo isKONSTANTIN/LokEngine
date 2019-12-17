@@ -6,9 +6,6 @@ import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 public abstract class Component implements Saveable {
-
-    public abstract String getName();
-
     public abstract void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder);
 
     @Override

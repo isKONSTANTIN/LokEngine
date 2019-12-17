@@ -60,11 +60,6 @@ public class SoundComponent extends Component implements Saveable {
     }
 
     @Override
-    public String getName() {
-        return "Sound Component";
-    }
-
-    @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         sound.update();
         AL10.alSource3f(this.source, AL10.AL_POSITION, source.position.x, source.position.y, 0);

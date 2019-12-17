@@ -25,11 +25,6 @@ public class RigidbodyComponent extends Component implements Saveable {
     private boolean bodyInited = false;
 
     @Override
-    public String getName() {
-        return "Rigidbody Component";
-    }
-
-    @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         if (!bodyInited) {
             initBody(source, polygons);
