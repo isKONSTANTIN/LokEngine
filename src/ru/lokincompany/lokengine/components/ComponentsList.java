@@ -33,9 +33,9 @@ public class ComponentsList implements Saveable {
         components.remove(id);
     }
 
-    public void remove(String name) {
+    public <T extends Component> void remove(Class<T> componentClass) {
         for (int i = 0; i < components.size(); i++) {
-            if (components.get(i).getName().equals(name)) {
+            if (components.get(i).getClass().getName().equals(componentClass.getName())) {
                 remove(i);
                 break;
             }
@@ -46,10 +46,10 @@ public class ComponentsList implements Saveable {
         return components.get(id);
     }
 
-    public Component get(String name) {
+    public <T extends Component> T get(Class<T> componentClass) {
         for (Component component : components) {
-            if (component.getName().equals(name)) {
-                return component;
+            if (component.getClass().getName().equals(componentClass.getName())) {
+                return (T)component;
             }
         }
         return null;
