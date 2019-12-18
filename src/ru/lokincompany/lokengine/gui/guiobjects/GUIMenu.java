@@ -26,19 +26,24 @@ public class GUIMenu extends GUIObject {
     public Color textActiveColor;
     public Color textInactiveColor;
 
-    public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
+    public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
         super(position, size);
         this.titleSize = titleSize;
         this.drawer = new GUIFreeTextDrawer("", 0, (int)(titleSize / 1.2f), true);
-        this.panel = new GUIPanel(position, new Vector2i(size.x, titleSize));
+        this.panel = panel;
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
         panel.setPosition(object -> getPosition());
+
         this.sizeAlgorithm = object -> new Vector2i(getSize().x, getSize().y - this.titleSize);
         this.positionAlgorithm = object -> new Vector2i(getPosition().x, getPosition().y + this.titleSize);
 
         this.textActiveColor = textActiveColor;
         this.textInactiveColor = textInactiveColor;
         this.touchable = true;
+    }
+
+    public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
+        this(position, size, titleSize, textActiveColor, textInactiveColor, new GUIPanel(position, new Vector2i(size.x, titleSize)));
     }
 
     public GUIMenu(Vector2i position, Vector2i size, int titleSize) {
