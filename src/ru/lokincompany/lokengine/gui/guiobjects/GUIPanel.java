@@ -32,6 +32,18 @@ public class GUIPanel extends GUIObject {
         this(position, size, null);
     }
 
+    public GUIPanel(Color color, BlurTuning blur) {
+        this(new Vector2i(), new Vector2i(), color, blur);
+    }
+
+    public GUIPanel(Color color) {
+        this(new Vector2i(), new Vector2i(), color, null);
+    }
+
+    public GUIPanel() {
+        this(new Vector2i(), new Vector2i(), null);
+    }
+
     @Override
     public void setPosition(Vector2i position) {
         this.position = position;

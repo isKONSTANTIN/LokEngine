@@ -54,6 +54,22 @@ public class GUIMenu extends GUIObject {
         this(position, size, 12, Colors.engineMainColor(), Colors.white());
     }
 
+    public GUIMenu(int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
+        this(new Vector2i(), new Vector2i(), titleSize, textActiveColor, textInactiveColor, panel);
+    }
+
+    public GUIMenu(int titleSize, Color textActiveColor, Color textInactiveColor) {
+        this(new Vector2i(), new Vector2i(), titleSize, textActiveColor, textInactiveColor, new GUIPanel());
+    }
+
+    public GUIMenu(int titleSize) {
+        this(new Vector2i(), new Vector2i(), titleSize, Colors.engineMainColor(), Colors.white());
+    }
+
+    public GUIMenu() {
+        this(new Vector2i(), new Vector2i(), 12, Colors.engineMainColor(), Colors.white());
+    }
+
     public void showItem(String name, Vector2i position) {
         if (activeItem != null)
             hideActiveItem();

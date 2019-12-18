@@ -58,6 +58,38 @@ public class GUIText extends GUIObject {
         this(position, "Text");
     }
 
+    public GUIText(String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
+        this(new Vector2i(), fontName, text, color, fontStyle, size, antiAlias, canResize);
+    }
+
+    public GUIText(String fontName, String text, TextColorShader shader, int fontStyle, int size, boolean antiAlias, boolean canResize) {
+        this(new Vector2i(), fontName, text, shader, fontStyle, size, antiAlias, canResize);
+    }
+
+    public GUIText(String text, TextColorShader shader, int fontStyle) {
+        this(new Vector2i(), text, shader, fontStyle, 24);
+    }
+
+    public GUIText(String text, TextColorShader shader, int fontStyle, int size) {
+        this(new Vector2i(), "Arial", text, shader, fontStyle, size, true, false);
+    }
+
+    public GUIText(String text, Color color, int fontStyle, int size) {
+        this(new Vector2i(), "Arial", text, color, fontStyle, size, true, false);
+    }
+
+    public GUIText(String text, Color color, int fontStyle) {
+        this(new Vector2i(), text, color, fontStyle, 24);
+    }
+
+    public GUIText(String text) {
+        this(new Vector2i(), text, new Color(1, 1, 1, 1), 0);
+    }
+
+    public GUIText() {
+        this(new Vector2i(), "Text");
+    }
+
     public void setShader(TextColorShader shader) {
         this.shader = shader;
     }

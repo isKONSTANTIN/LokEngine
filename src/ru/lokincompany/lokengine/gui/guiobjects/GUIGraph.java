@@ -46,6 +46,27 @@ public class GUIGraph extends GUIObject {
         this(position, size, 100, 0);
     }
 
+    public GUIGraph(float maxHeight, float minHeight, int maxPoints, Color color, Color color2) {
+        this(new Vector2i(), new Vector2i(), maxHeight, minHeight, maxPoints, color, color2);
+    }
+
+    public GUIGraph(float maxHeight, float minHeight, int maxPoints, Color color) {
+        this(new Vector2i(), new Vector2i(), maxHeight, minHeight, maxPoints, color, new Color(color.red, color.green, color.blue, color.alpha / 3f));
+    }
+
+    public GUIGraph(float maxHeight, float minHeight, int maxPoints) {
+        this(new Vector2i(), new Vector2i(), maxHeight, minHeight, maxPoints, new Color(1, 1, 1, 1));
+    }
+
+    public GUIGraph(float maxHeight, float minHeight) {
+        this(new Vector2i(), new Vector2i(), maxHeight, minHeight);
+    }
+
+    public GUIGraph() {
+        this(new Vector2i(), new Vector2i());
+    }
+
+
     public void addPoint(float height) {
         if (maxPoints != 0 && maxPoints == points.size()) {
             points.remove(0);

@@ -88,6 +88,10 @@ public class GUIObject {
         properties = new GUIObjectProperties(position, size);
     }
 
+    public GUIObject() {
+        this(new Vector2i(), new Vector2i());
+    }
+
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         updateAlgorithms();
         properties.globalPosition.x = parentProperties.globalPosition.x + position.x;

@@ -45,6 +45,22 @@ public class GUISubWindow extends GUIObject {
         this(position, size, false);
     }
 
+    public GUISubWindow(boolean canMove, GUIText titleText, GUIPanel titlePanel) {
+        this(new Vector2i(), new Vector2i(), canMove, titleText, titlePanel);
+    }
+
+    public GUISubWindow(boolean canMove) {
+        this(new Vector2i(), new Vector2i(), canMove, null, null);
+    }
+
+    public GUISubWindow(GUIText titleText, GUIPanel titlePanel) {
+        this(new Vector2i(), new Vector2i(), false, titleText, titlePanel);
+    }
+
+    public GUISubWindow() {
+        this(new Vector2i(), new Vector2i(), false);
+    }
+
     @Override
     public void setSize(Vector2i size) {
         super.setSize(size);

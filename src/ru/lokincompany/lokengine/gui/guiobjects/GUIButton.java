@@ -21,8 +21,7 @@ public class GUIButton extends GUIObject {
         return active;
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
-        super(position, size);
+    public GUIButton(Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
         this.text = text;
         if (size.x <= 0 || size.y <= 0) {
             size = this.text.getSize();
@@ -41,8 +40,7 @@ public class GUIButton extends GUIObject {
         setSize(size);
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text, boolean centralizeText) {
-        super(position, size);
+    public GUIButton(Color calmState, GUIText text, boolean centralizeText) {
         this.text = text;
         text.setPosition(position);
         if (size.x <= 0 || size.y <= 0) {
@@ -58,6 +56,32 @@ public class GUIButton extends GUIObject {
         text.setPosition(object -> new Vector2i(getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0) , getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
         panel.setSize(object -> getSize());
         panel.setPosition(object -> getPosition());
+
+        setPosition(position);
+        setSize(size);
+    }
+
+    public GUIButton(Color pressed, Color calmState, GUIText text, GUIPanel panel){
+        this(pressed, calmState, text, panel, true);
+    }
+
+    public GUIButton(Color calmState, GUIText text){
+        this(calmState, text, true);
+    }
+
+    public GUIButton(Color calmState, String text) {
+        this(calmState, new GUIText(text));
+    }
+
+    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
+        this(pressed,calmState, text, panel, centralizeText);
+
+        setPosition(position);
+        setSize(size);
+    }
+
+    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text, boolean centralizeText) {
+        this(calmState, text, centralizeText);
 
         setPosition(position);
         setSize(size);

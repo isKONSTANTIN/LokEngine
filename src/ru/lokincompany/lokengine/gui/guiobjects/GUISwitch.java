@@ -26,6 +26,14 @@ public class GUISwitch extends GUIObject {
         updateHeadSize();
     }
 
+    public GUISwitch(Color colorHead, Color colorBackground, Color colorFill) {
+        this(new Vector2i(), new Vector2i(), colorHead, colorBackground, colorFill);
+    }
+
+    public GUISwitch() {
+        this(new Vector2i(), new Vector2i());
+    }
+
     protected void updateHeadPosition() {
         framePart.headPosition = new Vector2i(framePart.status ? (position.x + size.x - framePart.headSize.x) : position.x, position.y);
     }

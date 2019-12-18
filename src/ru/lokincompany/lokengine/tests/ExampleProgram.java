@@ -13,6 +13,6 @@ public class ExampleProgram extends ApplicationDefault {
     protected void initEvent() {
         window.setCloseEvent((window, args) -> close());
         window.getFrameBuilder().backgroundColor = Colors.engineBackgroundColor();
-        window.getCanvas().addObject(new GUIText(new Vector2i(),"It's simple program on LokEngine!"), GUIPosition.Center);
+        window.getCanvas().addObject(new GUIText("It's simple program on LokEngine!"), GUIPosition.Center);
     }
 }

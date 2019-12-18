@@ -24,15 +24,12 @@ public class GUITextField extends GUIObject {
     public boolean getActive() {
         return active;
     }
-
     public void setActiveScript(GUITextFieldScript script) {
         activeScript = script;
     }
-
     public void setInactiveScript(GUITextFieldScript script) {
         inactiveScript = script;
     }
-
     public void setStatusChangedScript(GUITextFieldScript script) {
         statusChangedScript = script;
     }
@@ -81,6 +78,30 @@ public class GUITextField extends GUIObject {
 
     public GUITextField(Vector2i position) {
         this(position, "");
+    }
+
+    public GUITextField(GUITextFieldFramePart customFramePart) {
+        this(new Vector2i(), customFramePart);
+    }
+
+    public GUITextField(String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
+        this(new Vector2i(),new Vector2i(), fontName, text, color, fontStyle, fontSize, antiAlias, canResize);
+    }
+
+    public GUITextField(String text, Color color, int fontStyle, int fontSize) {
+        this(new Vector2i(), new Vector2i(), "Arial", text, color, fontStyle, fontSize, true, false);
+    }
+
+    public GUITextField(String text, Color color, int fontStyle) {
+        this(new Vector2i(), new Vector2i(), text, color, fontStyle, 24);
+    }
+
+    public GUITextField(String text) {
+        this(new Vector2i(), new Vector2i(), text, new Color(1, 1, 1, 1), 0);
+    }
+
+    public GUITextField() {
+        this(new Vector2i(), "");
     }
 
     public String getText() {

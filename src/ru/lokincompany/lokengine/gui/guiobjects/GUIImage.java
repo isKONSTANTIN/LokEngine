@@ -21,6 +21,14 @@ public class GUIImage extends GUIObject {
         framePart = new GUIImageFramePart(position, size, path);
     }
 
+    public GUIImage() {
+        this(new Vector2i(), new Vector2i());
+    }
+
+    public GUIImage(String path) {
+        this(new Vector2i(), new Vector2i(), path);
+    }
+
     public Texture getTexture() {
         return framePart.texture;
     }
