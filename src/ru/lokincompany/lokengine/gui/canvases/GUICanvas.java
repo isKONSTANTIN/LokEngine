@@ -64,10 +64,7 @@ public class GUICanvas extends GUIObject {
         return objects.get(id);
     }
 
-    @Override
-    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
-        super.update(partsBuilder, parentProperties);
-
+    protected void updateObjects(){
         for (GUIObject object : objects) {
             if (!object.hidden){
                 if (!object.ignoreCanvasUpdateOrder)
@@ -82,7 +79,18 @@ public class GUICanvas extends GUIObject {
         }
 
         ignoreOrderObjects.clear();
+    }
+
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties, boolean updateObjects) {
+        super.update(partsBuilder, parentProperties);
+
+        if (updateObjects) updateObjects();
 
         partsBuilder.addPart(framePart);
+    }
+
+    @Override
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
+        update(partsBuilder, parentProperties, true);
     }
 }
