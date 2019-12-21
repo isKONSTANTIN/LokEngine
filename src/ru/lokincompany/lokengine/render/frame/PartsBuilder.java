@@ -11,7 +11,7 @@ import java.util.Vector;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
-public class  PartsBuilder {
+public class PartsBuilder {
 
     FrameBufferWorker frameBufferWorker;
 

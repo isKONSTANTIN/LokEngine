@@ -38,6 +38,7 @@ public class FrameBufferWorker {
     public void cleanUp() {
         GL30.glDeleteFramebuffers(frameBuffer);
         GL11.glDeleteTextures(texture);
+        GL11.glDeleteTextures(depth);
     }
 
     public Vector2i getResolution() {
