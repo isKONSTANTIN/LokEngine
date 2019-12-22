@@ -43,7 +43,7 @@ public class GUITextField extends GUIObject {
         framePart.position = this.position;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
+    public GUITextField(Vector2i position, Vector2i size, String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize, boolean centralizeText) {
         super(position, new Vector2i(0, 0));
         framePart = new GUITextFieldFramePart(size, text, fontName, color, fontStyle, fontSize, antiAlias);
         this.canResize = canResize;
@@ -58,10 +58,15 @@ public class GUITextField extends GUIObject {
         }
 
         framePart.position = this.position;
+        framePart.centralizeText = centralizeText;
+    }
+
+    public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle, int fontSize, boolean centralizeText) {
+        this(position, size, "Arial", text, color, fontStyle, fontSize, true, false, centralizeText);
     }
 
     public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle, int fontSize) {
-        this(position, size, "Arial", text, color, fontStyle, fontSize, true, false);
+        this(position, size, text, color, fontStyle, fontSize, false);
     }
 
     public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle) {
@@ -85,11 +90,11 @@ public class GUITextField extends GUIObject {
     }
 
     public GUITextField(String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
-        this(new Vector2i(),new Vector2i(), fontName, text, color, fontStyle, fontSize, antiAlias, canResize);
+        this(new Vector2i(),new Vector2i(), fontName, text, color, fontStyle, fontSize, antiAlias, canResize, false);
     }
 
     public GUITextField(String text, Color color, int fontStyle, int fontSize) {
-        this(new Vector2i(), new Vector2i(), "Arial", text, color, fontStyle, fontSize, true, false);
+        this(new Vector2i(), new Vector2i(), "Arial", text, color, fontStyle, fontSize, true, false, false);
     }
 
     public GUITextField(String text, Color color, int fontStyle) {

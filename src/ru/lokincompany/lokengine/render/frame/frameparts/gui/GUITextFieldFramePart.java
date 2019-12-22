@@ -11,6 +11,7 @@ import ru.lokincompany.lokengine.tools.utilities.color.Colors;
 import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUITextFieldFramePart extends GUITextFramePart {
 
@@ -20,6 +21,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     public boolean active;
     public Vector2i size;
     public Color backgroundColor;
+    public boolean centralizeText;
 
     public GUITextFieldFramePart(Vector2i GUIObjectSize, String text, String fontName, Color color, int fontStyle, int size, boolean antiAlias) {
         super(text, FontLoader.createFont(new Font(fontName, fontStyle, size), antiAlias), color);
@@ -31,6 +33,11 @@ public class GUITextFieldFramePart extends GUITextFramePart {
 
     @Override
     public void partRender(BuilderProperties builderProperties) {
+        int fontHeight = font.getFontHeight();
+        int fontYpos = position.y + (int)(size.y / 2f - fontHeight / 2f) + 1;
+        int fontXpos = position.x + (centralizeText ? (int) (size.x / 2f - font.getWidth(text) / 2f) : 0);
+
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glBegin(GL_QUADS);
 
         glColor4f(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
@@ -41,7 +48,11 @@ public class GUITextFieldFramePart extends GUITextFramePart {
 
         glEnd();
 
-        super.partRender(builderProperties);
+        if (color != null) {
+            font.drawText(text, fontXpos, fontYpos, color);
+        } else {
+            font.drawText(text, fontXpos, fontYpos, shader);
+        }
 
         if (timer.checkTime()) {
             printSelecter = !printSelecter;
@@ -49,13 +60,13 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         }
 
         if (printSelecter && active) {
-            int xPos = font.getWidth(text.substring(0, pointer)) + position.x;
+            int xPos = font.getWidth(text.substring(0, pointer)) + fontXpos;
 
             GL11.glBegin(GL11.GL_LINES);
             GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
 
-            GL11.glVertex2f(xPos + 1, position.y);
-            GL11.glVertex2f(xPos + 1, position.y + size.y);
+            GL11.glVertex2f(xPos + 1,fontYpos);
+            GL11.glVertex2f(xPos + 1, fontYpos + fontHeight);
 
             GL11.glEnd();
         }
