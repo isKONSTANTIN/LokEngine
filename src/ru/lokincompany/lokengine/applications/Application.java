@@ -12,7 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class Application {
-    public ApplicationRuntime applicationRuntime;
     private static URLReportSender reportSender;
 
     static {
@@ -30,20 +29,13 @@ public abstract class Application {
         }
     }
 
+    public ApplicationRuntime applicationRuntime;
     protected boolean isRun;
     protected Thread myThread;
     protected long openALDevice;
     protected long openALContext;
     protected ALCCapabilities alcCapabilities;
     protected ALCapabilities alCapabilities;
-
-    public boolean isRun() {
-        return isRun;
-    }
-
-    public void close() {
-        isRun = false;
-    }
 
     static void errorClose(Exception e) {
         Logger.errorMessages = true;
@@ -64,11 +56,22 @@ public abstract class Application {
         System.exit(-1);
     }
 
+    public boolean isRun() {
+        return isRun;
+    }
+
+    public void close() {
+        isRun = false;
+    }
+
     public abstract void start();
 
-    protected void initEvent() {}
+    protected void initEvent() {
+    }
 
-    protected void updateEvent() {}
+    protected void updateEvent() {
+    }
 
-    protected void exitEvent() {}
+    protected void exitEvent() {
+    }
 }

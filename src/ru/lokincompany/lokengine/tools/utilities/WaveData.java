@@ -36,6 +36,23 @@ public class WaveData {
         loadData();
     }
 
+    public static WaveData create(InputStream stream) throws IOException, UnsupportedAudioFileException {
+        if (stream == null) {
+            return null;
+        }
+        InputStream bufferedInput = new BufferedInputStream(stream);
+        WaveData wavStream = new WaveData(getAudioInputStream(bufferedInput));
+        return wavStream;
+    }
+
+    private static int getOpenAlFormat(int channels, int bitsPerSample) {
+        if (channels == 1) {
+            return bitsPerSample == 8 ? AL10.AL_FORMAT_MONO8 : AL10.AL_FORMAT_MONO16;
+        } else {
+            return bitsPerSample == 8 ? AL10.AL_FORMAT_STEREO8 : AL10.AL_FORMAT_STEREO16;
+        }
+    }
+
     public void dispose() throws IOException {
         audioStream.close();
         data.clear();
@@ -52,25 +69,6 @@ public class WaveData {
             System.err.println("Couldn't read bytes from audio stream!");
         }
         return data;
-    }
-
-
-    public static WaveData create(InputStream stream) throws IOException, UnsupportedAudioFileException {
-        if (stream == null) {
-            return null;
-        }
-        InputStream bufferedInput = new BufferedInputStream(stream);
-        WaveData wavStream = new WaveData(getAudioInputStream(bufferedInput));
-        return wavStream;
-    }
-
-
-    private static int getOpenAlFormat(int channels, int bitsPerSample) {
-        if (channels == 1) {
-            return bitsPerSample == 8 ? AL10.AL_FORMAT_MONO8 : AL10.AL_FORMAT_MONO16;
-        } else {
-            return bitsPerSample == 8 ? AL10.AL_FORMAT_STEREO8 : AL10.AL_FORMAT_STEREO16;
-        }
     }
 
 }

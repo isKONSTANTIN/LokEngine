@@ -5,9 +5,9 @@ import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
-import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.MatrixCreator;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
@@ -28,6 +28,10 @@ public class BuilderProperties {
     private DrawMode activeDrawMode;
     private int UVBuffer;
     private int vertexScreenBuffer;
+
+    public BuilderProperties(Window window) {
+        this.window = window;
+    }
 
     public Shader getActiveShader() {
         return activeShader;
@@ -53,7 +57,7 @@ public class BuilderProperties {
         return unknownTexture;
     }
 
-    public DrawMode getActiveDrawMode(){
+    public DrawMode getActiveDrawMode() {
         return activeDrawMode;
     }
 
@@ -73,10 +77,6 @@ public class BuilderProperties {
     public void unUseShader() {
         ARBShaderObjects.glUseProgramObjectARB(0);
         activeShader = null;
-    }
-
-    public BuilderProperties(Window window) {
-        this.window = window;
     }
 
     public void update() {
@@ -117,13 +117,13 @@ public class BuilderProperties {
         });
     }
 
-    public void setOrthoView(Vector4i view){
-        orthoView = new Vector4i(view.x, view.y, view.z, view.w);
-        gluOrtho2D(-view.z, view.x - view.z, view.y - view.w, -view.w);
+    public Vector4i getOrthoView() {
+        return orthoView;
     }
 
-    public Vector4i getOrthoView(){
-        return orthoView;
+    public void setOrthoView(Vector4i view) {
+        orthoView = new Vector4i(view.x, view.y, view.z, view.w);
+        gluOrtho2D(-view.z, view.x - view.z, view.y - view.w, -view.w);
     }
 
     public void setDrawMode(DrawMode dm) {

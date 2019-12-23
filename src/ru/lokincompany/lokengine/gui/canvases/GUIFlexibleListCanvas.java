@@ -15,7 +15,7 @@ public class GUIFlexibleListCanvas extends GUIListCanvas {
     }
 
     @Override
-    public void calculatePositions(){
+    public void calculatePositions() {
         int y = 0;
         for (GUIObject object : objects) {
             object.setPosition(new Vector2i(0, y));

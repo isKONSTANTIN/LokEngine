@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.loaders.FontLoader;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.tools.Timer;
-import ru.lokincompany.lokengine.tools.text.TextColorShader;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
 import ru.lokincompany.lokengine.tools.utilities.color.Colors;
@@ -35,7 +34,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     @Override
     public void partRender(BuilderProperties builderProperties) {
         int fontHeight = font.getFontHeight();
-        int fontYpos = position.y + (int)(size.y / 2f - fontHeight / 2f) + 1;
+        int fontYpos = position.y + (int) (size.y / 2f - fontHeight / 2f) + 1;
         int fontXpos = position.x + (centralizeText ? (int) (size.x / 2f - font.getWidth(text) / 2f) : 0);
 
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -66,7 +65,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
             GL11.glBegin(GL11.GL_LINES);
             GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
 
-            GL11.glVertex2f(xPos + 1,fontYpos);
+            GL11.glVertex2f(xPos + 1, fontYpos);
             GL11.glVertex2f(xPos + 1, fontYpos + fontHeight);
 
             GL11.glEnd();

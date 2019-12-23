@@ -13,16 +13,15 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GUIGraphFramePart extends FramePart {
 
-    ArrayList<Float> points;
-    GUIFreeTextDrawer freeTextDrawer;
     public Vector2i position;
     public Vector2i size;
     public Color color;
     public Color color2;
-
     public float maxHeight;
     public float minHeight;
     public int maxPoints;
+    ArrayList<Float> points;
+    GUIFreeTextDrawer freeTextDrawer;
 
     public GUIGraphFramePart(Vector2i position, Vector2i size, ArrayList<Float> points, float maxHeight, float minHeight, int maxPoints, Color color, Color color2, GUIFreeTextDrawer freeTextDrawer) {
         super(FramePartType.GUI);

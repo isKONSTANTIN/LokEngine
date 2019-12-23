@@ -79,7 +79,7 @@ public class SoundComponent extends Component implements Saveable {
         if (savedString.equals("")) return this;
 
         SubclassSaver subclassSaver = new SubclassSaver();
-        SoundComponent loadedSoundComponent = new SoundComponent((Sound)((SubclassSaver) subclassSaver.load(savedString)).saveableObject);
+        SoundComponent loadedSoundComponent = new SoundComponent((Sound) ((SubclassSaver) subclassSaver.load(savedString)).saveableObject);
 
         this.sound = loadedSoundComponent.sound;
         this.source = loadedSoundComponent.source;

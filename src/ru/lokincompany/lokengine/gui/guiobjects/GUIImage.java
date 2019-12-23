@@ -37,12 +37,12 @@ public class GUIImage extends GUIObject {
         framePart.texture = texture;
     }
 
-    public void setColor(Color color) {
-        framePart.color = color;
-    }
-
     public Color getColor() {
         return framePart.color;
+    }
+
+    public void setColor(Color color) {
+        framePart.color = color;
     }
 
     @Override

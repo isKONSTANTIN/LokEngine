@@ -60,7 +60,7 @@ public class TextureLoader {
         return new Object[]{textureBuffer, image};
     }
 
-    public static Texture loadTexture(ByteBuffer buffer, Vector2i size, String path, long context){
+    public static Texture loadTexture(ByteBuffer buffer, Vector2i size, String path, long context) {
         int textureID = glGenTextures();
 
         glBindTexture(GL_TEXTURE_2D, textureID);
@@ -76,7 +76,7 @@ public class TextureLoader {
         return texture;
     }
 
-    public static Texture loadTexture(ByteBuffer buffer, Vector2i size){
+    public static Texture loadTexture(ByteBuffer buffer, Vector2i size) {
         return loadTexture(buffer, size, "", glfwGetCurrentContext());
     }
 

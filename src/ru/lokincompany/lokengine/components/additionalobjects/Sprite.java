@@ -14,10 +14,6 @@ public class Sprite implements Saveable {
 
     private float vertexSize;
 
-    public float getVertexSize() {
-        return vertexSize;
-    }
-
     public Sprite() {
     }
 
@@ -35,6 +31,10 @@ public class Sprite implements Saveable {
         this.size = size;
         this.vertexSize = vertexSize;
         this.uvBuffer = uvBuffer;
+    }
+
+    public float getVertexSize() {
+        return vertexSize;
     }
 
     public boolean equals(Object obj) {

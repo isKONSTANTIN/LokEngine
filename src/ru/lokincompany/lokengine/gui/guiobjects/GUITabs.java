@@ -14,18 +14,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GUITabs extends GUIObject {
+    public GUIPanel panel;
+    public Color textActiveColor;
+    public Color textInactiveColor;
     protected Map<String, GUICanvas> tabs = new HashMap<>();
     protected ArrayList<String> tabsNames = new ArrayList<>();
     protected GUILocationAlgorithm sizeAlgorithm;
     protected GUILocationAlgorithm positionAlgorithm;
     protected GUICanvas activeCanvas;
     protected GUIFreeTextDrawer drawer;
-
     protected int titleSize;
-
-    public GUIPanel panel;
-    public Color textActiveColor;
-    public Color textInactiveColor;
 
     public GUITabs(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
         super(position, size);
@@ -61,12 +59,16 @@ public class GUITabs extends GUIObject {
         this(new Vector2i(), new Vector2i(), 12, Colors.engineMainColor(), Colors.white());
     }
 
+    public GUICanvas getActiveTab() {
+        return activeCanvas;
+    }
+
     public void setActiveTab(String name) {
         activeCanvas = getTab(name);
     }
 
-    public GUICanvas getActiveTab() {
-        return activeCanvas;
+    public Font getTabsFont() {
+        return drawer.getFont();
     }
 
     public void setTabsFont(Font font) {
@@ -79,10 +81,6 @@ public class GUITabs extends GUIObject {
                 titleSize = fontH;
             }
         }
-    }
-
-    public Font getTabsFont() {
-        return drawer.getFont();
     }
 
     public String getActiveTabName() {

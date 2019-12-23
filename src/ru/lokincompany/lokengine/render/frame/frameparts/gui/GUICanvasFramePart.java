@@ -14,7 +14,7 @@ public class GUICanvasFramePart extends FramePart {
     public PartsBuilder partsBuilder;
     public Vector2i position;
     public Vector2i size;
-    public Vector2i viewOffset = new Vector2i(0,0);
+    public Vector2i viewOffset = new Vector2i(0, 0);
     public Color color = new Color(1, 1, 1, 1);
 
     public GUICanvasFramePart(Vector2i position, Vector2i size) {

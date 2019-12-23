@@ -3,7 +3,8 @@ package ru.lokincompany.lokengine.network.tcp.handlers.defaulthandles;
 import ru.lokincompany.lokengine.network.tcp.handlers.SimpleTCPClientHandler;
 import ru.lokincompany.lokengine.tools.base64.Base64;
 
-import static ru.lokincompany.lokengine.network.tcp.handlers.defaulthandles.DefaultTCPHandlersHeads.*;
+import static ru.lokincompany.lokengine.network.tcp.handlers.defaulthandles.DefaultTCPHandlersHeads.publicDataHeadName;
+import static ru.lokincompany.lokengine.network.tcp.handlers.defaulthandles.DefaultTCPHandlersHeads.runServerMethodHeadName;
 
 public class DefaultTCPClientHandler extends SimpleTCPClientHandler {
 

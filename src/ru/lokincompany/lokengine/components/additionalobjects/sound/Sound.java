@@ -7,7 +7,8 @@ public abstract class Sound implements Saveable {
     public String path;
     public int buffer;
 
-    public Sound() {}
+    public Sound() {
+    }
 
     public abstract void update();
 

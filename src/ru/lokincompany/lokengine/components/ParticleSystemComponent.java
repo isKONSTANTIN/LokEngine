@@ -16,18 +16,12 @@ import java.util.ArrayList;
 
 public class ParticleSystemComponent extends Component {
 
+    public boolean staticParticles;
     ParticleSystemFramePart framePart;
     ArrayList<Particle> particlesList = new ArrayList<>();
     ParticleHandler particleHandler;
-
     private Vector2f sourcePosition = new Vector2f();
-
-    public boolean staticParticles;
     private boolean staticInited;
-
-    public Vector2f getSourcePosition() {
-        return new Vector2f(sourcePosition.x, sourcePosition.y);
-    }
 
     public ParticleSystemComponent(Sprite spriteParticles, ParticleHandler particleHandler, Shader shader) {
         framePart = new ParticleSystemFramePart(spriteParticles, shader);
@@ -40,6 +34,10 @@ public class ParticleSystemComponent extends Component {
 
     public ParticleSystemComponent(Sprite spriteParticles) {
         this(spriteParticles, new DefaultParticleHandler(), null);
+    }
+
+    public Vector2f getSourcePosition() {
+        return new Vector2f(sourcePosition.x, sourcePosition.y);
     }
 
     public void setParticleHandler(ParticleHandler handler) {

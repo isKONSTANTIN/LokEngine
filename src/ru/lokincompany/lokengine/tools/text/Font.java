@@ -1,7 +1,6 @@
 package ru.lokincompany.lokengine.tools.text;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
@@ -18,6 +17,12 @@ public class Font {
     private int fontHeight;
     private float spaceSize;
 
+    public Font(Texture texture, HashMap<Character, Glyph> glyphs, int fontHeight) {
+        this.texture = texture;
+        this.glyphs = glyphs;
+        this.fontHeight = fontHeight;
+    }
+
     public HashMap<Character, Glyph> getGlyphs() {
         return glyphs;
     }
@@ -28,12 +33,6 @@ public class Font {
 
     public int getFontHeight() {
         return fontHeight;
-    }
-
-    public Font(Texture texture, HashMap<Character, Glyph> glyphs, int fontHeight) {
-        this.texture = texture;
-        this.glyphs = glyphs;
-        this.fontHeight = fontHeight;
     }
 
     public int getWidth(CharSequence text) {

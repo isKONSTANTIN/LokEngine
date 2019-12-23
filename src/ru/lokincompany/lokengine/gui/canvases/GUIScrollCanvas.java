@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.gui.canvases;
+
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
-import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
@@ -26,7 +26,7 @@ public class GUIScrollCanvas extends GUICanvas {
         this(position, size, null, null);
     }
 
-    protected void updateScroll(GUIObjectProperties parentProperties){
+    protected void updateScroll(GUIObjectProperties parentProperties) {
         Vector2f mouseScroll = parentProperties.mouseRaycastStatus.mouse.getMouseScroll();
 
         int Xmin = (int) (minOffset != null ? Math.max(framePart.viewOffset.x + mouseScroll.x * scrollStrength, minOffset.x) : framePart.viewOffset.x + mouseScroll.x * 10);

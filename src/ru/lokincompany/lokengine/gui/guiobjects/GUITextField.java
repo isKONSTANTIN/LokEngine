@@ -13,26 +13,12 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class GUITextField extends GUIObject {
 
-    protected GUITextFieldFramePart framePart;
-    private boolean lastActive;
     public boolean canResize;
-
+    protected GUITextFieldFramePart framePart;
     protected GUITextFieldScript activeScript;
     protected GUITextFieldScript inactiveScript;
     protected GUITextFieldScript statusChangedScript;
-
-    public boolean getActive() {
-        return active;
-    }
-    public void setActiveScript(GUITextFieldScript script) {
-        activeScript = script;
-    }
-    public void setInactiveScript(GUITextFieldScript script) {
-        inactiveScript = script;
-    }
-    public void setStatusChangedScript(GUITextFieldScript script) {
-        statusChangedScript = script;
-    }
+    private boolean lastActive;
 
     public GUITextField(Vector2i position, GUITextFieldFramePart customFramePart) {
         super(position, new Vector2i(0, 0));
@@ -90,7 +76,7 @@ public class GUITextField extends GUIObject {
     }
 
     public GUITextField(String fontName, String text, Color color, int fontStyle, int fontSize, boolean antiAlias, boolean canResize) {
-        this(new Vector2i(),new Vector2i(), fontName, text, color, fontStyle, fontSize, antiAlias, canResize, false);
+        this(new Vector2i(), new Vector2i(), fontName, text, color, fontStyle, fontSize, antiAlias, canResize, false);
     }
 
     public GUITextField(String text, Color color, int fontStyle, int fontSize) {
@@ -109,6 +95,22 @@ public class GUITextField extends GUIObject {
         this(new Vector2i(), "");
     }
 
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActiveScript(GUITextFieldScript script) {
+        activeScript = script;
+    }
+
+    public void setInactiveScript(GUITextFieldScript script) {
+        inactiveScript = script;
+    }
+
+    public void setStatusChangedScript(GUITextFieldScript script) {
+        statusChangedScript = script;
+    }
+
     public String getText() {
         return framePart.text;
     }
@@ -121,12 +123,12 @@ public class GUITextField extends GUIObject {
         }
     }
 
-    public void setBackgroundColor(Color color){
-        framePart.backgroundColor = color;
+    public Color getBackgroundColor() {
+        return framePart.backgroundColor;
     }
 
-    public Color getBackgroundColor(){
-        return framePart.backgroundColor;
+    public void setBackgroundColor(Color color) {
+        framePart.backgroundColor = color;
     }
 
     @Override

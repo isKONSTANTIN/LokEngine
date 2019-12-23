@@ -2,8 +2,8 @@ package ru.lokincompany.lokengine.tools.saveworker;
 
 public class SubclassSaver implements Saveable {
 
-    String className;
     public Saveable saveableObject;
+    String className;
 
     public SubclassSaver() {
     }

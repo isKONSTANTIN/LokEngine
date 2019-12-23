@@ -51,12 +51,12 @@ public class GUICheckBox extends GUIObject {
         this(new Vector2i(), new Vector2i());
     }
 
-    public void setTexture(Texture texture) {
-        framePart.imageFramePart.texture = texture;
-    }
-
     public Texture getTexture() {
         return framePart.imageFramePart.texture;
+    }
+
+    public void setTexture(Texture texture) {
+        framePart.imageFramePart.texture = texture;
     }
 
     @Override

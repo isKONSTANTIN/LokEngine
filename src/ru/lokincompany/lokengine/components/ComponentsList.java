@@ -8,7 +8,6 @@ import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.saveworker.SubclassSaver;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ComponentsList implements Saveable {
 
@@ -49,7 +48,7 @@ public class ComponentsList implements Saveable {
     public <T extends Component> T get(Class<T> componentClass) {
         for (Component component : components) {
             if (component.getClass().getName().equals(componentClass.getName())) {
-                return (T)component;
+                return (T) component;
             }
         }
         return null;

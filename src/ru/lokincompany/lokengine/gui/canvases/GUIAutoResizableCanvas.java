@@ -1,6 +1,5 @@
 package ru.lokincompany.lokengine.gui.canvases;
 
-import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;

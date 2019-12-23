@@ -4,7 +4,7 @@ import ru.lokincompany.lokengine.tools.utilities.StringToLongTransformer;
 
 public class OpenSimplexNoise3D extends OpenSimplexNoise {
 
-    public OpenSimplexNoise3D(){
+    public OpenSimplexNoise3D() {
         super();
     }
 
@@ -103,7 +103,7 @@ public class OpenSimplexNoise3D extends OpenSimplexNoise {
                     dz_ext0 = dz_ext1 = dz0 - 1;
                 }
             } else {
-                byte c = (byte)(aPoint | bPoint);
+                byte c = (byte) (aPoint | bPoint);
 
                 if ((c & 0x01) == 0) {
                     xsv_ext0 = xsb;
@@ -220,7 +220,7 @@ public class OpenSimplexNoise3D extends OpenSimplexNoise {
                     dz_ext0 = dz_ext1 = dz0 - 3 * SQUISH_CONSTANT_3D;
                 }
             } else {
-                byte c = (byte)(aPoint & bPoint);
+                byte c = (byte) (aPoint & bPoint);
 
                 if ((c & 0x01) != 0) {
                     xsv_ext0 = xsb + 1;
@@ -347,7 +347,7 @@ public class OpenSimplexNoise3D extends OpenSimplexNoise {
                     ysv_ext0 = ysb + 1;
                     zsv_ext0 = zsb + 1;
 
-                    byte c = (byte)(aPoint & bPoint);
+                    byte c = (byte) (aPoint & bPoint);
                     if ((c & 0x01) != 0) {
                         dx_ext1 = dx0 - 2 - 2 * SQUISH_CONSTANT_3D;
                         dy_ext1 = dy0 - 2 * SQUISH_CONSTANT_3D;
@@ -378,7 +378,7 @@ public class OpenSimplexNoise3D extends OpenSimplexNoise {
                     ysv_ext0 = ysb;
                     zsv_ext0 = zsb;
 
-                    byte c = (byte)(aPoint | bPoint);
+                    byte c = (byte) (aPoint | bPoint);
                     if ((c & 0x01) == 0) {
                         dx_ext1 = dx0 + 1 - SQUISH_CONSTANT_3D;
                         dy_ext1 = dy0 - 1 - SQUISH_CONSTANT_3D;
@@ -503,15 +503,13 @@ public class OpenSimplexNoise3D extends OpenSimplexNoise {
         }
 
         double attn_ext0 = 2 - dx_ext0 * dx_ext0 - dy_ext0 * dy_ext0 - dz_ext0 * dz_ext0;
-        if (attn_ext0 > 0)
-        {
+        if (attn_ext0 > 0) {
             attn_ext0 *= attn_ext0;
             value += attn_ext0 * attn_ext0 * extrapolate(xsv_ext0, ysv_ext0, zsv_ext0, dx_ext0, dy_ext0, dz_ext0);
         }
 
         double attn_ext1 = 2 - dx_ext1 * dx_ext1 - dy_ext1 * dy_ext1 - dz_ext1 * dz_ext1;
-        if (attn_ext1 > 0)
-        {
+        if (attn_ext1 > 0) {
             attn_ext1 *= attn_ext1;
             value += attn_ext1 * attn_ext1 * extrapolate(xsv_ext1, ysv_ext1, zsv_ext1, dx_ext1, dy_ext1, dz_ext1);
         }

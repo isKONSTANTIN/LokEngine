@@ -13,20 +13,23 @@ import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class PartsBuilder {
 
-    FrameBufferWorker frameBufferWorker;
-
     public Color clearColor = new Color(0, 0, 0, 0);
+    FrameBufferWorker frameBufferWorker;
     Vector<FramePart> frameParts = new Vector<>();
-
-    public void addPart(FramePart fp) {
-        frameParts.add(fp);
-    }
 
     public PartsBuilder() {
     }
 
     public PartsBuilder(Vector2i resolution) {
         setResolution(resolution);
+    }
+
+    public void addPart(FramePart fp) {
+        frameParts.add(fp);
+    }
+
+    public Vector2i getResolution() {
+        return frameBufferWorker.getResolution();
     }
 
     public void setResolution(Vector2i resolution) {
@@ -36,12 +39,8 @@ public class PartsBuilder {
         frameBufferWorker = new FrameBufferWorker(resolution);
     }
 
-    public Vector2i getResolution() {
-        return frameBufferWorker.getResolution();
-    }
-
     public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties) {
-        return build(frameParts,drawMode,builderProperties, new Vector2i());
+        return build(frameParts, drawMode, builderProperties, new Vector2i());
     }
 
     public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties, Vector2i viewOffset) {

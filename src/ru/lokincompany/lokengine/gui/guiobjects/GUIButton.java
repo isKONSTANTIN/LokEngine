@@ -17,10 +17,6 @@ public class GUIButton extends GUIObject {
     protected GUIButtonScript pressScript;
     protected GUIButtonScript unpressScript;
 
-    public boolean isPressed() {
-        return active;
-    }
-
     public GUIButton(Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
         this.text = text;
         if (size.x <= 0 || size.y <= 0) {
@@ -32,7 +28,7 @@ public class GUIButton extends GUIObject {
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
         this.touchable = true;
 
-        text.setPosition(object -> new Vector2i(getPosition().x  + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0), getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
+        text.setPosition(object -> new Vector2i(getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0), getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
         panel.setSize(object -> getSize());
         panel.setPosition(object -> getPosition());
 
@@ -53,7 +49,7 @@ public class GUIButton extends GUIObject {
         this.panel = new GUIPanel(position, size, activeColor);
         this.touchable = true;
 
-        text.setPosition(object -> new Vector2i(getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0) , getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
+        text.setPosition(object -> new Vector2i(getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0), getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)));
         panel.setSize(object -> getSize());
         panel.setPosition(object -> getPosition());
 
@@ -61,11 +57,11 @@ public class GUIButton extends GUIObject {
         setSize(size);
     }
 
-    public GUIButton(Color pressed, Color calmState, GUIText text, GUIPanel panel){
+    public GUIButton(Color pressed, Color calmState, GUIText text, GUIPanel panel) {
         this(pressed, calmState, text, panel, true);
     }
 
-    public GUIButton(Color calmState, GUIText text){
+    public GUIButton(Color calmState, GUIText text) {
         this(calmState, text, true);
     }
 
@@ -74,7 +70,7 @@ public class GUIButton extends GUIObject {
     }
 
     public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
-        this(pressed,calmState, text, panel, centralizeText);
+        this(pressed, calmState, text, panel, centralizeText);
 
         setPosition(position);
         setSize(size);
@@ -87,16 +83,20 @@ public class GUIButton extends GUIObject {
         setSize(size);
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel){
+    public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel) {
         this(position, size, pressed, calmState, text, panel, true);
     }
 
-    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text){
+    public GUIButton(Vector2i position, Vector2i size, Color calmState, GUIText text) {
         this(position, size, calmState, text, true);
     }
 
     public GUIButton(Vector2i position, Vector2i size, Color calmState, String text) {
         this(position, size, calmState, new GUIText(position, text));
+    }
+
+    public boolean isPressed() {
+        return active;
     }
 
     public void setPressScript(GUIButtonScript script) {

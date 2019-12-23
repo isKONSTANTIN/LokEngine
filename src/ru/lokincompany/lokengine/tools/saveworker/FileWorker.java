@@ -14,13 +14,13 @@ public class FileWorker {
     FileWriter fileWriter;
     FileReader fileReader;
 
-    public static boolean fileExists(String filePath) {
-        return new File(filePath).exists();
-    }
-
     public FileWorker(String filePath) {
         file = new File(filePath);
         this.filePath = filePath;
+    }
+
+    public static boolean fileExists(String filePath) {
+        return new File(filePath).exists();
     }
 
     public void write(String data) throws IOException {

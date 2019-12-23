@@ -4,7 +4,7 @@ import ru.lokincompany.lokengine.tools.utilities.StringToLongTransformer;
 
 public class OpenSimplexNoise2D extends OpenSimplexNoise {
 
-    public OpenSimplexNoise2D(){
+    public OpenSimplexNoise2D() {
         super();
     }
 

@@ -8,9 +8,8 @@ import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class GUISwitch extends GUIObject {
-    protected GUISwitchFramePart framePart;
-
     public GUILocationAlgorithm switchSizeAlgorithm;
+    protected GUISwitchFramePart framePart;
 
     public GUISwitch(Vector2i position, Vector2i size, Color colorHead, Color colorBackground, Color colorFill) {
         super(position, size);
@@ -42,17 +41,17 @@ public class GUISwitch extends GUIObject {
         framePart.headSize = switchSizeAlgorithm != null ? switchSizeAlgorithm.calculate(this) : new Vector2i(size.x / 3, size.y);
     }
 
-    public void setStatus(boolean status) {
-        framePart.status = status;
-        updateHeadPosition();
-    }
-
     public void switchStatus() {
         setStatus(!framePart.status);
     }
 
     public boolean getStatus() {
         return framePart.status;
+    }
+
+    public void setStatus(boolean status) {
+        framePart.status = status;
+        updateHeadPosition();
     }
 
     @Override

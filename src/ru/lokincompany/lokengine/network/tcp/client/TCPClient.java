@@ -9,9 +9,9 @@ import java.net.Socket;
 public class TCPClient {
 
     public Socket socket;
+    public TCPClientHandler clientHandler;
     private BufferedReader fromServer;
     private BufferedWriter toServer;
-    public TCPClientHandler clientHandler;
 
     public TCPClient(String address, TCPClientHandler clientHandler, int port) throws IOException {
         socket = new Socket(address, port);

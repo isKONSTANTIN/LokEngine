@@ -23,15 +23,6 @@ public class BloomActionWorker extends PostProcessingActionWorker {
     private int blurAction;
     private BloomSettings bloomSettings;
 
-    @Override
-    public String getName() {
-        return "Bloom Action Worker";
-    }
-
-    public BloomSettings getBloomSettings(){
-        return bloomSettings;
-    }
-
     public BloomActionWorker(Window window) throws Exception {
         this.frameBufferWorker1 = new FrameBufferWorker(window.getResolution());
         this.frameBufferWorker2 = new FrameBufferWorker(window.getResolution());
@@ -48,22 +39,31 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         window.getFrameBuilder().getBuilderProperties().unUseShader();
     }
 
-    public void setBloomSettings(BloomSettings bloomSettings){
+    @Override
+    public String getName() {
+        return "Bloom Action Worker";
+    }
+
+    public BloomSettings getBloomSettings() {
+        return bloomSettings;
+    }
+
+    public void setBloomSettings(BloomSettings bloomSettings) {
         this.blurAction = bloomSettings.getBlurTexture(window);
         this.bloomSettings = bloomSettings;
     }
 
     @Override
     public int render(int sourceFrame) {
-        if (blurAction != 0){
-            if (!frameBufferWorker1.getResolution().equals(window.getResolution())){
+        if (blurAction != 0) {
+            if (!frameBufferWorker1.getResolution().equals(window.getResolution())) {
                 window.getFrameBuilder().getBuilderProperties().useShader(filterShader);
                 window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
                 window.getFrameBuilder().getBuilderProperties().useShader(mixerShader);
                 window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
             }
 
-            BlurActionWorker blur = (BlurActionWorker)window.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker");
+            BlurActionWorker blur = (BlurActionWorker) window.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker");
             BuilderProperties builderProperties = window.getFrameBuilder().getBuilderProperties();
 
             frameBufferWorker1.bindFrameBuffer(DrawMode.Display, builderProperties);
@@ -86,7 +86,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
             builderProperties.useShader(mixerShader);
             mixerShader.setUniformData("Gamma", bloomSettings.gamma);
             mixerShader.setUniformData("Exposure", bloomSettings.exposure);
-            DisplayDrawer.bindTexture("frame2", blured,1,builderProperties);
+            DisplayDrawer.bindTexture("frame2", blured, 1, builderProperties);
             DisplayDrawer.renderScreen(sourceFrame, window);
 
             frameBufferWorker2.unbindCurrentFrameBuffer();

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class GUIFreeTextDrawer extends GUIObject {
 
+    public Color color = new Color(1, 1, 1, 1);
     protected ArrayList<GUITextFramePart> frameParts = new ArrayList<>();
     protected Font font;
-    public Color color = new Color(1, 1, 1, 1);
 
     public GUIFreeTextDrawer(Font font) {
         super(new Vector2i(0, 0), new Vector2i(0, 0));

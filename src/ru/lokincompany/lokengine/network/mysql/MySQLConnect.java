@@ -10,10 +10,6 @@ public class MySQLConnect {
     protected Statement statement;
     protected String databaseName;
 
-    public String getDatabaseName() {
-        return databaseName;
-    }
-
     public MySQLConnect(String address, int port, String databaseName, String username, String password, String timezone) {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + databaseName + "?serverTimezone=" + timezone, username, password);
@@ -24,6 +20,18 @@ public class MySQLConnect {
         }
     }
 
+    public MySQLConnect(String address, String databaseName, String username, String password, String timezone) {
+        this(address, 3306, databaseName, username, password, timezone);
+    }
+
+    public MySQLConnect(String address, String databaseName, String username, String password) {
+        this(address, 3306, databaseName, username, password, "UTC");
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
     public void close() {
         try {
             if (connection != null)
@@ -32,14 +40,6 @@ public class MySQLConnect {
             Logger.warning("Fail close MySQL database connect", "LokEngine_MySQLConnect");
             Logger.printException(e);
         }
-    }
-
-    public MySQLConnect(String address, String databaseName, String username, String password, String timezone) {
-        this(address, 3306, databaseName, username, password, timezone);
-    }
-
-    public MySQLConnect(String address, String databaseName, String username, String password) {
-        this(address, 3306, databaseName, username, password, "UTC");
     }
 
     public boolean connected() {

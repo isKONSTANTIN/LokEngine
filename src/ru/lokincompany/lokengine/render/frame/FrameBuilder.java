@@ -16,6 +16,13 @@ public class FrameBuilder {
     private PartsBuilder GUIPartsBuilder;
     private BuilderProperties builderProperties;
 
+    public FrameBuilder(Window correctWin) {
+        builderProperties = new BuilderProperties(correctWin);
+
+        scenePartsBuilder = new PartsBuilder(correctWin.getResolution());
+        GUIPartsBuilder = new PartsBuilder(correctWin.getResolution());
+    }
+
     public PartsBuilder getScenePartsBuilder() {
         return scenePartsBuilder;
     }
@@ -26,13 +33,6 @@ public class FrameBuilder {
 
     public BuilderProperties getBuilderProperties() {
         return builderProperties;
-    }
-
-    public FrameBuilder(Window correctWin) {
-        builderProperties = new BuilderProperties(correctWin);
-
-        scenePartsBuilder = new PartsBuilder(correctWin.getResolution());
-        GUIPartsBuilder = new PartsBuilder(correctWin.getResolution());
     }
 
     public void addPostProcessingActionWorker(PostProcessingActionWorker worker) {

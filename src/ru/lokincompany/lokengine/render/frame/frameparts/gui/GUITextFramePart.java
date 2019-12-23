@@ -9,7 +9,6 @@ import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUITextFramePart extends FramePart {

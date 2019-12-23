@@ -6,7 +6,6 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.util.vector.Vector2f;
-
 import ru.lokincompany.lokengine.components.additionalobjects.rigidbody.Rigidbody;
 import ru.lokincompany.lokengine.components.additionalobjects.rigidbody.shapes.Shape;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
@@ -23,6 +22,19 @@ public class RigidbodyComponent extends Component implements Saveable {
     public Shape polygons;
     Rigidbody body;
     private boolean bodyInited = false;
+
+    public RigidbodyComponent() {
+    }
+
+    public RigidbodyComponent(Shape polygons) {
+        this.polygons = polygons;
+        this.body = new Rigidbody();
+    }
+
+    public RigidbodyComponent(Shape polygons, Rigidbody rigidbody) {
+        this.polygons = polygons;
+        this.body = rigidbody;
+    }
 
     @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
@@ -65,19 +77,6 @@ public class RigidbodyComponent extends Component implements Saveable {
         body.createFixture(fixtureDef);
 
         this.body.b2body = body;
-    }
-
-    public RigidbodyComponent() {
-    }
-
-    public RigidbodyComponent(Shape polygons) {
-        this.polygons = polygons;
-        this.body = new Rigidbody();
-    }
-
-    public RigidbodyComponent(Shape polygons, Rigidbody rigidbody) {
-        this.polygons = polygons;
-        this.body = rigidbody;
     }
 
     public void addForce(Vector2f forceToCenter) {

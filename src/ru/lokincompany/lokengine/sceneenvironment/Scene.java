@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class Scene implements Saveable {
-    private Vector<SceneObject> objects = new Vector<>();
-    private Vector<PostUpdateEvent> postUpdateEvents = new Vector<>();
     public World b2World;
-
     public int physicsVelocityIterations = 12;
     public int physicsPositionsIterations = 4;
+    private Vector<SceneObject> objects = new Vector<>();
+    private Vector<PostUpdateEvent> postUpdateEvents = new Vector<>();
 
     public Scene() {
         b2World = new World(new Vec2(0, -5));

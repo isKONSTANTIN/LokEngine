@@ -6,24 +6,42 @@ import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class GUIObject {
+    public boolean ignoreCanvasUpdateOrder;
+    public boolean hidden;
+    public GUIObjectProperties properties;
     protected Vector2i position;
     protected Vector2i size;
-
     protected GUILocationAlgorithm positionAlgorithm;
     protected GUILocationAlgorithm sizeAlgorithm;
-
     protected boolean touchable;
     protected boolean active;
     protected boolean focused;
     protected boolean retention;
 
-    public boolean ignoreCanvasUpdateOrder;
-    public boolean hidden;
+    public GUIObject(Vector2i position, Vector2i size) {
+        this.position = position;
+        this.size = size;
+        properties = new GUIObjectProperties(position, size);
+    }
 
-    public GUIObjectProperties properties;
+    public GUIObject() {
+        this(new Vector2i(), new Vector2i());
+    }
+
+    public Vector2i getPosition() {
+        return position;
+    }
 
     public void setPosition(Vector2i position) {
         this.position = position;
+    }
+
+    public void setPosition(GUILocationAlgorithm position) {
+        positionAlgorithm = position;
+    }
+
+    public Vector2i getSize() {
+        return size;
     }
 
     public void setSize(Vector2i size) {
@@ -32,20 +50,8 @@ public class GUIObject {
         properties.size.y = size.y;
     }
 
-    public void setPosition(GUILocationAlgorithm position) {
-        positionAlgorithm = position;
-    }
-
     public void setSize(GUILocationAlgorithm size) {
         sizeAlgorithm = size;
-    }
-
-    public Vector2i getPosition() {
-        return position;
-    }
-
-    public Vector2i getSize() {
-        return size;
     }
 
     protected void pressed() {
@@ -80,16 +86,6 @@ public class GUIObject {
                 setSize(newSize);
             }
         }
-    }
-
-    public GUIObject(Vector2i position, Vector2i size) {
-        this.position = position;
-        this.size = size;
-        properties = new GUIObjectProperties(position, size);
-    }
-
-    public GUIObject() {
-        this(new Vector2i(), new Vector2i());
     }
 
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {

@@ -7,8 +7,8 @@ import java.net.ServerSocket;
 
 public class TCPServer {
 
-    private volatile ServerSocket serverSocket;
     public TCPServerHandler serverHandler;
+    private volatile ServerSocket serverSocket;
     private TCPServerMainThread thread;
 
     public TCPServer(int port, TCPServerHandler serverHandler) throws IOException {

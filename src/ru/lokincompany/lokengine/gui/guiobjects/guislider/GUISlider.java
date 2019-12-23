@@ -11,13 +11,11 @@ import ru.lokincompany.lokengine.tools.utilities.color.Colors;
 
 public class GUISlider extends GUIObject {
 
-    protected GUISliderFramePart framePart;
-    protected GUISliderHead head;
-
     public GUISliderColorShader colorFillShader;
     public GUISliderColorShader colorBackgroundShader;
-
     public Vector2f range = new Vector2f(0, 100);
+    protected GUISliderFramePart framePart;
+    protected GUISliderHead head;
 
     public GUISlider(Vector2i position, Vector2i size, Color background, Color filledBackground, GUISliderHead head) {
         super(position, size);

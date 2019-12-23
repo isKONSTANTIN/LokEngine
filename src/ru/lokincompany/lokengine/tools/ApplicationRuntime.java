@@ -20,16 +20,16 @@ public class ApplicationRuntime {
         return speedEngine;
     }
 
-    public long getEngineRunTime() {
-        return System.nanoTime() - startEngineTime;
-    }
-
     public void setSpeedEngine(float speed) {
         if (speed >= 0) {
             speedEngine = speed;
         } else {
             throw new IllegalArgumentException("Speed cannot be less than zero!");
         }
+    }
+
+    public long getEngineRunTime() {
+        return System.nanoTime() - startEngineTime;
     }
 
     public void init() {

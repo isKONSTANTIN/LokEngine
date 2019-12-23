@@ -13,11 +13,11 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class Mouse {
 
+    public int buttonID = GLFW_MOUSE_BUTTON_LEFT;
     private Vector2i mousePosition = new Vector2i();
     private Vector2f mouseScroll = new Vector2f();
     private Vector2f lastMouseScroll = new Vector2f();
     private boolean mousePressed = false;
-    public int buttonID = GLFW_MOUSE_BUTTON_LEFT;
     private Window window;
 
     public Mouse(Window window) {
@@ -33,8 +33,8 @@ public class Mouse {
         glfwSetScrollCallback(window.getId(), new GLFWScrollCallback() {
             @Override
             public void invoke(long l, double xoffset, double yoffset) {
-                mouseScroll.x = (float)xoffset;
-                mouseScroll.y = (float)yoffset;
+                mouseScroll.x = (float) xoffset;
+                mouseScroll.y = (float) yoffset;
             }
         });
     }
@@ -59,7 +59,7 @@ public class Mouse {
         mousePosition.x = (int) xBuffer.get(0);
         mousePosition.y = (int) yBuffer.get(0);
 
-        if (lastMouseScroll.equals(mouseScroll) && (mouseScroll.x != 0 || mouseScroll.y != 0)){
+        if (lastMouseScroll.equals(mouseScroll) && (mouseScroll.x != 0 || mouseScroll.y != 0)) {
             mouseScroll.x = 0;
             mouseScroll.y = 0;
         }

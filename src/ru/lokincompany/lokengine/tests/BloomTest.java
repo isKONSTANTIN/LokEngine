@@ -10,7 +10,9 @@ import ru.lokincompany.lokengine.tools.utilities.color.Colors;
 
 public class BloomTest extends ApplicationDefault {
 
-    public static void main(String[] args) { new BloomTest().start(false,true); }
+    public static void main(String[] args) {
+        new BloomTest().start(false, true);
+    }
 
     @Override
     protected void initEvent() {
@@ -21,8 +23,8 @@ public class BloomTest extends ApplicationDefault {
         sceneObject.components.add(new SpriteComponent("#/resources/textures/EngineIcon128.png"));
         scene.addObject(sceneObject);
 
-        BloomSettings settings = new BloomSettings(new BlurTuning(0.6,50,0.15),1,1,0.6f);
-        ((BloomActionWorker)window.getFrameBuilder().getPostProcessingActionWorker("Bloom Action Worker")).setBloomSettings(settings);
+        BloomSettings settings = new BloomSettings(new BlurTuning(0.6, 50, 0.15), 1, 1, 0.6f);
+        ((BloomActionWorker) window.getFrameBuilder().getPostProcessingActionWorker("Bloom Action Worker")).setBloomSettings(settings);
     }
 
 }

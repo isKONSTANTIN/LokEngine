@@ -34,14 +34,14 @@ public class GUISliderHead extends GUIObject {
         setTexture(texture);
     }
 
+    public Texture getTexture() {
+        return texture;
+    }
+
     public void setTexture(Texture texture) {
         this.texture = texture;
         color = Colors.white();
         setSize(new Vector2i(texture.sizeX, texture.sizeY));
-    }
-
-    public Texture getTexture() {
-        return texture;
     }
 
     public boolean getActive() {

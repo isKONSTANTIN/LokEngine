@@ -57,17 +57,17 @@ public class Window {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+        glfwSetWindowTitle(id, title);
+    }
+
     public GUICanvas getCanvas() {
         return canvas;
     }
 
     public FrameBuilder getFrameBuilder() {
         return frameBuilder;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-        glfwSetWindowTitle(id, title);
     }
 
     public long getId() {
@@ -153,10 +153,6 @@ public class Window {
         return mouse;
     }
 
-    public void setPosition(Vector2i position) {
-        glfwSetWindowPos(id, position.x, position.y);
-    }
-
     public Vector2i getPosition() {
         IntBuffer xBuffer = BufferUtils.createIntBuffer(1);
         IntBuffer yBuffer = BufferUtils.createIntBuffer(1);
@@ -164,6 +160,10 @@ public class Window {
         glfwGetWindowPos(id, xBuffer, yBuffer);
 
         return new Vector2i(xBuffer.get(0), yBuffer.get(0));
+    }
+
+    public void setPosition(Vector2i position) {
+        glfwSetWindowPos(id, position.x, position.y);
     }
 
     public void iconify() {

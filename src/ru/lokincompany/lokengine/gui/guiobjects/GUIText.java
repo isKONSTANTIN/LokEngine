@@ -12,10 +12,10 @@ import java.awt.*;
 
 public class GUIText extends GUIObject {
 
+    public boolean canResize;
     protected GUITextFramePart framePart;
     protected int maxTextLength;
     protected TextColorShader shader;
-    public boolean canResize;
 
     public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
         super(position, new Vector2i(0, 0));
@@ -115,15 +115,15 @@ public class GUIText extends GUIObject {
     }
 
     @Override
+    public Vector2i getSize() {
+        return new Vector2i(framePart.getWidth(), framePart.getHeight());
+    }
+
+    @Override
     public void setSize(Vector2i size) {
         super.setSize(size);
         updateMaxSize();
         framePart.text = getText().length() > maxTextLength ? framePart.text.substring(0, maxTextLength) : framePart.text;
-    }
-
-    @Override
-    public Vector2i getSize() {
-        return new Vector2i(framePart.getWidth(), framePart.getHeight());
     }
 
     private void updateMaxSize() {

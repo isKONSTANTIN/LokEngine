@@ -13,7 +13,7 @@ public class GLFW {
         return inited;
     }
 
-    public static boolean isInited(){
+    public static boolean isInited() {
         return inited;
     }
 

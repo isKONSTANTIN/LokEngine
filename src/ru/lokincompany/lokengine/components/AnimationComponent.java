@@ -15,23 +15,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AnimationComponent extends Component implements Saveable {
+    public float currentFrame;
+    public float speedAnimation = 1;
+    public boolean frameSkipping;
     private HashMap<String, Animation> animations = new HashMap<>();
     private Animation activeAnimation;
     private String activeAnimationName;
     private SpriteFramePart framePart;
-
-    public float currentFrame;
-    public float speedAnimation = 1;
-    public boolean frameSkipping;
-
     private Sprite sprite = new Sprite(null, 0, 1, 0);
-
-    public Sprite getSprite() {
-        return sprite;
-    }
 
     public AnimationComponent() {
         framePart = new SpriteFramePart(sprite, null, Colors.white());
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public void addAnimation(Animation animation, String name) {
@@ -47,14 +45,14 @@ public class AnimationComponent extends Component implements Saveable {
         return activeAnimation;
     }
 
-    public String getActiveAnimationName() {
-        return activeAnimationName;
-    }
-
     public void setActiveAnimation(String name) {
         activeAnimation = animations.get(name);
         activeAnimationName = name;
         currentFrame = 0;
+    }
+
+    public String getActiveAnimationName() {
+        return activeAnimationName;
     }
 
     @Override

@@ -10,27 +10,31 @@ import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class BloomSettings {
 
-    BlurTuning blurTuning;
-    FrameBufferWorker frameBufferWorker;
-
     public float gamma;
     public float exposure;
     public float brightnessLimit;
+    BlurTuning blurTuning;
+    FrameBufferWorker frameBufferWorker;
 
-    public BloomSettings(BlurTuning blurTuning, float gamma, float exposure, float brightnessLimit){
-       this.blurTuning = blurTuning;
+    public BloomSettings(BlurTuning blurTuning, float gamma, float exposure, float brightnessLimit) {
+        this.blurTuning = blurTuning;
         this.gamma = gamma;
         this.exposure = exposure;
         this.brightnessLimit = brightnessLimit;
     }
 
-    public BloomSettings(BlurTuning blurTuning){ this(blurTuning, 1, 1, 0.9f); }
+    public BloomSettings(BlurTuning blurTuning) {
+        this(blurTuning, 1, 1, 0.9f);
+    }
 
-    public BloomSettings(){ this(new BlurTuning(0.2,10,0), 1, 1, 0.9f); }
-    int getBlurTexture(Window window){
+    public BloomSettings() {
+        this(new BlurTuning(0.2, 10, 0), 1, 1, 0.9f);
+    }
+
+    int getBlurTexture(Window window) {
         if (frameBufferWorker == null)
             frameBufferWorker = new FrameBufferWorker(window.getResolution());
-        frameBufferWorker.bindFrameBuffer(DrawMode.RawGUI,window.getFrameBuilder().getBuilderProperties());
+        frameBufferWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GUICanvas extends GUIObject {
 
-    protected ArrayList <GUIObject> objects = new ArrayList<>();
+    protected ArrayList<GUIObject> objects = new ArrayList<>();
     protected ArrayList<GUIObject> ignoreOrderObjects = new ArrayList<>();
     protected GUICanvasFramePart framePart;
 
@@ -33,11 +33,13 @@ public class GUICanvas extends GUIObject {
         return addObject(object);
     }
 
+    public Color getColor() {
+        return framePart.color;
+    }
+
     public void setColor(Color color) {
         framePart.color = color;
     }
-
-    public Color getColor() { return framePart.color; }
 
     @Override
     public void setPosition(Vector2i position) {
@@ -64,9 +66,9 @@ public class GUICanvas extends GUIObject {
         return objects.get(id);
     }
 
-    protected void updateObjects(){
+    protected void updateObjects() {
         for (GUIObject object : objects) {
-            if (!object.hidden){
+            if (!object.hidden) {
                 if (!object.ignoreCanvasUpdateOrder)
                     object.update(framePart.partsBuilder, properties);
                 else
@@ -74,7 +76,7 @@ public class GUICanvas extends GUIObject {
             }
         }
 
-        for (GUIObject object : ignoreOrderObjects){
+        for (GUIObject object : ignoreOrderObjects) {
             object.update(framePart.partsBuilder, properties);
         }
 

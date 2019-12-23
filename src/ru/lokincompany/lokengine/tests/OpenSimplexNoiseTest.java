@@ -11,12 +11,16 @@ import java.nio.ByteBuffer;
 
 public class OpenSimplexNoiseTest extends ApplicationGUIOnly {
 
+    OpenSimplexNoiseTest() {
+        start();
+    }
+
     public static void main(String[] args) {
         new OpenSimplexNoiseTest();
     }
 
     @Override
-    protected void initEvent(){
+    protected void initEvent() {
 
         OpenSimplexNoise2D noise = new OpenSimplexNoise2D("LokEngine");
 
@@ -27,7 +31,7 @@ public class OpenSimplexNoiseTest extends ApplicationGUIOnly {
         for (int y = 0; y < imageSize.y; y++) {
             for (int x = 0; x < imageSize.x; x++) {
                 double n = noise.get(x / 50d, y / 50d);
-                pixels[y * imageSize.x + x] = (byte)(((n + 1d) / 2d) * 255d);
+                pixels[y * imageSize.x + x] = (byte) (((n + 1d) / 2d) * 255d);
             }
         }
         int texture_size = imageSize.x * imageSize.y * 4;
@@ -48,10 +52,6 @@ public class OpenSimplexNoiseTest extends ApplicationGUIOnly {
         GUIImage image = new GUIImage(new Vector2i(), imageSize);
         image.setTexture(TextureLoader.loadTexture(textureBuffer, imageSize));
         window.getCanvas().addObject(image);
-    }
-
-    OpenSimplexNoiseTest(){
-        start();
     }
 
 }

@@ -13,23 +13,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GUIMenu extends GUIObject {
+    public GUIPanel panel;
+    public Color textActiveColor;
+    public Color textInactiveColor;
     protected Map<String, GUIObject> items = new HashMap<>();
     protected ArrayList<String> itemsNames = new ArrayList<>();
     protected GUILocationAlgorithm sizeAlgorithm;
     protected GUILocationAlgorithm positionAlgorithm;
     protected GUIObject activeItem;
     protected GUIFreeTextDrawer drawer;
-
     protected int titleSize;
-    
-    public GUIPanel panel;
-    public Color textActiveColor;
-    public Color textInactiveColor;
 
     public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
         super(position, size);
         this.titleSize = titleSize;
-        this.drawer = new GUIFreeTextDrawer("", 0, (int)(titleSize / 1.2f), true);
+        this.drawer = new GUIFreeTextDrawer("", 0, (int) (titleSize / 1.2f), true);
         this.panel = panel;
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
         panel.setPosition(object -> getPosition());
@@ -85,7 +83,7 @@ public class GUIMenu extends GUIObject {
     }
 
     public void hideActiveItem() {
-        if (activeItem != null){
+        if (activeItem != null) {
             activeItem.hidden = true;
             activeItem = null;
         }
@@ -93,6 +91,10 @@ public class GUIMenu extends GUIObject {
 
     public GUIObject getActiveItem() {
         return activeItem;
+    }
+
+    public Font getPointsFont() {
+        return drawer.getFont();
     }
 
     public void setPointsFont(Font font) {
@@ -105,10 +107,6 @@ public class GUIMenu extends GUIObject {
                 titleSize = fontH;
             }
         }
-    }
-
-    public Font getPointsFont() {
-        return drawer.getFont();
     }
 
     public String getActiveItemName() {
@@ -148,7 +146,7 @@ public class GUIMenu extends GUIObject {
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
-        if (activeItem != null && !activeItem.active){
+        if (activeItem != null && !activeItem.active) {
             hideActiveItem();
         }
 

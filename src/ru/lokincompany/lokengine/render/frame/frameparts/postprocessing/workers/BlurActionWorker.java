@@ -21,10 +21,6 @@ public class BlurActionWorker extends PostProcessingActionWorker {
     private FrameBufferWorker blurSceneFrameWorker3;
     private Window window;
 
-    public String getName() {
-        return "Blur Action Worker";
-    }
-
     public BlurActionWorker(Window window) throws Exception {
         blurPostProcessingFrameWorker = new FrameBufferWorker(window.getResolution());
         blurSceneFrameWorker1 = new FrameBufferWorker(window.getResolution());
@@ -36,6 +32,10 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         window.getFrameBuilder().getBuilderProperties().useShader(shader);
         window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
         window.getFrameBuilder().getBuilderProperties().unUseShader();
+    }
+
+    public String getName() {
+        return "Blur Action Worker";
     }
 
     private int blurPostProcess(int postFrame, int originalFrame) {
@@ -93,8 +93,8 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         return blurPostProcess(blurAction, sourceFrame);
     }
 
-    private void checkResizeWindow(){
-        if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())){
+    private void checkResizeWindow() {
+        if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())) {
             window.getFrameBuilder().getBuilderProperties().useShader(shader);
             window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
             blurPostProcessingFrameWorker.setResolution(window.getResolution());
@@ -103,7 +103,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
 
     @Override
     public int render(int sourceFrame) {
-        if (postProcessingActions.size() > 0){
+        if (postProcessingActions.size() > 0) {
             checkResizeWindow();
             blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getBuilderProperties());
 
