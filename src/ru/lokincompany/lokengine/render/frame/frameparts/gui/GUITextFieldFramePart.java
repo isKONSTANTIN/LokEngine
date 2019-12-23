@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.loaders.FontLoader;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.tools.Timer;
+import ru.lokincompany.lokengine.tools.text.TextColorShader;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
 import ru.lokincompany.lokengine.tools.utilities.color.Colors;
@@ -49,9 +50,9 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         glEnd();
 
         if (color != null) {
-            font.drawText(text, fontXpos, fontYpos, color);
+            font.drawText(text, new Vector2i(fontXpos, fontYpos), size.x, charPos -> color);
         } else {
-            font.drawText(text, fontXpos, fontYpos, shader);
+            font.drawText(text, new Vector2i(fontXpos, fontYpos), size.x, shader);
         }
 
         if (timer.checkTime()) {

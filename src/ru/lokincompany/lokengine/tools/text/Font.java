@@ -1,6 +1,7 @@
 package ru.lokincompany.lokengine.tools.text;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
@@ -82,9 +83,9 @@ public class Font {
         return height;
     }
 
-    public void drawText(String text, int x, int y, TextColorShader shader) {
-        int drawX = x;
-        int drawY = y;
+    public void drawText(String text, Vector2i position, int maxWidth, TextColorShader shader) {
+        int drawX = position.x;
+        int drawY = position.y;
 
         GL11.glBindTexture(GL_TEXTURE_2D, texture.buffer);
         glBegin(GL_QUADS);
@@ -93,7 +94,7 @@ public class Font {
             char ch = text.charAt(i);
             if (ch == '\n') {
                 drawY += fontHeight;
-                drawX = x;
+                drawX = position.x;
                 continue;
             }
             if (ch == '\r') continue;
@@ -108,12 +109,15 @@ public class Font {
             int width = drawX + g.width;
             int height = drawY + g.height;
 
+            if (maxWidth != -1 && width > maxWidth)
+                continue;
+
             float glTexX = g.x / (float) texture.sizeX;
             float glTexY = g.y / (float) texture.sizeY;
             float glTexWidth = (g.x + g.width) / (float) texture.sizeX;
             float glTexHeight = (g.y + g.height) / (float) texture.sizeY;
 
-            Color color = shader.getColor(new Vector2i(drawX - x, drawY - y));
+            Color color = shader.getColor(new Vector2i(drawX - position.x, drawY - position.y));
             glColor4d(color.red, color.green, color.blue, color.alpha);
 
             glTexCoord2f(glTexX, glTexHeight);
@@ -136,13 +140,22 @@ public class Font {
         GL11.glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    public void drawText(String text, int x, int y, Color color) {
-        drawText(text, x, y, charPos -> color);
+    public void drawText(String text, Vector2i position, int maxWidth, Color color) {
+        drawText(text, position, maxWidth, charPos -> color);
     }
 
-    public void drawText(String text, int x, int y) {
-        drawText(text, x, y, new Color(1, 1, 1, 1));
+    public void drawText(String text, Vector2i position, int maxWidth) {
+        drawText(text, position, maxWidth, new Color(1, 1, 1, 1));
     }
+
+    public void drawText(String text, Vector2i position, Color color) {
+        drawText(text, position, -1, charPos -> color);
+    }
+
+    public void drawText(String text, Vector2i position) {
+        drawText(text, position, new Color(1, 1, 1, 1));
+    }
+
 
     public void dispose() {
         TextureLoader.unloadTexture(texture);
