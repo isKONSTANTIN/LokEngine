@@ -61,18 +61,23 @@ public class SoundComponent extends Component implements Saveable {
 
     @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
-        sound.update();
+        if (sound != null)
+            sound.update();
         AL10.alSource3f(this.source, AL10.AL_POSITION, source.position.x, source.position.y, 0);
     }
 
     @Override
     public String save() {
+        if (sound == null) return "";
+
         SubclassSaver subclassSaver = new SubclassSaver(sound);
         return subclassSaver.save();
     }
 
     @Override
     public Saveable load(String savedString) {
+        if (savedString.equals("")) return this;
+
         SubclassSaver subclassSaver = new SubclassSaver();
         SoundComponent loadedSoundComponent = new SoundComponent((Sound)((SubclassSaver) subclassSaver.load(savedString)).saveableObject);
 
