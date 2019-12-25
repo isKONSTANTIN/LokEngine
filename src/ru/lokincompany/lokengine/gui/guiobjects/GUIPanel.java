@@ -4,6 +4,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIPanelFramePart;
 import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.workers.BlurActionWorker;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
@@ -66,7 +67,7 @@ public class GUIPanel extends GUIObject {
         partsBuilder.addPart(framePart);
         if (blurAction != null) {
             blurAction.position = new Vector2i(parentProperties.globalPosition.x + position.x, parentProperties.globalPosition.y + position.y);
-            parentProperties.window.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker").addPostProcessingAction(blurAction);
+            parentProperties.window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class).addPostProcessingAction(blurAction);
         }
     }
 

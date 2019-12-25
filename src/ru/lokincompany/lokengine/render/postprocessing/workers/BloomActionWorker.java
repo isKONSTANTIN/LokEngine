@@ -7,6 +7,7 @@ import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
+import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
 import ru.lokincompany.lokengine.render.window.Window;
 
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
@@ -63,7 +64,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
                 window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
             }
 
-            BlurActionWorker blur = (BlurActionWorker) window.getFrameBuilder().getPostProcessingActionWorker("Blur Action Worker");
+            BlurActionWorker blur = window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class);
             BuilderProperties builderProperties = window.getFrameBuilder().getBuilderProperties();
 
             frameBufferWorker1.bindFrameBuffer(DrawMode.Display, builderProperties);

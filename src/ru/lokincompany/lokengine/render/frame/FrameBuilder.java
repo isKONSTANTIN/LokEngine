@@ -1,6 +1,7 @@
 package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.GL11;
+import ru.lokincompany.lokengine.components.Component;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
@@ -39,10 +40,10 @@ public class FrameBuilder {
         postProcessingActionWorkers.add(worker);
     }
 
-    public PostProcessingActionWorker getPostProcessingActionWorker(String name) {
+    public <T extends PostProcessingActionWorker> T getPostProcessingActionWorker(Class<T> actionWorker) {
         for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
-            if (postProcessingActionWorker.getName().equals(name)) {
-                return postProcessingActionWorker;
+            if (postProcessingActionWorker.getClass().getName().equals(actionWorker.getName())) {
+                return (T)postProcessingActionWorker;
             }
         }
         return null;

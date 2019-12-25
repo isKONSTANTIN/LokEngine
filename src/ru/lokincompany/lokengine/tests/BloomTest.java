@@ -24,7 +24,7 @@ public class BloomTest extends ApplicationDefault {
         scene.addObject(sceneObject);
 
         BloomSettings settings = new BloomSettings(new BlurTuning(0.6, 50, 0.15), 1, 1, 0.6f);
-        ((BloomActionWorker) window.getFrameBuilder().getPostProcessingActionWorker("Bloom Action Worker")).setBloomSettings(settings);
+        window.getFrameBuilder().getPostProcessingActionWorker(BloomActionWorker.class).setBloomSettings(settings);
     }
 
 }
