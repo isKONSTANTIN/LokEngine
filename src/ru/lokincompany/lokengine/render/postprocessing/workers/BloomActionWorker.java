@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers;
+package ru.lokincompany.lokengine.render.postprocessing.workers;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;

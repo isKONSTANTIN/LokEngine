@@ -1,9 +1,9 @@
-package ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers;
+package ru.lokincompany.lokengine.render.postprocessing.workers;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.actions.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;

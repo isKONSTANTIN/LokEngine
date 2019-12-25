@@ -1,6 +1,6 @@
-package ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers;
+package ru.lokincompany.lokengine.render.postprocessing.workers;
 
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.actions.PostProcessingAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.PostProcessingAction;
 
 import java.util.Vector;
 

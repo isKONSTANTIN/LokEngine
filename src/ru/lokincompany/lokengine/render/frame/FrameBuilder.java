@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers.PostProcessingActionWorker;
+import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
 

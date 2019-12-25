@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers;
+package ru.lokincompany.lokengine.render.postprocessing.workers;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -8,8 +8,8 @@ import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.actions.BlurAction;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.actions.PostProcessingAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.PostProcessingAction;
 import ru.lokincompany.lokengine.render.window.Window;
 
 public class BlurActionWorker extends PostProcessingActionWorker {

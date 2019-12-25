@@ -2,8 +2,8 @@ package ru.lokincompany.lokengine.tests;
 
 import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.components.SpriteComponent;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers.BloomActionWorker;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.workers.BloomSettings;
+import ru.lokincompany.lokengine.render.postprocessing.workers.BloomActionWorker;
+import ru.lokincompany.lokengine.render.postprocessing.workers.BloomSettings;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
 import ru.lokincompany.lokengine.tools.utilities.color.Colors;

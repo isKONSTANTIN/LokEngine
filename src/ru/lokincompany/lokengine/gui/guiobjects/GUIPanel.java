@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.gui.guiobjects;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIPanelFramePart;
-import ru.lokincompany.lokengine.render.frame.frameparts.postprocessing.actions.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
