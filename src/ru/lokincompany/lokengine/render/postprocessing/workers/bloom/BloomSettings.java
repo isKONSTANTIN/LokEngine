@@ -1,34 +1,30 @@
-package ru.lokincompany.lokengine.render.postprocessing.workers;
+package ru.lokincompany.lokengine.render.postprocessing.workers.bloom;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
-import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class BloomSettings {
 
-    public float gamma;
-    public float exposure;
     public float brightnessLimit;
     BlurTuning blurTuning;
     FrameBufferWorker frameBufferWorker;
 
-    public BloomSettings(BlurTuning blurTuning, float gamma, float exposure, float brightnessLimit) {
+    public BloomSettings(BlurTuning blurTuning, float brightnessLimit) {
         this.blurTuning = blurTuning;
-        this.gamma = gamma;
-        this.exposure = exposure;
         this.brightnessLimit = brightnessLimit;
     }
 
     public BloomSettings(BlurTuning blurTuning) {
-        this(blurTuning, 1, 1, 0.9f);
+        this(blurTuning,0.9f);
     }
 
     public BloomSettings() {
-        this(new BlurTuning(0.2, 10, 0), 1, 1, 0.9f);
+        this(new BlurTuning(0.2, 10, 0),0.9f);
     }
 
     int getBlurTexture(Window window) {

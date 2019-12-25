@@ -4,8 +4,9 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALC10;
 import ru.lokincompany.lokengine.render.GLFW;
-import ru.lokincompany.lokengine.render.postprocessing.workers.BloomActionWorker;
-import ru.lokincompany.lokengine.render.postprocessing.workers.BlurActionWorker;
+import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomActionWorker;
+import ru.lokincompany.lokengine.render.postprocessing.workers.blur.BlurActionWorker;
+import ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection.ColorCorrectionActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.sceneenvironment.Scene;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;
@@ -88,6 +89,7 @@ public class ApplicationDefault extends Application {
 
                 window.getFrameBuilder().addPostProcessingActionWorker(new BloomActionWorker(window));
                 window.getFrameBuilder().addPostProcessingActionWorker(new BlurActionWorker(window));
+                window.getFrameBuilder().addPostProcessingActionWorker(new ColorCorrectionActionWorker(window));
 
                 SplashScreen.updateStatus(0.5f);
                 Logger.debug("Call user init method", "LokEngine_start");

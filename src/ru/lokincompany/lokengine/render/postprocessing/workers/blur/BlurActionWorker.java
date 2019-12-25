@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.render.postprocessing.workers;
+package ru.lokincompany.lokengine.render.postprocessing.workers.blur;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -8,8 +8,9 @@ import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
-import ru.lokincompany.lokengine.render.postprocessing.actions.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
 import ru.lokincompany.lokengine.render.postprocessing.actions.PostProcessingAction;
+import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 
 public class BlurActionWorker extends PostProcessingActionWorker {
@@ -27,15 +28,11 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         blurSceneFrameWorker2 = new FrameBufferWorker(window.getResolution());
         blurSceneFrameWorker3 = new FrameBufferWorker(window.getResolution());
         this.window = window;
-        shader = ShaderLoader.loadShader("#/resources/shaders/BlurVertShader.glsl", "#/resources/shaders/BlurFragShader.glsl");
+        shader = ShaderLoader.loadShader("#/resources/shaders/blur/BlurVertShader.glsl", "#/resources/shaders/blur/BlurFragShader.glsl");
 
         window.getFrameBuilder().getBuilderProperties().useShader(shader);
         window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
         window.getFrameBuilder().getBuilderProperties().unUseShader();
-    }
-
-    public String getName() {
-        return "Blur Action Worker";
     }
 
     private int blurPostProcess(int postFrame, int originalFrame) {

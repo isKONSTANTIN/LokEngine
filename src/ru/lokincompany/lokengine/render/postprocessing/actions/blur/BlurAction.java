@@ -1,5 +1,6 @@
-package ru.lokincompany.lokengine.render.postprocessing.actions;
+package ru.lokincompany.lokengine.render.postprocessing.actions.blur;
 
+import ru.lokincompany.lokengine.render.postprocessing.actions.PostProcessingAction;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 

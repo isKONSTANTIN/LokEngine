@@ -8,10 +8,6 @@ public class PostProcessingActionWorker {
 
     public Vector<PostProcessingAction> postProcessingActions = new Vector<>();
 
-    public String getName() {
-        return "Post Processing Action Worker";
-    }
-
     public void addPostProcessingAction(PostProcessingAction action) {
         postProcessingActions.add(action);
     }
