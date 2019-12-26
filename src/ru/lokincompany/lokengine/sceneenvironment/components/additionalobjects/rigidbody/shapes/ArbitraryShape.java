@@ -1,7 +1,7 @@
-package ru.lokincompany.lokengine.components.additionalobjects.rigidbody.shapes;
+package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody.shapes;
 
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.components.componentstools.ShapeCreator;
+import ru.lokincompany.lokengine.sceneenvironment.components.componentstools.ShapeCreator;
 import ru.lokincompany.lokengine.tools.base64.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 

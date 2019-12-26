@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.render.frame.frameparts;
 
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
-import ru.lokincompany.lokengine.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;

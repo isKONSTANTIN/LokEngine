@@ -1,14 +1,11 @@
 package ru.lokincompany.lokengine.tests;
 
 import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
-import ru.lokincompany.lokengine.components.SpriteComponent;
+import ru.lokincompany.lokengine.sceneenvironment.components.SpriteComponent;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomActionWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomSettings;
-import ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection.ColorCorrectionActionWorker;
-import ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection.ColorCorrectionSettings;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
 import ru.lokincompany.lokengine.tools.utilities.color.Colors;
 
 public class BloomTest extends ApplicationDefault {

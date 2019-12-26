@@ -1,7 +1,7 @@
-package ru.lokincompany.lokengine.components;
+package ru.lokincompany.lokengine.sceneenvironment.components;
 
 import org.lwjgl.util.vector.Vector4f;
-import ru.lokincompany.lokengine.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;

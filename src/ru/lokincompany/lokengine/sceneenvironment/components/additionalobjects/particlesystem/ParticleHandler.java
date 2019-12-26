@@ -1,6 +1,6 @@
-package ru.lokincompany.lokengine.components.additionalobjects.particlesystem;
+package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.particlesystem;
 
-import ru.lokincompany.lokengine.components.ParticleSystemComponent;
+import ru.lokincompany.lokengine.sceneenvironment.components.ParticleSystemComponent;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 
 public interface ParticleHandler {

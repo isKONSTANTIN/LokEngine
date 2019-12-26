@@ -1,6 +1,6 @@
-package ru.lokincompany.lokengine.components;
+package ru.lokincompany.lokengine.sceneenvironment.components;
 
-import ru.lokincompany.lokengine.components.additionalobjects.ScriptSceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.ScriptSceneObject;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;

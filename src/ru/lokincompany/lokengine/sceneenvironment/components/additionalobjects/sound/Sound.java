@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.components.additionalobjects.sound;
+package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound;
 
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 

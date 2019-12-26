@@ -1,7 +1,7 @@
-package ru.lokincompany.lokengine.components;
+package ru.lokincompany.lokengine.sceneenvironment.components;
 
 import org.lwjgl.openal.AL10;
-import ru.lokincompany.lokengine.components.additionalobjects.sound.Sound;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound.Sound;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;

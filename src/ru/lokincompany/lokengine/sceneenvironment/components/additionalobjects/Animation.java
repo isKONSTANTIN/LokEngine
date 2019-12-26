@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.components.additionalobjects;
+package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
 
 import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.loaders.TextureLoader;

@@ -1,6 +1,6 @@
 package ru.lokincompany.lokengine.render.frame.frameparts;
 
-import ru.lokincompany.lokengine.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.FramePartType;

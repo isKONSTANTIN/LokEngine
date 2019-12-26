@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.sceneenvironment;
 
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.components.ComponentsList;
+import ru.lokincompany.lokengine.sceneenvironment.components.ComponentsList;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 import ru.lokincompany.lokengine.tools.base64.Base64;

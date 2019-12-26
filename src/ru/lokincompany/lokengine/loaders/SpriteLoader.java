@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.loaders;
 
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.tools.utilities.Vector4i;
 

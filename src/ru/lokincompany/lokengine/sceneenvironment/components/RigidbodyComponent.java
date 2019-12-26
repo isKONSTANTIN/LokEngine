@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.components;
+package ru.lokincompany.lokengine.sceneenvironment.components;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -6,8 +6,8 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.components.additionalobjects.rigidbody.Rigidbody;
-import ru.lokincompany.lokengine.components.additionalobjects.rigidbody.shapes.Shape;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody.Rigidbody;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody.shapes.Shape;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.PostUpdateEvent;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
