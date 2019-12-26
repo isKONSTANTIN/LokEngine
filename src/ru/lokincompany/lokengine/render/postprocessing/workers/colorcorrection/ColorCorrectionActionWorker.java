@@ -1,6 +1,7 @@
 package ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
@@ -9,6 +10,7 @@ import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomSettings;
 import ru.lokincompany.lokengine.render.window.Window;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
     Shader shader;
@@ -47,6 +49,8 @@ public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
 
         shader.setUniformData("Exposure", settings.exposure);
         shader.setUniformData("Gamma", settings.gamma);
+        shader.setUniformData("ColorMultiplication", new Vector3f(settings.colorMultiplication.red, settings.colorMultiplication.green, settings.colorMultiplication.blue));
+        shader.setUniformData("ColorAddition", new Vector3f(settings.colorAddition.red, settings.colorAddition.green, settings.colorAddition.blue));
 
         DisplayDrawer.renderScreen(sourceFrame, window);
 

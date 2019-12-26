@@ -28,9 +28,6 @@ public class BloomTest extends ApplicationDefault {
 
         BloomSettings settings = new BloomSettings(new BlurTuning(0.6, 50, 0.15),0.6f);
         window.getFrameBuilder().getPostProcessingActionWorker(BloomActionWorker.class).setBloomSettings(settings);
-
-        //ColorCorrectionSettings colorCorrectionSettings = new ColorCorrectionSettings(0.7f,2f);
-        //window.getFrameBuilder().getPostProcessingActionWorker(ColorCorrectionActionWorker.class).setColorCorrectionSettings(colorCorrectionSettings);
     }
 
 }
