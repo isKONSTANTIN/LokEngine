@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.applications.applications;
+package ru.lokincompany.lokengine.applications;
 
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;

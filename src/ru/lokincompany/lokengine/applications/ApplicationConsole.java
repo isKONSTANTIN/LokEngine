@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.applications.applications;
+package ru.lokincompany.lokengine.applications;
 
 import ru.lokincompany.lokengine.sceneenvironment.Scene;
 import ru.lokincompany.lokengine.tools.ApplicationRuntime;

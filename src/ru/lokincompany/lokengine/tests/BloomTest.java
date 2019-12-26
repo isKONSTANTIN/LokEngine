@@ -1,6 +1,6 @@
 package ru.lokincompany.lokengine.tests;
 
-import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.sceneenvironment.components.SpriteComponent;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomActionWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomSettings;
