@@ -1,7 +1,5 @@
 package ru.lokincompany.lokengine.tools.opensimplexnoise;
 
-import ru.lokincompany.lokengine.tools.utilities.StringToLongTransformer;
-
 public abstract class OpenSimplexNoise {
 
     static final double STRETCH_CONSTANT_2D = -0.211324865405187;

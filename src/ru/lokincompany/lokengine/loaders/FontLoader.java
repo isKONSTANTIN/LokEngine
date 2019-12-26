@@ -3,8 +3,8 @@ package ru.lokincompany.lokengine.loaders;
 import org.lwjgl.BufferUtils;
 import ru.lokincompany.lokengine.render.GLFW;
 import ru.lokincompany.lokengine.render.Texture;
-import ru.lokincompany.lokengine.tools.text.Font;
-import ru.lokincompany.lokengine.tools.text.Glyph;
+import ru.lokincompany.lokengine.render.text.Font;
+import ru.lokincompany.lokengine.render.text.Glyph;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

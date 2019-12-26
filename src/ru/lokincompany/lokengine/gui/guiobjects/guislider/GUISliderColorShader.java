@@ -1,8 +1,8 @@
 package ru.lokincompany.lokengine.gui.guiobjects.guislider;
 
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
-import ru.lokincompany.lokengine.tools.utilities.color.Colors;
-import ru.lokincompany.lokengine.tools.utilities.color.SimpleColorShader;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.Colors;
+import ru.lokincompany.lokengine.tools.color.SimpleColorShader;
 
 public interface GUISliderColorShader extends SimpleColorShader {
 

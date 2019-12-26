@@ -4,7 +4,6 @@ import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
 import ru.lokincompany.lokengine.network.report.Report;
 import ru.lokincompany.lokengine.network.report.URLReportSender;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 

@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.color.Color;
 
 import java.util.Vector;
 
@@ -42,7 +42,7 @@ public class FrameBuilder {
     public <T extends PostProcessingActionWorker> T getPostProcessingActionWorker(Class<T> actionWorker) {
         for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
             if (postProcessingActionWorker.getClass().getName().equals(actionWorker.getName())) {
-                return (T)postProcessingActionWorker;
+                return (T) postProcessingActionWorker;
             }
         }
         return null;

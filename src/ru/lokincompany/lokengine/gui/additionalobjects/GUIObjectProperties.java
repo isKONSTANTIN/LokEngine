@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.gui.additionalobjects;
 
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUIObjectProperties {
 

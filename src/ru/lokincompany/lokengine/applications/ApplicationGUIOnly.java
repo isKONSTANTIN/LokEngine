@@ -4,12 +4,11 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALC10;
 import ru.lokincompany.lokengine.render.GLFW;
+import ru.lokincompany.lokengine.render.SplashScreen;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 import ru.lokincompany.lokengine.tools.Logger;
-import ru.lokincompany.lokengine.tools.SplashScreen;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.openal.ALC10.*;
 

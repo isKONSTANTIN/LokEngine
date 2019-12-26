@@ -4,8 +4,8 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUISwitchFramePart;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUISwitch extends GUIObject {
     public GUILocationAlgorithm switchSizeAlgorithm;

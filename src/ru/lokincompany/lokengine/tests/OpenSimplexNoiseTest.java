@@ -5,7 +5,7 @@ import ru.lokincompany.lokengine.applications.ApplicationGUIOnly;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIImage;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.tools.opensimplexnoise.OpenSimplexNoise2D;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.nio.ByteBuffer;
 

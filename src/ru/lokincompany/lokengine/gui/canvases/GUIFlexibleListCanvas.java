@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.gui.canvases;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUIFlexibleListCanvas extends GUIListCanvas {
     public GUIFlexibleListCanvas(Vector2i position, Vector2i size) {

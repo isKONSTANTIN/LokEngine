@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.utilities;
+package ru.lokincompany.lokengine.render.postprocessing.actions.blur;
 
 public class BlurTuning {
 

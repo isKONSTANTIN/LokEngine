@@ -6,8 +6,8 @@ import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPositionA
 import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUICanvasFramePart;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 

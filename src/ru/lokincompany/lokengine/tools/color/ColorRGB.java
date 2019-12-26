@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.utilities.color;
+package ru.lokincompany.lokengine.tools.color;
 
 public class ColorRGB extends Color {
 

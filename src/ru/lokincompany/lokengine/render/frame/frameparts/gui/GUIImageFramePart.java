@@ -5,9 +5,9 @@ import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
-import ru.lokincompany.lokengine.tools.utilities.color.Colors;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.Colors;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
 

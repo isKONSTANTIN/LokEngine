@@ -1,16 +1,16 @@
 package ru.lokincompany.lokengine.sceneenvironment.components;
 
 import org.lwjgl.util.vector.Vector4f;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.SpriteFramePart;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
-import ru.lokincompany.lokengine.tools.utilities.color.Colors;
 
 public class SpriteComponent extends Component implements Saveable {
 

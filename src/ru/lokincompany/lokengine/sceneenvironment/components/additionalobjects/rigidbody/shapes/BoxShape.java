@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.
 
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.sceneenvironment.components.componentstools.ShapeCreator;
-import ru.lokincompany.lokengine.tools.base64.Base64;
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 public class BoxShape extends Shape {

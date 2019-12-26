@@ -1,7 +1,5 @@
 package ru.lokincompany.lokengine.tools.opensimplexnoise;
 
-import ru.lokincompany.lokengine.tools.utilities.StringToLongTransformer;
-
 public class OpenSimplexNoise4D extends OpenSimplexNoise {
 
     public OpenSimplexNoise4D() {

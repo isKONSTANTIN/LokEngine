@@ -2,10 +2,10 @@ package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.util.vector.Vector2f;
+import ru.lokincompany.lokengine.loaders.MatrixLoader;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.MatrixCreator;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class Camera {
 
@@ -21,11 +21,11 @@ public class Camera {
 
     public void updateProjection(float width, float height) {
         float projectionFieldOfView = fieldOfView * 0.000520833f * 4;
-        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public void updateProjection(float width, float height, float projectionFieldOfView) {
-        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixCreator.CreateOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public Vector2f screenPointToScene(Vector2i point) {
@@ -84,7 +84,7 @@ public class Camera {
     }
 
     public void updateView(Shader shader) {
-        shader.setUniformData("View", MatrixCreator.CreateViewMatrix(this));
+        shader.setUniformData("View", MatrixLoader.createViewMatrix(this));
     }
 
     public void updateAudioListener() {

@@ -3,9 +3,9 @@ package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.render.Texture;
-import ru.lokincompany.lokengine.tools.base64.Base64;
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
-import ru.lokincompany.lokengine.tools.utilities.Vector4i;
+import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 import java.util.ArrayList;
 

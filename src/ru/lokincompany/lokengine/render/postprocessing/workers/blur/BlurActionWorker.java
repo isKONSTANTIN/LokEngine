@@ -8,8 +8,8 @@ import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
-import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
 import ru.lokincompany.lokengine.render.postprocessing.actions.PostProcessingAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 

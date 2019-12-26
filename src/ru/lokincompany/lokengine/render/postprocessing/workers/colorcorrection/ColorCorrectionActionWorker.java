@@ -8,9 +8,7 @@ import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
-import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomSettings;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
     Shader shader;

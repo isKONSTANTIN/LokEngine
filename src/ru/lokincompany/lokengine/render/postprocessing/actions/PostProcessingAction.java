@@ -1,6 +1,6 @@
 package ru.lokincompany.lokengine.render.postprocessing.actions;
 
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class PostProcessingAction {
     public Vector2i position;

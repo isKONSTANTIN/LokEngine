@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.tools.saveworker;
 
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
-import ru.lokincompany.lokengine.tools.base64.Base64;
 
 import java.util.ArrayList;
 

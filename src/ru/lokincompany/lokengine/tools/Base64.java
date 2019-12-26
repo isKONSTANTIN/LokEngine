@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.base64;
+package ru.lokincompany.lokengine.tools;
 
 public class Base64 {
     public static String toBase64(String text) {

@@ -4,9 +4,9 @@ import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
 import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurTuning;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class BloomSettings {
 
@@ -20,11 +20,11 @@ public class BloomSettings {
     }
 
     public BloomSettings(BlurTuning blurTuning) {
-        this(blurTuning,0.9f);
+        this(blurTuning, 0.9f);
     }
 
     public BloomSettings() {
-        this(new BlurTuning(0.2, 10, 0),0.9f);
+        this(new BlurTuning(0.2, 10, 0), 0.9f);
     }
 
     int getBlurTexture(Window window) {

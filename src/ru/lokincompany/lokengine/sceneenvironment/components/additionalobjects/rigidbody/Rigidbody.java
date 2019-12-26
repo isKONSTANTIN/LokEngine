@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody;
 
 import org.jbox2d.dynamics.Body;
-import ru.lokincompany.lokengine.tools.base64.Base64;
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 public class Rigidbody implements Saveable {

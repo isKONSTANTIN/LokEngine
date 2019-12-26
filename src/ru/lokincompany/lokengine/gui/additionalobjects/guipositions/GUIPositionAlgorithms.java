@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.gui.additionalobjects.guipositions;
 
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUIPositionAlgorithms {
     public static GUILocationAlgorithm getAlgorithm(GUICanvas canvas, GUIPosition position) {

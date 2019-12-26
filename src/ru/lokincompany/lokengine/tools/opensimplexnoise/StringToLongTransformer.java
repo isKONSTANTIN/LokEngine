@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.utilities;
+package ru.lokincompany.lokengine.tools.opensimplexnoise;
 
 public interface StringToLongTransformer {
 

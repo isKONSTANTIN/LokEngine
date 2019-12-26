@@ -1,9 +1,9 @@
 package ru.lokincompany.lokengine.sceneenvironment.components;
 
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.ScriptSceneObject;
+import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.ScriptSceneObject;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 public class ScriptComponent extends Component {

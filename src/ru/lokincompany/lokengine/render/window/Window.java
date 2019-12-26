@@ -13,7 +13,7 @@ import ru.lokincompany.lokengine.render.frame.FrameBuilder;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.Mouse;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;

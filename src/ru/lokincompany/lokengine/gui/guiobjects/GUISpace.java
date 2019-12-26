@@ -1,6 +1,6 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUISpace extends GUIObject {
 

@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.loaders;
 import org.lwjgl.BufferUtils;
 import ru.lokincompany.lokengine.render.GLFW;
 import ru.lokincompany.lokengine.render.Texture;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

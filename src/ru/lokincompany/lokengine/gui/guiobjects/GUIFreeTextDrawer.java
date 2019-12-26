@@ -4,10 +4,10 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.loaders.FontLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUITextFramePart;
-import ru.lokincompany.lokengine.tools.text.Font;
-import ru.lokincompany.lokengine.tools.text.TextColorShader;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.render.text.Font;
+import ru.lokincompany.lokengine.render.text.TextColorShader;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools;
+package ru.lokincompany.lokengine.applications;
 
 public class ApplicationRuntime {
     private float deltaTime;

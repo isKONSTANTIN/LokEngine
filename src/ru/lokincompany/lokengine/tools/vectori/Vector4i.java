@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.utilities;
+package ru.lokincompany.lokengine.tools.vectori;
 
 public class Vector4i extends Vector3i {
     public int w;

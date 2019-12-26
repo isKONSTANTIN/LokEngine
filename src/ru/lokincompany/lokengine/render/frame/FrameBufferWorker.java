@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.Vector4i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 import java.nio.ByteBuffer;
 

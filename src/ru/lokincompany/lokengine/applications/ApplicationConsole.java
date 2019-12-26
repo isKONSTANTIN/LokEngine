@@ -1,7 +1,6 @@
 package ru.lokincompany.lokengine.applications;
 
 import ru.lokincompany.lokengine.sceneenvironment.Scene;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 

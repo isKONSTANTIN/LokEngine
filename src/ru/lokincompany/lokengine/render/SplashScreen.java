@@ -1,10 +1,10 @@
-package ru.lokincompany.lokengine.tools;
+package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIImageFramePart;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 

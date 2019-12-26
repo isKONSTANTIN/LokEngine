@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.utilities;
+package ru.lokincompany.lokengine.tools;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
@@ -27,7 +27,7 @@ public class WaveData {
     private WaveData(AudioInputStream stream) {
         this.audioStream = stream;
         AudioFormat audioFormat = stream.getFormat();
-        format = getOpenAlFormat(audioFormat.getChannels(), audioFormat.getSampleSizeInBits());
+        this.format = getOpenAlFormat(audioFormat.getChannels(), audioFormat.getSampleSizeInBits());
         this.samplerate = (int) audioFormat.getSampleRate();
         this.bytesPerFrame = audioFormat.getFrameSize();
         this.totalBytes = (int) (stream.getFrameLength() * bytesPerFrame);

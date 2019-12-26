@@ -2,10 +2,10 @@ package ru.lokincompany.lokengine.sceneenvironment;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
+import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
-import ru.lokincompany.lokengine.tools.base64.Base64;
 import ru.lokincompany.lokengine.tools.compression.GZIPCompression;
 import ru.lokincompany.lokengine.tools.saveworker.ArraySaver;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;

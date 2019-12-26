@@ -1,8 +1,7 @@
 package ru.lokincompany.lokengine.render.postprocessing.actions.blur;
 
 import ru.lokincompany.lokengine.render.postprocessing.actions.PostProcessingAction;
-import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
 

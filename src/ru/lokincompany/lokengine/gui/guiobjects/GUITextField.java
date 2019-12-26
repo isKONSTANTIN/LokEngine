@@ -4,10 +4,10 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUITextFieldScript;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUITextFieldFramePart;
+import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.additionalobjects.KeyInfo;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.glfw.GLFW.*;
 

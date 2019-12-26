@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.particlesystem;
 
+import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.sceneenvironment.components.ParticleSystemComponent;
-import ru.lokincompany.lokengine.tools.ApplicationRuntime;
 
 public class DefaultParticleHandler implements ParticleHandler {
     @Override

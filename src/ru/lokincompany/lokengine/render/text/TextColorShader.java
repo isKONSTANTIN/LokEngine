@@ -1,9 +1,9 @@
-package ru.lokincompany.lokengine.tools.text;
+package ru.lokincompany.lokengine.render.text;
 
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
-import ru.lokincompany.lokengine.tools.utilities.color.Colors;
-import ru.lokincompany.lokengine.tools.utilities.color.SimpleColorShader;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.Colors;
+import ru.lokincompany.lokengine.tools.color.SimpleColorShader;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public interface TextColorShader extends SimpleColorShader {
 

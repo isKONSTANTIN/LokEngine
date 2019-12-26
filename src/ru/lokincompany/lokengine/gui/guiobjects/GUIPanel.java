@@ -4,10 +4,10 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIPanelFramePart;
 import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
+import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurTuning;
 import ru.lokincompany.lokengine.render.postprocessing.workers.blur.BlurActionWorker;
-import ru.lokincompany.lokengine.tools.utilities.BlurTuning;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUIPanel extends GUIObject {
     protected GUIPanelFramePart framePart;

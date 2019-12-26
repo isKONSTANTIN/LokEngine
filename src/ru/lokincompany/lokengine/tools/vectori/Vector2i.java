@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.utilities;
+package ru.lokincompany.lokengine.tools.vectori;
 
 public class Vector2i {
     public int x;

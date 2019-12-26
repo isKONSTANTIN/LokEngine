@@ -3,12 +3,12 @@ package ru.lokincompany.lokengine.render;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.*;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
-import ru.lokincompany.lokengine.tools.base64.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.Vector3i;
-import ru.lokincompany.lokengine.tools.utilities.Vector4i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector3i;
+import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 import java.nio.FloatBuffer;
 

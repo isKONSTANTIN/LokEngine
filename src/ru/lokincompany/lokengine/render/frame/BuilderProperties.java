@@ -3,15 +3,15 @@ package ru.lokincompany.lokengine.render.frame;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.loaders.BufferLoader;
+import ru.lokincompany.lokengine.loaders.MatrixLoader;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.MatrixCreator;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.Vector4i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
@@ -86,7 +86,7 @@ public class BuilderProperties {
         window.getCamera().updateProjection(windowResolution.x, windowResolution.y, 1);
 
         useShader(particlesShader);
-        particlesShader.setUniformData("ObjectModelMatrix", MatrixCreator.CreateModelMatrix(0, new Vector3f(0, 0, 0)));
+        particlesShader.setUniformData("ObjectModelMatrix", MatrixLoader.createModelMatrix(0, new Vector3f(0, 0, 0)));
 
         useShader(objectShader);
         window.getCamera().setFieldOfView(window.getCamera().fieldOfView);

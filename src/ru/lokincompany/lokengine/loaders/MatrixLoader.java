@@ -1,21 +1,20 @@
-package ru.lokincompany.lokengine.tools;
+package ru.lokincompany.lokengine.loaders;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.render.Camera;
 
-public class MatrixCreator {
+public class MatrixLoader {
 
-    public static double RadiansToDegrees(float radians) {
+    public static double radiansToDegrees(float radians) {
         return ((radians / 3.14159265358979323846) * 180.0f);
     }
 
-    public static double DegressToRadians(float degress) {
+    public static double degressToRadians(float degress) {
         return (degress * (3.14159265358979323846 / 180.0f));
     }
 
-    public static Matrix4f toOrtho(Matrix4f m, float left, float right, float bottom, float top,
-                                   float near, float far) {
+    public static Matrix4f toOrtho(Matrix4f m, float left, float right, float bottom, float top, float near, float far) {
         if (m == null)
             m = new Matrix4f();
         float x_orth = 2 / (right - left);
@@ -45,24 +44,24 @@ public class MatrixCreator {
         return m;
     }
 
-    public static Matrix4f CreateOrthoMatrix(float width, float height) {
+    public static Matrix4f createOrthoMatrix(float width, float height) {
         return toOrtho(null, -width / 2, width / 2, -height / 2, height / 2, -1.0f, 1000.0f);
     }
 
-    public static Matrix4f CreateViewMatrix(Camera camera) {
+    public static Matrix4f createViewMatrix(Camera camera) {
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.setIdentity();
 
-        Matrix4f.rotate((float) DegressToRadians(camera.rollRotation), new Vector3f(0, 0, 1), viewMatrix, viewMatrix);
+        Matrix4f.rotate((float) degressToRadians(camera.rollRotation), new Vector3f(0, 0, 1), viewMatrix, viewMatrix);
         Matrix4f.translate(new Vector3f(-camera.position.x, -camera.position.y, -500), viewMatrix, viewMatrix);
         return viewMatrix;
     }
 
-    public static Matrix4f CreateModelMatrix(float angle, Vector3f pos) {
+    public static Matrix4f createModelMatrix(float angle, Vector3f pos) {
         Matrix4f matrix = new Matrix4f();
         matrix.setIdentity();
         Matrix4f.translate(pos, matrix, matrix);
-        Matrix4f.rotate((float) DegressToRadians(angle), new Vector3f(0, 0, 1), matrix, matrix);
+        Matrix4f.rotate((float) degressToRadians(angle), new Vector3f(0, 0, 1), matrix, matrix);
         return matrix;
     }
 }

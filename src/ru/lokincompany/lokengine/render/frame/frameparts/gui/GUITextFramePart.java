@@ -3,10 +3,10 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
-import ru.lokincompany.lokengine.tools.text.Font;
-import ru.lokincompany.lokengine.tools.text.TextColorShader;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.render.text.Font;
+import ru.lokincompany.lokengine.render.text.TextColorShader;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;

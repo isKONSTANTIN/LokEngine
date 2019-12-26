@@ -3,10 +3,10 @@ package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
 import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
-import ru.lokincompany.lokengine.tools.base64.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 

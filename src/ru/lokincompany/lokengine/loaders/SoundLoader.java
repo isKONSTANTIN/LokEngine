@@ -6,7 +6,7 @@ import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.s
 import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound.RawWavSound;
 import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound.Sound;
 import ru.lokincompany.lokengine.tools.Logger;
-import ru.lokincompany.lokengine.tools.utilities.WaveData;
+import ru.lokincompany.lokengine.tools.WaveData;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;

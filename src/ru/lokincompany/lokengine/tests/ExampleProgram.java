@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.tests;
 import ru.lokincompany.lokengine.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
-import ru.lokincompany.lokengine.tools.utilities.color.Colors;
+import ru.lokincompany.lokengine.tools.color.Colors;
 
 public class ExampleProgram extends ApplicationDefault {
     public static void main(String[] args) {

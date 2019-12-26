@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.network.tcp.handlers.defaulthandles;
 
 import ru.lokincompany.lokengine.network.tcp.handlers.SimpleTCPServerHandler;
-import ru.lokincompany.lokengine.tools.base64.Base64;
+import ru.lokincompany.lokengine.tools.Base64;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,11 +1,11 @@
 package ru.lokincompany.lokengine.render.frame.frameparts;
 
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 
 import java.util.ArrayList;
 

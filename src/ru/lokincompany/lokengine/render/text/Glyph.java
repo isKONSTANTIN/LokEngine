@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.tools.text;
+package ru.lokincompany.lokengine.render.text;
 
 public class Glyph {
 
