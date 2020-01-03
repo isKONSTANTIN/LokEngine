@@ -10,8 +10,8 @@
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
       <element id="directory" name="ru">
-        <element id="directory" name="lokinCompany">
-          <element id="directory" name="lokEngine">
+        <element id="directory" name="lokincompany">
+          <element id="directory" name="lokengine">
             <element id="file-copy" path="$PROJECT_DIR$/LICENSE.md" />
           </element>
         </element>
