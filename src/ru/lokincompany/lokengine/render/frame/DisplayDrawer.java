@@ -27,7 +27,7 @@ public class DisplayDrawer {
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
-        glBindBuffer(GL_ARRAY_BUFFER, window.getFrameBuilder().getBuilderProperties().getUVBuffer());
+        window.getFrameBuilder().getBuilderProperties().getUVVBO().bind();
         glVertexAttribPointer(
                 1,
                 2,
@@ -37,7 +37,7 @@ public class DisplayDrawer {
                 0);
         glVertexAttribDivisor(1, 0);
 
-        glBindBuffer(GL_ARRAY_BUFFER, window.getFrameBuilder().getBuilderProperties().getVertexScreenBuffer());
+        window.getFrameBuilder().getBuilderProperties().getVertexScreenBuffer().bind();
         glVertexAttribPointer(
                 0,
                 2,

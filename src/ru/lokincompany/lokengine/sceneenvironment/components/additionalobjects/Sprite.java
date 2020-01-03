@@ -2,14 +2,15 @@ package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
 
 import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 public class Sprite implements Saveable {
 
     public Texture texture;
-    public int vertexBuffer;
-    public int uvBuffer = -1;
+    public VBO vertexVBO;
+    public VBO uvVBO;
     public double size;
 
     private float vertexSize;
@@ -17,20 +18,20 @@ public class Sprite implements Saveable {
     public Sprite() {
     }
 
-    public Sprite(Texture texture, int vertexBuffer, float vertexSize) {
-        this(texture, vertexBuffer, 1, vertexSize, -1);
+    public Sprite(Texture texture, VBO vertexBuffer, float vertexSize) {
+        this(texture, vertexBuffer, 1, vertexSize, null);
     }
 
-    public Sprite(Texture texture, int vertexBuffer, float vertexSize, int uvBuffer) {
-        this(texture, vertexBuffer, 1, vertexSize, uvBuffer);
+    public Sprite(Texture texture, VBO vertexBuffer, float vertexSize, VBO uvVBO) {
+        this(texture, vertexBuffer, 1, vertexSize, uvVBO);
     }
 
-    public Sprite(Texture texture, int vertexBuffer, double size, float vertexSize, int uvBuffer) {
+    public Sprite(Texture texture, VBO vertexVBO, double size, float vertexSize, VBO uvVBO) {
         this.texture = texture;
-        this.vertexBuffer = vertexBuffer;
+        this.vertexVBO = vertexVBO;
         this.size = size;
         this.vertexSize = vertexSize;
-        this.uvBuffer = uvBuffer;
+        this.uvVBO = uvVBO;
     }
 
     public float getVertexSize() {
@@ -40,7 +41,7 @@ public class Sprite implements Saveable {
     public boolean equals(Object obj) {
         Sprite objs = (Sprite) obj;
         return objs.texture.equals(texture) &&
-                objs.vertexBuffer == vertexBuffer &&
+                objs.vertexVBO == vertexVBO &&
                 objs.size == size;
     }
 
@@ -57,7 +58,7 @@ public class Sprite implements Saveable {
 
         Sprite loadedSprite = SpriteLoader.loadSprite((Texture) new Texture().load(data[0]), vertexSize);
         this.texture = loadedSprite.texture;
-        this.vertexBuffer = loadedSprite.vertexBuffer;
+        this.vertexVBO = loadedSprite.vertexVBO;
         return this;
     }
 }

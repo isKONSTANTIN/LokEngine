@@ -22,7 +22,7 @@ public class AnimationComponent extends Component implements Saveable {
     private Animation activeAnimation;
     private String activeAnimationName;
     private SpriteFramePart framePart;
-    private Sprite sprite = new Sprite(null, 0, 1, 0);
+    private Sprite sprite = new Sprite(null, null, 1, null);
 
     public AnimationComponent() {
         framePart = new SpriteFramePart(sprite, null, Colors.white());
@@ -59,18 +59,18 @@ public class AnimationComponent extends Component implements Saveable {
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
         if (activeAnimation != null) {
             sprite.texture = activeAnimation.altasTexture;
-            sprite.vertexBuffer = activeAnimation.vertexBuffer;
+            sprite.vertexVBO = activeAnimation.vertexVBO;
             currentFrame += speedAnimation * (frameSkipping ? applicationRuntime.getDeltaTime() * applicationRuntime.getSpeedEngine() : 1);
 
-            if ((int) currentFrame > activeAnimation.uvBuffers.size() - 1) {
+            if ((int) currentFrame > activeAnimation.uvVBOs.size() - 1) {
                 currentFrame = 0;
             }
 
             if ((int) currentFrame < 0) {
-                currentFrame = activeAnimation.uvBuffers.size() - 1;
+                currentFrame = activeAnimation.uvVBOs.size() - 1;
             }
 
-            sprite.uvBuffer = activeAnimation.uvBuffers.get((int) currentFrame);
+            sprite.uvVBO = activeAnimation.uvVBOs.get((int) currentFrame);
 
             framePart.position = new Vector4f(source.position.x, source.position.y, source.renderPriority, source.rollRotation);
             if (partsBuilder != null)

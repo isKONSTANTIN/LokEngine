@@ -1,8 +1,8 @@
 package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
 
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.vectori.Vector4i;
@@ -33,18 +33,18 @@ public class AtlasPositions implements Saveable {
         return this;
     }
 
-    public ArrayList<Integer> build(Texture texture) {
+    public ArrayList<VBO> build(Texture texture) {
         Vector2f fistPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
         Vector2f secondPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
         Vector2f thirdPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
         Vector2f fourthPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
 
-        ArrayList<Integer> uvBuffers = new ArrayList<>();
+        ArrayList<VBO> uvVBOs = new ArrayList<>();
 
         for (int i = 0; i < countSprites; i++) {
             float offset = thirdPoint.x * i;
-            uvBuffers.add(
-                    BufferLoader.load(new float[]{
+            uvVBOs.add(
+                    new VBO(new float[]{
                             fistPoint.x + offset, fistPoint.y,
                             secondPoint.x + offset, secondPoint.y,
                             thirdPoint.x + offset, thirdPoint.y,
@@ -54,8 +54,8 @@ public class AtlasPositions implements Saveable {
         }
 
         for (Vector4i position : positions) {
-            uvBuffers.add(
-                    BufferLoader.load(new float[]{
+            uvVBOs.add(
+                    new VBO(new float[]{
                             (float) position.x / (float) texture.sizeX, (float) position.w / (float) texture.sizeY,
                             (float) position.x / (float) texture.sizeX, (float) position.y / (float) texture.sizeY,
                             (float) position.z / (float) texture.sizeX, (float) position.y / (float) texture.sizeY,
@@ -64,7 +64,7 @@ public class AtlasPositions implements Saveable {
             );
         }
 
-        return uvBuffers;
+        return uvVBOs;
     }
 
     @Override

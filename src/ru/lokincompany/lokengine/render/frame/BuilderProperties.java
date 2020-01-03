@@ -2,12 +2,12 @@ package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.loaders.MatrixLoader;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -26,8 +26,8 @@ public class BuilderProperties {
     private Texture unknownTexture;
     private Vector4i orthoView = new Vector4i();
     private DrawMode activeDrawMode;
-    private int UVBuffer;
-    private int vertexScreenBuffer;
+    private VBO uvVBO;
+    private VBO vertexScreenVBO;
 
     public BuilderProperties(Window window) {
         this.window = window;
@@ -61,12 +61,12 @@ public class BuilderProperties {
         return activeDrawMode;
     }
 
-    public int getUVBuffer() {
-        return UVBuffer;
+    public VBO getUVVBO() {
+        return uvVBO;
     }
 
-    public int getVertexScreenBuffer() {
-        return vertexScreenBuffer;
+    public VBO getVertexScreenBuffer() {
+        return vertexScreenVBO;
     }
 
     public void useShader(Shader shader) {
@@ -91,9 +91,12 @@ public class BuilderProperties {
         useShader(objectShader);
         window.getCamera().setFieldOfView(window.getCamera().fieldOfView);
 
-        if (vertexScreenBuffer != 0) BufferLoader.unload(vertexScreenBuffer);
+        if (vertexScreenVBO != null)
+            vertexScreenVBO.unload();
+        else
+            vertexScreenVBO = new VBO();
 
-        vertexScreenBuffer = BufferLoader.load(new float[]{
+        vertexScreenVBO.putData(new float[]{
                 -windowResolution.x / 2f, windowResolution.y / 2f,
                 -windowResolution.x / 2f, -windowResolution.y / 2f,
                 windowResolution.x / 2f, -windowResolution.y / 2f,
@@ -109,7 +112,7 @@ public class BuilderProperties {
 
         update();
 
-        UVBuffer = BufferLoader.load(new float[]{
+        uvVBO = new VBO(new float[]{
                 0, 1,
                 0, 0,
                 1, 0,

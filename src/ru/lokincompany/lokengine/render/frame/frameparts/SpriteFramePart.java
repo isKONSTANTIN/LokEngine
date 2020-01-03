@@ -4,6 +4,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 import ru.lokincompany.lokengine.loaders.MatrixLoader;
 import ru.lokincompany.lokengine.render.Shader;
+import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
@@ -39,11 +40,11 @@ public class SpriteFramePart extends FramePart {
             builderProperties.useShader(shader);
         }
 
-        int uvBuffer = sprite.uvBuffer != -1 ? sprite.uvBuffer : builderProperties.getUVBuffer();
+        VBO uvBuffer = sprite.uvVBO != null ? sprite.uvVBO : builderProperties.getUVVBO();
         int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
 
         glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, sprite.vertexBuffer);
+        sprite.vertexVBO.bind();
         glVertexAttribPointer(
                 0,
                 2,
@@ -54,7 +55,7 @@ public class SpriteFramePart extends FramePart {
         glVertexAttribDivisor(0, 0);
 
         glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+        uvBuffer.bind();
         glVertexAttribPointer(
                 1,
                 2,

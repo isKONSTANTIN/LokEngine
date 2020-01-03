@@ -2,13 +2,14 @@ package ru.lokincompany.lokengine.loaders;
 
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 public class SpriteLoader {
 
     public static Sprite loadSprite(Texture texture, float vertexSize) {
-        int vertexBuffer = BufferLoader.load(new float[]
+        VBO vertexVBO = new VBO(new float[]
                 {
                         -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
                         -texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
@@ -17,7 +18,7 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(texture, vertexBuffer, vertexSize);
+        return new Sprite(texture, vertexVBO, vertexSize);
     }
 
     public static Sprite loadSprite(Texture texture, float vertexSize, Vector4i imagePosFromAtlas) {
@@ -26,7 +27,7 @@ public class SpriteLoader {
         Vector2f thirdPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
         Vector2f fourthPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
 
-        int vertexBuffer = BufferLoader.load(new float[]
+        VBO vertexVBO = new VBO(new float[]
                 {
                         -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
                         -texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
@@ -35,7 +36,7 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(texture, vertexBuffer, vertexSize, BufferLoader.load(new float[]{
+        return new Sprite(texture, vertexVBO, vertexSize, new VBO(new float[]{
                 fistPoint.x, fistPoint.y,
                 secondPoint.x, secondPoint.y,
                 thirdPoint.x, thirdPoint.y,
@@ -46,7 +47,7 @@ public class SpriteLoader {
     public static Sprite loadSprite(String texturePath, float vertexSize) {
         Texture tex = TextureLoader.loadTexture(texturePath);
 
-        int vertexBuffer = BufferLoader.load(new float[]
+        VBO vertexVBO = new VBO(new float[]
                 {
                         -tex.sizeX * vertexSize / 2f * 0.000520833f, -tex.sizeY * vertexSize / 2f * 0.000520833f,
                         -tex.sizeX * vertexSize / 2f * 0.000520833f, tex.sizeY * vertexSize / 2f * 0.000520833f,
@@ -55,7 +56,7 @@ public class SpriteLoader {
                 }
         );
 
-        return new Sprite(tex, vertexBuffer, vertexSize);
+        return new Sprite(tex, vertexVBO, vertexSize);
     }
 
     public static Sprite loadSprite(String texturePath) {

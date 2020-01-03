@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.render.frame.frameparts;
 
-import ru.lokincompany.lokengine.loaders.BufferLoader;
 import ru.lokincompany.lokengine.render.Shader;
+import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
@@ -17,12 +17,11 @@ import static org.lwjgl.opengl.GL31.glDrawArraysInstanced;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 public class ParticleSystemFramePart extends FramePart {
-
     public Shader shader;
     Sprite sourceSprite;
 
-    int positionsBuffer;
-    int sizesBuffer;
+    VBO positionsVBO;
+    VBO sizesVBO;
     int count;
 
     public ParticleSystemFramePart(Sprite sourceSprite, Shader shader) {
@@ -37,14 +36,12 @@ public class ParticleSystemFramePart extends FramePart {
     }
 
     public void update(ArrayList<Float> positions, ArrayList<Float> sizes) {
-        count = sizes.size();
+        positionsVBO.unload();
+        sizesVBO.unload();
 
-        BufferLoader.unload(positionsBuffer);
-        BufferLoader.unload(sizesBuffer);
-
-        if (count > 0) {
-            positionsBuffer = BufferLoader.load(positions);
-            sizesBuffer = BufferLoader.load(sizes);
+        if (sizes.size() > 0) {
+            positionsVBO.putData(positions);
+            positionsVBO.putData(sizes);
         }
     }
 
@@ -58,13 +55,13 @@ public class ParticleSystemFramePart extends FramePart {
                 builderProperties.useShader(shader);
             }
 
-            int uvBuffer = sourceSprite.uvBuffer != -1 ? sourceSprite.uvBuffer : builderProperties.getUVBuffer();
+            VBO uvBuffer = sourceSprite.uvVBO != null ? sourceSprite.uvVBO : builderProperties.getUVVBO();
             int textureBuffer = sourceSprite.texture.buffer != -1 ? sourceSprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
 
             builderProperties.getBuilderWindow().getCamera().updateView();
 
             glEnableVertexAttribArray(0);
-            glBindBuffer(GL_ARRAY_BUFFER, sourceSprite.vertexBuffer);
+            sourceSprite.vertexVBO.bind();
             glVertexAttribPointer(
                     0,
                     2,
@@ -75,7 +72,7 @@ public class ParticleSystemFramePart extends FramePart {
             glVertexAttribDivisor(0, 0);
 
             glEnableVertexAttribArray(1);
-            glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+            uvBuffer.bind();
             glVertexAttribPointer(
                     1,
                     2,
@@ -86,7 +83,7 @@ public class ParticleSystemFramePart extends FramePart {
             glVertexAttribDivisor(1, 0);
 
             glEnableVertexAttribArray(2);
-            glBindBuffer(GL_ARRAY_BUFFER, sizesBuffer);
+            sizesVBO.bind();
             glVertexAttribPointer(
                     2,
                     1,
@@ -97,7 +94,7 @@ public class ParticleSystemFramePart extends FramePart {
             glVertexAttribDivisor(2, 1);
 
             glEnableVertexAttribArray(3);
-            glBindBuffer(GL_ARRAY_BUFFER, positionsBuffer);
+            positionsVBO.bind();
             glVertexAttribPointer(
                     3,
                     2,
