@@ -111,7 +111,7 @@ public class ParticleSystemFramePart extends FramePart {
 
             glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
-            glDrawArraysInstanced(GL_POLYGON, 0, sourceSprite.vertexVBO.getSize(), count);
+            glDrawArraysInstanced(sourceSprite.renderMode, 0, sourceSprite.vertexVBO.getSize(), count);
 
             glBindTexture(GL_TEXTURE_2D, 0);
             glBindBuffer(GL_ARRAY_BUFFER, 0);

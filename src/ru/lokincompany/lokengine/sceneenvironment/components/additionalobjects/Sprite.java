@@ -6,11 +6,14 @@ import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+
 public class Sprite implements Saveable {
 
     public Texture texture;
     public VBO vertexVBO;
     public VBO uvVBO;
+    public int renderMode = GL_QUADS;
     public double size;
 
     private float vertexSize;

@@ -83,7 +83,7 @@ public class SpriteFramePart extends FramePart {
 
         vao.bind();
 
-        glDrawArrays(GL_POLYGON, 0, sprite.vertexVBO.getSize());
+        glDrawArrays(sprite.renderMode, 0, sprite.vertexVBO.getSize());
 
         vao.unbind();
 
