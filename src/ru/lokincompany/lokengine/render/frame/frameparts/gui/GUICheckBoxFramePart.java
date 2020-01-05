@@ -52,6 +52,9 @@ public class GUICheckBoxFramePart extends FramePart {
     }
 
     @Override
+    public void init(BuilderProperties builderProperties) {}
+
+    @Override
     public void partRender(BuilderProperties builderProperties) {
         glColor4f(color.red, color.green, color.blue, color.alpha);
         imageFramePart.position = position;

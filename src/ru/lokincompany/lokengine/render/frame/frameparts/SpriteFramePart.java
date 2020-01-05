@@ -4,6 +4,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 import ru.lokincompany.lokengine.loaders.MatrixLoader;
 import ru.lokincompany.lokengine.render.Shader;
+import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.BuilderProperties;
@@ -23,25 +24,21 @@ public class SpriteFramePart extends FramePart {
     public Vector4f position = new Vector4f(0, 0, 0, 0);
     public Shader shader;
     public Color color;
+    public VAO vao;
 
     public SpriteFramePart(Sprite sprite, Shader shader, Color color) {
         super(FramePartType.Scene);
         this.sprite = sprite;
         this.shader = shader;
         this.color = color;
+        this.vao = new VAO();
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
-        if (shader == null)
-            shader = builderProperties.getObjectShader();
-
-        if (builderProperties.getActiveShader() == null || !shader.equals(builderProperties.getActiveShader())) {
-            builderProperties.useShader(shader);
-        }
+    public void init(BuilderProperties builderProperties) {
+        vao.bind();
 
         VBO uvBuffer = sprite.uvVBO != null ? sprite.uvVBO : builderProperties.getUVVBO();
-        int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
 
         glEnableVertexAttribArray(0);
         sprite.vertexVBO.bind();
@@ -65,19 +62,32 @@ public class SpriteFramePart extends FramePart {
                 0);
         glVertexAttribDivisor(1, 0);
 
+        vao.unbind();
+    }
+
+    @Override
+    public void partRender(BuilderProperties builderProperties) {
+        if (shader == null)
+            shader = builderProperties.getObjectShader();
+
+        if (builderProperties.getActiveShader() == null || !shader.equals(builderProperties.getActiveShader())) {
+            builderProperties.useShader(shader);
+        }
+
         shader.setUniformData("ObjectSize", (float) sprite.size * 2);
         shader.setUniformData("ObjectColor", new Vector4f(color.red, color.green, color.blue, color.alpha));
         shader.setUniformData("ObjectModelMatrix", MatrixLoader.createModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 
+        int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
+
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
-        glDrawArrays(GL_QUADS, 0, 8);
+        vao.bind();
+
+        glDrawArrays(GL_QUADS, 0, sprite.vertexVBO.getSize());
+
+        vao.unbind();
 
         glBindTexture(GL_TEXTURE_2D, 0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
     }
-
 }

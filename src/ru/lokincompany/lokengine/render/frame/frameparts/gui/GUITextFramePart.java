@@ -50,4 +50,7 @@ public class GUITextFramePart extends FramePart {
             font.drawText(text, new Vector2i(position.x, position.y), -1, shader);
         }
     }
+
+    @Override
+    public void init(BuilderProperties builderProperties) {}
 }

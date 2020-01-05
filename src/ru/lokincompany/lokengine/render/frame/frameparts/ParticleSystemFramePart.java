@@ -46,6 +46,11 @@ public class ParticleSystemFramePart extends FramePart {
     }
 
     @Override
+    public void init(BuilderProperties builderProperties) {
+
+    }
+
+    @Override
     public void partRender(BuilderProperties builderProperties) {
         if (count > 0) {
             if (shader == null)
@@ -106,7 +111,7 @@ public class ParticleSystemFramePart extends FramePart {
 
             glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
-            glDrawArraysInstanced(GL_QUADS, 0, 8, count);
+            glDrawArraysInstanced(GL_QUADS, 0, sourceSprite.vertexVBO.getSize(), count);
 
             glBindTexture(GL_TEXTURE_2D, 0);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
