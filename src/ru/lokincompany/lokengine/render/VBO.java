@@ -18,7 +18,7 @@ public class VBO {
     }
 
     public VBO(ArrayList<Float> points){
-        super();
+        this();
         putData(points);
     }
 
