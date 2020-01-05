@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL15C.*;
 
 public class VBO {
     int vboID;
+    int size;
 
     public VBO(){
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
@@ -34,6 +35,9 @@ public class VBO {
     public int getID(){
         return vboID;
     }
+    public int getSize(){
+        return size;
+    }
 
     public void putData(float[] points) throws GLFWNotInitializedError {
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
@@ -41,6 +45,8 @@ public class VBO {
         bind();
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, points, GL15.GL_DYNAMIC_DRAW);
         unbind();
+
+        size = points.length;
     }
 
     public void putData(ArrayList<Float> points) throws GLFWNotInitializedError {
@@ -54,12 +60,15 @@ public class VBO {
         bind();
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, pointsArray, GL15.GL_DYNAMIC_DRAW);
         unbind();
+
+        size = points.size();
     }
 
     public void unload() throws GLFWNotInitializedError {
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
         GL15.glDeleteBuffers(vboID);
         vboID = -1;
+        size = 0;
     }
 
 }
