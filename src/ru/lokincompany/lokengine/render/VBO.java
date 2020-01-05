@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import static org.lwjgl.opengl.GL15C.*;
 
 public class VBO {
-    int vboID = -1;
+    int vboID;
 
     public VBO(){
+        if (!GLFW.isInited()) throw new GLFWNotInitializedError();
         vboID = GL15.glGenBuffers();
     }
 
@@ -36,32 +37,23 @@ public class VBO {
 
     public void putData(float[] points) throws GLFWNotInitializedError {
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
-        try {
-            bind();
-            GL15.glBufferData(GL15.GL_ARRAY_BUFFER, points, GL15.GL_DYNAMIC_DRAW);
-            unbind();
-        } catch (Exception e) {
-            Logger.error("Fail generate buffer!", "LokEngine_BufferLoader");
-            Logger.printException(e);
-        }
+
+        bind();
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, points, GL15.GL_DYNAMIC_DRAW);
+        unbind();
     }
 
     public void putData(ArrayList<Float> points) throws GLFWNotInitializedError {
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
-        try {
-            float[] pointsArray = new float[points.size()];
+        float[] pointsArray = new float[points.size()];
 
-            for (int i = 0; i < pointsArray.length; i++) {
-                pointsArray[i] = points.get(i);
-            }
-
-            bind();
-            GL15.glBufferData(GL15.GL_ARRAY_BUFFER, pointsArray, GL15.GL_DYNAMIC_DRAW);
-            unbind();
-        } catch (Exception e) {
-            Logger.error("Fail generate buffer!", "LokEngine_BufferLoader");
-            Logger.printException(e);
+        for (int i = 0; i < pointsArray.length; i++) {
+            pointsArray[i] = points.get(i);
         }
+
+        bind();
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, pointsArray, GL15.GL_DYNAMIC_DRAW);
+        unbind();
     }
 
     public void unload() throws GLFWNotInitializedError {

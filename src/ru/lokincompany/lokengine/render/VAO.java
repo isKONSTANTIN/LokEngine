@@ -1,14 +1,15 @@
 package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.opengl.GL;
+import ru.lokincompany.lokengine.render.exceptions.GLFWNotInitializedError;
 
-import static org.lwjgl.opengl.GL30.glBindVertexArray;
-import static org.lwjgl.opengl.GL30.glGenVertexArrays;
+import static org.lwjgl.opengl.GL30.*;
 
 public class VAO {
     int vaoID;
 
     public VAO(){
+        if (!GLFW.isInited()) throw new GLFWNotInitializedError();
         vaoID = glGenVertexArrays();
     }
 
@@ -22,6 +23,12 @@ public class VAO {
 
     public int getID(){
         return vaoID;
+    }
+
+    public void unload() throws GLFWNotInitializedError {
+        if (!GLFW.isInited()) throw new GLFWNotInitializedError();
+        glDeleteVertexArrays(vaoID);
+        vaoID = -1;
     }
 
 }
