@@ -1,7 +1,9 @@
 package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.opengl.GL15;
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.exceptions.GLFWNotInitializedError;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,11 @@ public class VBO {
     }
 
     public VBO(ArrayList<Float> points) {
+        this();
+        putData(points);
+    }
+
+    public VBO(Vector2f[] points) {
         this();
         putData(points);
     }
@@ -66,6 +73,18 @@ public class VBO {
         unbind();
 
         size = points.size();
+    }
+
+    public void putData(Vector2f[] points) throws GLFWNotInitializedError {
+        if (!GLFW.isInited()) throw new GLFWNotInitializedError();
+        float[] floatPoints = new float[points.length * 2];
+
+        for (int i = 0; i < points.length; i++) {
+            floatPoints[i * 2] = points[i].x;
+            floatPoints[i * 2 + 1] = points[i].x;
+        }
+
+        putData(floatPoints);
     }
 
     public void unload() throws GLFWNotInitializedError {
