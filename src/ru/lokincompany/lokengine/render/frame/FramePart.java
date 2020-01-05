@@ -12,6 +12,7 @@ public abstract class FramePart {
     }
 
     public abstract void partRender(BuilderProperties builderProperties);
+
     public abstract void init(BuilderProperties builderProperties);
 
 }

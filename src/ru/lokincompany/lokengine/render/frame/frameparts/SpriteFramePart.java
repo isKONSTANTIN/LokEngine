@@ -13,9 +13,8 @@ import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.S
 import ru.lokincompany.lokengine.tools.color.Color;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.glBindBuffer;
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 public class SpriteFramePart extends FramePart {

@@ -25,7 +25,8 @@ public class GUICanvasFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {}
+    public void init(BuilderProperties builderProperties) {
+    }
 
     @Override
     public void partRender(BuilderProperties builderProperties) {

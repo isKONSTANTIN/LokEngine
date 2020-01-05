@@ -1,41 +1,45 @@
 package ru.lokincompany.lokengine.render;
+
 import org.lwjgl.opengl.GL15;
 import ru.lokincompany.lokengine.render.exceptions.GLFWNotInitializedError;
-import ru.lokincompany.lokengine.tools.Logger;
+
 import java.util.ArrayList;
-import static org.lwjgl.opengl.GL15C.*;
+
+import static org.lwjgl.opengl.GL15C.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15C.glBindBuffer;
 
 public class VBO {
     int vboID;
     int size;
 
-    public VBO(){
+    public VBO() {
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
         vboID = GL15.glGenBuffers();
     }
 
-    public VBO(float[] points){
+    public VBO(float[] points) {
         this();
         putData(points);
     }
 
-    public VBO(ArrayList<Float> points){
+    public VBO(ArrayList<Float> points) {
         this();
         putData(points);
     }
 
-    public void bind(){
+    public void bind() {
         glBindBuffer(GL_ARRAY_BUFFER, vboID);
     }
 
-    public void unbind(){
+    public void unbind() {
         glBindBuffer(GL_ARRAY_BUFFER, vboID);
     }
 
-    public int getID(){
+    public int getID() {
         return vboID;
     }
-    public int getSize(){
+
+    public int getSize() {
         return size;
     }
 

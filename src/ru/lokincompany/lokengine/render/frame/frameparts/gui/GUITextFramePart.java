@@ -52,5 +52,6 @@ public class GUITextFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {}
+    public void init(BuilderProperties builderProperties) {
+    }
 }
