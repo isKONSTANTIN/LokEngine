@@ -53,14 +53,19 @@ public class PartsBuilder {
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        try {
+
             for (FramePart framePart : frameParts) {
-                framePart.partRender(builderProperties);
+                try {
+                    if (!framePart.inited) {
+                        framePart.init(builderProperties);
+                        framePart.inited = true;
+                    }
+                    framePart.partRender(builderProperties);
+                } catch (Exception e) {
+                    Logger.error("Fail render frame part!", "LokEngine_PartsBuilder");
+                    Logger.printException(e);
+                }
             }
-        } catch (Exception e) {
-            Logger.error("Fail render frame part!", "LokEngine_PartsBuilder");
-            Logger.printException(e);
-        }
 
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         frameBufferWorker.unbindCurrentFrameBuffer();
