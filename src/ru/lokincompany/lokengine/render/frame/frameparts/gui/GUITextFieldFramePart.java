@@ -34,8 +34,12 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     @Override
     public void partRender(BuilderProperties builderProperties) {
         int fontHeight = font.getFontHeight();
-        int fontYpos = position.y + (int) (size.y / 2f - fontHeight / 2f) + 1;
-        int fontXpos = position.x + (centralizeText ? (int) (size.x / 2f - font.getWidth(text) / 2f) : 0);
+
+        int xGap = (centralizeText ? (int) (size.x / 2f - font.getWidth(text) / 2f) : 0);
+        int yGap = (int) (size.y / 2f - fontHeight / 2f) + 1;
+
+        int fontXpos = position.x + xGap;
+        int fontYpos = position.y + yGap;
 
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glBegin(GL_QUADS);
@@ -48,10 +52,13 @@ public class GUITextFieldFramePart extends GUITextFramePart {
 
         glEnd();
 
+        Vector2i endPosText;
+        Vector2i maxPos = new Vector2i(size.x - 1 - xGap, size.y - yGap);
+
         if (color != null) {
-            font.drawText(text, new Vector2i(fontXpos, fontYpos), size.x, charPos -> color);
+            endPosText = font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, charPos -> color);
         } else {
-            font.drawText(text, new Vector2i(fontXpos, fontYpos), size.x, shader);
+            endPosText = font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, shader);
         }
 
         if (timer.checkTime()) {
@@ -60,13 +67,13 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         }
 
         if (printSelecter && active) {
-            int xPos = font.getWidth(text.substring(0, pointer)) + fontXpos;
+            int xPos = endPosText.x;
 
             GL11.glBegin(GL11.GL_LINES);
             GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
 
-            GL11.glVertex2f(xPos + 1, fontYpos);
-            GL11.glVertex2f(xPos + 1, fontYpos + fontHeight);
+            GL11.glVertex2f(xPos + 1, endPosText.y);
+            GL11.glVertex2f(xPos + 1, endPosText.y + fontHeight);
 
             GL11.glEnd();
         }

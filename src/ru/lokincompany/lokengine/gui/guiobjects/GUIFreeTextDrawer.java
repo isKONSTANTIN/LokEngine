@@ -43,21 +43,33 @@ public class GUIFreeTextDrawer extends GUIObject {
         this.font = font;
     }
 
-    public void draw(String text, Vector2i position, TextColorShader shader) {
+    public void draw(String text, Vector2i position, Vector2i maxSize, TextColorShader shader) {
         GUITextFramePart framePart = new GUITextFramePart(text, font, shader);
         framePart.position = position;
+        framePart.maxSize = maxSize;
         frameParts.add(framePart);
+    }
+
+    public void draw(String text, Vector2i position, Vector2i maxSize, Color color) {
+        draw(text, position, maxSize, charPos -> color);
+    }
+
+    public void draw(String text, Vector2i position, Vector2i maxSize) {
+        draw(text, position, maxSize, color);
+    }
+
+    public void draw(String text, Vector2i position, TextColorShader shader) {
+        draw(text, position, null, color);
     }
 
     public void draw(String text, Vector2i position, Color color) {
-        GUITextFramePart framePart = new GUITextFramePart(text, font, color);
-        framePart.position = position;
-        frameParts.add(framePart);
+        draw(text, position, null, charPos -> color);
     }
 
     public void draw(String text, Vector2i position) {
-        draw(text, position, color);
+        draw(text, position, null, color);
     }
+
 
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
