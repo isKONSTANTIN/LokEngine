@@ -9,6 +9,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.MouseRaycastStatus;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.frame.FrameBuilder;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
@@ -16,10 +17,13 @@ import ru.lokincompany.lokengine.tools.input.Mouse;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
+import static org.lwjgl.opengl.ARBVertexArrayObject.glGenVertexArrays;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -27,6 +31,8 @@ public class Window {
     private Camera camera;
     private GUICanvas canvas;
     private FrameBuilder frameBuilder;
+
+    private VAO vao;
 
     private Keyboard keyboard;
     private Mouse mouse;
@@ -204,6 +210,7 @@ public class Window {
                 Logger.error("Failed to create the window", "LokEngine_Window");
                 return;
             }
+
             if (!fullscreen)
                 glfwSetWindowPos(id, mode.width() / 2 - this.resolution.x / 2, mode.height() / 2 - this.resolution.y / 2);
 
@@ -212,11 +219,11 @@ public class Window {
             this.setIcon(pathsWindowIcon);
 
             glfwSwapInterval(vSync ? 1 : 0);
-            glfwShowWindow(id);
 
             glEnableClientState(GL_VERTEX_ARRAY);
             glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-            GL30.glBindVertexArray(GL30.glGenVertexArrays());
+
+            vao = new VAO();
 
             isInited = true;
             camera = new Camera(this);
@@ -236,6 +243,8 @@ public class Window {
             }
             setResizeEvent((window, args) -> {
             });
+
+            glfwShowWindow(id);
         }
     }
 
@@ -261,7 +270,11 @@ public class Window {
         if (isInited) {
             try {
                 frameBuilder.build();
+
+                vao.bind();
                 glfwSwapBuffers(id);
+                vao.unbind();
+
             } catch (Exception e) {
                 Logger.error("Fail build frame!", "LokEngine_Window");
                 Logger.printException(e);
