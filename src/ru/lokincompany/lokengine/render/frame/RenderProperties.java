@@ -91,10 +91,7 @@ public class RenderProperties {
         useShader(objectShader);
         window.getCamera().setFieldOfView(window.getCamera().fieldOfView);
 
-        if (vertexScreenVBO != null)
-            vertexScreenVBO.unload();
-        else
-            vertexScreenVBO = new VBO();
+        vertexScreenVBO.createNew();
 
         vertexScreenVBO.putData(new float[]{
                 -windowResolution.x / 2f, windowResolution.y / 2f,
@@ -110,14 +107,16 @@ public class RenderProperties {
 
         unknownTexture = TextureLoader.loadTexture("#/resources/textures/unknown.png");
 
-        update();
-
         uvVBO = new VBO(new float[]{
                 0, 1,
                 0, 0,
                 1, 0,
                 1, 1,
         });
+
+        vertexScreenVBO = new VBO();
+
+        update();
     }
 
     public Vector4i getOrthoView() {
