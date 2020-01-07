@@ -291,11 +291,10 @@ public class Window {
 
     public void setIcon(String[] paths) {
         GLFWImage.Buffer iconGB = GLFWImage.malloc(paths.length);
-
         for (String path : paths) {
             try {
                 Object[] image = TextureLoader.loadTextureInBuffer(path);
-                GLFWImage GLFWimage = GLFWImage.create().set(
+                GLFWImage GLFWimage = GLFWImage.malloc().set(
                         ((BufferedImage) image[1]).getWidth(),
                         ((BufferedImage) image[1]).getHeight(),
                         (ByteBuffer) image[0]);
