@@ -10,12 +10,11 @@ import static org.lwjgl.opengl.GL15C.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15C.glBindBuffer;
 
 public class VBO {
-    int vboID;
+    int vboID = -1;
     int size;
 
     public VBO() {
-        if (!GLFW.isInited()) throw new GLFWNotInitializedError();
-        vboID = GL15.glGenBuffers();
+        createNew();
     }
 
     public VBO(float[] points) {
@@ -47,6 +46,15 @@ public class VBO {
 
     public int getSize() {
         return size;
+    }
+
+    public void createNew(){
+        if (!GLFW.isInited()) throw new GLFWNotInitializedError();
+
+        if (vboID != -1)
+            unload();
+
+        vboID = GL15.glGenBuffers();
     }
 
     public void putData(float[] points) throws GLFWNotInitializedError {
@@ -92,5 +100,4 @@ public class VBO {
         vboID = -1;
         size = 0;
     }
-
 }
