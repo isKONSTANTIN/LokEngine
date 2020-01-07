@@ -26,9 +26,12 @@ public class ParticleSystemFramePart extends FramePart {
 
     public ParticleSystemFramePart(Sprite sourceSprite, Shader shader) {
         super(FramePartType.Scene);
-        this.sourceSprite = sourceSprite;
 
+        this.sourceSprite = sourceSprite;
         this.shader = shader;
+
+        positionsVBO = new VBO();
+        sizesVBO = new VBO();
     }
 
     public void setSourceSprite(Sprite sprite) {
@@ -36,8 +39,8 @@ public class ParticleSystemFramePart extends FramePart {
     }
 
     public void update(ArrayList<Float> positions, ArrayList<Float> sizes) {
-        positionsVBO.unload();
-        sizesVBO.unload();
+        positionsVBO.createNew();
+        sizesVBO.createNew();
 
         if (sizes.size() > 0) {
             positionsVBO.putData(positions);
