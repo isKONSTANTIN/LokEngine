@@ -60,7 +60,7 @@ public class TextureLoader {
         return new Object[]{textureBuffer, image};
     }
 
-    public static Texture loadTexture(ByteBuffer buffer, Vector2i size, String path, long context) {
+    public static Texture loadTexture(ByteBuffer buffer, Vector2i size, String path) {
         int textureID = glGenTextures();
 
         glBindTexture(GL_TEXTURE_2D, textureID);
@@ -77,7 +77,7 @@ public class TextureLoader {
     }
 
     public static Texture loadTexture(ByteBuffer buffer, Vector2i size) {
-        return loadTexture(buffer, size, "", glfwGetCurrentContext());
+        return loadTexture(buffer, size, "");
     }
 
     public static Texture loadTexture(String path) {
@@ -105,7 +105,7 @@ public class TextureLoader {
             return new Texture(-1, 100, 100, path);
         }
 
-        Texture texture = loadTexture(textureBuffer, new Vector2i(image.getWidth(), image.getHeight()), path, context);
+        Texture texture = loadTexture(textureBuffer, new Vector2i(image.getWidth(), image.getHeight()), path);
 
         loadedTextures.get(context).put(path, texture);
 

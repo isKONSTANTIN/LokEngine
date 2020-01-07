@@ -3,7 +3,6 @@ package ru.lokincompany.lokengine.render;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.exceptions.GLFWNotInitializedError;
-import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 

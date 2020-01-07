@@ -3,8 +3,8 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -35,11 +35,11 @@ public class GUIImageFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {
+    public void init(RenderProperties renderProperties) {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
+    public void partRender(RenderProperties renderProperties) {
         if (texture != null && texture.buffer != -1) {
             glBindTexture(GL_TEXTURE_2D, texture.buffer);
             glBegin(GL_POLYGON);

@@ -3,8 +3,8 @@ package ru.lokincompany.lokengine.render.frame.frameparts;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 
 import java.util.ArrayList;
@@ -46,24 +46,24 @@ public class ParticleSystemFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {
+    public void init(RenderProperties renderProperties) {
 
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
+    public void partRender(RenderProperties renderProperties) {
         if (count > 0) {
             if (shader == null)
-                shader = builderProperties.getParticlesShader();
+                shader = renderProperties.getParticlesShader();
 
-            if (builderProperties.getActiveShader() == null || !builderProperties.getActiveShader().equals(shader)) {
-                builderProperties.useShader(shader);
+            if (renderProperties.getActiveShader() == null || !renderProperties.getActiveShader().equals(shader)) {
+                renderProperties.useShader(shader);
             }
 
-            VBO uvBuffer = sourceSprite.uvVBO != null ? sourceSprite.uvVBO : builderProperties.getUVVBO();
-            int textureBuffer = sourceSprite.texture.buffer != -1 ? sourceSprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
+            VBO uvBuffer = sourceSprite.uvVBO != null ? sourceSprite.uvVBO : renderProperties.getUVVBO();
+            int textureBuffer = sourceSprite.texture.buffer != -1 ? sourceSprite.texture.buffer : renderProperties.getUnknownTexture().buffer;
 
-            builderProperties.getBuilderWindow().getCamera().updateView();
+            renderProperties.getBuilderWindow().getCamera().updateView();
 
             glEnableVertexAttribArray(0);
             sourceSprite.vertexVBO.bind();

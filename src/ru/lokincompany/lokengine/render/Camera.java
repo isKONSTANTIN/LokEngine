@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.render;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.loaders.MatrixLoader;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -21,11 +21,11 @@ public class Camera {
 
     public void updateProjection(float width, float height) {
         float projectionFieldOfView = fieldOfView * 0.000520833f * 4;
-        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+        window.getFrameBuilder().getRenderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public void updateProjection(float width, float height, float projectionFieldOfView) {
-        window.getFrameBuilder().getBuilderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+        window.getFrameBuilder().getRenderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public Vector2f screenPointToScene(Vector2i point) {
@@ -48,39 +48,39 @@ public class Camera {
     public void setFieldOfView(float fieldOfView, Shader shader) {
         this.fieldOfView = fieldOfView;
         screenRatio = (float) window.getResolution().x / (float) window.getResolution().y;
-        Shader activeShader = window.getFrameBuilder().getBuilderProperties().getActiveShader();
+        Shader activeShader = window.getFrameBuilder().getRenderProperties().getActiveShader();
 
-        window.getFrameBuilder().getBuilderProperties().useShader(shader);
+        window.getFrameBuilder().getRenderProperties().useShader(shader);
         updateProjection(screenRatio, 1);
 
         if (activeShader != null) {
-            window.getFrameBuilder().getBuilderProperties().useShader(activeShader);
+            window.getFrameBuilder().getRenderProperties().useShader(activeShader);
         } else {
-            window.getFrameBuilder().getBuilderProperties().unUseShader();
+            window.getFrameBuilder().getRenderProperties().unUseShader();
         }
     }
 
     public void setFieldOfView(float fieldOfView) {
         this.fieldOfView = fieldOfView;
-        BuilderProperties builderProperties = window.getFrameBuilder().getBuilderProperties();
+        RenderProperties renderProperties = window.getFrameBuilder().getRenderProperties();
         screenRatio = (float) window.getResolution().x / (float) window.getResolution().y;
-        Shader activeShader = builderProperties.getActiveShader();
+        Shader activeShader = renderProperties.getActiveShader();
 
-        builderProperties.useShader(builderProperties.getObjectShader());
+        renderProperties.useShader(renderProperties.getObjectShader());
         updateProjection(screenRatio, 1);
 
-        builderProperties.useShader(builderProperties.getParticlesShader());
+        renderProperties.useShader(renderProperties.getParticlesShader());
         updateProjection(screenRatio, 1);
 
         if (activeShader != null) {
-            builderProperties.useShader(activeShader);
+            renderProperties.useShader(activeShader);
         } else {
-            builderProperties.unUseShader();
+            renderProperties.unUseShader();
         }
     }
 
     public void updateView() {
-        updateView(window.getFrameBuilder().getBuilderProperties().getActiveShader());
+        updateView(window.getFrameBuilder().getRenderProperties().getActiveShader());
     }
 
     public void updateView(Shader shader) {

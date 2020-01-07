@@ -2,9 +2,9 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -25,12 +25,12 @@ public class GUICanvasFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {
+    public void init(RenderProperties renderProperties) {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
-        int texture = partsBuilder.build(DrawMode.RawGUI, builderProperties, viewOffset);
+    public void partRender(RenderProperties renderProperties) {
+        int texture = partsBuilder.build(DrawMode.RawGUI, renderProperties, viewOffset);
 
         glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_POLYGON);

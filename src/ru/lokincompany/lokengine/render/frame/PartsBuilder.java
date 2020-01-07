@@ -39,15 +39,15 @@ public class PartsBuilder {
         frameBufferWorker = new FrameBufferWorker(resolution);
     }
 
-    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties) {
-        return build(frameParts, drawMode, builderProperties, new Vector2i());
+    public int build(Vector<FramePart> frameParts, DrawMode drawMode, RenderProperties renderProperties) {
+        return build(frameParts, drawMode, renderProperties, new Vector2i());
     }
 
-    public int build(Vector<FramePart> frameParts, DrawMode drawMode, BuilderProperties builderProperties, Vector2i viewOffset) {
+    public int build(Vector<FramePart> frameParts, DrawMode drawMode, RenderProperties renderProperties, Vector2i viewOffset) {
         if (frameBufferWorker == null)
-            frameBufferWorker = new FrameBufferWorker(builderProperties.getBuilderWindow().getResolution());
+            frameBufferWorker = new FrameBufferWorker(renderProperties.getBuilderWindow().getResolution());
 
-        frameBufferWorker.bindFrameBuffer(drawMode, builderProperties, viewOffset);
+        frameBufferWorker.bindFrameBuffer(drawMode, renderProperties, viewOffset);
 
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
@@ -56,10 +56,10 @@ public class PartsBuilder {
         for (FramePart framePart : frameParts) {
             try {
                 if (!framePart.inited) {
-                    framePart.init(builderProperties);
+                    framePart.init(renderProperties);
                     framePart.inited = true;
                 }
-                framePart.partRender(builderProperties);
+                framePart.partRender(renderProperties);
             } catch (Exception e) {
                 Logger.error("Fail render frame part!", "LokEngine_PartsBuilder");
                 Logger.printException(e);
@@ -72,14 +72,14 @@ public class PartsBuilder {
         return frameBufferWorker.getTexture();
     }
 
-    public int build(DrawMode drawMode, BuilderProperties builderProperties, Vector2i viewOffset) {
-        int result = build(frameParts, drawMode, builderProperties, viewOffset);
+    public int build(DrawMode drawMode, RenderProperties renderProperties, Vector2i viewOffset) {
+        int result = build(frameParts, drawMode, renderProperties, viewOffset);
         frameParts.clear();
         return result;
     }
 
-    public int build(DrawMode drawMode, BuilderProperties builderProperties) {
-        return build(drawMode, builderProperties, new Vector2i());
+    public int build(DrawMode drawMode, RenderProperties renderProperties) {
+        return build(drawMode, renderProperties, new Vector2i());
     }
 
 }

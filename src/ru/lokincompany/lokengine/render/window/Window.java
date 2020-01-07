@@ -4,7 +4,6 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL30;
 import ru.lokincompany.lokengine.gui.additionalobjects.MouseRaycastStatus;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.loaders.TextureLoader;
@@ -17,13 +16,10 @@ import ru.lokincompany.lokengine.tools.input.Mouse;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
-import static org.lwjgl.opengl.ARBVertexArrayObject.glGenVertexArrays;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -97,7 +93,7 @@ public class Window {
             public void invoke(long l, int i, int i1) {
                 window.resolution.x = i;
                 window.resolution.y = i1;
-                window.getFrameBuilder().getBuilderProperties().update();
+                window.getFrameBuilder().getRenderProperties().update();
                 event.execute(window, new Integer[]{i, i1});
             }
         });
@@ -235,7 +231,7 @@ public class Window {
 
             try {
                 frameBuilder = new FrameBuilder(this);
-                frameBuilder.getBuilderProperties().init();
+                frameBuilder.getRenderProperties().init();
             } catch (Exception e) {
                 Logger.error("Fail init Frame Builder!", "LokEngine_Window");
                 Logger.printException(e);

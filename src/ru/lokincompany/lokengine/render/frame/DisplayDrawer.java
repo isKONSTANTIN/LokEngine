@@ -12,22 +12,22 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 public class DisplayDrawer {
 
-    public static void bindTexture(String uniformName, int textureBuffer, int index, BuilderProperties builderProperties) {
+    public static void bindTexture(String uniformName, int textureBuffer, int index, RenderProperties renderProperties) {
         glActiveTexture(GL_TEXTURE0 + index);
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 
-        if (builderProperties.getActiveShader() != null) {
-            builderProperties.getActiveShader().setUniformData(uniformName, index);
+        if (renderProperties.getActiveShader() != null) {
+            renderProperties.getActiveShader().setUniformData(uniformName, index);
         }
     }
 
     public static void renderScreen(int frameTextureBuffer, Window window) {
-        bindTexture("frame", frameTextureBuffer, 0, window.getFrameBuilder().getBuilderProperties());
+        bindTexture("frame", frameTextureBuffer, 0, window.getFrameBuilder().getRenderProperties());
 
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
-        window.getFrameBuilder().getBuilderProperties().getUVVBO().bind();
+        window.getFrameBuilder().getRenderProperties().getUVVBO().bind();
         glVertexAttribPointer(
                 1,
                 2,
@@ -37,7 +37,7 @@ public class DisplayDrawer {
                 0);
         glVertexAttribDivisor(1, 0);
 
-        window.getFrameBuilder().getBuilderProperties().getVertexScreenBuffer().bind();
+        window.getFrameBuilder().getRenderProperties().getVertexScreenBuffer().bind();
         glVertexAttribPointer(
                 0,
                 2,
@@ -50,7 +50,7 @@ public class DisplayDrawer {
         glDrawArrays(GL_QUADS, 0, 8);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        bindTexture("frame", 0, 0, window.getFrameBuilder().getBuilderProperties());
+        bindTexture("frame", 0, 0, window.getFrameBuilder().getRenderProperties());
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);

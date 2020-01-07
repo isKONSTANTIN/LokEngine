@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.loaders.FontLoader;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.tools.Timer;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
@@ -32,7 +32,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
+    public void partRender(RenderProperties renderProperties) {
         int fontHeight = font.getFontHeight();
 
         int xGap = (centralizeText ? (int) (size.x / 2f - font.getWidth(text) / 2f) : 0);

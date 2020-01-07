@@ -16,7 +16,7 @@ import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 
-public class BuilderProperties {
+public class RenderProperties {
     private Shader activeShader;
 
     private Shader objectShader;
@@ -29,7 +29,7 @@ public class BuilderProperties {
     private VBO uvVBO;
     private VBO vertexScreenVBO;
 
-    public BuilderProperties(Window window) {
+    public RenderProperties(Window window) {
         this.window = window;
     }
 

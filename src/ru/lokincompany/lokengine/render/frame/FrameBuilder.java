@@ -14,10 +14,10 @@ public class FrameBuilder {
     private Vector<PostProcessingActionWorker> postProcessingActionWorkers = new Vector<>();
     private PartsBuilder scenePartsBuilder;
     private PartsBuilder GUIPartsBuilder;
-    private BuilderProperties builderProperties;
+    private RenderProperties renderProperties;
 
     public FrameBuilder(Window correctWin) {
-        builderProperties = new BuilderProperties(correctWin);
+        renderProperties = new RenderProperties(correctWin);
 
         scenePartsBuilder = new PartsBuilder(correctWin.getResolution());
         GUIPartsBuilder = new PartsBuilder(correctWin.getResolution());
@@ -31,8 +31,8 @@ public class FrameBuilder {
         return GUIPartsBuilder;
     }
 
-    public BuilderProperties getBuilderProperties() {
-        return builderProperties;
+    public RenderProperties getRenderProperties() {
+        return renderProperties;
     }
 
     public void addPostProcessingActionWorker(PostProcessingActionWorker worker) {
@@ -52,13 +52,13 @@ public class FrameBuilder {
         int sceneFrame = -1;
         int GUIBuild = -1;
 
-        Window window = builderProperties.getBuilderWindow();
+        Window window = renderProperties.getBuilderWindow();
 
         if (scenePartsBuilder.frameParts.size() > 0) {
-            builderProperties.useShader(builderProperties.getObjectShader());
+            renderProperties.useShader(renderProperties.getObjectShader());
             window.getCamera().updateView();
 
-            sceneFrame = scenePartsBuilder.build(DrawMode.Scene, builderProperties);
+            sceneFrame = scenePartsBuilder.build(DrawMode.Scene, renderProperties);
 
             for (PostProcessingActionWorker postProcessingActionWorker : postProcessingActionWorkers) {
                 sceneFrame = postProcessingActionWorker.render(sceneFrame);
@@ -67,9 +67,9 @@ public class FrameBuilder {
 
         window.getCanvas().update(GUIPartsBuilder, window.getCanvas().properties);
         if (GUIPartsBuilder.frameParts.size() > 0)
-            GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI, builderProperties);
+            GUIBuild = GUIPartsBuilder.build(DrawMode.RawGUI, renderProperties);
 
-        builderProperties.useShader(builderProperties.getDisplayShader());
+        renderProperties.useShader(renderProperties.getDisplayShader());
 
         GL11.glClearColor(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);

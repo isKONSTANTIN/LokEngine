@@ -2,8 +2,8 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 
 import ru.lokincompany.lokengine.gui.guiobjects.GUIFreeTextDrawer;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -37,11 +37,11 @@ public class GUIGraphFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {
+    public void init(RenderProperties renderProperties) {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
+    public void partRender(RenderProperties renderProperties) {
 
         glBegin(GL_LINES);
         glColor4f(color2.red, color2.green, color2.blue, color2.alpha);

@@ -1,6 +1,5 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
-import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.loaders.FontLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
@@ -103,7 +102,7 @@ public class GUIText extends GUIObject {
         super.setSize(new Vector2i(framePart.getWidth(), framePart.getHeight()));
     }
 
-    public void setMaxSize(Vector2i maxSize){
+    public void setMaxSize(Vector2i maxSize) {
         framePart.maxSize = maxSize;
     }
 

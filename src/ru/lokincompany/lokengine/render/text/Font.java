@@ -106,8 +106,8 @@ public class Font {
                 continue;
             }
 
-            if (maxSize != null){
-                if (maxSize.x > 0 && drawX + g.width > maxSize.x + position.x){
+            if (maxSize != null) {
+                if (maxSize.x > 0 && drawX + g.width > maxSize.x + position.x) {
                     if (maxSize.y > 0 && drawY + fontHeight + g.height > maxSize.y + position.y)
                         break;
                     drawX = position.x;

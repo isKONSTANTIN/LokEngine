@@ -4,9 +4,9 @@ import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
 import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.blur.BlurActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
@@ -33,12 +33,12 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         filterShader = ShaderLoader.loadShader("#/resources/shaders/bloom/BloomFilterVertShader.glsl", "#/resources/shaders/bloom/BloomFilterFragShader.glsl");
         mixerShader = ShaderLoader.loadShader("#/resources/shaders/bloom/BloomMixerVertShader.glsl", "#/resources/shaders/bloom/BloomMixerFragShader.glsl");
 
-        window.getFrameBuilder().getBuilderProperties().useShader(filterShader);
+        window.getFrameBuilder().getRenderProperties().useShader(filterShader);
         window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-        window.getFrameBuilder().getBuilderProperties().useShader(mixerShader);
+        window.getFrameBuilder().getRenderProperties().useShader(mixerShader);
         window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
 
-        window.getFrameBuilder().getBuilderProperties().unUseShader();
+        window.getFrameBuilder().getRenderProperties().unUseShader();
     }
 
     public BloomSettings getBloomSettings() {
@@ -55,17 +55,17 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         if (blurAction == 0) return sourceFrame;
 
         if (!frameBufferWorker1.getResolution().equals(window.getResolution())) {
-            window.getFrameBuilder().getBuilderProperties().useShader(filterShader);
+            window.getFrameBuilder().getRenderProperties().useShader(filterShader);
             window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-            window.getFrameBuilder().getBuilderProperties().useShader(mixerShader);
+            window.getFrameBuilder().getRenderProperties().useShader(mixerShader);
             window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
         }
 
         BlurActionWorker blur = window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class);
-        BuilderProperties builderProperties = window.getFrameBuilder().getBuilderProperties();
+        RenderProperties renderProperties = window.getFrameBuilder().getRenderProperties();
 
-        frameBufferWorker1.bindFrameBuffer(DrawMode.Display, builderProperties);
-        builderProperties.useShader(filterShader);
+        frameBufferWorker1.bindFrameBuffer(DrawMode.Display, renderProperties);
+        renderProperties.useShader(filterShader);
         filterShader.setUniformData("BrightnessLimit", bloomSettings.brightnessLimit);
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -74,15 +74,15 @@ public class BloomActionWorker extends PostProcessingActionWorker {
 
         frameBufferWorker1.unbindCurrentFrameBuffer();
 
-        frameBufferWorker2.bindFrameBuffer(DrawMode.Display, builderProperties);
+        frameBufferWorker2.bindFrameBuffer(DrawMode.Display, renderProperties);
         glDisable(GL_ALPHA_TEST);
 
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         int blured = blur.onceRender(frameBufferWorker1.getTexture(), blurAction);
 
-        builderProperties.useShader(mixerShader);
-        DisplayDrawer.bindTexture("frame2", blured, 1, builderProperties);
+        renderProperties.useShader(mixerShader);
+        DisplayDrawer.bindTexture("frame2", blured, 1, renderProperties);
         DisplayDrawer.renderScreen(sourceFrame, window);
 
         frameBufferWorker2.unbindCurrentFrameBuffer();

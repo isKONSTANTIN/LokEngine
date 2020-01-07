@@ -11,8 +11,8 @@ public abstract class FramePart {
         this.frameType = frameType;
     }
 
-    public abstract void partRender(BuilderProperties builderProperties);
+    public abstract void partRender(RenderProperties renderProperties);
 
-    public abstract void init(BuilderProperties builderProperties);
+    public abstract void init(RenderProperties renderProperties);
 
 }

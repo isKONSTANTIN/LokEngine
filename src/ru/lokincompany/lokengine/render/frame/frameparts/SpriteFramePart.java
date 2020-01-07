@@ -7,8 +7,8 @@ import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.tools.color.Color;
 
@@ -34,10 +34,10 @@ public class SpriteFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {
+    public void init(RenderProperties renderProperties) {
         vao.bind();
 
-        VBO uvBuffer = sprite.uvVBO != null ? sprite.uvVBO : builderProperties.getUVVBO();
+        VBO uvBuffer = sprite.uvVBO != null ? sprite.uvVBO : renderProperties.getUVVBO();
 
         glEnableVertexAttribArray(0);
         sprite.vertexVBO.bind();
@@ -65,19 +65,19 @@ public class SpriteFramePart extends FramePart {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
+    public void partRender(RenderProperties renderProperties) {
         if (shader == null)
-            shader = builderProperties.getObjectShader();
+            shader = renderProperties.getObjectShader();
 
-        if (builderProperties.getActiveShader() == null || !shader.equals(builderProperties.getActiveShader())) {
-            builderProperties.useShader(shader);
+        if (renderProperties.getActiveShader() == null || !shader.equals(renderProperties.getActiveShader())) {
+            renderProperties.useShader(shader);
         }
 
         shader.setUniformData("ObjectSize", (float) sprite.size * 2);
         shader.setUniformData("ObjectColor", new Vector4f(color.red, color.green, color.blue, color.alpha));
         shader.setUniformData("ObjectModelMatrix", MatrixLoader.createModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 
-        int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : builderProperties.getUnknownTexture().buffer;
+        int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : renderProperties.getUnknownTexture().buffer;
 
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 

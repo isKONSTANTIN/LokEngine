@@ -1,8 +1,8 @@
 package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 
 import ru.lokincompany.lokengine.render.enums.FramePartType;
-import ru.lokincompany.lokengine.render.frame.BuilderProperties;
 import ru.lokincompany.lokengine.render.frame.FramePart;
+import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.text.Font;
 import ru.lokincompany.lokengine.render.text.TextColorShader;
 import ru.lokincompany.lokengine.tools.color.Color;
@@ -43,7 +43,7 @@ public class GUITextFramePart extends FramePart {
     }
 
     @Override
-    public void partRender(BuilderProperties builderProperties) {
+    public void partRender(RenderProperties renderProperties) {
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (color != null) {
             font.drawText(text, new Vector2i(position.x, position.y), maxSize, color);
@@ -53,6 +53,6 @@ public class GUITextFramePart extends FramePart {
     }
 
     @Override
-    public void init(BuilderProperties builderProperties) {
+    public void init(RenderProperties renderProperties) {
     }
 }

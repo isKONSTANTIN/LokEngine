@@ -26,7 +26,7 @@ public class FrameBufferWorker {
     private Vector2i bufferResolution;
     private int depth;
     private DrawMode lastDrawMode;
-    private BuilderProperties activeProperties;
+    private RenderProperties activeProperties;
 
     public FrameBufferWorker(Vector2i resolution) {
         sourceResolution = resolution;
@@ -54,7 +54,7 @@ public class FrameBufferWorker {
         initialiseFrameBuffer(bufferResolution.x, bufferResolution.y);
     }
 
-    public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties, Vector2i offset) {
+    public void bindFrameBuffer(DrawMode drawMode, RenderProperties properties, Vector2i offset) {
         if (!sourceResolution.equals(bufferResolution)) {
             setResolution(sourceResolution);
         }
@@ -64,7 +64,7 @@ public class FrameBufferWorker {
         properties.setDrawMode(drawMode, bufferResolution, new Vector4i(bufferResolution.x, bufferResolution.y, offset.x, offset.y));
     }
 
-    public void bindFrameBuffer(DrawMode drawMode, BuilderProperties properties) {
+    public void bindFrameBuffer(DrawMode drawMode, RenderProperties properties) {
         bindFrameBuffer(drawMode, properties, new Vector2i());
     }
 
@@ -92,7 +92,7 @@ public class FrameBufferWorker {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
     }
 
-    private void bindFrameBuffer(int frameBuffer, BuilderProperties properties) {
+    private void bindFrameBuffer(int frameBuffer, RenderProperties properties) {
         lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
         int[] view = new int[4];
         glGetIntegerv(GL_VIEWPORT, view);
