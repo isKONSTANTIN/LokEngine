@@ -23,6 +23,7 @@ public class DisplayDrawer {
 
     public static void renderScreen(int frameTextureBuffer, Window window) {
         bindTexture("frame", frameTextureBuffer, 0, window.getFrameBuilder().getRenderProperties());
+        window.getVAO().bind();
 
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
@@ -54,6 +55,8 @@ public class DisplayDrawer {
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
+
+        window.getVAO().unbind();
     }
 
 }

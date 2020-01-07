@@ -76,6 +76,10 @@ public class Window {
         return id;
     }
 
+    public VAO getVAO(){
+        return vao;
+    }
+
     public void setCloseEvent(WindowEvent event) {
         Window window = this;
         glfwSetWindowCloseCallback(id, new GLFWWindowCloseCallback() {
