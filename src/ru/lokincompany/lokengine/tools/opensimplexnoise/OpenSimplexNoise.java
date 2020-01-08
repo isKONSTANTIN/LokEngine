@@ -78,17 +78,7 @@ public abstract class OpenSimplexNoise {
     }
 
     public OpenSimplexNoise(String seed) {
-        this(seed, text -> {
-            long longSeed = 0;
-
-            char[] symbols = seed.toCharArray();
-
-            for (int i = 1; i <= symbols.length; i++) {
-                longSeed += Math.pow((int) symbols[i - 1], i);
-            }
-
-            return longSeed;
-        });
+        this(seed, DefaultStringToLongTransformer.get());
     }
 
     static int fastFloor(double x) {
