@@ -36,6 +36,10 @@ public class Font {
         return fontHeight;
     }
 
+    public float getSpaceSize(){
+        return spaceSize;
+    }
+
     public int getWidth(CharSequence text) {
         int width = 0;
         int lineWidth = 0;
