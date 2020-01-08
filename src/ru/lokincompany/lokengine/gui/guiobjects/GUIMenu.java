@@ -154,8 +154,10 @@ public class GUIMenu extends GUIObject {
         int x = gap / 2;
 
         for (String key : itemsNames) {
-            int widthText = drawer.getFont().getWidth(key);
-            int heightText = drawer.getFont().getHeight(key);
+            Vector2i textSize = drawer.getFont().getSize(key, null);
+
+            int widthText = textSize.x;
+            int heightText = textSize.y;
 
             if (x + widthText > size.x) break;
             Vector2i itemPos = new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y);

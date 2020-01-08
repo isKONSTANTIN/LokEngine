@@ -128,7 +128,7 @@ public class GUITabs extends GUIObject {
         int gap = (int)(drawer.getFont().getSpaceSize() * 1.5f);
 
         for (String key : tabsNames) {
-            int widthText = drawer.getFont().getWidth(key);
+            int widthText = drawer.getFont().getSize(key, null).x;
 
             if (x + widthText > size.x) break;
             boolean inField = properties.mouseRaycastStatus.mouse.inField(new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y), new Vector2i(widthText, titleSize));

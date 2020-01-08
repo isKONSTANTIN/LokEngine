@@ -23,8 +23,9 @@ public class GUITextField extends GUIObject {
     public GUITextField(Vector2i position, GUITextFieldFramePart customFramePart) {
         super(position, new Vector2i(0, 0));
         this.framePart = customFramePart;
-        this.size.y = framePart.getHeight();
-        this.size.x = framePart.getWidth();
+        Vector2i textSize = framePart.getSize();
+        this.size.x = textSize.x;
+        this.size.y = textSize.y;
         this.touchable = true;
         framePart.position = this.position;
     }
@@ -38,8 +39,9 @@ public class GUITextField extends GUIObject {
 
         if (size.x < 1 || size.y < 1) {
             if (canResize) {
-                this.size.y = framePart.getHeight();
-                this.size.x = framePart.getWidth();
+                Vector2i textSize = framePart.getSize();
+                this.size.x = textSize.x;
+                this.size.y = textSize.y;
             }
         }
 
@@ -118,8 +120,9 @@ public class GUITextField extends GUIObject {
     public void updateText(String text) {
         framePart.text = text;
         if (canResize) {
-            this.size.y = framePart.getHeight();
-            this.size.x = framePart.getWidth();
+            Vector2i textSize = framePart.getSize();
+            this.size.x = textSize.x;
+            this.size.y = textSize.y;
         }
     }
 
@@ -144,7 +147,7 @@ public class GUITextField extends GUIObject {
     }
 
     public Vector2i getTextSize() {
-        return new Vector2i(framePart.getWidth(), framePart.getHeight());
+        return framePart.getSize();
     }
 
     @Override

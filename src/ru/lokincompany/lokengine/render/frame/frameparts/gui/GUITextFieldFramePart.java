@@ -34,8 +34,9 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     @Override
     public void partRender(RenderProperties renderProperties) {
         int fontHeight = font.getFontHeight();
+        Vector2i textSize = font.getSize(text, maxSize);
 
-        int xGap = (centralizeText ? (int) (size.x / 2f - font.getWidth(text) / 2f) : 0);
+        int xGap = (centralizeText ? (int) (size.x / 2f - textSize.x / 2f) : 0);
         int yGap = (int) (size.y / 2f - fontHeight / 2f) + 1;
 
         int fontXpos = position.x + xGap;
@@ -52,13 +53,13 @@ public class GUITextFieldFramePart extends GUITextFramePart {
 
         glEnd();
 
-        Vector2i endPosText;
+        Vector2i endPosText = new Vector2i(textSize.x + fontXpos, textSize.y + fontYpos);
         Vector2i maxPos = new Vector2i(size.x - 1 - xGap, size.y - yGap);
 
         if (color != null) {
-            endPosText = font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, charPos -> color);
+            font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, charPos -> color);
         } else {
-            endPosText = font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, shader);
+            font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, shader);
         }
 
         if (timer.checkTime()) {

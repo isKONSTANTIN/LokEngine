@@ -19,7 +19,6 @@ public class GUITextFramePart extends FramePart {
     public Color color;
     public TextColorShader shader;
     public Vector2i maxSize;
-    public Vector2i lastRenderPos = new Vector2i();
 
     public GUITextFramePart(String text, Font font, Color color) {
         super(FramePartType.GUI);
@@ -35,21 +34,17 @@ public class GUITextFramePart extends FramePart {
         this.shader = shader;
     }
 
-    public int getWidth() {
-        return lastRenderPos.x - position.x;
-    }
-
-    public int getHeight() {
-        return lastRenderPos.y - position.y + font.getFontHeight();
+    public Vector2i getSize(){
+        return font.getSize(text, maxSize);
     }
 
     @Override
     public void partRender(RenderProperties renderProperties) {
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (color != null) {
-            lastRenderPos = font.drawText(text, new Vector2i(position.x, position.y), maxSize, color);
+            font.drawText(text, new Vector2i(position.x, position.y), maxSize, color);
         } else {
-            lastRenderPos = font.drawText(text, new Vector2i(position.x, position.y), maxSize, shader);
+            font.drawText(text, new Vector2i(position.x, position.y), maxSize, shader);
         }
     }
 

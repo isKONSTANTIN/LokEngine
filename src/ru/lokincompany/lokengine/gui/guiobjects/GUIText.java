@@ -27,7 +27,7 @@ public class GUIText extends GUIObject {
         super(position, new Vector2i(0, 0));
         framePart = new GUITextFramePart(text, FontLoader.createFont(new Font(fontName, fontStyle, size), antiAlias), shader);
 
-        super.setSize(new Vector2i(framePart.getWidth(), framePart.getHeight()));
+        super.setSize(framePart.getSize());
 
         this.canResize = canResize;
         framePart.position = getPosition();
@@ -99,7 +99,7 @@ public class GUIText extends GUIObject {
 
     public void updateText(String text) {
         framePart.text = text;
-        super.setSize(new Vector2i(framePart.getWidth(), framePart.getHeight()));
+        super.setSize(framePart.getSize());
     }
 
     public void setMaxSize(Vector2i maxSize) {
@@ -114,7 +114,7 @@ public class GUIText extends GUIObject {
 
     @Override
     public Vector2i getSize() {
-        return new Vector2i(framePart.getWidth(), framePart.getHeight());
+        return framePart.getSize();
     }
 
     @Override

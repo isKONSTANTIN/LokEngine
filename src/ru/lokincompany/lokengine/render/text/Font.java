@@ -40,54 +40,54 @@ public class Font {
         return spaceSize;
     }
 
-    public int getWidth(CharSequence text) {
-        int width = 0;
-        int lineWidth = 0;
+    public Vector2i getSize(String text, Vector2i maxSize){
+        Vector2i result = new Vector2i();
+
+        int drawX = 0;
+        int drawY = 0;
+
         for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            Glyph g = glyphs.get(c);
+            char ch = text.charAt(i);
+            if (ch == '\n') {
+                drawY += fontHeight;
+                result.y = Math.max(drawY, result.y);
+                drawX = 0;
+                continue;
+            }
+            if (ch == '\r') continue;
+
+            Glyph g = glyphs.get(ch);
+
             if (g == null) {
-                lineWidth += spaceSize;
+                drawX += spaceSize;
+                result.x = Math.max(drawX, result.x);
                 continue;
             }
 
-            if (c == '\r') continue;
-
-            if (c == '\n') {
-                width = Math.max(width, lineWidth);
-                lineWidth = 0;
-                continue;
+            if (maxSize != null) {
+                if (maxSize.x > 0 && drawX + g.width > maxSize.x) {
+                    if (maxSize.y > 0 && drawY + fontHeight + g.height > maxSize.y)
+                        break;
+                    drawX = 0;
+                    drawY += fontHeight;
+                }
             }
 
-            lineWidth += g.width;
+            int width = drawX + g.width;
+            int height = drawY + g.height;
+
+            result.x = Math.max(width, result.x);
+            result.y = Math.max(height, result.y);
+
             spaceSize += g.width;
             spaceSize /= 2f;
+            drawX += g.width;
         }
-        width = Math.max(width, lineWidth);
-        return width;
+
+        return result;
     }
 
-    public int getHeight(CharSequence text) {
-        int height = 0;
-        int lineHeight = 0;
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            Glyph g = glyphs.get(c);
-            if (g == null) continue;
-            if (c == '\r') continue;
-            if (c == '\n') {
-                height += lineHeight;
-                lineHeight = 0;
-                continue;
-            }
-
-            lineHeight = Math.max(lineHeight, g.height);
-        }
-        height += lineHeight;
-        return height;
-    }
-
-    public Vector2i drawText(String text, Vector2i position, Vector2i maxSize, TextColorShader shader) {
+    public void drawText(String text, Vector2i position, Vector2i maxSize, TextColorShader shader) {
         int drawX = position.x;
         int drawY = position.y;
 
@@ -148,24 +148,22 @@ public class Font {
         }
         glEnd();
         GL11.glBindTexture(GL_TEXTURE_2D, 0);
-
-        return new Vector2i(drawX, drawY);
     }
 
-    public Vector2i drawText(String text, Vector2i position, Vector2i maxSize, Color color) {
-        return drawText(text, position, maxSize, charPos -> color);
+    public void drawText(String text, Vector2i position, Vector2i maxSize, Color color) {
+        drawText(text, position, maxSize, charPos -> color);
     }
 
-    public Vector2i drawText(String text, Vector2i position, Vector2i maxSize) {
-        return drawText(text, position, maxSize, Colors.white());
+    public void drawText(String text, Vector2i position, Vector2i maxSize) {
+        drawText(text, position, maxSize, Colors.white());
     }
 
-    public Vector2i drawText(String text, Vector2i position, Color color) {
-        return drawText(text, position, null, color);
+    public void drawText(String text, Vector2i position, Color color) {
+        drawText(text, position, null, color);
     }
 
-    public Vector2i drawText(String text, Vector2i position) {
-        return drawText(text, position, Colors.white());
+    public void drawText(String text, Vector2i position) {
+        drawText(text, position, Colors.white());
     }
 
     public void dispose() {
