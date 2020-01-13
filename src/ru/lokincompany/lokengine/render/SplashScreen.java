@@ -56,8 +56,8 @@ public class SplashScreen {
 
             GL11.glEnd();
         }
+        window.getVAO().bind();
         glfwSwapBuffers(window.getId());
+        window.getVAO().unbind();
     }
-
-
 }
