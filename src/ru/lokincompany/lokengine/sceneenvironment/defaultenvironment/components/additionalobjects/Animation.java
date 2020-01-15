@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects;
 
 import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
@@ -29,10 +29,10 @@ public class Animation implements Saveable {
 
         vertexVBO = new VBO(new float[]
                 {
-                        -size.x / 2f * 0.000520833f, -size.y / 2f * 0.000520833f,
-                        -size.x / 2f * 0.000520833f, size.y / 2f * 0.000520833f,
-                        size.x / 2f * 0.000520833f, size.y / 2f * 0.000520833f,
-                        size.x / 2f * 0.000520833f, -size.y / 2f * 0.000520833f
+                        -size.x / 2f * 0.0005f, -size.y / 2f * 0.0005f,
+                        -size.x / 2f * 0.0005f, size.y / 2f * 0.0005f,
+                        size.x / 2f * 0.0005f, size.y / 2f * 0.0005f,
+                        size.x / 2f * 0.0005f, -size.y / 2f * 0.0005f
                 }
         );
     }
@@ -51,10 +51,10 @@ public class Animation implements Saveable {
 
         vertexVBO = new VBO(new float[]
                 {
-                        -size.x / 2f * 0.000520833f, -size.y / 2f * 0.000520833f,
-                        -size.x / 2f * 0.000520833f, size.y / 2f * 0.000520833f,
-                        size.x / 2f * 0.000520833f, size.y / 2f * 0.000520833f,
-                        size.x / 2f * 0.000520833f, -size.y / 2f * 0.000520833f
+                        -size.x / 2f * 0.0005f, -size.y / 2f * 0.0005f,
+                        -size.x / 2f * 0.0005f, size.y / 2f * 0.0005f,
+                        size.x / 2f * 0.0005f, size.y / 2f * 0.0005f,
+                        size.x / 2f * 0.0005f, -size.y / 2f * 0.0005f
                 }
         );
     }

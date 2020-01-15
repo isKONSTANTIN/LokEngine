@@ -1,12 +1,12 @@
-package ru.lokincompany.lokengine.sceneenvironment.components;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components;
 
 import org.lwjgl.util.vector.Vector4f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.SpriteFramePart;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Animation;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Animation;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.saveworker.ArraySaver;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;

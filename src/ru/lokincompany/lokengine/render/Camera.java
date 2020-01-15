@@ -20,7 +20,7 @@ public class Camera {
     }
 
     public void updateProjection(float width, float height) {
-        float projectionFieldOfView = fieldOfView * 0.000520833f * 4;
+        float projectionFieldOfView = fieldOfView * 0.0005f * 4;
         window.getFrameBuilder().getRenderProperties().getActiveShader().setUniformData("Projection", MatrixLoader.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
@@ -31,8 +31,8 @@ public class Camera {
     public Vector2f screenPointToScene(Vector2i point) {
         Vector2f screenCenter = new Vector2f(window.getResolution().x / 2f, window.getResolution().y / 2f);
         return new Vector2f(
-                0.520833f * fieldOfView * ((point.x - screenCenter.x) / screenCenter.x) * screenRatio + position.x,
-                0.520833f * fieldOfView * ((window.getResolution().y - point.y - screenCenter.y) / screenCenter.y) + position.y
+                0.5f * fieldOfView * ((point.x - screenCenter.x) / screenCenter.x) * screenRatio + position.x,
+                0.5f * fieldOfView * ((window.getResolution().y - point.y - screenCenter.y) / screenCenter.y) + position.y
         );
     }
 
@@ -40,8 +40,8 @@ public class Camera {
         Vector2f screenCenter = new Vector2f(window.getResolution().x / 2f, window.getResolution().y / 2f);
 
         return new Vector2i(
-                Math.round((point.x - position.x) / 0.520833f / fieldOfView / screenRatio * screenCenter.x + screenCenter.x),
-                Math.round(window.getResolution().y - ((point.y - position.y) / 0.520833f / fieldOfView * screenCenter.y + screenCenter.y))
+                Math.round((point.x - position.x) / 0.5f / fieldOfView / screenRatio * screenCenter.x + screenCenter.x),
+                Math.round(window.getResolution().y - ((point.y - position.y) / 0.5f / fieldOfView * screenCenter.y + screenCenter.y))
         );
     }
 

@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.sceneenvironment.components;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -9,10 +9,10 @@ import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.loaders.MatrixLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.sceneenvironment.PostUpdateEvent;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody.Rigidbody;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody.shapes.Shape;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.PostUpdateEvent;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.rigidbody.Rigidbody;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.rigidbody.shapes.Shape;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.saveworker.SubclassSaver;

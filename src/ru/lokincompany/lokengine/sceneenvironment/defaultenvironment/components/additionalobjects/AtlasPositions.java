@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects;
 
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.Texture;

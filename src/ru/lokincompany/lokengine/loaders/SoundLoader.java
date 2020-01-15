@@ -2,9 +2,9 @@ package ru.lokincompany.lokengine.loaders;
 
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.openal.AL10;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound.OggSound;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound.RawWavSound;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound.Sound;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.sound.OggSound;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.sound.RawWavSound;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.sound.Sound;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.WaveData;
 

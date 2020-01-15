@@ -1,19 +1,18 @@
-package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.sound;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.sound;
 
 import ru.lokincompany.lokengine.loaders.SoundLoader;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
-
-public class OggSound extends Sound {
-
-    public OggSound() {
+public class RawWavSound extends Sound {
+    public RawWavSound() {
     }
 
-    public OggSound(String path) {
+    public RawWavSound(String path) {
         this.path = path;
     }
 
+    @Override
     public void update() {
     }
 
@@ -25,7 +24,7 @@ public class OggSound extends Sound {
     @Override
     public Saveable load(String savedString) {
         try {
-            buffer = SoundLoader.loadOGG(savedString).buffer;
+            buffer = SoundLoader.loadWAV(savedString).buffer;
         } catch (Exception e) {
             Logger.warning("Fail load raw wav!", "LokEngine_RawWavSound");
             e.printStackTrace();

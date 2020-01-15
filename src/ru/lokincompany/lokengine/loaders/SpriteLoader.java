@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.loaders;
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 public class SpriteLoader {
@@ -11,10 +11,10 @@ public class SpriteLoader {
     public static Sprite loadSprite(Texture texture, float vertexSize) {
         VBO vertexVBO = new VBO(new float[]
                 {
-                        -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
-                        -texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
-                        texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
-                        texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f,
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f
                 }
         );
 
@@ -29,10 +29,10 @@ public class SpriteLoader {
 
         VBO vertexVBO = new VBO(new float[]
                 {
-                        -texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f,
-                        -texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
-                        texture.sizeX * vertexSize / 2f * 0.000520833f, texture.sizeY * vertexSize / 2f * 0.000520833f,
-                        texture.sizeX * vertexSize / 2f * 0.000520833f, -texture.sizeY * vertexSize / 2f * 0.000520833f
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f,
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f
                 }
         );
 
@@ -49,10 +49,10 @@ public class SpriteLoader {
 
         VBO vertexVBO = new VBO(new float[]
                 {
-                        -tex.sizeX * vertexSize / 2f * 0.000520833f, -tex.sizeY * vertexSize / 2f * 0.000520833f,
-                        -tex.sizeX * vertexSize / 2f * 0.000520833f, tex.sizeY * vertexSize / 2f * 0.000520833f,
-                        tex.sizeX * vertexSize / 2f * 0.000520833f, tex.sizeY * vertexSize / 2f * 0.000520833f,
-                        tex.sizeX * vertexSize / 2f * 0.000520833f, -tex.sizeY * vertexSize / 2f * 0.000520833f
+                        -tex.sizeX * vertexSize / 2f * 0.0005f, -tex.sizeY * vertexSize / 2f * 0.0005f,
+                        -tex.sizeX * vertexSize / 2f * 0.0005f, tex.sizeY * vertexSize / 2f * 0.0005f,
+                        tex.sizeX * vertexSize / 2f * 0.0005f, tex.sizeY * vertexSize / 2f * 0.0005f,
+                        tex.sizeX * vertexSize / 2f * 0.0005f, -tex.sizeY * vertexSize / 2f * 0.0005f
                 }
         );
 

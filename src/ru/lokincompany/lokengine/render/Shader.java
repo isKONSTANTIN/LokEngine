@@ -11,6 +11,7 @@ import ru.lokincompany.lokengine.tools.vectori.Vector3i;
 import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 import java.nio.FloatBuffer;
+import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL20.*;
 
@@ -19,6 +20,8 @@ public class Shader implements Saveable {
     public int program;
     public String vertPath;
     public String fragPath;
+
+    HashMap<String, Integer> uniformsName = new HashMap<>();
 
     public Shader() {
     }
@@ -34,57 +37,67 @@ public class Shader implements Saveable {
         return objs.program == program;
     }
 
+    protected int getUniformLocationID(String name){
+        if (!uniformsName.containsKey(name)){
+            int id = glGetUniformLocation(program, name);
+            uniformsName.put(name, id);
+            return id;
+        }else{
+            return uniformsName.get(name);
+        }
+    }
+
     public void setUniformData(String uniformName, int data) {
-        glUniform1i(glGetUniformLocation(program, uniformName), data);
+        glUniform1i(getUniformLocationID(uniformName), data);
     }
 
     public void setUniformData(String uniformName, Vector2i data) {
-        glUniform2i(glGetUniformLocation(program, uniformName), data.x, data.y);
+        glUniform2i(getUniformLocationID(uniformName), data.x, data.y);
     }
 
     public void setUniformData(String uniformName, Vector3i data) {
-        glUniform3i(glGetUniformLocation(program, uniformName), data.x, data.y, data.z);
+        glUniform3i(getUniformLocationID(uniformName), data.x, data.y, data.z);
     }
 
     public void setUniformData(String uniformName, Vector4i data) {
-        glUniform4i(glGetUniformLocation(program, uniformName), data.x, data.y, data.z, data.w);
+        glUniform4i(getUniformLocationID(uniformName), data.x, data.y, data.z, data.w);
     }
 
     public void setUniformData(String uniformName, float data) {
-        glUniform1f(glGetUniformLocation(program, uniformName), data);
+        glUniform1f(getUniformLocationID(uniformName), data);
     }
 
     public void setUniformData(String uniformName, Vector2f data) {
-        glUniform2f(glGetUniformLocation(program, uniformName), data.x, data.y);
+        glUniform2f(getUniformLocationID(uniformName), data.x, data.y);
     }
 
     public void setUniformData(String uniformName, Vector3f data) {
-        glUniform3f(glGetUniformLocation(program, uniformName), data.x, data.y, data.z);
+        glUniform3f(getUniformLocationID(uniformName), data.x, data.y, data.z);
     }
 
     public void setUniformData(String uniformName, Vector4f data) {
-        glUniform4f(glGetUniformLocation(program, uniformName), data.x, data.y, data.z, data.w);
+        glUniform4f(getUniformLocationID(uniformName), data.x, data.y, data.z, data.w);
     }
 
     public void setUniformData(String uniformName, Matrix2f data) {
         FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(8);
         data.store(matrixBuffer);
         matrixBuffer.flip();
-        glUniformMatrix2fv(glGetUniformLocation(program, uniformName), false, matrixBuffer);
+        glUniformMatrix2fv(getUniformLocationID(uniformName), false, matrixBuffer);
     }
 
     public void setUniformData(String uniformName, Matrix3f data) {
         FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(12);
         data.store(matrixBuffer);
         matrixBuffer.flip();
-        glUniformMatrix3fv(glGetUniformLocation(program, uniformName), false, matrixBuffer);
+        glUniformMatrix3fv(getUniformLocationID(uniformName), false, matrixBuffer);
     }
 
     public void setUniformData(String uniformName, Matrix4f data) {
         FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
         data.store(matrixBuffer);
         matrixBuffer.flip();
-        glUniformMatrix4fv(glGetUniformLocation(program, uniformName), false, matrixBuffer);
+        glUniformMatrix4fv(getUniformLocationID(uniformName), false, matrixBuffer);
     }
 
     @Override

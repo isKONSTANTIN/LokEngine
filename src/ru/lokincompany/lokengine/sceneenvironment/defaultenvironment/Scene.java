@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.sceneenvironment;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;

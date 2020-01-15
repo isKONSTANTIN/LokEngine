@@ -1,15 +1,15 @@
-package ru.lokincompany.lokengine.sceneenvironment.components;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components;
 
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.ParticleSystemFramePart;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.particlesystem.DefaultParticleHandler;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.particlesystem.Particle;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.particlesystem.ParticleHandler;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem.DefaultParticleHandler;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem.Particle;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem.ParticleHandler;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 import java.util.ArrayList;

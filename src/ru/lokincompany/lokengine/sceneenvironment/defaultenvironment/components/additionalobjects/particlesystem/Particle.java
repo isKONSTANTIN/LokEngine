@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.particlesystem;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem;
 
 import org.lwjgl.util.vector.Vector2f;
 

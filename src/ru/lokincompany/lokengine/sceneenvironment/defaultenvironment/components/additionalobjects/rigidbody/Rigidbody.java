@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.rigidbody;
 
 import org.jbox2d.dynamics.Body;
 import ru.lokincompany.lokengine.tools.Base64;

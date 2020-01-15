@@ -4,8 +4,8 @@ import ru.lokincompany.lokengine.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurTuning;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomActionWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomSettings;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.sceneenvironment.components.SpriteComponent;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.SpriteComponent;
 import ru.lokincompany.lokengine.tools.color.Colors;
 
 public class BloomTest extends ApplicationDefault {

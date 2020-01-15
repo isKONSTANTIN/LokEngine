@@ -5,7 +5,7 @@ import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
-import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Sprite;
 
 import java.util.ArrayList;
 

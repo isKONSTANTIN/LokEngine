@@ -1,9 +1,9 @@
-package ru.lokincompany.lokengine.sceneenvironment;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment;
 
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.sceneenvironment.components.ComponentsList;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.ComponentsList;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 

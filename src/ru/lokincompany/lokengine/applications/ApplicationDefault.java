@@ -9,7 +9,7 @@ import ru.lokincompany.lokengine.render.postprocessing.workers.bloom.BloomAction
 import ru.lokincompany.lokengine.render.postprocessing.workers.blur.BlurActionWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection.ColorCorrectionActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.sceneenvironment.Scene;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.Scene;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;

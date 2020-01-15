@@ -1,8 +1,8 @@
-package ru.lokincompany.lokengine.sceneenvironment.components;
+package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components;
 
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 public abstract class Component implements Saveable {
