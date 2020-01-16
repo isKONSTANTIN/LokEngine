@@ -37,7 +37,7 @@ public class BloomSettings {
         new BlurAction(new Vector2i(), frameBufferWorker.getResolution(), blurTuning).apply();
 
         frameBufferWorker.unbindCurrentFrameBuffer();
-        return frameBufferWorker.getTexture();
+        return frameBufferWorker.getTextureBuffer();
     }
 
 }

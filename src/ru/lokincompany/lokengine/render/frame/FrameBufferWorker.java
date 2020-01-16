@@ -18,13 +18,15 @@ import static org.lwjgl.opengl.GL30.GL_FRAMEBUFFER_BINDING;
 
 public class FrameBufferWorker {
     private int frameBuffer;
-    private int texture;
-    private int lastBuffer;
+    private int depthBuffer;
+    private int textureBuffer;
+
+    private int lastFrameBuffer;
+
     private Vector2i lastView = new Vector2i();
     private Vector4i lastOrthoView = new Vector4i();
     private Vector2i sourceResolution;
     private Vector2i bufferResolution;
-    private int depth;
     private DrawMode lastDrawMode;
     private RenderProperties activeProperties;
 
@@ -37,8 +39,8 @@ public class FrameBufferWorker {
 
     public void cleanUp() {
         GL30.glDeleteFramebuffers(frameBuffer);
-        GL11.glDeleteTextures(texture);
-        GL11.glDeleteTextures(depth);
+        GL11.glDeleteTextures(textureBuffer);
+        GL11.glDeleteTextures(depthBuffer);
     }
 
     public Vector2i getResolution() {
@@ -69,16 +71,16 @@ public class FrameBufferWorker {
     }
 
     public void unbindCurrentFrameBuffer() {
-        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
+        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastFrameBuffer);
         activeProperties.setDrawMode(lastDrawMode, lastView, lastOrthoView);
     }
 
-    public int getTexture() {
-        return texture;
+    public int getTextureBuffer() {
+        return textureBuffer;
     }
 
-    public int getDepth() {
-        return depth;
+    public int getDepthBuffer() {
+        return depthBuffer;
     }
 
     private void initialiseFrameBuffer(int x, int y) {
@@ -86,20 +88,21 @@ public class FrameBufferWorker {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
         GL11.glDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
 
-        texture = createTextureAttachment(x, y);
-        depth = createDepthAttachment(x, y);
+        textureBuffer = createTextureAttachment(x, y);
+        depthBuffer = createDepthAttachment(x, y);
 
-        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastBuffer);
+        GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastFrameBuffer);
     }
 
     private void bindFrameBuffer(int frameBuffer, RenderProperties properties) {
-        lastBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
+        lastFrameBuffer = glGetInteger(GL_FRAMEBUFFER_BINDING);
         int[] view = new int[4];
         glGetIntegerv(GL_VIEWPORT, view);
         lastView.x = view[2];
         lastView.y = view[3];
         lastOrthoView = properties.getOrthoView();
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
     }
 

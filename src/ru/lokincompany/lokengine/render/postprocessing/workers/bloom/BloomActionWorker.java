@@ -79,14 +79,14 @@ public class BloomActionWorker extends PostProcessingActionWorker {
 
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        int blured = blur.onceRender(frameBufferWorker1.getTexture(), blurAction);
+        int blured = blur.onceRender(frameBufferWorker1.getTextureBuffer(), blurAction);
 
         renderProperties.useShader(mixerShader);
         DisplayDrawer.bindTexture("frame2", blured, 1, renderProperties);
         DisplayDrawer.renderScreen(sourceFrame, window);
 
         frameBufferWorker2.unbindCurrentFrameBuffer();
-        return frameBufferWorker2.getTexture();
+        return frameBufferWorker2.getTextureBuffer();
 
     }
 }

@@ -54,7 +54,7 @@ public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
 
         frameBufferWorker.unbindCurrentFrameBuffer();
 
-        return frameBufferWorker.getTexture();
+        return frameBufferWorker.getTextureBuffer();
     }
 
     private void checkResizeWindow() {

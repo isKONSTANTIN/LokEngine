@@ -55,7 +55,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         shader.setUniformData("direction", new Vector2f(0.866f / ((float) window.getResolution().x / (float) window.getResolution().y), 0.5f));
-        DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTexture(), window);
+        DisplayDrawer.renderScreen(blurSceneFrameWorker1.getTextureBuffer(), window);
 
         blurSceneFrameWorker2.unbindCurrentFrameBuffer();
         blurSceneFrameWorker3.bindFrameBuffer(DrawMode.Display, renderProperties);
@@ -65,12 +65,12 @@ public class BlurActionWorker extends PostProcessingActionWorker {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         shader.setUniformData("direction", new Vector2f(0.866f / ((float) window.getResolution().x / (float) window.getResolution().y), -0.5f));
-        DisplayDrawer.renderScreen(blurSceneFrameWorker2.getTexture(), window);
+        DisplayDrawer.renderScreen(blurSceneFrameWorker2.getTextureBuffer(), window);
 
         renderProperties.unUseShader();
         blurSceneFrameWorker3.unbindCurrentFrameBuffer();
 
-        return blurSceneFrameWorker3.getTexture();
+        return blurSceneFrameWorker3.getTextureBuffer();
     }
 
     public int onceRender(int sourceFrame, BlurAction blurAction) {
@@ -83,7 +83,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
 
         blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
 
-        return blurPostProcess(blurPostProcessingFrameWorker.getTexture(), sourceFrame);
+        return blurPostProcess(blurPostProcessingFrameWorker.getTextureBuffer(), sourceFrame);
     }
 
     public int onceRender(int sourceFrame, int blurAction) {
@@ -113,7 +113,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
             postProcessingActions.clear();
             blurPostProcessingFrameWorker.unbindCurrentFrameBuffer();
 
-            return blurPostProcess(blurPostProcessingFrameWorker.getTexture(), sourceFrame);
+            return blurPostProcess(blurPostProcessingFrameWorker.getTextureBuffer(), sourceFrame);
         }
         return sourceFrame;
     }

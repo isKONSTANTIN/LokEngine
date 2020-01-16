@@ -69,7 +69,7 @@ public class PartsBuilder {
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         frameBufferWorker.unbindCurrentFrameBuffer();
 
-        return frameBufferWorker.getTexture();
+        return frameBufferWorker.getTextureBuffer();
     }
 
     public int build(DrawMode drawMode, RenderProperties renderProperties, Vector2i viewOffset) {
