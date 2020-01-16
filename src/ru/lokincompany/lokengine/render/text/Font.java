@@ -41,7 +41,7 @@ public class Font {
     }
 
     public Vector2i getSize(String text, Vector2i maxSize){
-        Vector2i result = new Vector2i();
+        Vector2i result = new Vector2i(0, fontHeight);
 
         int drawX = 0;
         int drawY = 0;
