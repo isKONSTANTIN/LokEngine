@@ -1,6 +1,5 @@
 package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 
-import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
@@ -20,7 +19,7 @@ public class GUIImageFramePart extends FramePart {
 
     public GUIImageFramePart(Vector2i position, Vector2i size, String path) {
         super(FramePartType.GUI);
-        this.texture = TextureLoader.loadTexture(path);
+        this.texture = new Texture(path);
         this.position = position;
         if (size.x <= 0 || size.y <= 0) {
             size = new Vector2i(texture.sizeX, texture.sizeY);

@@ -1,7 +1,6 @@
 package ru.lokincompany.lokengine.sceneenvironment.plateenvironment;
 
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
-import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.plate.PlatesChunksFramePart;
 import ru.lokincompany.lokengine.tools.Logger;
@@ -69,6 +68,8 @@ public class PlateScene {
     }
 
     public PlateHandler getPlate(int id){
+        if (handlers.size() <= id) return null;
+
         return handlers.get(id);
     }
 

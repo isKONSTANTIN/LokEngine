@@ -2,28 +2,21 @@ package ru.lokincompany.lokengine.render.frame.frameparts.plate;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.loaders.MatrixLoader;
-import ru.lokincompany.lokengine.loaders.ShaderLoader;
-import ru.lokincompany.lokengine.loaders.SpriteLoader;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.Shader;
-import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
-import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Sprite;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateChunk;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateScene;
-import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL31.glDrawArraysInstanced;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
@@ -42,7 +35,7 @@ public class PlatesChunksFramePart extends FramePart {
         this.blockSize = blockSize;
 
         try {
-            this.shader = ShaderLoader.loadShader("#/resources/shaders/PlatesVertShader.glsl", "#/resources/shaders/PlatesFragShader.glsl");
+            this.shader = new Shader("#/resources/shaders/PlatesVertShader.glsl", "#/resources/shaders/PlatesFragShader.glsl");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,7 +81,7 @@ public class PlatesChunksFramePart extends FramePart {
     @Override
     public void init(RenderProperties renderProperties) {
         renderProperties.useShader(shader);
-        shader.setUniformData("ObjectModelMatrix", MatrixLoader.createModelMatrix(0, new Vector3f(0, 0, 0)));
+        shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(0, new Vector3f(0, 0, 0)));
 
         vao = new VAO();
         vertexVBO = new VBO(new float[]

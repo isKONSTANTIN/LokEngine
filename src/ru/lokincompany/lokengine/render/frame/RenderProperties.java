@@ -2,9 +2,7 @@ package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.loaders.MatrixLoader;
-import ru.lokincompany.lokengine.loaders.ShaderLoader;
-import ru.lokincompany.lokengine.loaders.TextureLoader;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
@@ -86,7 +84,7 @@ public class RenderProperties {
         window.getCamera().updateProjection(windowResolution.x, windowResolution.y, 1);
 
         useShader(particlesShader);
-        particlesShader.setUniformData("ObjectModelMatrix", MatrixLoader.createModelMatrix(0, new Vector3f(0, 0, 0)));
+        particlesShader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(0, new Vector3f(0, 0, 0)));
 
         useShader(objectShader);
         window.getCamera().setFieldOfView(window.getCamera().fieldOfView);
@@ -101,11 +99,11 @@ public class RenderProperties {
     }
 
     public void init() throws Exception {
-        objectShader = ShaderLoader.loadShader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
-        displayShader = ShaderLoader.loadShader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
-        particlesShader = ShaderLoader.loadShader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
+        objectShader = new Shader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
+        displayShader = new Shader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
+        particlesShader = new Shader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
 
-        unknownTexture = TextureLoader.loadTexture("#/resources/textures/unknown.png");
+        unknownTexture = new Texture("#/resources/textures/unknown.png");
 
         uvVBO = new VBO(new float[]{
                 0, 1,

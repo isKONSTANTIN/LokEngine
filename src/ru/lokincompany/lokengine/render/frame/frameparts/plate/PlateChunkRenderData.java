@@ -1,12 +1,10 @@
 package ru.lokincompany.lokengine.render.frame.frameparts.plate;
 
-import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateChunk;
+import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateHandler;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateScene;
-import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +24,11 @@ public class PlateChunkRenderData {
         for (int y = 0; y < 16; y++){
             for (int x = 0; x < 16; x++){
                 int plate = chunk.getPlate(x, y);
-                if (plate == 0) continue;
+                PlateHandler handler = scene.getPlate(plate);
 
-                Texture texture = scene.getPlate(plate).getTexture();
+                if (plate == 0 || handler == null) continue;
+
+                Texture texture = handler.getTexture();
                 if (!positions.containsKey(plate)){
                     positions.put(plate, new VBO());
                     counts.put(plate, 0);

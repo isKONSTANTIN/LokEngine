@@ -20,6 +20,8 @@ class TestChunk extends PlateChunk {
                 double n = scene.noise.get((xc + (this.xPosition * 16)) / 10d, (yc + (this.yPosition * 16)) / 10d);
                 if (n > 0.05)
                     scene.getChunk(chunkID).setPlate(1, xc, yc);
+                else
+                    scene.getChunk(chunkID).setPlate(2, xc, yc);
             }
         }
         return true;
@@ -28,8 +30,11 @@ class TestChunk extends PlateChunk {
 
 public class PlateSceneTest extends ApplicationPlateWorld {
 
+    static PlateSceneTest test;
+
     public static void main(String[] args) {
-            new PlateSceneTest().start(false, true, false);
+        test = new PlateSceneTest();
+        test.start(false, true, false);
     }
 
     GUIText text;

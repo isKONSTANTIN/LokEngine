@@ -1,8 +1,10 @@
 package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBFragmentShader;
+import org.lwjgl.opengl.ARBShaderObjects;
+import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.util.vector.*;
-import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
@@ -10,7 +12,12 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokengine.tools.vectori.Vector3i;
 import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL20.*;
@@ -26,10 +33,13 @@ public class Shader implements Saveable {
     public Shader() {
     }
 
-    public Shader(int program, String vertPath, String fragPath) {
-        this.program = program;
-        this.vertPath = vertPath;
-        this.fragPath = fragPath;
+    public Shader(String vertPath, String fragPath) {
+        try {
+            loadShader(vertPath, fragPath);
+        } catch (Exception e) {
+            Logger.warning("Fail load shader!", "LokEngine_Shader");
+            Logger.printException(e);
+        }
     }
 
     public boolean equals(Object obj) {
@@ -100,6 +110,96 @@ public class Shader implements Saveable {
         glUniformMatrix4fv(getUniformLocationID(uniformName), false, matrixBuffer);
     }
 
+    private String getLogInfo(int obj) {
+        return ARBShaderObjects.glGetInfoLogARB(obj, ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
+    }
+
+    private String readFileAsString(String filename) throws Exception {
+        StringBuilder source = new StringBuilder();
+        InputStream in;
+
+        if (filename.charAt(0) == '#') {
+            in = Shader.class.getResourceAsStream(filename.substring(1));
+        } else {
+            in = new FileInputStream(filename);
+        }
+
+        Exception exception = null;
+
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+
+            Exception innerExc = null;
+            try {
+                String line;
+                while ((line = reader.readLine()) != null)
+                    source.append(line).append('\n');
+            } catch (Exception exc) {
+                exception = exc;
+            } finally {
+                try {
+                    reader.close();
+                } catch (Exception exc) {
+                    if (innerExc == null)
+                        innerExc = exc;
+                    else
+                        exc.printStackTrace();
+                }
+            }
+
+            if (innerExc != null)
+                throw innerExc;
+        } catch (Exception exc) {
+            exception = exc;
+        } finally {
+            try {
+                in.close();
+            } catch (Exception exc) {
+                if (exception == null)
+                    exception = exc;
+                else
+                    exc.printStackTrace();
+            }
+
+            if (exception != null)
+                throw exception;
+        }
+
+        return source.toString();
+    }
+
+    private int loadPartShader(String filename, int shaderType) throws Exception {
+        int shader = ARBShaderObjects.glCreateShaderObjectARB(shaderType);
+
+        if (shader == 0)
+            return 0;
+
+        ARBShaderObjects.glShaderSourceARB(shader, readFileAsString(filename));
+        ARBShaderObjects.glCompileShaderARB(shader);
+
+        if (ARBShaderObjects.glGetObjectParameteriARB(shader, ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB) == GL_FALSE)
+            throw new RuntimeException("Error creating shader: " + getLogInfo(shader));
+
+        return shader;
+    }
+
+    private void loadShader(String vertPath, String fragPath) throws Exception {
+        int vertShader = loadPartShader(vertPath, ARBVertexShader.GL_VERTEX_SHADER_ARB);
+        int fragShader = loadPartShader(fragPath, ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
+        int program = ARBShaderObjects.glCreateProgramObjectARB();
+
+        ARBShaderObjects.glAttachObjectARB(program, vertShader);
+        ARBShaderObjects.glAttachObjectARB(program, fragShader);
+
+        ARBShaderObjects.glLinkProgramARB(program);
+        ARBShaderObjects.glValidateProgramARB(program);
+
+        this.program = program;
+        this.vertPath = vertPath;
+        this.fragPath = fragPath;
+    }
+
     @Override
     public String save() {
         return Base64.toBase64(vertPath + "\n" + fragPath);
@@ -110,10 +210,7 @@ public class Shader implements Saveable {
         String[] patches = Base64.fromBase64(savedString).split("\n");
 
         try {
-            Shader loadedShader = ShaderLoader.loadShader(patches[0], patches[1]);
-            this.program = loadedShader.program;
-            this.vertPath = loadedShader.vertPath;
-            this.fragPath = loadedShader.fragPath;
+            loadShader(patches[0], patches[1]);
         } catch (Exception e) {
             Logger.warning("Fail load shader from save!", "LokEngine_Shader");
             Logger.printException(e);

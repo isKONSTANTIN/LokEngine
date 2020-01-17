@@ -2,7 +2,6 @@ package ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
@@ -18,7 +17,7 @@ public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
 
     public ColorCorrectionActionWorker(Window window) throws Exception {
         this.window = window;
-        shader = ShaderLoader.loadShader("#/resources/shaders/colorCorrection/ColorCorrectionVertShader.glsl", "#/resources/shaders/colorCorrection/ColorCorrectionFragShader.glsl");
+        shader = new Shader("#/resources/shaders/colorCorrection/ColorCorrectionVertShader.glsl", "#/resources/shaders/colorCorrection/ColorCorrectionFragShader.glsl");
         frameBufferWorker = new FrameBufferWorker(window.getResolution());
 
         window.getFrameBuilder().getRenderProperties().useShader(shader);

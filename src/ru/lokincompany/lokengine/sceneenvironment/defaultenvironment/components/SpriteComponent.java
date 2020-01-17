@@ -2,7 +2,6 @@ package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components
 
 import org.lwjgl.util.vector.Vector4f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
-import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.SpriteFramePart;
@@ -24,7 +23,7 @@ public class SpriteComponent extends Component implements Saveable {
     }
 
     public SpriteComponent(String path, Shader shader) {
-        this(SpriteLoader.loadSprite(path, 1), shader);
+        this(new Sprite(path), shader);
     }
 
     public SpriteComponent(Sprite sprite) {
@@ -48,7 +47,7 @@ public class SpriteComponent extends Component implements Saveable {
     }
 
     public void setSprite(String path) {
-        framePart.sprite = SpriteLoader.loadSprite(path);
+        framePart.sprite = new Sprite(path);
     }
 
     public Color getColor() {

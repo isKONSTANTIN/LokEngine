@@ -1,7 +1,6 @@
 package ru.lokincompany.lokengine.render.postprocessing.workers.bloom;
 
 import org.lwjgl.opengl.GL11;
-import ru.lokincompany.lokengine.loaders.ShaderLoader;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
@@ -30,8 +29,8 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         this.frameBufferWorker2 = new FrameBufferWorker(window.getResolution());
         this.window = window;
 
-        filterShader = ShaderLoader.loadShader("#/resources/shaders/bloom/BloomFilterVertShader.glsl", "#/resources/shaders/bloom/BloomFilterFragShader.glsl");
-        mixerShader = ShaderLoader.loadShader("#/resources/shaders/bloom/BloomMixerVertShader.glsl", "#/resources/shaders/bloom/BloomMixerFragShader.glsl");
+        filterShader = new Shader("#/resources/shaders/bloom/BloomFilterVertShader.glsl", "#/resources/shaders/bloom/BloomFilterFragShader.glsl");
+        mixerShader = new Shader("#/resources/shaders/bloom/BloomMixerVertShader.glsl", "#/resources/shaders/bloom/BloomMixerFragShader.glsl");
 
         window.getFrameBuilder().getRenderProperties().useShader(filterShader);
         window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);

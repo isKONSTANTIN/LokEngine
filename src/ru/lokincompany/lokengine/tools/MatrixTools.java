@@ -1,10 +1,10 @@
-package ru.lokincompany.lokengine.loaders;
+package ru.lokincompany.lokengine.tools;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.render.Camera;
 
-public class MatrixLoader {
+public class MatrixTools {
 
     public static double radiansToDegrees(float radians) {
         return ((radians / 3.14159265358979323846) * 180.0f);

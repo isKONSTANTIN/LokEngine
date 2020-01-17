@@ -13,24 +13,7 @@ public abstract class PlateChunk {
 
     public abstract boolean generate(int chunkID, PlateScene scene);
 
-    public void update(PlateScene scene){
-        if (!generated)
-            return;
-
-        int[] xsPlates = new int[scene.randomUpdateIterations];
-        int[] ysPlates = new int[scene.randomUpdateIterations];
-
-        synchronized (scene.random){
-            for (int i = 0; i < scene.randomUpdateIterations; i++){
-                xsPlates[i] = scene.random.nextInt(16);
-                ysPlates[i] =  scene.random.nextInt(16);
-            }
-        }
-
-        for (int i = 0; i < scene.randomUpdateIterations; i++){
-            scene.getPlate(plates[xsPlates[i]][ysPlates[i]]).randomTickHandle(16 * xPosition + xsPlates[i], 16 * yPosition + ysPlates[i]);
-        }
-    }
+    public void update(PlateScene scene){}
 
     public void updateRender(PlateScene scene, int blockSize){
         if (platesChanged)

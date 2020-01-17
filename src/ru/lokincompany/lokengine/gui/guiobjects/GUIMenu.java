@@ -27,7 +27,7 @@ public class GUIMenu extends GUIObject {
     public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
         super(position, size);
         this.titleSize = titleSize;
-        this.drawer = new GUIFreeTextDrawer("", 0, (int) (titleSize / 1.2f), true);
+        this.drawer = new GUIFreeTextDrawer("", 0, (int) (titleSize / 1.2f));
         this.panel = panel;
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
         panel.setPosition(object -> getPosition());

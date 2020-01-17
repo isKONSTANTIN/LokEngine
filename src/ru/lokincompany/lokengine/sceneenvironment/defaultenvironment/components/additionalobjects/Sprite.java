@@ -1,10 +1,11 @@
 package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects;
 
-import ru.lokincompany.lokengine.loaders.SpriteLoader;
+import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
+import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 
@@ -19,6 +20,10 @@ public class Sprite implements Saveable {
     private float vertexSize;
 
     public Sprite() {
+    }
+
+    public Sprite(String path){
+        loadSprite(path);
     }
 
     public Sprite(Texture texture, VBO vertexBuffer, float vertexSize) {
@@ -48,6 +53,71 @@ public class Sprite implements Saveable {
                 objs.size == size;
     }
 
+    public void loadSprite(Texture texture, float vertexSize) {
+        VBO vertexVBO = new VBO(new float[]
+                {
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f,
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f
+                }
+        );
+
+        this.texture = texture;
+        this.vertexVBO = vertexVBO;
+        this.size = 1;
+        this.vertexSize = vertexSize;
+    }
+
+    public void loadSprite(Texture texture, float vertexSize, Vector4i imagePosFromAtlas) {
+        Vector2f fistPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
+        Vector2f secondPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
+        Vector2f thirdPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
+        Vector2f fourthPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
+
+        VBO vertexVBO = new VBO(new float[]
+                {
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f,
+                        -texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
+                        texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f
+                }
+        );
+
+        this.texture = texture;
+        this.vertexVBO = vertexVBO;
+        this.size = 1;
+        this.vertexSize = vertexSize;
+        this.uvVBO = new VBO(new float[]{
+                fistPoint.x, fistPoint.y,
+                secondPoint.x, secondPoint.y,
+                thirdPoint.x, thirdPoint.y,
+                fourthPoint.x, fourthPoint.y
+        });
+    }
+
+    public void loadSprite(String texturePath, float vertexSize) {
+        Texture tex = new Texture(texturePath);
+
+        VBO vertexVBO = new VBO(new float[]
+                {
+                        -tex.sizeX * vertexSize / 2f * 0.0005f, -tex.sizeY * vertexSize / 2f * 0.0005f,
+                        -tex.sizeX * vertexSize / 2f * 0.0005f, tex.sizeY * vertexSize / 2f * 0.0005f,
+                        tex.sizeX * vertexSize / 2f * 0.0005f, tex.sizeY * vertexSize / 2f * 0.0005f,
+                        tex.sizeX * vertexSize / 2f * 0.0005f, -tex.sizeY * vertexSize / 2f * 0.0005f
+                }
+        );
+
+        this.texture = tex;
+        this.vertexVBO = vertexVBO;
+        this.size = 1;
+        this.vertexSize = vertexSize;
+    }
+
+    public void loadSprite(String texturePath) {
+        loadSprite(texturePath, 1);
+    }
+
     @Override
     public String save() {
         return Base64.toBase64(texture.save() + "\n" + size + "\n" + vertexSize);
@@ -58,10 +128,8 @@ public class Sprite implements Saveable {
         String[] data = Base64.fromBase64(savedString).split("\n");
         this.vertexSize = Float.parseFloat(data[2]);
         this.size = Double.parseDouble(data[1]);
+        loadSprite((Texture) new Texture().load(data[0]), vertexSize);
 
-        Sprite loadedSprite = SpriteLoader.loadSprite((Texture) new Texture().load(data[0]), vertexSize);
-        this.texture = loadedSprite.texture;
-        this.vertexVBO = loadedSprite.vertexVBO;
         return this;
     }
 }

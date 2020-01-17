@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.render.frame.frameparts;
 
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
-import ru.lokincompany.lokengine.loaders.MatrixLoader;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
@@ -75,7 +75,7 @@ public class SpriteFramePart extends FramePart {
 
         shader.setUniformData("ObjectSize", (float) sprite.size * 2);
         shader.setUniformData("ObjectColor", new Vector4f(color.red, color.green, color.blue, color.alpha));
-        shader.setUniformData("ObjectModelMatrix", MatrixLoader.createModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
+        shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 
         int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : renderProperties.getUnknownTexture().buffer;
 

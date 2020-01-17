@@ -1,6 +1,5 @@
 package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects;
 
-import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.tools.Base64;
@@ -39,7 +38,7 @@ public class Animation implements Saveable {
 
     public Animation(String atlasPath, AtlasPositions atlasPositions) {
         try {
-            altasTexture = TextureLoader.loadTexture(atlasPath);
+            altasTexture = new Texture(atlasPath);
         } catch (Exception e) {
             Logger.warning("Fail load atlas from path!", "LokEngine_Animation");
             return;

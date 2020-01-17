@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.tests;
 import org.lwjgl.BufferUtils;
 import ru.lokincompany.lokengine.applications.ApplicationGUIOnly;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIImage;
-import ru.lokincompany.lokengine.loaders.TextureLoader;
+import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.tools.opensimplexnoise.OpenSimplexNoise2D;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -50,7 +50,7 @@ public class OpenSimplexNoiseTest extends ApplicationGUIOnly {
         textureBuffer.flip();
 
         GUIImage image = new GUIImage(new Vector2i(), imageSize);
-        image.setTexture(TextureLoader.loadTexture(textureBuffer, imageSize));
+        image.setTexture(new Texture(textureBuffer, imageSize));
         window.getCanvas().addObject(image);
     }
 

@@ -27,7 +27,7 @@ public class GUITabs extends GUIObject {
 
     public GUITabs(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
         super(position, size);
-        this.drawer = new GUIFreeTextDrawer("", 0, titleSize, true);
+        this.drawer = new GUIFreeTextDrawer("", 0, titleSize);
         this.titleSize = drawer.getFont().getFontHeight();
         this.panel = new GUIPanel(position, new Vector2i(size.x, titleSize));
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));

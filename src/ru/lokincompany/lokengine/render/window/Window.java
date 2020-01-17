@@ -6,8 +6,8 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import ru.lokincompany.lokengine.gui.additionalobjects.MouseRaycastStatus;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
-import ru.lokincompany.lokengine.loaders.TextureLoader;
 import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.frame.FrameBuilder;
 import ru.lokincompany.lokengine.tools.Logger;
@@ -293,7 +293,7 @@ public class Window {
         GLFWImage.Buffer iconGB = GLFWImage.malloc(paths.length);
         for (String path : paths) {
             try {
-                Object[] image = TextureLoader.loadTextureInBuffer(path);
+                Object[] image = Texture.loadData(path);
                 GLFWImage GLFWimage = GLFWImage.malloc().set(
                         ((BufferedImage) image[1]).getWidth(),
                         ((BufferedImage) image[1]).getHeight(),
@@ -314,7 +314,7 @@ public class Window {
     public void setCursor(String path) {
         GLFWImage GLFWimage;
         try {
-            Object[] image = TextureLoader.loadTextureInBuffer(path);
+            Object[] image = Texture.loadData(path);
             GLFWimage = GLFWImage.create().set(((BufferedImage) image[1]).getWidth(), ((BufferedImage) image[1]).getHeight(), (ByteBuffer) image[0]);
         } catch (Exception e) {
             Logger.warning("Fail load icon", "LokEngine_Window");

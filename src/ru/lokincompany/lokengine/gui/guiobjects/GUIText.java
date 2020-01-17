@@ -1,7 +1,6 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
-import ru.lokincompany.lokengine.loaders.FontLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUITextFramePart;
 import ru.lokincompany.lokengine.render.text.TextColorShader;
@@ -16,16 +15,16 @@ public class GUIText extends GUIObject {
     protected GUITextFramePart framePart;
     protected TextColorShader shader;
 
-    public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
+    public GUIText(Vector2i position, String fontName, String text, Color color, int fontStyle, int size, boolean canResize) {
         super(position, new Vector2i(0, 0));
-        framePart = new GUITextFramePart(text, FontLoader.createFont(new Font(fontName, fontStyle, size), antiAlias), color);
+        framePart = new GUITextFramePart(text, new ru.lokincompany.lokengine.render.text.Font(new Font(fontName, fontStyle, size)), color);
         this.canResize = canResize;
         framePart.position = getPosition();
     }
 
-    public GUIText(Vector2i position, String fontName, String text, TextColorShader shader, int fontStyle, int size, boolean antiAlias, boolean canResize) {
+    public GUIText(Vector2i position, String fontName, String text, TextColorShader shader, int fontStyle, int size, boolean canResize) {
         super(position, new Vector2i(0, 0));
-        framePart = new GUITextFramePart(text, FontLoader.createFont(new Font(fontName, fontStyle, size), antiAlias), shader);
+        framePart = new GUITextFramePart(text, new ru.lokincompany.lokengine.render.text.Font(new Font(fontName, fontStyle, size)), shader);
 
         super.setSize(framePart.getSize());
 
@@ -38,11 +37,11 @@ public class GUIText extends GUIObject {
     }
 
     public GUIText(Vector2i position, String text, TextColorShader shader, int fontStyle, int size) {
-        this(position, "Arial", text, shader, fontStyle, size, true, false);
+        this(position, "Arial", text, shader, fontStyle, size, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle, int size) {
-        this(position, "Arial", text, color, fontStyle, size, true, false);
+        this(position, "Arial", text, color, fontStyle, size, false);
     }
 
     public GUIText(Vector2i position, String text, Color color, int fontStyle) {
@@ -57,12 +56,12 @@ public class GUIText extends GUIObject {
         this(position, "Text");
     }
 
-    public GUIText(String fontName, String text, Color color, int fontStyle, int size, boolean antiAlias, boolean canResize) {
-        this(new Vector2i(), fontName, text, color, fontStyle, size, antiAlias, canResize);
+    public GUIText(String fontName, String text, Color color, int fontStyle, int size, boolean canResize) {
+        this(new Vector2i(), fontName, text, color, fontStyle, size, canResize);
     }
 
-    public GUIText(String fontName, String text, TextColorShader shader, int fontStyle, int size, boolean antiAlias, boolean canResize) {
-        this(new Vector2i(), fontName, text, shader, fontStyle, size, antiAlias, canResize);
+    public GUIText(String fontName, String text, TextColorShader shader, int fontStyle, int size, boolean canResize) {
+        this(new Vector2i(), fontName, text, shader, fontStyle, size, canResize);
     }
 
     public GUIText(String text, TextColorShader shader, int fontStyle) {
@@ -70,11 +69,11 @@ public class GUIText extends GUIObject {
     }
 
     public GUIText(String text, TextColorShader shader, int fontStyle, int size) {
-        this(new Vector2i(), "Arial", text, shader, fontStyle, size, true, false);
+        this(new Vector2i(), "Arial", text, shader, fontStyle, size, false);
     }
 
     public GUIText(String text, Color color, int fontStyle, int size) {
-        this(new Vector2i(), "Arial", text, color, fontStyle, size, true, false);
+        this(new Vector2i(), "Arial", text, color, fontStyle, size, false);
     }
 
     public GUIText(String text, Color color, int fontStyle) {

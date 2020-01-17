@@ -25,7 +25,7 @@ public class GUIGraph extends GUIObject {
         this.minHeight = minHeight;
         this.maxPoints = maxPoints > 0 ? maxPoints : 1;
 
-        this.freeTextDrawer = new GUIFreeTextDrawer("Arial", 0, Math.min(Math.max(size.y / 10, 10), 24), true);
+        this.freeTextDrawer = new GUIFreeTextDrawer("Arial", 0, Math.min(Math.max(size.y / 10, 10), 24));
 
         framePart = new GUIGraphFramePart(position, size, points, maxHeight, minHeight, maxPoints, color, color2, freeTextDrawer);
     }
