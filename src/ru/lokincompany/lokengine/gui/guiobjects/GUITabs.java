@@ -125,7 +125,7 @@ public class GUITabs extends GUIObject {
         super.update(partsBuilder, parentProperties);
 
         int x = 0;
-        int gap = (int)(drawer.getFont().getSpaceSize() * 1.5f);
+        int gap = (int) (drawer.getFont().getSpaceSize() * 1.5f);
 
         for (String key : tabsNames) {
             int widthText = drawer.getFont().getSize(key, null).x;

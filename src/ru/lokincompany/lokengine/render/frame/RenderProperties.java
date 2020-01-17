@@ -2,12 +2,12 @@ package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.window.Window;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 

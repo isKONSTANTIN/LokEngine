@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.tools.opensimplexnoise;
 
 public class DefaultStringToLongTransformer {
-    public static StringToLongTransformer get(){
+    public static StringToLongTransformer get() {
         return text -> {
             long longSeed = 0;
 

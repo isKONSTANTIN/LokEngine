@@ -2,9 +2,9 @@ package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.window.Window;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class Camera {

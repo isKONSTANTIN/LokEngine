@@ -76,7 +76,7 @@ public class Window {
         return id;
     }
 
-    public VAO getVAO(){
+    public VAO getVAO() {
         return vao;
     }
 

@@ -2,7 +2,6 @@ package ru.lokincompany.lokengine.render.frame.frameparts.plate;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
@@ -11,6 +10,7 @@ import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateChunk;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateScene;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 
 import java.util.Map;
 import java.util.Vector;
@@ -21,12 +21,12 @@ import static org.lwjgl.opengl.GL31.glDrawArraysInstanced;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 public class PlatesChunksFramePart extends FramePart {
+    public int blockSize;
     Vector<PlateChunk> chunks;
     PlateScene scene;
     Shader shader;
     VAO vao;
     VBO vertexVBO;
-    public int blockSize;
 
     public PlatesChunksFramePart(Vector<PlateChunk> chunks, PlateScene scene, int blockSize) {
         super(FramePartType.Scene);
@@ -49,12 +49,12 @@ public class PlatesChunksFramePart extends FramePart {
 
         vao.bind();
 
-        for (PlateChunk chunk : chunks){
+        for (PlateChunk chunk : chunks) {
             chunk.updateRender(scene, blockSize);
 
             shader.setUniformData("ChuckPosition", new Vector2f(chunk.xPosition * blockSize * 0.005f * 16, chunk.yPosition * blockSize * 0.005f * 16));
 
-            for(Map.Entry<Integer, VBO> entry : chunk.renderData.positions.entrySet()) {
+            for (Map.Entry<Integer, VBO> entry : chunk.renderData.positions.entrySet()) {
                 int key = entry.getKey();
                 VBO value = entry.getValue();
                 int count = chunk.renderData.counts.get(key);

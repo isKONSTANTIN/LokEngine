@@ -22,7 +22,7 @@ public class Sprite implements Saveable {
     public Sprite() {
     }
 
-    public Sprite(String path){
+    public Sprite(String path) {
         loadSprite(path);
     }
 

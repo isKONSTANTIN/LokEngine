@@ -47,12 +47,12 @@ public class Shader implements Saveable {
         return objs.program == program;
     }
 
-    protected int getUniformLocationID(String name){
-        if (!uniformsName.containsKey(name)){
+    protected int getUniformLocationID(String name) {
+        if (!uniformsName.containsKey(name)) {
             int id = glGetUniformLocation(program, name);
             uniformsName.put(name, id);
             return id;
-        }else{
+        } else {
             return uniformsName.get(name);
         }
     }

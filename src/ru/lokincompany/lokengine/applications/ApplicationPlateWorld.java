@@ -15,7 +15,6 @@ import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.openal.ALC10.*;
-import static org.lwjgl.openal.ALC10.alcCloseDevice;
 
 public class ApplicationPlateWorld extends Application {
     public Window window;

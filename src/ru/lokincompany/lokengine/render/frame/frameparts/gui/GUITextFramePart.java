@@ -34,7 +34,7 @@ public class GUITextFramePart extends FramePart {
         this.shader = shader;
     }
 
-    public Vector2i getSize(){
+    public Vector2i getSize() {
         return font.getSize(text, maxSize);
     }
 

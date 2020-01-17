@@ -15,21 +15,21 @@ public class PlateChunkRenderData {
     HashMap<Integer, Texture> textures = new HashMap<>();
     HashMap<Integer, Integer> counts = new HashMap<>();
 
-    public void update(PlateChunk chunk, PlateScene scene, int blockSize){
+    public void update(PlateChunk chunk, PlateScene scene, int blockSize) {
         clearPositions();
         textures.clear();
 
         HashMap<Integer, ArrayList<Float>> positionsArrays = new HashMap<>();
 
-        for (int y = 0; y < 16; y++){
-            for (int x = 0; x < 16; x++){
+        for (int y = 0; y < 16; y++) {
+            for (int x = 0; x < 16; x++) {
                 int plate = chunk.getPlate(x, y);
                 PlateHandler handler = scene.getPlate(plate);
 
                 if (plate == 0 || handler == null) continue;
 
                 Texture texture = handler.getTexture();
-                if (!positions.containsKey(plate)){
+                if (!positions.containsKey(plate)) {
                     positions.put(plate, new VBO());
                     counts.put(plate, 0);
                     textures.put(plate, texture);
@@ -39,11 +39,11 @@ public class PlateChunkRenderData {
 
                 positionsArrays.get(plate).add(blockSize * 0.005f * x);
                 positionsArrays.get(plate).add(blockSize * 0.005f * y);
-                counts.put(plate, counts.get(plate)+1);
+                counts.put(plate, counts.get(plate) + 1);
             }
         }
 
-        for(Map.Entry<Integer, VBO> entry : positions.entrySet()) {
+        for (Map.Entry<Integer, VBO> entry : positions.entrySet()) {
             int key = entry.getKey();
             VBO value = entry.getValue();
 
@@ -51,8 +51,8 @@ public class PlateChunkRenderData {
         }
     }
 
-    private void clearPositions(){
-        for(Map.Entry<Integer, VBO> entry : positions.entrySet()) {
+    private void clearPositions() {
+        for (Map.Entry<Integer, VBO> entry : positions.entrySet()) {
             VBO value = entry.getValue();
             value.unload();
         }

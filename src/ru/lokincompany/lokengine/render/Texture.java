@@ -17,34 +17,24 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class Texture implements Saveable {
+    private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();
     public int buffer = -1;
     public int sizeX = -1;
     public int sizeY = -1;
     public long context = -1;
     public String path;
 
-    private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();
-
-    public Texture(ByteBuffer byteBuffer, Vector2i size){
+    public Texture(ByteBuffer byteBuffer, Vector2i size) {
         this.buffer = createBuffer(byteBuffer, size.x, size.y);
         this.sizeX = size.x;
         this.sizeY = size.y;
     }
 
-    public Texture(String path){
+    public Texture(String path) {
         loadFromPath(path);
     }
 
     public Texture() {
-    }
-
-    public boolean equals(Object obj) {
-        return ((Texture) obj).buffer == buffer;
-    }
-
-    public void unload() {
-        loadedTextures.get(context).remove(path);
-        glDeleteTextures(buffer);
     }
 
     public static Object[] loadData(String path) throws IOException {
@@ -76,6 +66,15 @@ public class Texture implements Saveable {
         return new Object[]{textureBuffer, image};
     }
 
+    public boolean equals(Object obj) {
+        return ((Texture) obj).buffer == buffer;
+    }
+
+    public void unload() {
+        loadedTextures.get(context).remove(path);
+        glDeleteTextures(buffer);
+    }
+
     private int createBuffer(ByteBuffer buffer, int x, int y) {
         int textureID = glGenTextures();
 
@@ -100,7 +99,7 @@ public class Texture implements Saveable {
         if (!loadedTextures.containsKey(context))
             loadedTextures.put(context, new HashMap<>());
 
-        if (loadedTextures.get(context).containsKey(path)){
+        if (loadedTextures.get(context).containsKey(path)) {
             Texture loadedTexture = loadedTextures.get(context).get(path);
 
             this.buffer = loadedTexture.buffer;

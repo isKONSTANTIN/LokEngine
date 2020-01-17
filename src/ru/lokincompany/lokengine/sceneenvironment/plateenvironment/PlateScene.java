@@ -13,17 +13,14 @@ import java.util.Random;
 import java.util.Vector;
 
 public class PlateScene {
-    final Vector<PlateHandler> handlers;
-    final Vector<PlateChunk> plateChunks;
-
-    PlatesChunksFramePart framePart;
-
     public final Random random;
     public final OpenSimplexNoise2D noise;
-
+    final Vector<PlateHandler> handlers;
+    final Vector<PlateChunk> plateChunks;
     public int randomUpdateIterations = 1;
+    PlatesChunksFramePart framePart;
 
-    public PlateScene(long seed, int blockSize){
+    public PlateScene(long seed, int blockSize) {
         handlers = new Vector<>();
         plateChunks = new Vector<>();
         random = new Random(seed);
@@ -34,15 +31,15 @@ public class PlateScene {
         registerPlate(new PlateAirHandler());
     }
 
-    public PlateScene(String seed, StringToLongTransformer stringToLongTransformer, int blockSize){
+    public PlateScene(String seed, StringToLongTransformer stringToLongTransformer, int blockSize) {
         this(stringToLongTransformer.transform(seed), blockSize);
     }
 
-    public PlateScene(String seed, int blockSize){
+    public PlateScene(String seed, int blockSize) {
         this(seed, DefaultStringToLongTransformer.get(), blockSize);
     }
 
-    public int registerPlate(PlateHandler plate){
+    public int registerPlate(PlateHandler plate) {
         int newPlateID = handlers.size();
         plate.register(newPlateID, this);
 
@@ -50,7 +47,7 @@ public class PlateScene {
         return newPlateID;
     }
 
-    public int loadChunk(PlateChunk chunk, Vector2i position){
+    public int loadChunk(PlateChunk chunk, Vector2i position) {
         int chunkID = plateChunks.size();
 
         plateChunks.add(chunk);
@@ -59,7 +56,7 @@ public class PlateScene {
 
         try {
             chunk.generated = chunk.generate(chunkID, this);
-        } catch (Exception e){
+        } catch (Exception e) {
             Logger.warning("Fail to generate " + chunkID + " chunk (" + position.x + ";" + position.y + ")");
             Logger.printException(e);
         }
@@ -67,22 +64,22 @@ public class PlateScene {
         return chunkID;
     }
 
-    public PlateHandler getPlate(int id){
+    public PlateHandler getPlate(int id) {
         if (handlers.size() <= id) return null;
 
         return handlers.get(id);
     }
 
-    public PlateChunk getChunk(int id){
+    public PlateChunk getChunk(int id) {
         return plateChunks.get(id);
     }
 
-    public int getRegisteredPlatesCount(){
+    public int getRegisteredPlatesCount() {
         return handlers.size();
     }
 
-    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder){
-        for (PlateChunk chunk : plateChunks){
+    public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
+        for (PlateChunk chunk : plateChunks) {
             chunk.update(this);
         }
 

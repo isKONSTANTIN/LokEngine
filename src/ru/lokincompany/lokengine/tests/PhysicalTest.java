@@ -16,7 +16,7 @@ public class PhysicalTest extends ApplicationDefault {
 
     @Override
     protected void initEvent() {
-        for (int i = 0; i < 30; i++){
+        for (int i = 0; i < 30; i++) {
             SceneObject object = new SceneObject();
             object.components.add(new SpriteComponent("#/resources/textures/EngineIcon32.png"));
             object.components.add(new RigidbodyComponent(ShapeCreator.CreateCircleShape(31), new Rigidbody(false, 1)));
@@ -24,7 +24,7 @@ public class PhysicalTest extends ApplicationDefault {
         }
 
         SceneObject plate = new SceneObject();
-        plate.components.add(new RigidbodyComponent(ShapeCreator.CreateBoxShape(new Vector2f(5000, 10)), new Rigidbody(true,1)));
+        plate.components.add(new RigidbodyComponent(ShapeCreator.CreateBoxShape(new Vector2f(5000, 10)), new Rigidbody(true, 1)));
         plate.position.y -= 0.1f;
         scene.addObject(plate);
     }

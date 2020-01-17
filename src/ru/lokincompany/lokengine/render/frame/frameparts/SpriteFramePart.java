@@ -2,7 +2,6 @@ package ru.lokincompany.lokengine.render.frame.frameparts;
 
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
-import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
@@ -10,6 +9,7 @@ import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.Sprite;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.tools.color.Color;
 
 import static org.lwjgl.opengl.GL11.*;

@@ -2,7 +2,6 @@ package ru.lokincompany.lokengine.render.text;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import ru.lokincompany.lokengine.render.GLFW;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
@@ -20,16 +19,17 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Font {
 
+    private static HashMap<Long, HashMap<java.awt.Font, Font>> createdFonts = new HashMap<>();
     private HashMap<Character, Glyph> glyphs;
     private Texture texture;
     private int fontHeight;
     private float spaceSize;
 
-    public Font(java.awt.Font font, String additionalSymbols){
+    public Font(java.awt.Font font, String additionalSymbols) {
         load(font, additionalSymbols);
     }
 
-    public Font(java.awt.Font font){
+    public Font(java.awt.Font font) {
         load(font, "");
     }
 
@@ -45,11 +45,11 @@ public class Font {
         return fontHeight;
     }
 
-    public float getSpaceSize(){
+    public float getSpaceSize() {
         return spaceSize;
     }
 
-    public Vector2i getSize(String text, Vector2i maxSize){
+    public Vector2i getSize(String text, Vector2i maxSize) {
         Vector2i result = new Vector2i(0, fontHeight);
 
         int drawX = 0;
@@ -174,8 +174,6 @@ public class Font {
     public void drawText(String text, Vector2i position) {
         drawText(text, position, Colors.white());
     }
-
-    private static HashMap<Long, HashMap<java.awt.Font, Font>> createdFonts = new HashMap<>();
 
     private void load(java.awt.Font font, String additionalSymbols) {
         String russianAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";

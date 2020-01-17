@@ -48,7 +48,7 @@ public class VBO {
         return size;
     }
 
-    public void createNew(){
+    public void createNew() {
         if (!GLFW.isInited()) throw new GLFWNotInitializedError();
 
         if (vboID != -1)
