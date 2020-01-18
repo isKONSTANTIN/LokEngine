@@ -34,10 +34,10 @@ public class AtlasPositions implements Saveable {
     }
 
     public ArrayList<VBO> build(Texture texture) {
-        Vector2f fistPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
-        Vector2f secondPoint = new Vector2f((float) startPosition.x / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
-        Vector2f thirdPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.y / (float) texture.sizeY);
-        Vector2f fourthPoint = new Vector2f((float) startPosition.z / (float) texture.sizeX, (float) startPosition.w / (float) texture.sizeY);
+        Vector2f fistPoint = new Vector2f((float) startPosition.x / (float) texture.getSizeX(), (float) startPosition.w / (float) texture.getSizeY());
+        Vector2f secondPoint = new Vector2f((float) startPosition.x / (float) texture.getSizeX(), (float) startPosition.y / (float) texture.getSizeY());
+        Vector2f thirdPoint = new Vector2f((float) startPosition.z / (float) texture.getSizeX(), (float) startPosition.y / (float) texture.getSizeY());
+        Vector2f fourthPoint = new Vector2f((float) startPosition.z / (float) texture.getSizeX(), (float) startPosition.w / (float) texture.getSizeY());
 
         ArrayList<VBO> uvVBOs = new ArrayList<>();
 
@@ -56,10 +56,10 @@ public class AtlasPositions implements Saveable {
         for (Vector4i position : positions) {
             uvVBOs.add(
                     new VBO(new float[]{
-                            (float) position.x / (float) texture.sizeX, (float) position.w / (float) texture.sizeY,
-                            (float) position.x / (float) texture.sizeX, (float) position.y / (float) texture.sizeY,
-                            (float) position.z / (float) texture.sizeX, (float) position.y / (float) texture.sizeY,
-                            (float) position.z / (float) texture.sizeX, (float) position.w / (float) texture.sizeY
+                            (float) position.x / (float) texture.getSizeX(), (float) position.w / (float) texture.getSizeY(),
+                            (float) position.x / (float) texture.getSizeX(), (float) position.y / (float) texture.getSizeY(),
+                            (float) position.z / (float) texture.getSizeX(), (float) position.y / (float) texture.getSizeY(),
+                            (float) position.z / (float) texture.getSizeX(), (float) position.w / (float) texture.getSizeY()
                     })
             );
         }

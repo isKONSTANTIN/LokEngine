@@ -69,7 +69,7 @@ public class PlatesChunksFramePart extends FramePart {
                         0);
                 glVertexAttribDivisor(2, 1);
 
-                glBindTexture(GL_TEXTURE_2D, chunk.renderData.textures.get(key).buffer);
+                glBindTexture(GL_TEXTURE_2D, chunk.renderData.textures.get(key).getBuffer());
 
                 glDrawArraysInstanced(GL_QUADS, 0, vertexVBO.getSize(), count);
             }

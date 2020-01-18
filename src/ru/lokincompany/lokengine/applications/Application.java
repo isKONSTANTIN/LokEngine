@@ -30,13 +30,13 @@ public abstract class Application {
 
     public ApplicationRuntime applicationRuntime;
     protected boolean isRun;
-    protected Thread myThread;
     protected long openALDevice;
     protected long openALContext;
     protected ALCCapabilities alcCapabilities;
     protected ALCapabilities alCapabilities;
 
-    static void errorClose(Exception e) {
+    protected void errorClose(Exception e) {
+        isRun = false;
         Logger.errorMessages = true;
         Logger.error("Critical error in engine! Sorry for that :C", "ru/lokinCompany/lokEngine");
         Logger.printException(e);

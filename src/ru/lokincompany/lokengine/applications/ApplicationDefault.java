@@ -11,6 +11,7 @@ import ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection.C
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.Scene;
 import ru.lokincompany.lokengine.tools.Logger;
+import ru.lokincompany.lokengine.tools.executorservices.EngineExecutors;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -42,8 +43,10 @@ public class ApplicationDefault extends Application {
     }
 
     public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution, String windowTitle) {
-        if (myThread != null) return;
-        myThread = new Thread(() -> {
+        if (isRun) return;
+        isRun = true;
+
+        EngineExecutors.longTasksExecutor.submit(() -> {
             try {
                 Logger.debug("Init glfw", "LokEngine_start");
                 GLFW.init();
@@ -102,7 +105,6 @@ public class ApplicationDefault extends Application {
                 SplashScreen.updateStatus(0.9f);
                 Logger.debug("Turn in main while!", "LokEngine_start");
                 System.gc();
-                isRun = true;
             } catch (Exception e) {
                 errorClose(e);
             }
@@ -133,8 +135,9 @@ public class ApplicationDefault extends Application {
                 Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
                 Logger.printException(e);
             }
+
+            isRun = false;
         });
-        myThread.start();
     }
 
     private void mainWhile() {

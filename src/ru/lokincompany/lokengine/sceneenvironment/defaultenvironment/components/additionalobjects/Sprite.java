@@ -56,10 +56,10 @@ public class Sprite implements Saveable {
     public void loadSprite(Texture texture, float vertexSize) {
         VBO vertexVBO = new VBO(new float[]
                 {
-                        -texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f,
-                        -texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
-                        texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
-                        texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f
+                        -texture.getSizeX() * vertexSize / 2f * 0.0005f, -texture.getSizeY() * vertexSize / 2f * 0.0005f,
+                        -texture.getSizeX() * vertexSize / 2f * 0.0005f, texture.getSizeY() * vertexSize / 2f * 0.0005f,
+                        texture.getSizeX() * vertexSize / 2f * 0.0005f, texture.getSizeY() * vertexSize / 2f * 0.0005f,
+                        texture.getSizeX() * vertexSize / 2f * 0.0005f, -texture.getSizeY() * vertexSize / 2f * 0.0005f
                 }
         );
 
@@ -70,17 +70,17 @@ public class Sprite implements Saveable {
     }
 
     public void loadSprite(Texture texture, float vertexSize, Vector4i imagePosFromAtlas) {
-        Vector2f fistPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
-        Vector2f secondPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
-        Vector2f thirdPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.y / (float) texture.sizeY);
-        Vector2f fourthPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.sizeX, (float) imagePosFromAtlas.w / (float) texture.sizeY);
+        Vector2f fistPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.getSizeX(), (float) imagePosFromAtlas.w / (float) texture.getSizeY());
+        Vector2f secondPoint = new Vector2f((float) imagePosFromAtlas.x / (float) texture.getSizeX(), (float) imagePosFromAtlas.y / (float) texture.getSizeY());
+        Vector2f thirdPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.getSizeX(), (float) imagePosFromAtlas.y / (float) texture.getSizeY());
+        Vector2f fourthPoint = new Vector2f((float) imagePosFromAtlas.z / (float) texture.getSizeX(), (float) imagePosFromAtlas.w / (float) texture.getSizeY());
 
         VBO vertexVBO = new VBO(new float[]
                 {
-                        -texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f,
-                        -texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
-                        texture.sizeX * vertexSize / 2f * 0.0005f, texture.sizeY * vertexSize / 2f * 0.0005f,
-                        texture.sizeX * vertexSize / 2f * 0.0005f, -texture.sizeY * vertexSize / 2f * 0.0005f
+                        -texture.getSizeX() * vertexSize / 2f * 0.0005f, -texture.getSizeY() * vertexSize / 2f * 0.0005f,
+                        -texture.getSizeX() * vertexSize / 2f * 0.0005f, texture.getSizeY() * vertexSize / 2f * 0.0005f,
+                        texture.getSizeX() * vertexSize / 2f * 0.0005f, texture.getSizeY() * vertexSize / 2f * 0.0005f,
+                        texture.getSizeX() * vertexSize / 2f * 0.0005f, -texture.getSizeY() * vertexSize / 2f * 0.0005f
                 }
         );
 
@@ -101,10 +101,10 @@ public class Sprite implements Saveable {
 
         VBO vertexVBO = new VBO(new float[]
                 {
-                        -tex.sizeX * vertexSize / 2f * 0.0005f, -tex.sizeY * vertexSize / 2f * 0.0005f,
-                        -tex.sizeX * vertexSize / 2f * 0.0005f, tex.sizeY * vertexSize / 2f * 0.0005f,
-                        tex.sizeX * vertexSize / 2f * 0.0005f, tex.sizeY * vertexSize / 2f * 0.0005f,
-                        tex.sizeX * vertexSize / 2f * 0.0005f, -tex.sizeY * vertexSize / 2f * 0.0005f
+                        -tex.getSizeX() * vertexSize / 2f * 0.0005f, -tex.getSizeY() * vertexSize / 2f * 0.0005f,
+                        -tex.getSizeX() * vertexSize / 2f * 0.0005f, tex.getSizeY() * vertexSize / 2f * 0.0005f,
+                        tex.getSizeX() * vertexSize / 2f * 0.0005f, tex.getSizeY() * vertexSize / 2f * 0.0005f,
+                        tex.getSizeX() * vertexSize / 2f * 0.0005f, -tex.getSizeY() * vertexSize / 2f * 0.0005f
                 }
         );
 

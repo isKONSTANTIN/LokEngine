@@ -41,7 +41,7 @@ public class GUISliderHead extends GUIObject {
     public void setTexture(Texture texture) {
         this.texture = texture;
         color = Colors.white();
-        setSize(new Vector2i(texture.sizeX, texture.sizeY));
+        setSize(new Vector2i(texture.getSizeX(), texture.getSizeY()));
     }
 
     public boolean getActive() {

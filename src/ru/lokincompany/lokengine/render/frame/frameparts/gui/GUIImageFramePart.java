@@ -22,7 +22,7 @@ public class GUIImageFramePart extends FramePart {
         this.texture = new Texture(path);
         this.position = position;
         if (size.x <= 0 || size.y <= 0) {
-            size = new Vector2i(texture.sizeX, texture.sizeY);
+            size = new Vector2i(texture.getSizeX(), texture.getSizeY());
         }
         this.size = size;
     }
@@ -39,8 +39,8 @@ public class GUIImageFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        if (texture != null && texture.buffer != -1) {
-            glBindTexture(GL_TEXTURE_2D, texture.buffer);
+        if (texture != null && texture.getBuffer() != -1) {
+            glBindTexture(GL_TEXTURE_2D, texture.getBuffer());
             glBegin(GL_POLYGON);
             glColor4d(color.red, color.green, color.blue, color.alpha);
 

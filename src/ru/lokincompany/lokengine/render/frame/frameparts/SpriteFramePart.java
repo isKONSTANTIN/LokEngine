@@ -77,7 +77,7 @@ public class SpriteFramePart extends FramePart {
         shader.setUniformData("ObjectColor", new Vector4f(color.red, color.green, color.blue, color.alpha));
         shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
 
-        int textureBuffer = sprite.texture.buffer != -1 ? sprite.texture.buffer : renderProperties.getUnknownTexture().buffer;
+        int textureBuffer = sprite.texture.getBuffer() != -1 ? sprite.texture.getBuffer() : renderProperties.getUnknownTexture().getBuffer();
 
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
 

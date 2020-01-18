@@ -100,7 +100,7 @@ public class Font {
         int drawX = position.x;
         int drawY = position.y;
 
-        GL11.glBindTexture(GL_TEXTURE_2D, texture.buffer);
+        GL11.glBindTexture(GL_TEXTURE_2D, texture.getBuffer());
         glBegin(GL_QUADS);
 
         for (int i = 0; i < text.length(); i++) {
@@ -131,10 +131,10 @@ public class Font {
             int width = drawX + g.width;
             int height = drawY + g.height;
 
-            float glTexX = g.x / (float) texture.sizeX;
-            float glTexY = g.y / (float) texture.sizeY;
-            float glTexWidth = (g.x + g.width) / (float) texture.sizeX;
-            float glTexHeight = (g.y + g.height) / (float) texture.sizeY;
+            float glTexX = g.x / (float) texture.getSizeX();
+            float glTexY = g.y / (float) texture.getSizeY();
+            float glTexWidth = (g.x + g.width) / (float) texture.getSizeX();
+            float glTexHeight = (g.y + g.height) / (float) texture.getSizeY();
 
             Color color = shader.getColor(new Vector2i(drawX - position.x, drawY - position.y));
             glColor4d(color.red, color.green, color.blue, color.alpha);

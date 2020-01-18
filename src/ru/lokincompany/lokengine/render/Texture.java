@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.BufferUtils;
-import ru.lokincompany.lokengine.tools.Logger;
+import ru.lokincompany.lokengine.tools.executorservices.EngineExecutors;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.concurrent.Future;
 
 import static org.lwjgl.glfw.GLFW.glfwGetCurrentContext;
 import static org.lwjgl.opengl.GL11.*;
@@ -18,11 +19,13 @@ import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class Texture implements Saveable {
     private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();
-    public int buffer = -1;
-    public int sizeX = -1;
-    public int sizeY = -1;
     public long context = -1;
     public String path;
+    private int buffer = -1;
+    private int sizeX = 100;
+    private int sizeY = 100;
+    private Future<Object[]> loadedData;
+    private boolean prepared;
 
     public Texture(ByteBuffer byteBuffer, Vector2i size) {
         this.buffer = createBuffer(byteBuffer, size.x, size.y);
@@ -66,6 +69,21 @@ public class Texture implements Saveable {
         return new Object[]{textureBuffer, image};
     }
 
+    public int getSizeX() {
+        prepareBufferData();
+        return sizeX;
+    }
+
+    public int getSizeY() {
+        prepareBufferData();
+        return sizeY;
+    }
+
+    public int getBuffer() {
+        prepareBufferData();
+        return buffer;
+    }
+
     public boolean equals(Object obj) {
         return ((Texture) obj).buffer == buffer;
     }
@@ -93,9 +111,6 @@ public class Texture implements Saveable {
         this.context = glfwGetCurrentContext();
         this.path = path;
 
-        ByteBuffer textureBuffer;
-        BufferedImage image;
-
         if (!loadedTextures.containsKey(context))
             loadedTextures.put(context, new HashMap<>());
 
@@ -109,22 +124,32 @@ public class Texture implements Saveable {
             return;
         }
 
-        try {
-            Object[] imageData = loadData(path);
+        loadedData = EngineExecutors.fastTasksExecutor.submit(() -> loadData(path));
+    }
 
-            textureBuffer = (ByteBuffer) imageData[0];
-            image = (BufferedImage) imageData[1];
+    private void prepareBufferData() {
+        if (prepared) return;
+        prepared = true;
+
+        ByteBuffer textureBuffer;
+        BufferedImage image;
+        Object[] imageData;
+
+        try {
+            imageData = loadedData.get();
         } catch (Exception e) {
-            Logger.warning("Fail load texture: " + path + "!", "LokEngine_Texture");
-            Logger.printException(e);
             return;
         }
+
+        textureBuffer = (ByteBuffer) imageData[0];
+        image = (BufferedImage) imageData[1];
 
         this.buffer = createBuffer(textureBuffer, image.getWidth(), image.getHeight());
         this.sizeX = image.getWidth();
         this.sizeY = image.getHeight();
 
         loadedTextures.get(context).put(path, this);
+        loadedData = null;
     }
 
     @Override

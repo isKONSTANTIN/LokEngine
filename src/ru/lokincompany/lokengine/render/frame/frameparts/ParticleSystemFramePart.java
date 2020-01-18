@@ -64,7 +64,7 @@ public class ParticleSystemFramePart extends FramePart {
             }
 
             VBO uvBuffer = sourceSprite.uvVBO != null ? sourceSprite.uvVBO : renderProperties.getUVVBO();
-            int textureBuffer = sourceSprite.texture.buffer != -1 ? sourceSprite.texture.buffer : renderProperties.getUnknownTexture().buffer;
+            int textureBuffer = sourceSprite.texture.getBuffer() != -1 ? sourceSprite.texture.getBuffer() : renderProperties.getUnknownTexture().getBuffer();
 
             renderProperties.getBuilderWindow().getCamera().updateView();
 

@@ -2,6 +2,7 @@ package ru.lokincompany.lokengine.applications;
 
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.Scene;
 import ru.lokincompany.lokengine.tools.Logger;
+import ru.lokincompany.lokengine.tools.executorservices.EngineExecutors;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 
 public class ApplicationConsole extends Application {
@@ -14,8 +15,10 @@ public class ApplicationConsole extends Application {
     }
 
     public void start(boolean haveScene) {
-        if (myThread != null) return;
-        myThread = new Thread(() -> {
+        if (isRun) return;
+        isRun = true;
+
+        EngineExecutors.longTasksExecutor.submit(() -> {
             try {
                 Prefs.init();
             } catch (Exception e) {
@@ -42,10 +45,10 @@ public class ApplicationConsole extends Application {
                 }
                 Logger.debug("Turn in main while!", "LokEngine_start");
                 System.gc();
-                isRun = true;
             } catch (Exception e) {
                 errorClose(e);
             }
+
             try {
                 mainWhile();
             } catch (Exception e) {
@@ -65,8 +68,9 @@ public class ApplicationConsole extends Application {
                 Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
                 Logger.printException(e);
             }
+
+            isRun = false;
         });
-        myThread.start();
     }
 
     private void mainWhile() {

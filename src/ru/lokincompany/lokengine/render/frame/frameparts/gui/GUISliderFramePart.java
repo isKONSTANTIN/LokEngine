@@ -54,7 +54,7 @@ public class GUISliderFramePart extends FramePart {
         if (head.getTexture() != null) {
             glEnd();
 
-            glBindTexture(GL_TEXTURE_2D, head.getTexture().buffer);
+            glBindTexture(GL_TEXTURE_2D, head.getTexture().getBuffer());
 
             glBegin(GL_QUADS);
             glTexCoord2f(0, 0);
