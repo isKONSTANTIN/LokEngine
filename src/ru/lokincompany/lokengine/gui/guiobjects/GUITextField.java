@@ -82,7 +82,7 @@ public class GUITextField extends GUIObject {
     }
 
     public GUITextField(String text, Color color, int fontStyle, int fontSize) {
-        this(new Vector2i(), new Vector2i(), "Arial", text, color, fontStyle, fontSize, true, false);
+        this(new Vector2i(), new Vector2i(), text, color, fontStyle, fontSize);
     }
 
     public GUITextField(String text, Color color, int fontStyle) {
