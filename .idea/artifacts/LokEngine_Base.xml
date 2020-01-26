@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="LokEngine Base">
+    <output-path>$PROJECT_DIR$/out/artifacts/LokEngine_Base</output-path>
+    <root id="root">
+      <element id="file-copy" path="$PROJECT_DIR$/LICENSE.md" />
+      <element id="directory" name="resources">
+        <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+      </element>
+    </root>
+  </artifact>
+</component>

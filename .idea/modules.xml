@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LokEngine.iml" filepath="$PROJECT_DIR$/.idea/LokEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Applications/LokEngine-Applications.iml" filepath="$PROJECT_DIR$/LokEngine-Applications/LokEngine-Applications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LokEngine-Base.iml" filepath="$PROJECT_DIR$/.idea/LokEngine-Base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-GUI/LokEngine-GUI.iml" filepath="$PROJECT_DIR$/LokEngine-GUI/LokEngine-GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Inputs/LokEngine-Inputs.iml" filepath="$PROJECT_DIR$/LokEngine-Inputs/LokEngine-Inputs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Network/LokEngine-Network.iml" filepath="$PROJECT_DIR$/LokEngine-Network/LokEngine-Network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Render/LokEngine-Render.iml" filepath="$PROJECT_DIR$/LokEngine-Render/LokEngine-Render.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Scene-Default/LokEngine-Scene-Default.iml" filepath="$PROJECT_DIR$/LokEngine-Scene-Default/LokEngine-Scene-Default.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Scene-Plate/LokEngine-Scene-Plate.iml" filepath="$PROJECT_DIR$/LokEngine-Scene-Plate/LokEngine-Scene-Plate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Tests/LokEngine-Tests.iml" filepath="$PROJECT_DIR$/LokEngine-Tests/LokEngine-Tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Tools/LokEngine-Tools.iml" filepath="$PROJECT_DIR$/LokEngine-Tools/LokEngine-Tools.iml" />
     </modules>
   </component>
 </project>
