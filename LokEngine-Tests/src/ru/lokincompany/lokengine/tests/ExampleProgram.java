@@ -1,11 +1,14 @@
 package ru.lokincompany.lokengine.tests;
 
-import ru.lokincompany.lokengine.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.applications.ApplicationGUIOnly;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
+import ru.lokincompany.lokengine.tools.FontPrefs;
+import ru.lokincompany.lokengine.tools.TextColorShader;
+import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 
-public class ExampleProgram extends ApplicationDefault {
+public class ExampleProgram extends ApplicationGUIOnly {
     public static void main(String[] args) {
         new ExampleProgram().start(false, true);
     }
