@@ -12,14 +12,14 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 class TestChunk extends PlateChunk {
     @Override
-    public boolean generate(int chunkID, PlateScene scene) {
+    public boolean generate(int chunkID) {
         for (int xc = 0; xc < 16; xc++) {
             for (int yc = 0; yc < 16; yc++) {
                 double n = scene.noise.get((xc + (this.xPosition * 16)) / 10d, (yc + (this.yPosition * 16)) / 10d);
                 if (n > 0.05)
                     scene.getChunk(chunkID).setPlate(1, xc, yc);
                 else
-                    scene.getChunk(chunkID).setPlate(2, xc, yc);
+                    scene.getChunk(chunkID).setPlate(0, xc, yc);
             }
         }
         return true;

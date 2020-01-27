@@ -4,6 +4,8 @@ import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateHandler;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateScene;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.enums.InteractionType;
+import ru.lokincompany.lokengine.tools.Logger;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GrassPlateHandler extends PlateHandler {
     PlateScene scene;

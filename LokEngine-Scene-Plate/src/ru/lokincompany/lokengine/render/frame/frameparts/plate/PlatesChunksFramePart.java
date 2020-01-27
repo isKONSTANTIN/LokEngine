@@ -15,6 +15,7 @@ import ru.lokincompany.lokengine.tools.MatrixTools;
 
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20.*;
@@ -23,13 +24,13 @@ import org.lwjgl.opengl.GL33;
 
 public class PlatesChunksFramePart extends FramePart {
     public int blockSize;
-    Vector<PlateChunk> chunks;
+    ConcurrentHashMap<String,PlateChunk> chunks;
     PlateScene scene;
     Shader shader;
     VAO vao;
     VBO vertexVBO;
 
-    public PlatesChunksFramePart(Vector<PlateChunk> chunks, PlateScene scene, int blockSize) {
+    public PlatesChunksFramePart(ConcurrentHashMap<String, PlateChunk> chunks, PlateScene scene, int blockSize) {
         super(FramePartType.Scene);
         this.chunks = chunks;
         this.scene = scene;
@@ -50,14 +51,16 @@ public class PlatesChunksFramePart extends FramePart {
 
         vao.bind();
 
-        for (PlateChunk chunk : chunks) {
-            chunk.updateRender(scene, blockSize);
+        for (Map.Entry<String, PlateChunk> chunkEntry : chunks.entrySet()) {
+            PlateChunk chunk = chunkEntry.getValue();
+
+            chunk.updateRender(blockSize);
 
             shader.setUniformData("ChuckPosition", new Vector2f(chunk.xPosition * blockSize * 0.005f * 16, chunk.yPosition * blockSize * 0.005f * 16));
 
-            for (Map.Entry<Integer, VBO> entry : chunk.renderData.positions.entrySet()) {
-                int key = entry.getKey();
-                VBO value = entry.getValue();
+            for (Map.Entry<Integer, VBO> PositionEntry : chunk.renderData.positions.entrySet()) {
+                int key = PositionEntry.getKey();
+                VBO value = PositionEntry.getValue();
                 int count = chunk.renderData.counts.get(key);
 
                 value.bind();

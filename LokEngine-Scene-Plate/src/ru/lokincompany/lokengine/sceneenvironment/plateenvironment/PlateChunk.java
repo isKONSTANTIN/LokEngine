@@ -8,14 +8,16 @@ public abstract class PlateChunk {
     public boolean platesChanged;
     public boolean generated;
     public PlateChunkRenderData renderData = new PlateChunkRenderData();
+
     protected int[][] plates = new int[16][16];
+    public PlateScene scene;
 
-    public abstract boolean generate(int chunkID, PlateScene scene);
+    public abstract boolean generate(int chunkID);
 
-    public void update(PlateScene scene) {
+    public void update() {
     }
 
-    public void updateRender(PlateScene scene, int blockSize) {
+    public void updateRender(int blockSize) {
         if (platesChanged)
             renderData.update(this, scene, blockSize);
         platesChanged = false;
@@ -33,6 +35,7 @@ public abstract class PlateChunk {
             platesChanged = true;
 
         plates[x][y] = id;
+        scene.getPlate(id).createHandle(xPosition * 16 + x, yPosition * 16 + y);
     }
 
     public int getPlate(int x, int y) {
