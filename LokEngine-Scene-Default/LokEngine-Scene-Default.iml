@@ -9,9 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="LokEngine-Render" />
     <orderEntry type="module" module-name="LokEngine-Base" />
-    <orderEntry type="library" name="LWJGL" level="project" />
+    <orderEntry type="module" module-name="LokEngine-Tools" />
     <orderEntry type="library" name="Commons IO" level="project" />
     <orderEntry type="library" name="Jbox2D" level="project" />
-    <orderEntry type="module" module-name="LokEngine-Tools" />
+    <orderEntry type="library" name="LWJGL" level="project" />
   </component>
 </module>

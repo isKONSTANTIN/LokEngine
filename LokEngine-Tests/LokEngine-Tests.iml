@@ -12,10 +12,10 @@
     <orderEntry type="module" module-name="LokEngine-Network" />
     <orderEntry type="module" module-name="LokEngine-Scene-Default" />
     <orderEntry type="module" module-name="LokEngine-Scene-Plate" />
-    <orderEntry type="library" name="LWJGL" level="project" />
+    <orderEntry type="module" module-name="LokEngine-Tools" />
     <orderEntry type="module" module-name="LokEngine-Applications" />
     <orderEntry type="module" module-name="LokEngine-Render" />
     <orderEntry type="module" module-name="LokEngine-Inputs" />
-    <orderEntry type="module" module-name="LokEngine-Tools" />
+    <orderEntry type="library" name="LWJGL" level="project" />
   </component>
 </module>

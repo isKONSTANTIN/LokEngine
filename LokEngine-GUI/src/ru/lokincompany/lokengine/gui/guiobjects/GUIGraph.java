@@ -3,6 +3,7 @@ package ru.lokincompany.lokengine.gui.guiobjects;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIGraphFramePart;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -25,8 +26,10 @@ public class GUIGraph extends GUIObject {
         this.minHeight = minHeight;
         this.maxPoints = maxPoints > 0 ? maxPoints : 1;
 
-        this.freeTextDrawer = new GUIFreeTextDrawer("Arial", 0, Math.min(Math.max(size.y / 10, 10), 24));
-
+        this.freeTextDrawer = new GUIFreeTextDrawer(new FontPrefs()
+                .setSize(
+                        Math.min(Math.max(size.y / 10, 10), 24)
+                ));
         framePart = new GUIGraphFramePart(position, size, points, maxHeight, minHeight, maxPoints, color, color2, freeTextDrawer);
     }
 

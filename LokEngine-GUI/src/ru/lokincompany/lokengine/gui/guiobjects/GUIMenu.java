@@ -4,6 +4,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.text.Font;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -27,7 +28,7 @@ public class GUIMenu extends GUIObject {
     public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
         super(position, size);
         this.titleSize = titleSize;
-        this.drawer = new GUIFreeTextDrawer("", 0, (int) (titleSize / 1.2f));
+        this.drawer = new GUIFreeTextDrawer(new FontPrefs().setSize((int) (titleSize / 1.2f)));
         this.panel = panel;
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
         panel.setPosition(object -> getPosition());

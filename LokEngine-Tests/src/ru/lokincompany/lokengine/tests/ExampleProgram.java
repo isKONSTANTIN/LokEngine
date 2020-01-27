@@ -14,6 +14,13 @@ public class ExampleProgram extends ApplicationDefault {
     protected void initEvent() {
         window.setCloseEvent((window, args) -> close());
         window.getFrameBuilder().backgroundColor = Colors.engineBackgroundColor();
-        canvas.addObject(new GUIText("It's simple program on LokEngine!"), GUIPosition.Center);
+
+        TextColorShader textColorShader = charPos ->
+                new Color(1,1,1, (float)(Math.sin(applicationRuntime.getEngineRunTime() / 1000000000f - charPos.x / 100f) + 1) / 2f);
+
+        canvas.addObject(
+                new GUIText("It's simple program on LokEngine!", new FontPrefs().setShader(textColorShader)),
+                GUIPosition.Center
+        );
     }
 }

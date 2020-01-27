@@ -4,7 +4,7 @@ import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.text.Font;
-import ru.lokincompany.lokengine.render.text.TextColorShader;
+import ru.lokincompany.lokengine.tools.TextColorShader;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 

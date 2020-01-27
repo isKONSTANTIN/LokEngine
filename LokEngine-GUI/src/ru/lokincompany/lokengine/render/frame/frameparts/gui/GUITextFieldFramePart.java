@@ -2,6 +2,8 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
+import ru.lokincompany.lokengine.render.text.Font;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.Timer;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
@@ -22,12 +24,13 @@ public class GUITextFieldFramePart extends GUITextFramePart {
     public Color backgroundColor;
     public boolean centralizeText;
 
-    public GUITextFieldFramePart(Vector2i GUIObjectSize, String text, String fontName, Color color, int fontStyle, int size) {
-        super(text, new ru.lokincompany.lokengine.render.text.Font(new Font(fontName, fontStyle, size)), color);
-        timer = new Timer();
-        timer.setDurationInSeconds(0.5f);
+    public GUITextFieldFramePart(Vector2i GUIObjectSize, String text, FontPrefs fontPrefs) {
+        super(text, new Font(fontPrefs), fontPrefs.getShader());
         this.size = GUIObjectSize;
         this.backgroundColor = Colors.engineBackgroundColor();
+
+        timer = new Timer();
+        timer.setDurationInSeconds(0.5f);
     }
 
     @Override

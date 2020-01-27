@@ -3,6 +3,8 @@ package ru.lokincompany.lokengine.render.text;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.Texture;
+import ru.lokincompany.lokengine.tools.FontPrefs;
+import ru.lokincompany.lokengine.tools.TextColorShader;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -18,19 +20,21 @@ import static org.lwjgl.glfw.GLFW.glfwGetCurrentContext;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Font {
-
     private static HashMap<Long, HashMap<java.awt.Font, Font>> createdFonts = new HashMap<>();
     private HashMap<Character, Glyph> glyphs;
     private Texture texture;
     private int fontHeight;
     private float spaceSize;
+    private FontPrefs prefs;
 
-    public Font(java.awt.Font font, String additionalSymbols) {
-        load(font, additionalSymbols);
+    public Font(FontPrefs prefs, String additionalSymbols) {
+        this.prefs = prefs;
+        load(new java.awt.Font(prefs.getFontName(), prefs.getFontStyle(), prefs.getSize()), additionalSymbols);
     }
 
-    public Font(java.awt.Font font) {
-        load(font, "");
+    public Font(FontPrefs prefs) {
+        this.prefs = prefs;
+        load(new java.awt.Font(prefs.getFontName(), prefs.getFontStyle(), prefs.getSize()), "");
     }
 
     public HashMap<Character, Glyph> getGlyphs() {
@@ -164,7 +168,7 @@ public class Font {
     }
 
     public void drawText(String text, Vector2i position, Vector2i maxSize) {
-        drawText(text, position, maxSize, Colors.white());
+        drawText(text, position, maxSize, prefs.getShader());
     }
 
     public void drawText(String text, Vector2i position, Color color) {
@@ -172,7 +176,7 @@ public class Font {
     }
 
     public void drawText(String text, Vector2i position) {
-        drawText(text, position, Colors.white());
+        drawText(text, position, null, prefs.getShader());
     }
 
     private void load(java.awt.Font font, String additionalSymbols) {

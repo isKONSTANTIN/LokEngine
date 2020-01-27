@@ -8,8 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="LokEngine-Base" />
-    <orderEntry type="library" name="LWJGL" level="project" />
     <orderEntry type="module" module-name="LokEngine-Inputs" />
     <orderEntry type="module" module-name="LokEngine-Tools" />
+    <orderEntry type="library" name="LWJGL" level="project" />
   </component>
 </module>

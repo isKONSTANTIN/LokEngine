@@ -4,7 +4,8 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUITextFramePart;
 import ru.lokincompany.lokengine.render.text.Font;
-import ru.lokincompany.lokengine.render.text.TextColorShader;
+import ru.lokincompany.lokengine.tools.FontPrefs;
+import ru.lokincompany.lokengine.tools.TextColorShader;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -21,17 +22,13 @@ public class GUIFreeTextDrawer extends GUIObject {
         this.font = font;
     }
 
-    public GUIFreeTextDrawer(String fontName, int fontStyle, int size) {
+    public GUIFreeTextDrawer(FontPrefs fontPrefs) {
         super(new Vector2i(0, 0), new Vector2i(0, 0));
-        font = new Font(new java.awt.Font(fontName, fontStyle, size));
-    }
-
-    public GUIFreeTextDrawer(int fontStyle, int size) {
-        this("Arial", fontStyle, size);
+        font = new Font(fontPrefs);
     }
 
     public GUIFreeTextDrawer() {
-        this(0, 12);
+        this(new FontPrefs());
     }
 
     public Font getFont() {

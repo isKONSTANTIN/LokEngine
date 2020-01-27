@@ -4,6 +4,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUITextFieldScript;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUITextFieldFramePart;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.additionalobjects.KeyInfo;
@@ -30,9 +31,9 @@ public class GUITextField extends GUIObject {
         framePart.position = this.position;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String fontName, String text, Color color, int fontStyle, int fontSize, boolean canResize, boolean centralizeText) {
+    public GUITextField(Vector2i position, Vector2i size, String text, FontPrefs prefs, boolean canResize, boolean centralizeText) {
         super(position, new Vector2i(0, 0));
-        framePart = new GUITextFieldFramePart(size, text, fontName, color, fontStyle, fontSize);
+        framePart = new GUITextFieldFramePart(size, text, prefs);
         this.canResize = canResize;
         this.size = size;
         this.touchable = true;
@@ -49,24 +50,16 @@ public class GUITextField extends GUIObject {
         framePart.centralizeText = centralizeText;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle, int fontSize, boolean centralizeText) {
-        this(position, size, "Arial", text, color, fontStyle, fontSize, false, centralizeText);
-    }
-
-    public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle, int fontSize) {
-        this(position, size, text, color, fontStyle, fontSize, false);
-    }
-
-    public GUITextField(Vector2i position, Vector2i size, String text, Color color, int fontStyle) {
-        this(position, size, text, color, fontStyle, 24);
+    public GUITextField(Vector2i position, Vector2i size, String text, FontPrefs prefs, boolean centralizeText) {
+        this(position, size, text, prefs,false, centralizeText);
     }
 
     public GUITextField(Vector2i position, Vector2i size, String text) {
-        this(position, size, text, new Color(1, 1, 1, 1), 0);
+        this(position, size, text, new FontPrefs(), false);
     }
 
     public GUITextField(Vector2i position, String text) {
-        this(position, new Vector2i(), text, new Color(1, 1, 1, 1), 0);
+        this(position, new Vector2i(), text);
     }
 
     public GUITextField(Vector2i position) {
@@ -77,24 +70,24 @@ public class GUITextField extends GUIObject {
         this(new Vector2i(), customFramePart);
     }
 
-    public GUITextField(String fontName, String text, Color color, int fontStyle, int fontSize, boolean canResize) {
-        this(new Vector2i(), new Vector2i(), fontName, text, color, fontStyle, fontSize, canResize, false);
+    public GUITextField(String text, FontPrefs prefs, boolean canResize, boolean centralizeText) {
+        this(new Vector2i(), new Vector2i(), text, prefs, canResize, centralizeText);
     }
 
-    public GUITextField(String text, Color color, int fontStyle, int fontSize) {
-        this(new Vector2i(), new Vector2i(), text, color, fontStyle, fontSize);
+    public GUITextField(String text, FontPrefs prefs, boolean canResize) {
+        this(text, prefs, canResize, false);
     }
 
-    public GUITextField(String text, Color color, int fontStyle) {
-        this(new Vector2i(), new Vector2i(), text, color, fontStyle, 24);
+    public GUITextField(String text, FontPrefs prefs) {
+        this(new Vector2i(), new Vector2i(), text, prefs, false);
     }
 
     public GUITextField(String text) {
-        this(new Vector2i(), new Vector2i(), text, new Color(1, 1, 1, 1), 0);
+        this(text, new FontPrefs());
     }
 
     public GUITextField() {
-        this(new Vector2i(), "");
+        this("");
     }
 
     public boolean getActive() {

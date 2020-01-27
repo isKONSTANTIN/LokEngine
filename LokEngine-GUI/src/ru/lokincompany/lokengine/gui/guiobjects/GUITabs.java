@@ -5,6 +5,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.text.Font;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -27,7 +28,7 @@ public class GUITabs extends GUIObject {
 
     public GUITabs(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
         super(position, size);
-        this.drawer = new GUIFreeTextDrawer("", 0, titleSize);
+        this.drawer = new GUIFreeTextDrawer(new FontPrefs().setSize(titleSize));
         this.titleSize = drawer.getFont().getFontHeight();
         this.panel = new GUIPanel(position, new Vector2i(size.x, titleSize));
         panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));

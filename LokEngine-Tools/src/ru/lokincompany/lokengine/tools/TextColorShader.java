@@ -1,4 +1,4 @@
-package ru.lokincompany.lokengine.render.text;
+package ru.lokincompany.lokengine.tools;
 
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;

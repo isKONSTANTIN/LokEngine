@@ -8,9 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="LokEngine-Base" />
-    <orderEntry type="library" name="Gson" level="project" />
+    <orderEntry type="module" module-name="LokEngine-Tools" />
     <orderEntry type="library" name="MySQL Connector" level="project" />
     <orderEntry type="library" name="Commons IO" level="project" />
-    <orderEntry type="module" module-name="LokEngine-Tools" />
+    <orderEntry type="library" name="Gson" level="project" />
   </component>
 </module>
