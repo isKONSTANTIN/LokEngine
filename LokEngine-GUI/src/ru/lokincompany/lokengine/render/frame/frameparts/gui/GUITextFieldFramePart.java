@@ -73,8 +73,11 @@ public class GUITextFieldFramePart extends GUITextFramePart {
             int xPos = endPosText.x;
 
             GL11.glBegin(GL11.GL_LINES);
-            GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
-
+            if (color == null) {
+                Color shaderColor = shader.getColor(new Vector2i(text.length(), 1));
+                GL11.glColor4f(shaderColor.red, shaderColor.green, shaderColor.blue, shaderColor.alpha);
+            }else
+                GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
             GL11.glVertex2f(xPos + 1, endPosText.y - fontHeight);
             GL11.glVertex2f(xPos + 1, endPosText.y);
 

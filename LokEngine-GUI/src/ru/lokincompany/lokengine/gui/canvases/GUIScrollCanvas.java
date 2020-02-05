@@ -37,9 +37,6 @@ public class GUIScrollCanvas extends GUICanvas {
 
         framePart.viewOffset.x = Xmax;
         framePart.viewOffset.y = Ymax;
-
-        properties.globalPosition.x += framePart.viewOffset.x;
-        properties.globalPosition.y += framePart.viewOffset.y;
     }
 
     @Override
@@ -48,6 +45,9 @@ public class GUIScrollCanvas extends GUICanvas {
 
         if (properties.mouseRaycastStatus.mouse.inField(properties.globalPosition, size))
             updateScroll(parentProperties);
+
+        properties.globalPosition.x += framePart.viewOffset.x;
+        properties.globalPosition.y += framePart.viewOffset.y;
 
         updateObjects();
     }

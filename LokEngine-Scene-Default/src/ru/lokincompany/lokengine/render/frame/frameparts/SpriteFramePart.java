@@ -25,9 +25,12 @@ public class SpriteFramePart extends FramePart {
     public Color color;
     public VAO vao;
 
+    private VBO spriteVBO;
+
     public SpriteFramePart(Sprite sprite, Shader shader, Color color) {
         super(FramePartType.Scene);
         this.sprite = sprite;
+        this.spriteVBO = sprite.vertexVBO;
         this.shader = shader;
         this.color = color;
         this.vao = new VAO();
@@ -71,6 +74,11 @@ public class SpriteFramePart extends FramePart {
 
         if (renderProperties.getActiveShader() == null || !shader.equals(renderProperties.getActiveShader())) {
             renderProperties.useShader(shader);
+        }
+
+        if (!spriteVBO.equals(sprite.vertexVBO)){
+            init(renderProperties);
+            spriteVBO = sprite.vertexVBO;
         }
 
         shader.setUniformData("ObjectSize", (float) sprite.size * 2);
