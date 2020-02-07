@@ -48,6 +48,10 @@ public class GUISlider extends GUIObject {
         this(position, size, Colors.engineBackgroundColor(), Colors.engineMainColor());
     }
 
+    public GUISlider() {
+        this(new Vector2i(), new Vector2i(100, 10), Colors.engineBackgroundColor(), Colors.engineMainColor());
+    }
+
     public float getValue() {
         return (range.y - range.x) * framePart.filled + range.x;
     }
