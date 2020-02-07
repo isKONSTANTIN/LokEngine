@@ -34,31 +34,31 @@ public class GUISubWindow extends GUIObject {
     }
 
     public GUISubWindow(Vector2i position, Vector2i size, boolean canMove) {
-        this(position, size, canMove, null, null);
+        this(position, size, canMove,  new GUIText("window!"), new GUIPanel());
     }
 
     public GUISubWindow(Vector2i position, Vector2i size, GUIText titleText, GUIPanel titlePanel) {
-        this(position, size, false, titleText, titlePanel);
+        this(position, size, true, titleText, titlePanel);
     }
 
     public GUISubWindow(Vector2i position, Vector2i size) {
-        this(position, size, false);
+        this(position, size, true);
     }
 
     public GUISubWindow(boolean canMove, GUIText titleText, GUIPanel titlePanel) {
-        this(new Vector2i(), new Vector2i(), canMove, titleText, titlePanel);
+        this(new Vector2i(), new Vector2i(200,200), canMove, titleText, titlePanel);
     }
 
     public GUISubWindow(boolean canMove) {
-        this(new Vector2i(), new Vector2i(), canMove, null, null);
+        this(canMove, new GUIText("window!"), new GUIPanel());
     }
 
     public GUISubWindow(GUIText titleText, GUIPanel titlePanel) {
-        this(new Vector2i(), new Vector2i(), false, titleText, titlePanel);
+        this(true, titleText, titlePanel);
     }
 
     public GUISubWindow() {
-        this(new Vector2i(), new Vector2i(), false);
+        this(new Vector2i(), new Vector2i(200,200));
     }
 
     @Override
