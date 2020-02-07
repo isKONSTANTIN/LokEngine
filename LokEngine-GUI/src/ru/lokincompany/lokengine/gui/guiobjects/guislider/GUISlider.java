@@ -56,6 +56,10 @@ public class GUISlider extends GUIObject {
         return (range.y - range.x) * framePart.filled + range.x;
     }
 
+    public void setValue(float value) {
+        framePart.filled = value;
+    }
+
     public GUISliderHead getHead() {
         return head;
     }
