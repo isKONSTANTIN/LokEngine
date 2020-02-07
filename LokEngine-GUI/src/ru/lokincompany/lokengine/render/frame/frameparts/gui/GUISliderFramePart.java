@@ -4,6 +4,7 @@ import ru.lokincompany.lokengine.gui.guiobjects.guislider.GUISliderHead;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
+import ru.lokincompany.lokengine.tools.OpenGLFastTools;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -33,48 +34,19 @@ public class GUISliderFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        Vector2i headPos = head.getPosition();
-        Vector2i headSize = head.getSize();
-
-        glBegin(GL_QUADS);
-
         glColor4f(colorBackground.red, colorBackground.green, colorBackground.blue, colorBackground.alpha);
-        glVertex3f(position.x, position.y, 0);
-        glVertex3f(size.x + position.x, position.y, 0);
-        glVertex3f(size.x + position.x, size.y + position.y, 0);
-        glVertex3f(position.x, size.y + position.y, 0);
+        OpenGLFastTools.drawSquare(position, size);
 
         glColor4f(colorFill.red, colorFill.green, colorFill.blue, colorFill.alpha);
-        glVertex3f(position.x, position.y, 0);
-        glVertex3f(size.x * filled + position.x, position.y, 0);
-        glVertex3f(size.x * filled + position.x, size.y + position.y, 0);
-        glVertex3f(position.x, size.y + position.y, 0);
+        OpenGLFastTools.drawSquare(position, new Vector2i((int) (size.x * filled), size.y));
 
-        glColor4f(head.color.red, head.color.green, head.color.blue, head.color.alpha);
-        if (head.getTexture() != null) {
-            glEnd();
-
+        if (head.getTexture() != null)
             glBindTexture(GL_TEXTURE_2D, head.getTexture().getBuffer());
 
-            glBegin(GL_QUADS);
-            glTexCoord2f(0, 0);
-            glVertex3f(headPos.x, headPos.y, 0);
-            glTexCoord2f(1, 0);
-            glVertex3f(headSize.x + headPos.x, headPos.y, 0);
-            glTexCoord2f(1, 1);
-            glVertex3f(headSize.x + headPos.x, headSize.y + headPos.y, 0);
-            glTexCoord2f(0, 1);
-            glVertex3f(headPos.x, headSize.y + headPos.y, 0);
+        glColor4f(head.color.red, head.color.green, head.color.blue, head.color.alpha);
 
-            glEnd();
-            glBindTexture(GL_TEXTURE_2D, 0);
-        } else {
-            glVertex3f(headPos.x, headPos.y, 0);
-            glVertex3f(headSize.x + headPos.x, headPos.y, 0);
-            glVertex3f(headSize.x + headPos.x, headSize.y + headPos.y, 0);
-            glVertex3f(headPos.x, headSize.y + headPos.y, 0);
+        OpenGLFastTools.drawSquare(head.getPosition(), head.getSize());
 
-            glEnd();
-        }
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }

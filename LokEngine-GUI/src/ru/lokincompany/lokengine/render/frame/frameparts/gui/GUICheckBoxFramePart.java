@@ -4,6 +4,7 @@ import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
+import ru.lokincompany.lokengine.tools.OpenGLFastTools;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.ColorRGB;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -61,26 +62,10 @@ public class GUICheckBoxFramePart extends FramePart {
         imageFramePart.position = position;
         imageFramePart.size = size;
         if (status) {
-            glBegin(GL_QUADS);
-
-            glVertex3f(position.x, position.y, 0);
-            glVertex3f(size.x + position.x, position.y, 0);
-            glVertex3f(size.x + position.x, size.y + position.y, 0);
-            glVertex3f(position.x, size.y + position.y, 0);
-
-            glEnd();
-
+            OpenGLFastTools.drawSquare(position, size);
             imageFramePart.partRender(renderProperties);
         } else {
-            glBegin(GL_LINE_STRIP);
-
-            glVertex3f(position.x, position.y, 0);
-            glVertex3f(size.x + position.x, position.y, 0);
-            glVertex3f(size.x + position.x, size.y + position.y - 1, 0);
-            glVertex3f(position.x + 1, size.y + position.y, 0);
-            glVertex3f(position.x, position.y, 0);
-
-            glEnd();
+            OpenGLFastTools.drawHollowSquare(position, size);
         }
     }
 }

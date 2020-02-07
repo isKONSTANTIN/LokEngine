@@ -3,6 +3,7 @@ package ru.lokincompany.lokengine.render.frame.frameparts.gui;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
+import ru.lokincompany.lokengine.tools.OpenGLFastTools;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -41,33 +42,15 @@ public class GUISwitchFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        glBegin(GL_QUADS);
-        if (status) {
+        if (status)
             glColor4f(colorFill.red, colorFill.green, colorFill.blue, colorFill.alpha);
-            glVertex3f(position.x, position.y, 0);
-            glVertex3f(size.x + position.x, position.y, 0);
-            glVertex3f(size.x + position.x, size.y + position.y, 0);
-            glVertex3f(position.x, size.y + position.y, 0);
-
-            glColor4f(colorHead.red, colorHead.green, colorHead.blue, colorHead.alpha);
-            glVertex3f(headPosition.x, headPosition.y, 0);
-            glVertex3f(headSize.x + headPosition.x, headPosition.y, 0);
-            glVertex3f(headSize.x + headPosition.x, headSize.y + headPosition.y, 0);
-            glVertex3f(headPosition.x, headSize.y + headPosition.y, 0);
-        } else {
+        else
             glColor4f(colorBackground.red, colorBackground.green, colorBackground.blue, colorBackground.alpha);
-            glVertex3f(position.x, position.y, 0);
-            glVertex3f(size.x + position.x, position.y, 0);
-            glVertex3f(size.x + position.x, size.y + position.y, 0);
-            glVertex3f(position.x, size.y + position.y, 0);
 
-            glColor4f(colorHead.red, colorHead.green, colorHead.blue, colorHead.alpha);
-            glVertex3f(headPosition.x, headPosition.y, 0);
-            glVertex3f(headSize.x + headPosition.x, headPosition.y, 0);
-            glVertex3f(headSize.x + headPosition.x, headSize.y + headPosition.y, 0);
-            glVertex3f(headPosition.x, headSize.y + headPosition.y, 0);
-        }
-        glEnd();
+        OpenGLFastTools.drawSquare(position, size);
+
+        glColor4f(colorHead.red, colorHead.green, colorHead.blue, colorHead.alpha);
+        OpenGLFastTools.drawSquare(headPosition, headSize);
     }
 
 }

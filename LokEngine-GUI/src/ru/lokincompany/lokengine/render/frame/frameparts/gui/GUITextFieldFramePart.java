@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.text.Font;
 import ru.lokincompany.lokengine.tools.FontPrefs;
+import ru.lokincompany.lokengine.tools.OpenGLFastTools;
 import ru.lokincompany.lokengine.tools.Timer;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
@@ -45,15 +46,9 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         int fontYpos = position.y + yGap;
 
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        glBegin(GL_QUADS);
 
         glColor4f(backgroundColor.red, backgroundColor.green, backgroundColor.blue, backgroundColor.alpha);
-        glVertex3f(position.x, position.y, 0);
-        glVertex3f(size.x + position.x, position.y, 0);
-        glVertex3f(size.x + position.x, size.y + position.y, 0);
-        glVertex3f(position.x, size.y + position.y, 0);
-
-        glEnd();
+        OpenGLFastTools.drawSquare(position, size);
 
         Vector2i endPosText = new Vector2i(textSize.x + fontXpos, textSize.y + fontYpos);
         Vector2i maxPos = new Vector2i(size.x - 1 - xGap, size.y - yGap);
