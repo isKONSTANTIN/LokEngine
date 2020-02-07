@@ -30,7 +30,7 @@ public class GUISwitch extends GUIObject {
     }
 
     public GUISwitch() {
-        this(new Vector2i(), new Vector2i());
+        this(new Vector2i(), new Vector2i(25,10));
     }
 
     protected void updateHeadPosition() {
