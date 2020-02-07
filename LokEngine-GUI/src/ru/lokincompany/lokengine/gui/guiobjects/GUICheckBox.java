@@ -48,7 +48,7 @@ public class GUICheckBox extends GUIObject {
     }
 
     public GUICheckBox() {
-        this(new Vector2i(), new Vector2i());
+        this(new Vector2i(), new Vector2i(10, 10));
     }
 
     public Texture getTexture() {
