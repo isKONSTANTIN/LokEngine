@@ -2,6 +2,7 @@ package ru.lokincompany.lokengine.gui.guiobjects;
 
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectUpdateScript;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -11,6 +12,7 @@ public class GUIObject {
     public GUIObjectProperties properties;
     protected Vector2i position;
     protected Vector2i size;
+    protected GUIObjectUpdateScript updateScript;
     protected GUILocationAlgorithm positionAlgorithm;
     protected GUILocationAlgorithm sizeAlgorithm;
     protected boolean touchable;
@@ -52,6 +54,14 @@ public class GUIObject {
 
     public void setSize(GUILocationAlgorithm size) {
         sizeAlgorithm = size;
+    }
+
+    public void setUpdateScript(GUIObjectUpdateScript updateScript){
+        this.updateScript = updateScript;
+    }
+
+    public GUIObjectUpdateScript getUpdateScript(){
+        return updateScript;
     }
 
     protected void pressed() {
@@ -137,6 +147,8 @@ public class GUIObject {
                 unpressed();
             }
         }
+        if (updateScript != null)
+            updateScript.execute(this);
     }
 
 }
