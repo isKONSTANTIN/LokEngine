@@ -4,6 +4,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIButtonScript;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUIButton extends GUIObject {
@@ -21,6 +22,8 @@ public class GUIButton extends GUIObject {
         this.text = text;
         if (size.x <= 0 || size.y <= 0) {
             size = this.text.getSize();
+            size.x += size.x / 5;
+            size.y += size.y / 5;
         }
         this.pressedColor = pressed;
         this.calmStateColor = calmState;
@@ -41,6 +44,8 @@ public class GUIButton extends GUIObject {
         text.setPosition(position);
         if (size.x <= 0 || size.y <= 0) {
             size = this.text.getSize();
+            size.x += size.x / 5;
+            size.y += size.y / 5;
         }
         float colorChange = (calmState.red + calmState.green + calmState.blue) / 3 >= 0.5f ? -0.1f : 0.1f;
         this.pressedColor = new Color(calmState.red + colorChange, calmState.green + colorChange, calmState.blue + colorChange, calmState.alpha);
@@ -67,6 +72,14 @@ public class GUIButton extends GUIObject {
 
     public GUIButton(Color calmState, String text) {
         this(calmState, new GUIText(text));
+    }
+
+    public GUIButton(Color calmState) {
+        this(calmState, "Button");
+    }
+
+    public GUIButton() {
+        this(Colors.engineBackgroundColor());
     }
 
     public GUIButton(Vector2i position, Vector2i size, Color pressed, Color calmState, GUIText text, GUIPanel panel, boolean centralizeText) {
