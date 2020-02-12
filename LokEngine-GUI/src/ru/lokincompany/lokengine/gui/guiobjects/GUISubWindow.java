@@ -24,12 +24,15 @@ public class GUISubWindow extends GUIObject {
             this.titlePanel = titlePanel;
 
             titlePanel.setPosition(new Vector2i(position.x, position.y));
-            titlePanel.setSize(new Vector2i(size.x, titleText.getSize().y));
+            titlePanel.setSize(object -> new Vector2i(object.getSize().x, titleText.getSize().y));
             titleText.setPosition(titlePanel.position);
+            titleText.setMaxSize(size);
             canvasSize.y = size.y - titleText.getSize().y;
             canvasPosition.y += titleText.getSize().y;
         }
         canvas = new GUICanvas(canvasPosition, canvasSize);
+        canvas.setPosition(object -> new Vector2i(this.getPosition().x, this.getPosition().y + (titlePanel != null ? titlePanel.size.y : 0)));
+
         this.canMove = canMove;
     }
 
@@ -65,6 +68,11 @@ public class GUISubWindow extends GUIObject {
     public void setSize(Vector2i size) {
         super.setSize(size);
         canvas.setSize(size);
+
+        if (titleText != null) {
+            titlePanel.setSize(size);
+            titleText.setMaxSize(size);
+        }
     }
 
     @Override
@@ -74,11 +82,7 @@ public class GUISubWindow extends GUIObject {
         if (titleText != null) {
             titlePanel.setPosition(position);
             titleText.setPosition(titlePanel.position);
-            canvas.setPosition(new Vector2i(position.x, position.y + titlePanel.size.y));
-        } else {
-            canvas.setPosition(position);
         }
-
     }
 
     @Override
