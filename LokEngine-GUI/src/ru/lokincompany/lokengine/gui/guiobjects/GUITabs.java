@@ -49,15 +49,15 @@ public class GUITabs extends GUIObject {
     }
 
     public GUITabs(int titleSize, Color textActiveColor, Color textInactiveColor) {
-        this(new Vector2i(), new Vector2i(), titleSize, textActiveColor, textInactiveColor);
+        this(new Vector2i(), new Vector2i(300,300), titleSize, textActiveColor, textInactiveColor);
     }
 
     public GUITabs(int titleSize) {
-        this(new Vector2i(), new Vector2i(), titleSize, Colors.engineMainColor(), Colors.white());
+        this(new Vector2i(), new Vector2i(300,300), titleSize, Colors.engineMainColor(), Colors.white());
     }
 
     public GUITabs() {
-        this(new Vector2i(), new Vector2i(), 12, Colors.engineMainColor(), Colors.white());
+        this(new Vector2i(), new Vector2i(300,300), 12, Colors.engineMainColor(), Colors.white());
     }
 
     public GUICanvas getActiveTab() {
