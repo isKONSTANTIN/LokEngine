@@ -18,6 +18,7 @@ public class GUICheckBoxFramePart extends FramePart {
     public Vector2i size;
     public Color color;
     public boolean status;
+    public float colorStatus;
 
     public GUICheckBoxFramePart(Vector2i position, Vector2i size, String path, Color color) {
         super(FramePartType.GUI);
@@ -58,14 +59,22 @@ public class GUICheckBoxFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        glColor4f(color.red, color.green, color.blue, color.alpha);
         imageFramePart.position = position;
         imageFramePart.size = size;
-        if (status) {
+        imageFramePart.color.alpha = colorStatus;
+
+        if (status && colorStatus < 1) {
+            colorStatus += 0.1f;
+        }else if (!status && colorStatus > 0)
+            colorStatus -= 0.1f;
+
+        if (colorStatus > 0){
+            glColor4f(color.red, color.green, color.blue, color.alpha * colorStatus);
             OpenGLFastTools.drawSquare(position, size);
             imageFramePart.partRender(renderProperties);
-        } else {
-            OpenGLFastTools.drawHollowSquare(position, size);
         }
+
+        glColor4f(color.red, color.green, color.blue, color.alpha);
+        OpenGLFastTools.drawHollowSquare(position, size);
     }
 }
