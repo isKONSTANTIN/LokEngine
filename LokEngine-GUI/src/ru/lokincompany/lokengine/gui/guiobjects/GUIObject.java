@@ -1,5 +1,6 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
+import org.lwjgl.system.CallbackI;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectUpdateScript;
@@ -19,6 +20,7 @@ public class GUIObject {
     protected boolean active;
     protected boolean focused;
     protected boolean retention;
+    protected boolean mouseInField;
 
     public GUIObject(Vector2i position, Vector2i size) {
         this.position = position;
@@ -82,6 +84,14 @@ public class GUIObject {
     protected void endRetention() {
     }
 
+    protected void mouseInField(){
+
+    }
+
+    protected void mouseOutField(){
+
+    }
+
     protected void updateAlgorithms() {
         if (positionAlgorithm != null) {
             Vector2i newPosition = positionAlgorithm.calculate(this);
@@ -121,11 +131,24 @@ public class GUIObject {
                     active = false;
                     unpressed();
                 }
-            } else if (active) {
-                active = false;
-                focused = false;
-                unpressed();
-                unfocused();
+
+                if (!mouseInField){
+                    mouseInField = true;
+                    mouseInField();
+                }
+
+            } else {
+                if (mouseInField){
+                    mouseInField = false;
+                    mouseOutField();
+                }
+
+                if (active) {
+                    active = false;
+                    focused = false;
+                    unpressed();
+                    unfocused();
+                }
             }
         }
 
