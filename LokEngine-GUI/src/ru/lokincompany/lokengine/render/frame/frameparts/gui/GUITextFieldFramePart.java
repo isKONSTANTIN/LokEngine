@@ -18,24 +18,22 @@ import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 public class GUITextFieldFramePart extends GUITextFramePart {
 
     public int pointer = 0;
-    public boolean printSelecter;
-    public Timer timer;
     public boolean active;
     public Vector2i size;
     public Color backgroundColor;
     public boolean centralizeText;
+    public float pointerTime;
 
     public GUITextFieldFramePart(Vector2i GUIObjectSize, String text, FontPrefs fontPrefs) {
         super(text, new Font(fontPrefs), fontPrefs.getShader());
         this.size = GUIObjectSize;
         this.backgroundColor = Colors.engineBackgroundColor();
-
-        timer = new Timer();
-        timer.setDurationInSeconds(0.5f);
     }
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        pointerTime+=0.1f;
+
         int fontHeight = font.getFontHeight();
         Vector2i textSize = font.getSize(text, maxSize);
 
@@ -59,20 +57,15 @@ public class GUITextFieldFramePart extends GUITextFramePart {
             font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, shader);
         }
 
-        if (timer.checkTime()) {
-            printSelecter = !printSelecter;
-            timer.resetTimer();
-        }
+        if (active) {
+            int xPos = position.x + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
 
-        if (printSelecter && active) {
-            int xPos = endPosText.x;
+            Color lineColor = color == null ? shader.getColor(new Vector2i(text.length(), 1)) : color;
+            float s = (float)(Math.cos(pointerTime) + 1) / 2f;
 
             GL11.glBegin(GL11.GL_LINES);
-            if (color == null) {
-                Color shaderColor = shader.getColor(new Vector2i(text.length(), 1));
-                GL11.glColor4f(shaderColor.red, shaderColor.green, shaderColor.blue, shaderColor.alpha);
-            }else
-                GL11.glColor4f(color.red, color.green, color.blue, color.alpha);
+            GL11.glColor4f(lineColor.red, lineColor.green, lineColor.blue, lineColor.alpha * s);
+
             GL11.glVertex2f(xPos + 1, endPosText.y - fontHeight);
             GL11.glVertex2f(xPos + 1, endPosText.y);
 

@@ -146,6 +146,7 @@ public class GUITextField extends GUIObject {
     @Override
     protected void focused() {
         framePart.pointer = framePart.text.length();
+        framePart.pointerTime = 0;
 
         if (statusChangedScript != null)
             statusChangedScript.execute(this);
@@ -193,20 +194,17 @@ public class GUITextField extends GUIObject {
 
                     framePart.text = pointerText + framePart.text.substring(framePart.pointer);
                     framePart.pointer += pointerOffset;
+                    framePart.pointerTime = 0;
                 }
 
                 if (eventKey == GLFW_KEY_LEFT && keyInfo.action != GLFW_RELEASE) {
                     if (framePart.pointer > 0) {
                         framePart.pointer--;
-                        framePart.printSelecter = true;
-                        framePart.timer.resetTimer();
+                        framePart.pointerTime = 0;
                     }
-
-
                 } else if (eventKey == GLFW_KEY_RIGHT && keyInfo.action != GLFW_RELEASE) {
                     framePart.pointer++;
-                    framePart.printSelecter = true;
-                    framePart.timer.resetTimer();
+                    framePart.pointerTime = 0;
                 }
 
                 framePart.pointer = Math.min(framePart.text.length(), framePart.pointer);
