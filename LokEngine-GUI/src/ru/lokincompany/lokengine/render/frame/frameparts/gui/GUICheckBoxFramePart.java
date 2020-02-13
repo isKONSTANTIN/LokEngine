@@ -12,7 +12,6 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUICheckBoxFramePart extends FramePart {
-
     public GUIImageFramePart imageFramePart;
     public Vector2i position;
     public Vector2i size;

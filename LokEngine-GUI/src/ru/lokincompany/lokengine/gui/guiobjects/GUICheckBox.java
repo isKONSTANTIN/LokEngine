@@ -10,6 +10,7 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 public class GUICheckBox extends GUIObject {
 
     protected GUICheckBoxFramePart framePart;
+    public GUIText text;
 
     public GUICheckBox(Vector2i position, Vector2i size, Texture texture, Color color) {
         super(position, size);
@@ -43,8 +44,18 @@ public class GUICheckBox extends GUIObject {
         this(new Vector2i(), new Vector2i(), path, color);
     }
 
+    public GUICheckBox(Color color, GUIText text) {
+        this(new Vector2i(), new Vector2i(), color);
+        setText(text);
+    }
+
     public GUICheckBox(Color color) {
         this(new Vector2i(), new Vector2i(), color);
+    }
+
+    public GUICheckBox(GUIText text) {
+        this(new Vector2i(), new Vector2i(10, 10));
+        setText(text);
     }
 
     public GUICheckBox() {
@@ -57,6 +68,14 @@ public class GUICheckBox extends GUIObject {
 
     public void setTexture(Texture texture) {
         framePart.imageFramePart.texture = texture;
+    }
+
+    public GUICheckBox setText(GUIText text){
+        this.text = text;
+        text.setPosition(object -> new Vector2i(position.x + size.x + 2, position.y + 1));
+        this.size.x = text.framePart.font.getFontHeight();
+        this.size.y = this.size.x;
+        return this;
     }
 
     @Override
@@ -87,6 +106,10 @@ public class GUICheckBox extends GUIObject {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
+
+        if (text != null)
+            text.update(partsBuilder, parentProperties);
+
         partsBuilder.addPart(framePart);
     }
 
