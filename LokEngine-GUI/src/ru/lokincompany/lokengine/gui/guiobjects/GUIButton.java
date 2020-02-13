@@ -133,13 +133,26 @@ public class GUIButton extends GUIObject {
 
     @Override
     public void unpressed() {
+        mouseInField();
+
+        if (unpressScript != null)
+            unpressScript.execute(this);
+    }
+
+    @Override
+    protected void mouseInField() {
+        activeColor.red = (pressedColor.red + calmStateColor.red) / 2f;
+        activeColor.green = (pressedColor.green + calmStateColor.green) / 2f;
+        activeColor.blue = (pressedColor.blue + calmStateColor.blue) / 2f;
+        activeColor.alpha = (pressedColor.alpha + calmStateColor.alpha) / 2f;
+    }
+
+    @Override
+    protected void mouseOutField() {
         activeColor.red = calmStateColor.red;
         activeColor.green = calmStateColor.green;
         activeColor.blue = calmStateColor.blue;
         activeColor.alpha = calmStateColor.alpha;
-
-        if (unpressScript != null)
-            unpressScript.execute(this);
     }
 
     @Override
