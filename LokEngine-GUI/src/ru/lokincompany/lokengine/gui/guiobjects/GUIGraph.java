@@ -16,7 +16,7 @@ public class GUIGraph extends GUIObject {
     protected GUIGraphFramePart framePart;
     protected GUIFreeTextDrawer freeTextDrawer;
 
-    public GUIGraph(Color color, Color colorB) {
+    public GUIGraph() {
         super(new Vector2i(), new Vector2i(100, 100));
         this.freeTextDrawer = new GUIFreeTextDrawer(new FontPrefs()
                 .setSize(

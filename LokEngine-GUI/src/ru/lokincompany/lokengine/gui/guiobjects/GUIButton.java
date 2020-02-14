@@ -8,39 +8,49 @@ import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUIButton extends GUIObject {
-    public Color pressedColor;
-    public Color calmStateColor;
-    public GUIText text;
-    public GUIPanel panel;
-
+    protected Color pressedColor;
+    protected Color calmStateColor;
     protected Color activeColor;
+
+    protected GUIText text;
+    protected GUIPanel panel;
+
     protected GUIButtonScript pressScript;
     protected GUIButtonScript unpressScript;
-    protected boolean centralizeText;
+
+    protected boolean centralizeText = true;
 
     public GUIButton() {
-        this.text = new GUIText()
-                .setPosition(
-                        object -> new Vector2i(getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0),
-                        getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f))
-                );
-        this.panel = new GUIPanel()
-                .setPosition(object -> getPosition())
-                .setSize(object -> getSize());
-
-        size = this.text.getSize();
-        size.x += size.x / 5;
-        size.y += size.y / 5;
+        super(new Vector2i(), new Vector2i(60, 20));
 
         this.pressedColor = Colors.engineBrightBackgroundColor();
         this.calmStateColor = Colors.engineBackgroundColor();
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
+
+        this.text = new GUIText().setPosition(object -> new Vector2i(
+                        getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0),
+                        getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)
+                        ));
+        setText("Button");
+
+        this.panel = new GUIPanel()
+                .setColor(activeColor)
+                .setPosition(object -> getPosition())
+                .setSize(object -> getSize());
 
         this.touchable = true;
     }
 
     public GUIText getText() {
         return text;
+    }
+
+    public GUIButton setText(String text){
+        this.text.setText(text);
+        size = this.text.getSize();
+        size.x += size.x / 5;
+        size.y += size.y / 5;
+        return this;
     }
 
     public GUIPanel getPanel() {

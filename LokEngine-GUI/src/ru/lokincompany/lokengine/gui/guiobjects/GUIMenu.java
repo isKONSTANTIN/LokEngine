@@ -37,6 +37,10 @@ public class GUIMenu extends GUIObject {
         this.touchable = true;
     }
 
+    public GUIMenu(){
+        this(FontPrefs.defaultFontPrefs);
+    }
+
     public GUIMenu showItem(String name, Vector2i position) {
         if (activeItem != null)
             hideActiveItem();

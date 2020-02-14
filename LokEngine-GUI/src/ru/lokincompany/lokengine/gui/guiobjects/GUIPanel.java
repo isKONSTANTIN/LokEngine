@@ -1,5 +1,6 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
+import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIPanelFramePart;
@@ -65,10 +66,12 @@ public class GUIPanel extends GUIObject {
         super.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
 
-        if (blurAction == null) return;
+        BlurActionWorker blurActionWorker = parentProperties.window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class);
+
+        if (blurAction == null || blurActionWorker == null) return;
 
         blurAction.position = new Vector2i(parentProperties.globalPosition.x + position.x, parentProperties.globalPosition.y + position.y);
-        parentProperties.window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class).addPostProcessingAction(blurAction);
+        blurActionWorker.addPostProcessingAction(blurAction);
     }
 }
 

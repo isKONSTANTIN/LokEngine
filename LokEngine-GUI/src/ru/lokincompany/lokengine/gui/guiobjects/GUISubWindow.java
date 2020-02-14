@@ -3,6 +3,7 @@ package ru.lokincompany.lokengine.gui.guiobjects;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUISubWindow extends GUIObject {
@@ -25,7 +26,7 @@ public class GUISubWindow extends GUIObject {
             this.titlePanel = titlePanel;
 
             titlePanel.setPosition(new Vector2i(position.x, position.y));
-            titlePanel.setSize(object -> new Vector2i(object.getSize().x, titleText.getSize().y));
+            titlePanel.setSize(object -> new Vector2i(getSize().x, titleText.getSize().y));
             titleText.setPosition(titlePanel.position);
             titleText.setMaxSize(size);
 
@@ -33,11 +34,14 @@ public class GUISubWindow extends GUIObject {
             canvasPosition.y += titleText.getSize().y;
         }
         canvas = new GUICanvas(canvasPosition, canvasSize);
+        canvas.addObject(new GUIPanel().setSize(object -> canvas.getSize()));
         canvas.setPosition(object -> new Vector2i(this.getPosition().x, this.getPosition().y + (titlePanel != null ? titlePanel.size.y : 0)));
+
+        canMove = true;
     }
 
     public GUISubWindow(){
-        this(new GUIText().setText("Window!"), new GUIPanel());
+        this(new GUIText().setText("Window!"), new GUIPanel().setColor(Colors.engineBrightBackgroundColor()));
     }
 
     public GUICanvas getCanvas() {

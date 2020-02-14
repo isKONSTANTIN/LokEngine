@@ -12,8 +12,8 @@ public class GUICheckBox extends GUIObject {
     protected GUICheckBoxFramePart framePart;
     protected GUIText text;
 
-    public GUICheckBox(Vector2i position, Vector2i size) {
-        super(position, size);
+    public GUICheckBox() {
+        super(new Vector2i(), new Vector2i(10,10));
         this.framePart = new GUICheckBoxFramePart(position, size);
         this.touchable = true;
     }
