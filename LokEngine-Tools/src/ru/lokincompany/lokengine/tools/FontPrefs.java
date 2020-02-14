@@ -11,6 +11,8 @@ public class FontPrefs {
     private int fontStyle = 0;
     private int size = 14;
 
+    public final static FontPrefs defaultFontPrefs = new FontPrefs();
+
     public FontPrefs(){}
 
     public int getSize() {
