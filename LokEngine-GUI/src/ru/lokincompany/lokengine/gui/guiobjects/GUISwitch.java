@@ -11,26 +11,25 @@ public class GUISwitch extends GUIObject {
     public GUILocationAlgorithm switchSizeAlgorithm;
     protected GUISwitchFramePart framePart;
 
-    public GUISwitch(Vector2i position, Vector2i size, Color colorHead, Color colorBackground, Color colorFill) {
-        super(position, size);
-        framePart = new GUISwitchFramePart(position, size, colorHead, colorBackground, colorFill);
-        updateHeadPosition();
-        updateHeadSize();
-    }
-
-    public GUISwitch(Vector2i position, Vector2i size) {
-        super(position, size);
+    public GUISwitch() {
+        super(new Vector2i(), new Vector2i(25,10));
         framePart = new GUISwitchFramePart(position, size);
         updateHeadPosition();
         updateHeadSize();
+
+
     }
 
-    public GUISwitch(Color colorHead, Color colorBackground, Color colorFill) {
-        this(new Vector2i(), new Vector2i(), colorHead, colorBackground, colorFill);
+    public void setColorHead(Color colorHead){
+        framePart.colorHead = colorHead;
     }
 
-    public GUISwitch() {
-        this(new Vector2i(), new Vector2i(25,10));
+    public void setColorBackground(Color colorBackground){
+        framePart.colorBackground= colorBackground;
+    }
+
+    public void setColorFill(Color colorFill){
+        framePart.colorFill = colorFill;
     }
 
     protected void updateHeadPosition() {
@@ -55,17 +54,19 @@ public class GUISwitch extends GUIObject {
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUISwitch setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
         updateHeadPosition();
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUISwitch setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
         updateHeadSize();
+        return this;
     }
 
     @Override

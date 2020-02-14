@@ -7,15 +7,16 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUISubWindow extends GUIObject {
 
-    public GUICanvas canvas;
-    public GUIText titleText;
-    public boolean canMove;
+    protected GUICanvas canvas;
+    protected GUIText titleText;
     protected GUIPanel titlePanel;
     protected Vector2i lastMousePos;
+
+    protected boolean canMove;
     private boolean lastMFS;
 
-    public GUISubWindow(Vector2i position, Vector2i size, boolean canMove, GUIText titleText, GUIPanel titlePanel) {
-        super(position, size);
+    public GUISubWindow(GUIText titleText, GUIPanel titlePanel) {
+        super(new Vector2i(), new Vector2i(200,200));
         Vector2i canvasSize = new Vector2i(size.x, size.y);
         Vector2i canvasPosition = new Vector2i(position.x, position.y);
 
@@ -27,45 +28,41 @@ public class GUISubWindow extends GUIObject {
             titlePanel.setSize(object -> new Vector2i(object.getSize().x, titleText.getSize().y));
             titleText.setPosition(titlePanel.position);
             titleText.setMaxSize(size);
+
             canvasSize.y = size.y - titleText.getSize().y;
             canvasPosition.y += titleText.getSize().y;
         }
         canvas = new GUICanvas(canvasPosition, canvasSize);
         canvas.setPosition(object -> new Vector2i(this.getPosition().x, this.getPosition().y + (titlePanel != null ? titlePanel.size.y : 0)));
+    }
 
+    public GUISubWindow(){
+        this(new GUIText().setText("Window!"), new GUIPanel());
+    }
+
+    public GUICanvas getCanvas() {
+        return canvas;
+    }
+
+    public GUIText getTitleText() {
+        return titleText;
+    }
+
+    public GUIPanel getTitlePanel() {
+        return titlePanel;
+    }
+
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    public GUISubWindow setCanMove(boolean canMove) {
         this.canMove = canMove;
-    }
-
-    public GUISubWindow(Vector2i position, Vector2i size, boolean canMove) {
-        this(position, size, canMove,  new GUIText("window!"), new GUIPanel());
-    }
-
-    public GUISubWindow(Vector2i position, Vector2i size, GUIText titleText, GUIPanel titlePanel) {
-        this(position, size, true, titleText, titlePanel);
-    }
-
-    public GUISubWindow(Vector2i position, Vector2i size) {
-        this(position, size, true);
-    }
-
-    public GUISubWindow(boolean canMove, GUIText titleText, GUIPanel titlePanel) {
-        this(new Vector2i(), new Vector2i(200,200), canMove, titleText, titlePanel);
-    }
-
-    public GUISubWindow(boolean canMove) {
-        this(canMove, new GUIText("window!"), new GUIPanel());
-    }
-
-    public GUISubWindow(GUIText titleText, GUIPanel titlePanel) {
-        this(true, titleText, titlePanel);
-    }
-
-    public GUISubWindow() {
-        this(new Vector2i(), new Vector2i(200,200));
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUISubWindow setSize(Vector2i size) {
         super.setSize(size);
         canvas.setSize(size);
 
@@ -73,16 +70,18 @@ public class GUISubWindow extends GUIObject {
             titlePanel.setSize(size);
             titleText.setMaxSize(size);
         }
+        return this;
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUISubWindow setPosition(Vector2i position) {
         super.setPosition(position);
 
         if (titleText != null) {
             titlePanel.setPosition(position);
             titleText.setPosition(titlePanel.position);
         }
+        return this;
     }
 
     @Override

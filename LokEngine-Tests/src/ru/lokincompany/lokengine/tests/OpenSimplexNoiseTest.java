@@ -49,7 +49,7 @@ public class OpenSimplexNoiseTest extends ApplicationGUIOnly {
         }
         textureBuffer.flip();
 
-        GUIImage image = new GUIImage(new Vector2i(), imageSize);
+        GUIImage image = new GUIImage().setSize(imageSize);
         image.setTexture(new Texture(textureBuffer, imageSize));
         canvas.addObject(image);
     }

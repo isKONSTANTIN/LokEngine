@@ -15,61 +15,29 @@ import java.util.Map;
 
 public class GUIMenu extends GUIObject {
     public GUIPanel panel;
-    public Color textActiveColor;
-    public Color textInactiveColor;
+    protected Color textActiveColor;
+    protected Color textInactiveColor;
     protected Map<String, GUIObject> items = new HashMap<>();
     protected ArrayList<String> itemsNames = new ArrayList<>();
     protected GUILocationAlgorithm sizeAlgorithm;
     protected GUILocationAlgorithm positionAlgorithm;
     protected GUIObject activeItem;
     protected GUIFreeTextDrawer drawer;
-    protected int titleSize;
 
-    public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
-        super(position, size);
-        this.titleSize = titleSize;
-        this.drawer = new GUIFreeTextDrawer(new FontPrefs().setSize((int) (titleSize / 1.2f)));
-        this.panel = panel;
-        panel.setSize(object -> new Vector2i(getSize().x, this.titleSize));
-        panel.setPosition(object -> getPosition());
+    public GUIMenu(FontPrefs fontPrefs) {
+        this.drawer = new GUIFreeTextDrawer(fontPrefs);
+        setPanel(new GUIPanel());
 
-        this.sizeAlgorithm = object -> new Vector2i(getSize().x, getSize().y - this.titleSize);
-        this.positionAlgorithm = object -> new Vector2i(getPosition().x, getPosition().y + this.titleSize);
+        this.sizeAlgorithm = object -> new Vector2i(getSize().x, getSize().y - (int)(this.drawer.getFont().getFontHeight() * 1.2f));
+        this.positionAlgorithm = object -> new Vector2i(getPosition().x, getPosition().y + (int)(this.drawer.getFont().getFontHeight() * 1.2f));
 
-        this.textActiveColor = textActiveColor;
-        this.textInactiveColor = textInactiveColor;
+        this.textActiveColor = Colors.engineMainColor();
+        this.textInactiveColor = Colors.white();
+
         this.touchable = true;
     }
 
-    public GUIMenu(Vector2i position, Vector2i size, int titleSize, Color textActiveColor, Color textInactiveColor) {
-        this(position, size, titleSize, textActiveColor, textInactiveColor, new GUIPanel(position, new Vector2i(size.x, titleSize)));
-    }
-
-    public GUIMenu(Vector2i position, Vector2i size, int titleSize) {
-        this(position, size, titleSize, Colors.engineMainColor(), Colors.white());
-    }
-
-    public GUIMenu(Vector2i position, Vector2i size) {
-        this(position, size, 12, Colors.engineMainColor(), Colors.white());
-    }
-
-    public GUIMenu(int titleSize, Color textActiveColor, Color textInactiveColor, GUIPanel panel) {
-        this(new Vector2i(), new Vector2i(), titleSize, textActiveColor, textInactiveColor, panel);
-    }
-
-    public GUIMenu(int titleSize, Color textActiveColor, Color textInactiveColor) {
-        this(new Vector2i(), new Vector2i(), titleSize, textActiveColor, textInactiveColor, new GUIPanel());
-    }
-
-    public GUIMenu(int titleSize) {
-        this(new Vector2i(), new Vector2i(), titleSize, Colors.engineMainColor(), Colors.white());
-    }
-
-    public GUIMenu() {
-        this(new Vector2i(), new Vector2i(), 12, Colors.engineMainColor(), Colors.white());
-    }
-
-    public void showItem(String name, Vector2i position) {
+    public GUIMenu showItem(String name, Vector2i position) {
         if (activeItem != null)
             hideActiveItem();
         activeItem = getItem(name);
@@ -77,17 +45,20 @@ public class GUIMenu extends GUIObject {
         activeItem.active = true;
         if (position != null)
             activeItem.setPosition(position);
+        return this;
     }
 
-    public void showItem(String name) {
+    public GUIMenu showItem(String name) {
         showItem(name, null);
+        return this;
     }
 
-    public void hideActiveItem() {
+    public GUIMenu hideActiveItem() {
         if (activeItem != null) {
             activeItem.hidden = true;
             activeItem = null;
         }
+        return this;
     }
 
     public GUIObject getActiveItem() {
@@ -98,16 +69,9 @@ public class GUIMenu extends GUIObject {
         return drawer.getFont();
     }
 
-    public void setPointsFont(Font font) {
-        if (font != null) {
-            drawer.setFont(font);
-
-            int fontH = font.getFontHeight();
-
-            if (titleSize < fontH) {
-                titleSize = fontH;
-            }
-        }
+    public GUIMenu setPointsFont(Font font) {
+        drawer.setFont(font);
+        return this;
     }
 
     public String getActiveItemName() {
@@ -119,28 +83,65 @@ public class GUIMenu extends GUIObject {
         return null;
     }
 
-    public void removePoint(String name) {
+    public GUIMenu removePoint(String name) {
         items.remove(name);
+        return this;
     }
 
-    public void addPoint(String name, GUIObject object) {
+    public GUIMenu addPoint(String name, GUIObject object) {
         items.put(name, object);
         itemsNames.add(name);
         object.hidden = true;
+
+        return this;
     }
 
     public GUIObject getItem(String name) {
         return items.get(name);
     }
 
-    @Override
-    public void setPosition(Vector2i position) {
-        super.setPosition(position);
+    public GUIMenu setTextActiveColor(Color textActiveColor) {
+        this.textActiveColor = textActiveColor;
+        return this;
+    }
+
+    public GUIMenu setTextInactiveColor(Color textInactiveColor) {
+        this.textInactiveColor = textInactiveColor;
+        return this;
+    }
+
+    public GUIPanel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(GUIPanel panel) {
+        this.panel = panel
+                .setPosition(object -> getPosition())
+                .setSize(object -> new Vector2i(getSize().x, (int)(this.drawer.getFont().getFontHeight() * 1.2f)));
+    }
+
+    public Color getTextActiveColor() {
+        return textActiveColor;
+    }
+
+    public Color getTextInactiveColor() {
+        return textInactiveColor;
+    }
+
+    public GUIFreeTextDrawer getDrawer() {
+        return drawer;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUIMenu setPosition(Vector2i position) {
+        super.setPosition(position);
+        return this;
+    }
+
+    @Override
+    public GUIMenu setSize(Vector2i size) {
         super.setSize(size);
+        return this;
     }
 
     @Override
@@ -151,7 +152,7 @@ public class GUIMenu extends GUIObject {
             hideActiveItem();
         }
 
-        int gap = titleSize / 2;
+        int gap = panel.size.y / 2;
         int x = gap / 2;
 
         for (String key : itemsNames) {
@@ -162,13 +163,13 @@ public class GUIMenu extends GUIObject {
 
             if (x + widthText > size.x) break;
             Vector2i itemPos = new Vector2i(properties.globalPosition.x + x, properties.globalPosition.y);
-            boolean inField = properties.mouseRaycastStatus.mouse.inField(itemPos, new Vector2i(widthText, titleSize));
+            boolean inField = properties.mouseRaycastStatus.mouse.inField(itemPos, new Vector2i(widthText, panel.size.y));
 
             if (inField && properties.mouseRaycastStatus.mouse.getPressedStatus() && !properties.mouseRaycastStatus.lastFramePressed)
                 showItem(key, properties.mouseRaycastStatus.mouse.getMousePosition());
             else
                 properties.mouseRaycastStatus.touched = false;
-            drawer.draw(key, new Vector2i(x + position.x, position.y + (titleSize - heightText) / 2), activeItem == items.get(key) || inField ? textActiveColor : textInactiveColor);
+            drawer.draw(key, new Vector2i(x + position.x, position.y + (panel.size.y - heightText) / 2), activeItem == items.get(key) || inField ? textActiveColor : textInactiveColor);
             x += widthText + gap;
         }
         if (panel != null)

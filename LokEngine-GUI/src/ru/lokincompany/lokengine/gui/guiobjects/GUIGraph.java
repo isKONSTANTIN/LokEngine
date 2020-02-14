@@ -5,89 +5,82 @@ import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIGraphFramePart;
 import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.ArrayList;
 
 public class GUIGraph extends GUIObject {
-
     protected ArrayList<Float> points = new ArrayList<>();
-
-    protected float maxHeight;
-    protected float minHeight;
-    protected int maxPoints;
 
     protected GUIGraphFramePart framePart;
     protected GUIFreeTextDrawer freeTextDrawer;
 
-    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints, Color color, Color color2) {
-        super(position, size);
-        this.maxHeight = maxHeight;
-        this.minHeight = minHeight;
-        this.maxPoints = maxPoints > 0 ? maxPoints : 1;
-
+    public GUIGraph(Color color, Color colorB) {
+        super(new Vector2i(), new Vector2i(100, 100));
         this.freeTextDrawer = new GUIFreeTextDrawer(new FontPrefs()
                 .setSize(
                         Math.min(Math.max(size.y / 10, 10), 24)
                 ));
-        framePart = new GUIGraphFramePart(position, size, points, maxHeight, minHeight, maxPoints, color, color2, freeTextDrawer);
+        framePart = new GUIGraphFramePart(position, size, points, 100, 0, 100, Colors.engineMainColor(), Colors.engineBackgroundColor(), freeTextDrawer);
     }
 
-    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints, Color color) {
-        this(position, size, maxHeight, minHeight, maxPoints, color, new Color(color.red, color.green, color.blue, color.alpha / 3f));
+    public GUIGraph setMaxHeight(float maxHeight) {
+        framePart.maxHeight = maxHeight;
+        return this;
     }
 
-    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight, int maxPoints) {
-        this(position, size, maxHeight, minHeight, maxPoints, new Color(1, 1, 1, 1));
+    public GUIGraph setMinHeight(float minHeight) {
+        framePart.minHeight = minHeight;
+        return this;
     }
 
-    public GUIGraph(Vector2i position, Vector2i size, float maxHeight, float minHeight) {
-        this(position, size, maxHeight, minHeight, size.x);
+    public GUIGraph setMaxPoints(int maxPoints) {
+        framePart.maxPoints = maxPoints;
+        return this;
     }
 
-    public GUIGraph(Vector2i position, Vector2i size) {
-        this(position, size, 100, 0);
+    public ArrayList<Float> getPoints() {
+        return points;
     }
 
-    public GUIGraph(float maxHeight, float minHeight, int maxPoints, Color color, Color color2) {
-        this(new Vector2i(), new Vector2i(), maxHeight, minHeight, maxPoints, color, color2);
+    public float getMaxHeight() {
+        return framePart.maxHeight;
     }
 
-    public GUIGraph(float maxHeight, float minHeight, int maxPoints, Color color) {
-        this(new Vector2i(), new Vector2i(), maxHeight, minHeight, maxPoints, color, new Color(color.red, color.green, color.blue, color.alpha / 3f));
+    public float getMinHeight() {
+        return framePart.minHeight;
     }
 
-    public GUIGraph(float maxHeight, float minHeight, int maxPoints) {
-        this(new Vector2i(), new Vector2i(), maxHeight, minHeight, maxPoints, new Color(1, 1, 1, 1));
+    public int getMaxPoints() {
+        return framePart.maxPoints;
     }
 
-    public GUIGraph(float maxHeight, float minHeight) {
-        this(new Vector2i(), new Vector2i(), maxHeight, minHeight);
+    public GUIFreeTextDrawer getFreeTextDrawer() {
+        return freeTextDrawer;
     }
 
-    public GUIGraph() {
-        this(new Vector2i(), new Vector2i());
-    }
-
-
-    public void addPoint(float height) {
-        if (maxPoints != 0 && maxPoints == points.size()) {
+    public GUIGraph addPoint(float height) {
+        if (framePart.maxPoints != 0 && framePart.maxPoints == points.size()) {
             points.remove(0);
         }
 
-        points.add(Math.min(maxHeight, Math.max(minHeight, height)));
+        points.add(height);
+        return this;
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUIGraph setPosition(Vector2i position) {
         this.position = position;
         framePart.position = position;
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUIGraph setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
+        return this;
     }
 
     @Override

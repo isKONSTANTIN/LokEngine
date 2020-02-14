@@ -13,63 +13,62 @@ public class GUIPanel extends GUIObject {
     protected GUIPanelFramePart framePart;
     protected BlurAction blurAction;
 
-    public GUIPanel(Vector2i position, Vector2i size, Color color, BlurTuning blur) {
-        super(position, size);
-        if (color != null) {
-            this.framePart = new GUIPanelFramePart(position, size, color);
-        } else {
-            this.framePart = new GUIPanelFramePart(position, size);
+    public GUIPanel() {
+        super(new Vector2i(), new Vector2i(100,100));
+        this.framePart = new GUIPanelFramePart(position, size);
+        setBlurTuning(new BlurTuning());
+    }
+
+    public GUIPanel setColor(Color color){
+        framePart.color = color;
+        return this;
+    }
+
+    public Color getColor(){
+        return framePart.color;
+    }
+
+    public GUIPanel setBlurTuning(BlurTuning blur){
+        if (blur == null){
+            blurAction = null;
+            return this;
         }
 
-        if (blur != null)
-            this.blurAction = new BlurAction(position, size, blur);
+        this.blurAction = new BlurAction(position, size, blur);
+        return this;
     }
 
-    public GUIPanel(Vector2i position, Vector2i size, Color color) {
-        this(position, size, color, null);
-    }
-
-    public GUIPanel(Vector2i position, Vector2i size) {
-        this(position, size, null);
-    }
-
-    public GUIPanel(Color color, BlurTuning blur) {
-        this(new Vector2i(), new Vector2i(), color, blur);
-    }
-
-    public GUIPanel(Color color) {
-        this(new Vector2i(), new Vector2i(), color, null);
-    }
-
-    public GUIPanel() {
-        this(new Vector2i(), new Vector2i(), null);
+    public BlurTuning getBlurTuning(){
+        return blurAction.blurTuning;
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUIPanel setPosition(Vector2i position) {
         this.position = position;
         framePart.position = position;
         if (blurAction != null)
             blurAction.position = position;
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUIPanel setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
         if (blurAction != null)
             blurAction.size = size;
+        return this;
     }
 
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
-        if (blurAction != null) {
-            blurAction.position = new Vector2i(parentProperties.globalPosition.x + position.x, parentProperties.globalPosition.y + position.y);
-            parentProperties.window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class).addPostProcessingAction(blurAction);
-        }
-    }
 
+        if (blurAction == null) return;
+
+        blurAction.position = new Vector2i(parentProperties.globalPosition.x + position.x, parentProperties.globalPosition.y + position.y);
+        parentProperties.window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class).addPostProcessingAction(blurAction);
+    }
 }
 

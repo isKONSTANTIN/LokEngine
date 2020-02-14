@@ -13,14 +13,14 @@ public class GUISlider extends GUIObject {
 
     public GUISliderColorShader colorFillShader;
     public GUISliderColorShader colorBackgroundShader;
-    public Vector2f range = new Vector2f(0, 100);
+    protected Vector2f range = new Vector2f(0, 100);
     protected GUISliderFramePart framePart;
     protected GUISliderHead head;
 
-    public GUISlider(Vector2i position, Vector2i size, Color background, Color filledBackground, GUISliderHead head) {
-        super(position, size);
-        framePart = new GUISliderFramePart(position, size, background, filledBackground, head);
-        this.head = head;
+    public GUISlider() {
+        super(new Vector2i(), new Vector2i(100,10));
+        framePart = new GUISliderFramePart(position, size, Colors.engineBackgroundColor(), Colors.engineMainColor(), head);
+        this.head = new GUISliderHead().setSize(new Vector2i(11,11));
         touchable = true;
 
         head.setPosition(object -> {
@@ -35,29 +35,39 @@ public class GUISlider extends GUIObject {
 
         if (head.getSize().x == -1 || head.getSize().y == -1)
             head.setSize(object -> new Vector2i(getSize().y + 2, this.getSize().y + 2));
-
     }
 
-    public GUISlider(Vector2i position, Vector2i size, Color background, Color filledBackground) {
-        this(position, size, background, filledBackground,
-                new GUISliderHead(new Vector2i(), new Vector2i(-1, -1), Colors.engineBrightMainColor())
-        );
+    public GUISlider setHead(GUISliderHead head) {
+        this.head = head;
+        return this;
     }
 
-    public GUISlider(Vector2i position, Vector2i size) {
-        this(position, size, Colors.engineBackgroundColor(), Colors.engineMainColor());
+    public GUISlider setFilledBackgroundColor(Color filledColor){
+        framePart.colorFill = filledColor;
+        return this;
     }
 
-    public GUISlider() {
-        this(new Vector2i(), new Vector2i(100, 10), Colors.engineBackgroundColor(), Colors.engineMainColor());
+    public GUISlider setBackgroundColor(Color backgroundColor){
+        framePart.colorBackground = backgroundColor;
+        return this;
+    }
+
+    public GUISlider setRange(Vector2f range){
+        this.range = range;
+        return this;
+    }
+
+    public Vector2f getRange(){
+        return range;
     }
 
     public float getValue() {
         return (range.y - range.x) * framePart.filled + range.x;
     }
 
-    public void setValue(float value) {
+    public GUISlider setValue(float value) {
         framePart.filled = value;
+        return this;
     }
 
     public GUISliderHead getHead() {
@@ -65,15 +75,17 @@ public class GUISlider extends GUIObject {
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUISlider setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUISlider setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
+        return this;
     }
 
     protected void calculateFilled() {

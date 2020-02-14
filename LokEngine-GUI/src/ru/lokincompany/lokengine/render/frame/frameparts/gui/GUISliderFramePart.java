@@ -34,6 +34,8 @@ public class GUISliderFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        Color headColor = head.getColor();
+
         glColor4f(colorBackground.red, colorBackground.green, colorBackground.blue, colorBackground.alpha);
         OpenGLFastTools.drawSquare(position, size);
 
@@ -43,7 +45,7 @@ public class GUISliderFramePart extends FramePart {
         if (head.getTexture() != null)
             glBindTexture(GL_TEXTURE_2D, head.getTexture().getBuffer());
 
-        glColor4f(head.color.red, head.color.green, head.color.blue, head.color.alpha);
+        glColor4f(headColor.red, headColor.green, headColor.blue, headColor.alpha);
 
         OpenGLFastTools.drawSquare(head.getPosition(), head.getSize());
 

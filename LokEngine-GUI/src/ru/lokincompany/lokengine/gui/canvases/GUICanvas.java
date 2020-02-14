@@ -42,16 +42,18 @@ public class GUICanvas extends GUIObject {
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUICanvas setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUICanvas setSize(Vector2i size) {
         super.setSize(size);
         framePart.partsBuilder.setResolution(size);
         framePart.size = size;
+        return this;
     }
 
     public void removeObject(int id) {

@@ -10,25 +10,7 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 public class GUICheckBox extends GUIObject {
 
     protected GUICheckBoxFramePart framePart;
-    public GUIText text;
-
-    public GUICheckBox(Vector2i position, Vector2i size, Texture texture, Color color) {
-        super(position, size);
-        this.framePart = new GUICheckBoxFramePart(position, size, texture, color);
-        this.touchable = true;
-    }
-
-    public GUICheckBox(Vector2i position, Vector2i size, String path, Color color) {
-        super(position, size);
-        this.framePart = new GUICheckBoxFramePart(position, size, path, color);
-        this.touchable = true;
-    }
-
-    public GUICheckBox(Vector2i position, Vector2i size, Color color) {
-        super(position, size);
-        this.framePart = new GUICheckBoxFramePart(position, size, color);
-        this.touchable = true;
-    }
+    protected GUIText text;
 
     public GUICheckBox(Vector2i position, Vector2i size) {
         super(position, size);
@@ -36,38 +18,21 @@ public class GUICheckBox extends GUIObject {
         this.touchable = true;
     }
 
-    public GUICheckBox(Texture texture, Color color) {
-        this(new Vector2i(), new Vector2i(), texture, color);
+    public Color getColor(){
+        return framePart.color;
     }
 
-    public GUICheckBox(String path, Color color) {
-        this(new Vector2i(), new Vector2i(), path, color);
-    }
-
-    public GUICheckBox(Color color, GUIText text) {
-        this(new Vector2i(), new Vector2i(), color);
-        setText(text);
-    }
-
-    public GUICheckBox(Color color) {
-        this(new Vector2i(), new Vector2i(), color);
-    }
-
-    public GUICheckBox(GUIText text) {
-        this(new Vector2i(), new Vector2i(10, 10));
-        setText(text);
-    }
-
-    public GUICheckBox() {
-        this(new Vector2i(), new Vector2i(10, 10));
+    public GUIText getText() {
+        return text;
     }
 
     public Texture getTexture() {
         return framePart.imageFramePart.texture;
     }
 
-    public void setTexture(Texture texture) {
+    public GUICheckBox setTexture(Texture texture) {
         framePart.imageFramePart.texture = texture;
+        return this;
     }
 
     public GUICheckBox setText(GUIText text){
@@ -79,15 +44,17 @@ public class GUICheckBox extends GUIObject {
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUICheckBox setSize(Vector2i size) {
         super.setSize(size);
         framePart.size = size;
+        return this;
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUICheckBox setPosition(Vector2i position) {
         super.setPosition(position);
         framePart.position = position;
+        return this;
     }
 
     @Override
@@ -99,8 +66,9 @@ public class GUICheckBox extends GUIObject {
         return framePart.status;
     }
 
-    public void setStatus(boolean status) {
+    public GUICheckBox setStatus(boolean status) {
         framePart.status = status;
+        return this;
     }
 
     @Override

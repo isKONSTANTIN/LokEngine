@@ -35,8 +35,9 @@ public class GUIFreeTextDrawer extends GUIObject {
         return font;
     }
 
-    public void setFont(Font font) {
+    public GUIFreeTextDrawer setFont(Font font) {
         this.font = font;
+        return this;
     }
 
     public void draw(String text, Vector2i position, Vector2i maxSize, TextColorShader shader) {

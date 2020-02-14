@@ -128,15 +128,17 @@ public class GUITextField extends GUIObject {
     }
 
     @Override
-    public void setPosition(Vector2i position) {
+    public GUITextField setPosition(Vector2i position) {
         this.position = position;
         framePart.position = position;
+        return this;
     }
 
     @Override
-    public void setSize(Vector2i size) {
+    public GUITextField setSize(Vector2i size) {
         this.size = size;
         framePart.size = size;
+        return this;
     }
 
     public Vector2i getTextSize() {

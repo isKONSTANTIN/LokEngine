@@ -7,41 +7,41 @@ import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class GUISliderHead extends GUIObject {
-    public Color color;
-    public GUISliderColorShader colorShader;
-
+    protected Color color = Colors.white();
+    protected GUISliderColorShader colorShader;
     protected Texture texture;
 
-    public GUISliderHead(Vector2i position, Vector2i size, Color color) {
-        super(position, size);
-        this.color = color;
+    public GUISliderHead() {
         touchable = true;
-    }
-
-    public GUISliderHead(Vector2i position, Vector2i size, GUISliderColorShader colorShader) {
-        super(position, size);
-        this.colorShader = colorShader;
-        touchable = true;
-    }
-
-    public GUISliderHead(Vector2i position, Vector2i size, Texture texture) {
-        this(position, size, Colors.white());
-        this.texture = texture;
-    }
-
-    public GUISliderHead(Vector2i position, Texture texture) {
-        this(position, new Vector2i(), Colors.white());
-        setTexture(texture);
     }
 
     public Texture getTexture() {
         return texture;
     }
 
-    public void setTexture(Texture texture) {
+    public Color getColor() {
+        return color;
+    }
+
+    public GUISliderHead setColor(Color color) {
+        this.color = color;
+        return this;
+    }
+
+    public GUISliderColorShader getColorShader() {
+        return colorShader;
+    }
+
+    public GUISliderHead setColorShader(GUISliderColorShader colorShader) {
+        this.colorShader = colorShader;
+        return this;
+    }
+
+    public GUISliderHead setTexture(Texture texture) {
         this.texture = texture;
         color = Colors.white();
         setSize(new Vector2i(texture.getSizeX(), texture.getSizeY()));
+        return this;
     }
 
     public boolean getActive() {

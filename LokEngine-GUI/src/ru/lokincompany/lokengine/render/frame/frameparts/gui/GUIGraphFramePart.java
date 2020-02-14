@@ -60,7 +60,7 @@ public class GUIGraphFramePart extends FramePart {
 
         for (int i = 0; i < points.size(); i++) {
             glVertex2f(
-                    ((float) i / (float) maxPoints * size.x) + position.x, position.y + size.y - size.y * (points.get(i) / (maxHeight + minHeight))
+                    ((float) i / (float) maxPoints * size.x) + position.x, position.y + size.y - size.y * (Math.min(maxHeight, Math.max(minHeight, points.get(i))) / (maxHeight + minHeight))
             );
         }
 

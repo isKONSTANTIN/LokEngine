@@ -51,7 +51,7 @@ public class PlateSceneTest extends ApplicationPlateWorld {
         camera.position.y += keyboard.isKeyDown(GLFW.GLFW_KEY_W) ? camera.fieldOfView * applicationRuntime.getDeltaTime() / 90f : 0;
         camera.position.y -= keyboard.isKeyDown(GLFW.GLFW_KEY_S) ? camera.fieldOfView * applicationRuntime.getDeltaTime() / 90f : 0;
 
-        text.updateText("FPS: " + applicationRuntime.getFps());
+        text.setText("FPS: " + applicationRuntime.getFps());
     }
 
     @Override
