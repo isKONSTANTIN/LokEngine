@@ -36,26 +36,30 @@ public class GUIObject {
         return position;
     }
 
-    public void setPosition(Vector2i position) {
+    public <T extends GUIObject> T setPosition(Vector2i position) {
         this.position = position;
+        return (T)this;
     }
 
-    public void setPosition(GUILocationAlgorithm position) {
+    public <T extends GUIObject> T setPosition(GUILocationAlgorithm position) {
         positionAlgorithm = position;
+        return (T)this;
     }
 
     public Vector2i getSize() {
         return size;
     }
 
-    public void setSize(Vector2i size) {
+    public <T extends GUIObject> T setSize(Vector2i size) {
         this.size = size;
         properties.size.x = size.x;
         properties.size.y = size.y;
+        return (T)this;
     }
 
-    public void setSize(GUILocationAlgorithm size) {
+    public <T extends GUIObject> T setSize(GUILocationAlgorithm size) {
         sizeAlgorithm = size;
+        return (T)this;
     }
 
     public void setUpdateScript(GUIObjectUpdateScript updateScript){
