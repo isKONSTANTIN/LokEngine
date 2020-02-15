@@ -35,12 +35,12 @@ public class TCPServerMainRunnable implements Runnable {
                 EngineExecutors.longTasksExecutor.submit(clientRunnable);
 
                 clientRunnables.add(clientRunnable);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 if (serverSocket.isClosed())
                     break;
 
                 Logger.warning("Fail make a connection", "LokEngine_TCPServer");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
         }
     }

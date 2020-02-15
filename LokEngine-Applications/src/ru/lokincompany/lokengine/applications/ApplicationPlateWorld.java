@@ -16,8 +16,6 @@ import ru.lokincompany.lokengine.tools.executorservices.EngineExecutors;
 import ru.lokincompany.lokengine.tools.saveworker.Prefs;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
-import static org.lwjgl.openal.ALC10.*;
-
 public class ApplicationPlateWorld extends Application {
     public Window window;
     public PlateScene scene;
@@ -57,15 +55,15 @@ public class ApplicationPlateWorld extends Application {
                 try {
                     window.open(windowFullscreen, allowResize, vSync, windowResolution);
                     window.setTitle(windowTitle);
-                } catch (Exception e) {
+                } catch (Throwable e) {
                     Logger.error("Fail open window!", "LokEngine_start");
-                    Logger.printException(e);
+                    Logger.printThrowable(e);
                 }
                 try {
                     SplashScreen.init(window);
-                } catch (Exception e) {
+                } catch (Throwable e) {
                     Logger.error("Fail init splash screen!", "LokEngine_start");
-                    Logger.printException(e);
+                    Logger.printThrowable(e);
                 }
 
                 SplashScreen.updateStatus(0.1f);
@@ -105,21 +103,21 @@ public class ApplicationPlateWorld extends Application {
                 Logger.debug("Call user init method", "LokEngine_start");
                 try {
                     initEvent();
-                } catch (Exception e) {
+                } catch (Throwable e) {
                     Logger.warning("Fail user-init!", "LokEngine_start");
-                    Logger.printException(e);
+                    Logger.printThrowable(e);
                 }
 
                 SplashScreen.updateStatus(0.9f);
                 Logger.debug("Turn in main while!", "LokEngine_start");
                 System.gc();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 errorClose(e);
             }
 
             try {
                 mainWhile();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 errorClose(e);
             }
 
@@ -127,9 +125,9 @@ public class ApplicationPlateWorld extends Application {
 
             try {
                 exitEvent();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.warning("Fail user-exit!", "LokEngine_postRuntime");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
 
             ALC10.alcDestroyContext(openALContext);
@@ -139,9 +137,9 @@ public class ApplicationPlateWorld extends Application {
 
             try {
                 Prefs.save();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.warning("Fail save prefs!", "LokEngine_postRuntime");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
 
             isRun = false;
@@ -152,9 +150,9 @@ public class ApplicationPlateWorld extends Application {
         while (true) {
             try {
                 updateEvent();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.warning("Fail user-update!", "LokEngine_runtime");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
 
             if (!isRun) break;

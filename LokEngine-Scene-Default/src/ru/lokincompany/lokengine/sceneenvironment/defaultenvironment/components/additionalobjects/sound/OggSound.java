@@ -44,9 +44,9 @@ public class OggSound extends Sound {
                 fos.write(IOUtils.resourceToByteArray(path.substring(1)));
                 fos.close();
                 endPath = tempFile.getAbsolutePath();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.warning("Failed load ogg file!", "LokEngine_OggSound");
-                Logger.printException(e);
+                Logger.printThrowable(e);
                 return;
             }
         }

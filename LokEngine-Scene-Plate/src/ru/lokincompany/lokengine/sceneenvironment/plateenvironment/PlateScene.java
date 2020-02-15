@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class PlateScene {
     public final Random random;
@@ -62,9 +61,9 @@ public class PlateScene {
         try {
             chunk.scene = this;
             chunk.generated = chunk.generate(chunkID);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.warning("Fail to generate " + chunkID + " chunk (" + position.x + ";" + position.y + ")");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
 
         return chunkID;

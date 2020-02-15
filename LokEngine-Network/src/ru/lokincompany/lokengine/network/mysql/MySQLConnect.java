@@ -16,7 +16,7 @@ public class MySQLConnect {
             statement = connection.createStatement();
         } catch (SQLException e) {
             Logger.warning("Fail connect to MySQL database", "LokEngine_MySQLConnect");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 
@@ -38,7 +38,7 @@ public class MySQLConnect {
                 connection.close();
         } catch (SQLException e) {
             Logger.warning("Fail close MySQL database connect", "LokEngine_MySQLConnect");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 
@@ -51,7 +51,7 @@ public class MySQLConnect {
             return statement.executeQuery(query);
         } catch (SQLException e) {
             Logger.warning("Fail execute query", "LokEngine_MySQLConnect");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
         return null;
     }
@@ -68,7 +68,7 @@ public class MySQLConnect {
 
             } catch (SQLException e) {
                 Logger.warning("Fail add data to array from ResultSet", "LokEngine_MySQLTools");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
 
         }
@@ -94,7 +94,7 @@ public class MySQLConnect {
             return resultSet.next() ? resultSet.getObject(1) : null;
         } catch (SQLException e) {
             Logger.warning("Fail get data from cell", "LokEngine_MySQLTools");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
         return null;
     }

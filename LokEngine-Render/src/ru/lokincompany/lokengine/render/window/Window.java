@@ -226,9 +226,9 @@ public class Window {
             try {
                 frameBuilder = new FrameBuilder(this);
                 frameBuilder.getRenderProperties().init();
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.error("Fail init Frame Builder!", "LokEngine_Window");
-                Logger.printException(e);
+                Logger.printThrowable(e);
                 return;
             }
             setResizeEvent((window, args) -> {
@@ -265,9 +265,9 @@ public class Window {
                 glfwSwapBuffers(id);
                 vao.unbind();
 
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.error("Fail build frame!", "LokEngine_Window");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
 
             glfwPollEvents();
@@ -288,9 +288,9 @@ public class Window {
                         (ByteBuffer) image[0]);
 
                 iconGB.put(GLFWimage);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.warning("Fail load icon", "LokEngine_Window");
-                Logger.printException(e);
+                Logger.printThrowable(e);
                 return;
             }
         }
@@ -304,9 +304,9 @@ public class Window {
         try {
             Object[] image = Texture.loadData(path);
             GLFWimage = GLFWImage.create().set(((BufferedImage) image[1]).getWidth(), ((BufferedImage) image[1]).getHeight(), (ByteBuffer) image[0]);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.warning("Fail load icon", "LokEngine_Window");
-            Logger.printException(e);
+            Logger.printThrowable(e);
             return;
         }
 

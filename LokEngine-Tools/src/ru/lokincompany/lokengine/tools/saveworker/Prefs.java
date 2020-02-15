@@ -30,7 +30,7 @@ public class Prefs {
                 fileWorker.close();
             } catch (IOException e) {
                 Logger.warning("Fail save prefs fields!", "LokEngine_Prefs");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
         }
     }
@@ -68,7 +68,7 @@ public class Prefs {
             fileWorker.close();
         } catch (IOException e) {
             Logger.warning("Fail init prefs fields!", "LokEngine_Prefs");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 

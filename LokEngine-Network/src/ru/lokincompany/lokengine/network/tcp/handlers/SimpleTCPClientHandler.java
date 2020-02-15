@@ -25,7 +25,7 @@ public class SimpleTCPClientHandler implements TCPClientHandler {
             return TCPTools.getMessage(fromServer);
         } catch (IOException e) {
             Logger.warning("Fail get message from server", "LokEngine_SimpleTCPClientHandler");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
         return null;
     }
@@ -35,7 +35,7 @@ public class SimpleTCPClientHandler implements TCPClientHandler {
             TCPTools.sendMessage(message, toServer);
         } catch (IOException e) {
             Logger.warning("Fail send message to server", "LokEngine_SimpleTCPClientHandler");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 

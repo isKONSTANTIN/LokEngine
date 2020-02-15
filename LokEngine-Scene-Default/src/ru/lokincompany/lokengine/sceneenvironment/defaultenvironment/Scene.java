@@ -81,7 +81,7 @@ public class Scene implements Saveable {
             return Base64.bytesToBase64(GZIPCompression.compress(sceneData + ",\n" + arraySaver.save()));
         } catch (IOException e) {
             Logger.warning("Fail save scene!", "LokEngine_Scene");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
 
         return null;
@@ -95,7 +95,7 @@ public class Scene implements Saveable {
             data = GZIPCompression.decompress(Base64.bytesFromBase64(savedString)).split(",\n");
         } catch (IOException e) {
             Logger.warning("Fail load scene!", "LokEngine_Scene");
-            Logger.printException(e);
+            Logger.printThrowable(e);
             return null;
         }
         String[] lines = data[0].split("\n");

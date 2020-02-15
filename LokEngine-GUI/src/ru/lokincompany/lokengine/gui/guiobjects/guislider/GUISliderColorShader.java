@@ -12,7 +12,7 @@ public interface GUISliderColorShader extends SimpleColorShader {
     default Color getColor(Object input) {
         try {
             return getColor((float) input);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return Colors.black();
         }
     }

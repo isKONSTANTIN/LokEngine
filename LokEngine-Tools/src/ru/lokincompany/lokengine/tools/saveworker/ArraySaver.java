@@ -47,7 +47,7 @@ public class ArraySaver implements Saveable {
             typeClass = Class.forName(elements[0].replace("\n", ""));
         } catch (ClassNotFoundException e) {
             Logger.warning("Fail load type class!", "LokEngine_ArraySaver");
-            Logger.printException(e);
+            Logger.printThrowable(e);
             return this;
         }
 
@@ -68,7 +68,7 @@ public class ArraySaver implements Saveable {
                     );
                 } catch (InstantiationException | IllegalAccessException e) {
                     Logger.warning("Fail add loaded object!", "LokEngine_ArraySaver");
-                    Logger.printException(e);
+                    Logger.printThrowable(e);
                 }
             }
 

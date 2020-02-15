@@ -12,11 +12,11 @@ public abstract class Application {
     protected ALCCapabilities alcCapabilities;
     protected ALCapabilities alCapabilities;
 
-    protected void errorClose(Exception e) {
+    protected void errorClose(Throwable e) {
         isRun = false;
         Logger.errorMessages = true;
         Logger.error("Critical error in engine! Sorry for that :C", "LokEngine");
-        Logger.printException(e);
+        Logger.printThrowable(e);
 
         System.exit(-1);
     }

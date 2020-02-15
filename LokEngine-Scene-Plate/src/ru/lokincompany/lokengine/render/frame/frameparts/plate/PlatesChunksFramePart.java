@@ -38,7 +38,7 @@ public class PlatesChunksFramePart extends FramePart {
 
         try {
             this.shader = new Shader("#/resources/shaders/PlatesVertShader.glsl", "#/resources/shaders/PlatesFragShader.glsl");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
     }

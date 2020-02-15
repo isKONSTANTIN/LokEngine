@@ -42,10 +42,10 @@ public class RawWavSound extends Sound {
             loadedSounds.put(path, this);
         } catch (UnsupportedAudioFileException e) {
             Logger.warning("Unsupported audio file (not raw wav): " + path + "!", "LokEngine_RawWavSound");
-            Logger.printException(e);
-        } catch (Exception e) {
+            Logger.printThrowable(e);
+        } catch (Throwable e) {
             Logger.warning("Fail load raw wav: " + path + "!", "LokEngine_RawWavSound");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 

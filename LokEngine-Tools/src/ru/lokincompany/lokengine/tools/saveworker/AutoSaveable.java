@@ -19,7 +19,7 @@ public interface AutoSaveable extends Serializable, Saveable {
             return Base64.bytesToBase64(baos.toByteArray());
         } catch (IOException e) {
             Logger.warning("Fail auto save object!", "LokEngine_AutoSaveable");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
         return null;
     }
@@ -42,7 +42,7 @@ public interface AutoSaveable extends Serializable, Saveable {
             }
         } catch (IOException | ClassNotFoundException | IllegalAccessException e) {
             Logger.warning("Fail auto load object!", "LokEngine_AutoSaveable");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
 
         return this;

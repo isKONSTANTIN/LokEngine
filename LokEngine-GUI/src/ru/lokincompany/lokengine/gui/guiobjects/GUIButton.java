@@ -27,11 +27,7 @@ public class GUIButton extends GUIObject {
         this.calmStateColor = Colors.engineBackgroundColor();
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
 
-        this.text = new GUIText().setPosition(object -> new Vector2i(
-                        getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0),
-                        getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)
-                        ));
-        setText("Button");
+        setText(new GUIText());
 
         this.panel = new GUIPanel()
                 .setColor(activeColor)
@@ -45,8 +41,12 @@ public class GUIButton extends GUIObject {
         return text;
     }
 
-    public GUIButton setText(String text){
-        this.text.setText(text);
+    public GUIButton setText(GUIText text){
+        this.text = text;
+        text.setPosition(object -> new Vector2i(
+                getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0),
+                getPosition().y + (int) (getSize().y / 2f - text.getSize().y / 2f)
+        ));
         size = this.text.getSize();
         size.x += size.x / 5;
         size.y += size.y / 5;

@@ -44,7 +44,7 @@ public class TCPClient {
             socket.close();
         } catch (IOException e) {
             Logger.warning("Fail close Client!", "LokEngine_TCPClient");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 

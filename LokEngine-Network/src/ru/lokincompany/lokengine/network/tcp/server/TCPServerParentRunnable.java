@@ -41,9 +41,9 @@ public class TCPServerParentRunnable implements Runnable {
 
             } catch (SocketException e) {
                 break;
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.warning("Fail process client!", "LokEngine_TCPServer-ClientThread");
-                Logger.printException(e);
+                Logger.printThrowable(e);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {

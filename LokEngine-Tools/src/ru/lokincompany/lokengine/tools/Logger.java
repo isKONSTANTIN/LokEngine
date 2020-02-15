@@ -10,7 +10,7 @@ public class Logger {
     public static boolean warningMessages = true;
     public static boolean infoMessages = true;
     public static boolean errorMessages = true;
-    public static boolean exceptionMessages = true;
+    public static boolean throwableMessages = true;
 
     public static boolean useColors = true;
 
@@ -140,8 +140,8 @@ public class Logger {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printException(Exception e) {
-        if (exceptionMessages) {
+    public static void printThrowable(Throwable e) {
+        if (throwableMessages) {
             underMessage(e.getClass().getName() + " - " + e.getMessage());
             underMessage(stackTraceToString(e.getStackTrace()));
         }

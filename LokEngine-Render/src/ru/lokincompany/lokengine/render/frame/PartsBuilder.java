@@ -60,9 +60,9 @@ public class PartsBuilder {
                     framePart.inited = true;
                 }
                 framePart.partRender(renderProperties);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Logger.error("Fail render frame part!", "LokEngine_PartsBuilder");
-                Logger.printException(e);
+                Logger.printThrowable(e);
             }
         }
 

@@ -13,7 +13,7 @@ public interface TextColorShader extends SimpleColorShader {
     default Color getColor(Object input) {
         try {
             return getColor((Vector2i) input);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return Colors.black();
         }
     }

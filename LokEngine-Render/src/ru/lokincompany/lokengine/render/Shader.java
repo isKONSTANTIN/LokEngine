@@ -34,9 +34,9 @@ public class Shader implements Saveable {
     public Shader(String vertPath, String fragPath) {
         try {
             loadShader(vertPath, fragPath);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.warning("Fail load shader!", "LokEngine_Shader");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
     }
 
@@ -209,9 +209,9 @@ public class Shader implements Saveable {
 
         try {
             loadShader(patches[0], patches[1]);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.warning("Fail load shader from save!", "LokEngine_Shader");
-            Logger.printException(e);
+            Logger.printThrowable(e);
         }
         return this;
     }

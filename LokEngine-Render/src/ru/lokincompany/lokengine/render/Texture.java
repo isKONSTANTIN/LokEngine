@@ -136,7 +136,7 @@ public class Texture implements Saveable {
 
         try {
             imageData = loadedData.get();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return;
         }
 

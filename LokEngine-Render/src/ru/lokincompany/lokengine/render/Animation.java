@@ -37,7 +37,7 @@ public class Animation implements Saveable {
     public Animation(String atlasPath, AtlasPositions atlasPositions) {
         try {
             altasTexture = new Texture(atlasPath);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Logger.warning("Fail load atlas from path!", "LokEngine_Animation");
             return;
         }
