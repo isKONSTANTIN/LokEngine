@@ -86,7 +86,7 @@ public class GUIGraph extends GUIObject {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
-        freeTextDrawer.update(partsBuilder, properties);
+        freeTextDrawer.update(partsBuilder, parentProperties);
         partsBuilder.addPart(framePart);
     }
 

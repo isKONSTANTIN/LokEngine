@@ -104,7 +104,7 @@ public class GUISubWindow extends GUIObject {
 
         if (titleText != null) {
             titlePanel.update(partsBuilder, parentProperties);
-            titleText.update(partsBuilder, properties);
+            titleText.update(partsBuilder, parentProperties);
         }
 
         canvas.update(partsBuilder, parentProperties);

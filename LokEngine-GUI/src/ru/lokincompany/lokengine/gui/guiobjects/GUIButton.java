@@ -23,8 +23,8 @@ public class GUIButton extends GUIObject {
     public GUIButton() {
         super(new Vector2i(), new Vector2i(60, 20));
 
-        this.pressedColor = Colors.engineBrightBackgroundColor();
-        this.calmStateColor = Colors.engineBackgroundColor();
+        this.pressedColor = Colors.engineBrightBackgroundColor().setAlpha(0.8f);
+        this.calmStateColor = Colors.engineBrightBackgroundColor().setAlpha(0.5f);
         this.activeColor = new Color(calmStateColor.red, calmStateColor.green, calmStateColor.blue, calmStateColor.alpha);
 
         setText(new GUIText());
@@ -129,8 +129,8 @@ public class GUIButton extends GUIObject {
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
-        panel.update(partsBuilder, properties);
-        text.update(partsBuilder, properties);
+        panel.update(partsBuilder, parentProperties);
+        text.update(partsBuilder, parentProperties);
     }
 
 }

@@ -135,6 +135,6 @@ public class GUITabs extends GUIObject {
 
         drawer.update(partsBuilder, parentProperties);
         if (activeCanvas != null)
-            activeCanvas.update(partsBuilder, properties);
+            activeCanvas.update(partsBuilder, parentProperties);
     }
 }
