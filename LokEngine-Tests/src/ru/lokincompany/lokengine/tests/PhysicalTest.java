@@ -11,7 +11,7 @@ import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.
 public class PhysicalTest extends ApplicationDefault {
 
     public static void main(String[] args) {
-        new PhysicalTest().start(false, true);
+        new PhysicalTest().start(false, true, true, 16);
     }
 
     @Override

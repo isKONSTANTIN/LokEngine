@@ -30,15 +30,19 @@ public class ApplicationGUIOnly extends Application {
         start(windowFullscreen, allowResize, true);
     }
 
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync) {
-        start(windowFullscreen, allowResize, vSync, new Vector2i(512, 512));
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync){
+        start(windowFullscreen, allowResize, vSync, -1, new Vector2i(512, 512));
     }
 
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution) {
-        start(windowFullscreen, allowResize, vSync, windowResolution, "LokEngine application");
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, int samples) {
+        start(windowFullscreen, allowResize, vSync, samples, new Vector2i(512, 512));
     }
 
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, Vector2i windowResolution, String windowTitle) {
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, int samples, Vector2i windowResolution) {
+        start(windowFullscreen, allowResize, vSync, samples, windowResolution, "LokEngine application");
+    }
+
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync, int samples, Vector2i windowResolution, String windowTitle) {
         if (isRun) return;
         isRun = true;
 
@@ -50,7 +54,7 @@ public class ApplicationGUIOnly extends Application {
                 Logger.debug("Init window", "LokEngine_start");
                 window = new Window();
                 try {
-                    window.open(windowFullscreen, allowResize, vSync, windowResolution);
+                    window.open(windowFullscreen, allowResize, vSync, samples, windowResolution);
                     window.setTitle(windowTitle);
                 } catch (Throwable e) {
                     Logger.error("Fail open window!", "LokEngine_start");

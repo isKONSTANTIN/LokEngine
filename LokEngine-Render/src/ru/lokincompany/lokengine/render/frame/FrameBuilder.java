@@ -23,6 +23,13 @@ public class FrameBuilder {
         GUIPartsBuilder = new PartsBuilder(correctWin.getResolution());
     }
 
+    public FrameBuilder(Window correctWin, int samples) {
+        renderProperties = new RenderProperties(correctWin);
+
+        scenePartsBuilder = new PartsBuilder(correctWin.getResolution(), samples);
+        GUIPartsBuilder = new PartsBuilder(correctWin.getResolution());
+    }
+
     public PartsBuilder getScenePartsBuilder() {
         return scenePartsBuilder;
     }

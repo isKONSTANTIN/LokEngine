@@ -11,7 +11,7 @@ import ru.lokincompany.lokengine.tools.color.Colors;
 public class BloomTest extends ApplicationDefault {
 
     public static void main(String[] args) {
-        new BloomTest().start(false, true);
+        new BloomTest().start(false, true, true, 16);
     }
 
     @Override

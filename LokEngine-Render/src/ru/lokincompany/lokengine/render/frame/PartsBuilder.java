@@ -17,10 +17,17 @@ public class PartsBuilder {
     FrameBufferWorker frameBufferWorker;
     Vector<FramePart> frameParts = new Vector<>();
 
+    int samples = -1;
+
     public PartsBuilder() {
     }
 
     public PartsBuilder(Vector2i resolution) {
+        setResolution(resolution);
+    }
+
+    public PartsBuilder(Vector2i resolution, int samples) {
+        this.samples = samples;
         setResolution(resolution);
     }
 
@@ -36,7 +43,11 @@ public class PartsBuilder {
         if (frameBufferWorker != null)
             frameBufferWorker.cleanUp();
 
-        frameBufferWorker = new FrameBufferWorker(resolution);
+        if (samples != -1)
+            frameBufferWorker = new FrameBufferWorker(resolution, samples);
+        else
+            frameBufferWorker = new FrameBufferWorker(resolution);
+
     }
 
     public int build(Vector<FramePart> frameParts, DrawMode drawMode, RenderProperties renderProperties) {
@@ -44,8 +55,12 @@ public class PartsBuilder {
     }
 
     public int build(Vector<FramePart> frameParts, DrawMode drawMode, RenderProperties renderProperties, Vector2i viewOffset) {
-        if (frameBufferWorker == null)
-            frameBufferWorker = new FrameBufferWorker(renderProperties.getBuilderWindow().getResolution());
+        if (frameBufferWorker == null){
+            if (samples != -1)
+                frameBufferWorker = new FrameBufferWorker(renderProperties.getBuilderWindow().getResolution(), samples);
+            else
+                frameBufferWorker = new FrameBufferWorker(renderProperties.getBuilderWindow().getResolution());
+        }
 
         frameBufferWorker.bindFrameBuffer(drawMode, renderProperties, viewOffset);
 

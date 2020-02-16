@@ -181,7 +181,7 @@ public class Window {
         glfwHideWindow(id);
     }
 
-    public void open(boolean fullscreen, boolean allowResize, boolean vSync, Vector2i resolution, String[] pathsWindowIcon) {
+    public void open(boolean fullscreen, boolean allowResize, boolean vSync, int samples, Vector2i resolution, String[] pathsWindowIcon) {
         if (!isInited) {
             this.fullscreen = fullscreen;
 
@@ -224,7 +224,11 @@ public class Window {
             mouse = new Mouse(id);
 
             try {
-                frameBuilder = new FrameBuilder(this);
+                if (samples == 0)
+                    frameBuilder = new FrameBuilder(this);
+                else
+                    frameBuilder = new FrameBuilder(this, samples);
+
                 frameBuilder.getRenderProperties().init();
             } catch (Throwable e) {
                 Logger.error("Fail init Frame Builder!", "LokEngine_Window");
@@ -238,16 +242,20 @@ public class Window {
         }
     }
 
-    public void open(boolean fullscreen, boolean allowResize, boolean vSync, Vector2i resolution) {
-        open(fullscreen, allowResize, vSync, resolution,
+    public void open(boolean fullscreen, boolean allowResize, boolean vSync, int samples, Vector2i resolution) {
+        open(fullscreen, allowResize, vSync, samples, resolution,
                 new String[]{
                         "#/resources/textures/EngineIcon16.png",
                         "#/resources/textures/EngineIcon32.png",
                         "#/resources/textures/EngineIcon128.png"});
     }
 
-    public void open(boolean allowResize, Vector2i resolution, boolean fullscreen) {
-        open(fullscreen, allowResize, true, resolution);
+    public void open(boolean fullscreen, boolean allowResize, int samples, Vector2i resolution) {
+        open(fullscreen, allowResize, true, samples, resolution);
+    }
+
+    public void open(boolean fullscreen, boolean allowResize, Vector2i resolution) {
+        open(fullscreen, allowResize, true, 0, resolution);
     }
 
     public void close() {

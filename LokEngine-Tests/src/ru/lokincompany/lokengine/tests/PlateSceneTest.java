@@ -32,7 +32,7 @@ public class PlateSceneTest extends ApplicationPlateWorld {
 
     public static void main(String[] args) {
         test = new PlateSceneTest();
-        test.start(false, true, false);
+        test.start(false, true, false, 16);
     }
 
     @Override
