@@ -49,7 +49,6 @@ public class PartsBuilder {
 
         frameBufferWorker.bindFrameBuffer(drawMode, renderProperties, viewOffset);
 
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         GL11.glClearColor(clearColor.red, clearColor.green, clearColor.blue, clearColor.alpha);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
@@ -66,7 +65,6 @@ public class PartsBuilder {
             }
         }
 
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         frameBufferWorker.unbindCurrentFrameBuffer();
 
         return frameBufferWorker.getTextureBuffer();

@@ -9,6 +9,7 @@ import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUISwitchFramePart extends FramePart {
     public Color colorHead;
@@ -47,6 +48,7 @@ public class GUISwitchFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glColor4f(colorBackground.red, colorBackground.green, colorBackground.blue, colorBackground.alpha);
         OpenGLFastTools.drawSquare(position, size);
 

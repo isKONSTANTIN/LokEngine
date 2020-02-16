@@ -10,8 +10,7 @@ import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingAct
 import ru.lokincompany.lokengine.render.postprocessing.workers.blur.BlurActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 
-import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
-import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.*;
 
 public class BloomActionWorker extends PostProcessingActionWorker {
 
@@ -51,6 +50,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
 
     @Override
     public int render(int sourceFrame) {
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (blurAction == 0) return sourceFrame;
 
         if (!frameBufferWorker1.getResolution().equals(window.getResolution())) {

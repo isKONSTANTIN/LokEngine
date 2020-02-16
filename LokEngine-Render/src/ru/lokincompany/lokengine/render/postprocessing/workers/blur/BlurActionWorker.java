@@ -12,6 +12,8 @@ import ru.lokincompany.lokengine.render.postprocessing.actions.blur.BlurAction;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class BlurActionWorker extends PostProcessingActionWorker {
 
     private Shader shader;
@@ -99,6 +101,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
 
     @Override
     public int render(int sourceFrame) {
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (postProcessingActions.size() > 0) {
             checkResizeWindow();
             blurPostProcessingFrameWorker.bindFrameBuffer(DrawMode.RawGUI, window.getFrameBuilder().getRenderProperties());

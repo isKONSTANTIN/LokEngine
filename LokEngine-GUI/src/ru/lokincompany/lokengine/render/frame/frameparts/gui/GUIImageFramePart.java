@@ -10,6 +10,7 @@ import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUIImageFramePart extends FramePart {
 
@@ -40,6 +41,7 @@ public class GUIImageFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (texture != null && texture.getBuffer() != -1) {
             glBindTexture(GL_TEXTURE_2D, texture.getBuffer());
             glColor4d(color.red, color.green, color.blue, color.alpha);

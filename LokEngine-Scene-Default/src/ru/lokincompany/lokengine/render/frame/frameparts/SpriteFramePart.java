@@ -13,6 +13,7 @@ import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.tools.color.Color;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
@@ -69,6 +70,7 @@ public class SpriteFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (shader == null)
             shader = renderProperties.getObjectShader();
 

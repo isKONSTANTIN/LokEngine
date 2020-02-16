@@ -10,6 +10,7 @@ import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUICanvasFramePart extends FramePart {
     public PartsBuilder partsBuilder;
@@ -39,7 +40,7 @@ public class GUICanvasFramePart extends FramePart {
     @Override
     public void partRender(RenderProperties renderProperties) {
         int texture = partsBuilder.build(DrawMode.RawGUI, renderProperties, viewOffset);
-
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glBindTexture(GL_TEXTURE_2D, texture);
         glColor4d(color.red, color.green, color.blue, color.alpha);
 

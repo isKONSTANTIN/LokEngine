@@ -9,6 +9,7 @@ import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUISliderFramePart extends FramePart {
 
@@ -34,6 +35,7 @@ public class GUISliderFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         Color headColor = head.getColor();
 
         glColor4f(colorBackground.red, colorBackground.green, colorBackground.blue, colorBackground.alpha);

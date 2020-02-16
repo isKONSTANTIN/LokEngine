@@ -10,6 +10,7 @@ import ru.lokincompany.lokengine.tools.color.ColorRGB;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUICheckBoxFramePart extends FramePart {
     public GUIImageFramePart imageFramePart;
@@ -58,6 +59,7 @@ public class GUICheckBoxFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         imageFramePart.position = position;
         imageFramePart.size = size;
         imageFramePart.color.alpha = colorStatus;

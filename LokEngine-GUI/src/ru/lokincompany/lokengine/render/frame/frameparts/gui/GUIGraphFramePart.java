@@ -10,6 +10,7 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUIGraphFramePart extends FramePart {
 
@@ -42,7 +43,7 @@ public class GUIGraphFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glBegin(GL_LINES);
         glColor4f(color2.red, color2.green, color2.blue, color2.alpha);
 

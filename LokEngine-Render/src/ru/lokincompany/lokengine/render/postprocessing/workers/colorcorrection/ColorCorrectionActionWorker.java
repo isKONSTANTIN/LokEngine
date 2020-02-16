@@ -9,6 +9,8 @@ import ru.lokincompany.lokengine.render.frame.FrameBufferWorker;
 import ru.lokincompany.lokengine.render.postprocessing.workers.PostProcessingActionWorker;
 import ru.lokincompany.lokengine.render.window.Window;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
     Shader shader;
     FrameBufferWorker frameBufferWorker;
@@ -35,6 +37,7 @@ public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
 
     @Override
     public int render(int sourceFrame) {
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (settings == null) return sourceFrame;
 
         checkResizeWindow();

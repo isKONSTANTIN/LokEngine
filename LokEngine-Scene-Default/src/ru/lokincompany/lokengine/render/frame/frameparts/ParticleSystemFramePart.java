@@ -55,6 +55,7 @@ public class ParticleSystemFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         if (count > 0) {
             if (shader == null)
                 shader = renderProperties.getParticlesShader();
