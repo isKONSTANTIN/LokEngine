@@ -58,7 +58,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         }
 
         if (active) {
-            int xPos = position.x + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
+            int xPos = fontXpos + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
 
             Color lineColor = color == null ? shader.getColor(new Vector2i(text.length(), 1)) : color;
             float s = (float)(Math.cos(pointerTime) + 1) / 2f;
