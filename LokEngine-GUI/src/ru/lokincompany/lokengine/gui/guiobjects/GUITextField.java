@@ -14,117 +14,92 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class GUITextField extends GUIObject {
 
-    public boolean canResize;
+    protected boolean canResize;
     protected GUITextFieldFramePart framePart;
     protected GUITextFieldScript activeScript;
     protected GUITextFieldScript inactiveScript;
     protected GUITextFieldScript statusChangedScript;
     private boolean lastActive;
 
-    public GUITextField(Vector2i position, GUITextFieldFramePart customFramePart) {
-        super(position, new Vector2i(0, 0));
+    public GUITextField(GUITextFieldFramePart customFramePart) {
         this.framePart = customFramePart;
+        framePart.position = this.position;
         Vector2i textSize = framePart.getSize();
         this.size.x = textSize.x;
         this.size.y = textSize.y;
         this.touchable = true;
-        framePart.position = this.position;
     }
 
-    public GUITextField(Vector2i position, Vector2i size, String text, FontPrefs prefs, boolean canResize, boolean centralizeText) {
-        super(position, new Vector2i(0, 0));
-        framePart = new GUITextFieldFramePart(size, text, prefs);
-        this.canResize = canResize;
-        this.size = size;
+    public GUITextField(FontPrefs prefs) {
+        super(new Vector2i(), new Vector2i(50, prefs.getSize() + 4));
+        framePart = new GUITextFieldFramePart(size, "", prefs);
+        this.canResize = false;
         this.touchable = true;
-
-        if (size.x < 1 || size.y < 1) {
-            if (canResize) {
-                Vector2i textSize = framePart.getSize();
-                this.size.x = textSize.x;
-                this.size.y = textSize.y;
-            }
-        }
-
+        framePart.centralizeText = false;
         framePart.position = this.position;
-        framePart.centralizeText = centralizeText;
-    }
-
-    public GUITextField(Vector2i position, Vector2i size, String text, FontPrefs prefs, boolean centralizeText) {
-        this(position, size, text, prefs,false, centralizeText);
-    }
-
-    public GUITextField(Vector2i position, Vector2i size, String text) {
-        this(position, size, text, new FontPrefs(), false);
-    }
-
-    public GUITextField(Vector2i position, String text) {
-        this(position, new Vector2i(), text);
-    }
-
-    public GUITextField(Vector2i position) {
-        this(position, "");
-    }
-
-    public GUITextField(GUITextFieldFramePart customFramePart) {
-        this(new Vector2i(), customFramePart);
-    }
-
-    public GUITextField(String text, FontPrefs prefs, boolean canResize, boolean centralizeText) {
-        this(new Vector2i(), new Vector2i(), text, prefs, canResize, centralizeText);
-    }
-
-    public GUITextField(String text, FontPrefs prefs, boolean canResize) {
-        this(text, prefs, canResize, false);
-    }
-
-    public GUITextField(String text, FontPrefs prefs) {
-        this(new Vector2i(), new Vector2i(), text, prefs, false);
-    }
-
-    public GUITextField(String text) {
-        this(text, new FontPrefs());
     }
 
     public GUITextField() {
-        this("");
+        this(FontPrefs.defaultFontPrefs);
+    }
+
+    public boolean isCentralizeText() {
+        return framePart.centralizeText;
+    }
+
+    public GUITextField setCentralizeText(boolean centralizeText) {
+        framePart.centralizeText = centralizeText;
+        return this;
+    }
+
+    public boolean isCanResize() {
+        return canResize;
+    }
+
+    public GUITextField setCanResize(boolean canResize) {
+        this.canResize = canResize;
+        return this;
+    }
+
+    public GUITextField setActiveScript(GUITextFieldScript script) {
+        activeScript = script;
+        return this;
+    }
+
+    public GUITextField setInactiveScript(GUITextFieldScript script) {
+        inactiveScript = script;
+        return this;
+    }
+
+    public GUITextField setStatusChangedScript(GUITextFieldScript script) {
+        statusChangedScript = script;
+        return this;
     }
 
     public boolean getActive() {
         return active;
     }
 
-    public void setActiveScript(GUITextFieldScript script) {
-        activeScript = script;
+    public Color getBackgroundColor() {
+        return framePart.backgroundColor;
     }
 
-    public void setInactiveScript(GUITextFieldScript script) {
-        inactiveScript = script;
+    public GUITextField setBackgroundColor(Color color) {
+        framePart.backgroundColor = color;
+        return this;
     }
-
-    public void setStatusChangedScript(GUITextFieldScript script) {
-        statusChangedScript = script;
-    }
-
     public String getText() {
         return framePart.text;
     }
 
-    public void updateText(String text) {
+    public GUITextField setText(String text) {
         framePart.text = text;
         if (canResize) {
             Vector2i textSize = framePart.getSize();
             this.size.x = textSize.x;
             this.size.y = textSize.y;
         }
-    }
-
-    public Color getBackgroundColor() {
-        return framePart.backgroundColor;
-    }
-
-    public void setBackgroundColor(Color color) {
-        framePart.backgroundColor = color;
+        return this;
     }
 
     @Override
