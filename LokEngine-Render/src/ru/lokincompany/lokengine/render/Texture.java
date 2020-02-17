@@ -2,6 +2,7 @@ package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 import ru.lokincompany.lokengine.tools.executorservices.EngineExecutors;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -13,8 +14,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.concurrent.Future;
-
-import org.lwjgl.opengl.GL12;
 
 public class Texture implements Saveable {
     private static HashMap<Long, HashMap<String, Texture>> loadedTextures = new HashMap<>();

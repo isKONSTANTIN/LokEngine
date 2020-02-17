@@ -18,9 +18,9 @@ public class GUISlider extends GUIObject {
     protected GUISliderHead head;
 
     public GUISlider() {
-        super(new Vector2i(), new Vector2i(100,10));
+        super(new Vector2i(), new Vector2i(100, 10));
         framePart = new GUISliderFramePart(position, size, Colors.engineBackgroundColor(), Colors.engineMainColor(), head);
-        this.head = new GUISliderHead().setSize(new Vector2i(11,11));
+        this.head = new GUISliderHead().setSize(new Vector2i(11, 11));
         touchable = true;
 
         head.setPosition(object -> {
@@ -37,28 +37,23 @@ public class GUISlider extends GUIObject {
             head.setSize(object -> new Vector2i(getSize().y + 2, this.getSize().y + 2));
     }
 
-    public GUISlider setHead(GUISliderHead head) {
-        this.head = head;
-        return this;
-    }
-
-    public GUISlider setFilledBackgroundColor(Color filledColor){
+    public GUISlider setFilledBackgroundColor(Color filledColor) {
         framePart.colorFill = filledColor;
         return this;
     }
 
-    public GUISlider setBackgroundColor(Color backgroundColor){
+    public GUISlider setBackgroundColor(Color backgroundColor) {
         framePart.colorBackground = backgroundColor;
         return this;
     }
 
-    public GUISlider setRange(Vector2f range){
-        this.range = range;
-        return this;
+    public Vector2f getRange() {
+        return range;
     }
 
-    public Vector2f getRange(){
-        return range;
+    public GUISlider setRange(Vector2f range) {
+        this.range = range;
+        return this;
     }
 
     public float getValue() {
@@ -72,6 +67,11 @@ public class GUISlider extends GUIObject {
 
     public GUISliderHead getHead() {
         return head;
+    }
+
+    public GUISlider setHead(GUISliderHead head) {
+        this.head = head;
+        return this;
     }
 
     @Override

@@ -10,8 +10,8 @@ out vec2 uvposition;
 out vec2 screensize;
 out vec2 dir;
 void main() {
-	dir = direction;
-	uvposition = UVPosition;
-	screensize = screenSize;
-	gl_Position = Projection * vec4(vertexPosition.x, vertexPosition.y, 0, 1);
+    dir = direction;
+    uvposition = UVPosition;
+    screensize = screenSize;
+    gl_Position = Projection * vec4(vertexPosition.x, vertexPosition.y, 0, 1);
 }

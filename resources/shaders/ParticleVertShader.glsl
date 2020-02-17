@@ -12,6 +12,6 @@ uniform mat4 View;
 uniform mat4 ObjectModelMatrix;
 
 void main() {
-	uvposition = UVPosition;
-	gl_Position = Projection * View * ObjectModelMatrix * vec4(vertexPosition.x * ObjectSize + ObjectPos.x, vertexPosition.y * ObjectSize + ObjectPos.y, 1, 1);
+    uvposition = UVPosition;
+    gl_Position = Projection * View * ObjectModelMatrix * vec4(vertexPosition.x * ObjectSize + ObjectPos.x, vertexPosition.y * ObjectSize + ObjectPos.y, 1, 1);
 }

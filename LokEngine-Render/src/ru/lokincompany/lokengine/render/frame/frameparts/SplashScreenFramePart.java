@@ -9,7 +9,6 @@ import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 
 public class SplashScreenFramePart extends FramePart {
 

@@ -78,7 +78,7 @@ public class SpriteFramePart extends FramePart {
             renderProperties.useShader(shader);
         }
 
-        if (!spriteVBO.equals(sprite.vertexVBO)){
+        if (!spriteVBO.equals(sprite.vertexVBO)) {
             init(renderProperties);
             spriteVBO = sprite.vertexVBO;
         }

@@ -6,7 +6,6 @@ import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.TextColorShader;
 import ru.lokincompany.lokengine.tools.color.Color;
-import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.awt.*;

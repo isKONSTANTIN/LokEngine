@@ -13,32 +13,32 @@ public class GUISwitch extends GUIObject {
     protected GUIText text;
 
     public GUISwitch() {
-        super(new Vector2i(), new Vector2i(25,15));
+        super(new Vector2i(), new Vector2i(25, 15));
         framePart = new GUISwitchFramePart(position, size);
     }
 
-    public GUISwitch setColorHead(Color colorHead){
+    public GUISwitch setColorHead(Color colorHead) {
         framePart.colorHead = colorHead;
         return this;
     }
 
-    public GUISwitch setColorBackground(Color colorBackground){
+    public GUISwitch setColorBackground(Color colorBackground) {
         framePart.colorBackground = colorBackground;
         return this;
     }
 
-    public GUISwitch setColorFill(Color colorFill){
+    public GUISwitch setColorFill(Color colorFill) {
         framePart.colorFill = colorFill;
         return this;
     }
 
-    public GUISwitch setText(GUIText text){
+    public GUISwitch setText(GUIText text) {
         this.text = text;
         text.setPosition(object -> new Vector2i(position.x + size.x + 2, position.y));
         setSize(new Vector2i(
-                (int)(text.framePart.font.getFontHeight() * (5f / 3f)),
+                (int) (text.framePart.font.getFontHeight() * (5f / 3f)),
                 text.framePart.font.getFontHeight()
-                ));
+        ));
         return this;
     }
 
@@ -67,7 +67,7 @@ public class GUISwitch extends GUIObject {
         super.setSize(size);
         framePart.size = size;
 
-        framePart.headSize.x = (int)(size.x / 2.5f);
+        framePart.headSize.x = (int) (size.x / 2.5f);
         framePart.headSize.y = size.y;
 
         return this;
@@ -85,10 +85,10 @@ public class GUISwitch extends GUIObject {
 
         if (framePart.status && framePart.animationStatus < 1) {
             framePart.animationStatus += 0.1f;
-        }else if (!framePart.status && framePart.animationStatus > 0)
+        } else if (!framePart.status && framePart.animationStatus > 0)
             framePart.animationStatus -= 0.1f;
 
-        framePart.headPosition.x = (int)(position.x + (size.x - framePart.headSize.x) * framePart.animationStatus);
+        framePart.headPosition.x = (int) (position.x + (size.x - framePart.headSize.x) * framePart.animationStatus);
         framePart.headPosition.y = position.y;
 
         if (switchSizeAlgorithm != null)

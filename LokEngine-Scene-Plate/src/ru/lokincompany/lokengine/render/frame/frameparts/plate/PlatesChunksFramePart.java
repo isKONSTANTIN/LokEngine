@@ -1,6 +1,9 @@
 package ru.lokincompany.lokengine.render.frame.frameparts.plate;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL31;
+import org.lwjgl.opengl.GL33;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.render.Shader;
@@ -14,17 +17,11 @@ import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateScene;
 import ru.lokincompany.lokengine.tools.MatrixTools;
 
 import java.util.Map;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20.*;
-import org.lwjgl.opengl.GL31;
-import org.lwjgl.opengl.GL33;
 
 public class PlatesChunksFramePart extends FramePart {
     public int blockSize;
-    ConcurrentHashMap<String,PlateChunk> chunks;
+    ConcurrentHashMap<String, PlateChunk> chunks;
     PlateScene scene;
     Shader shader;
     VAO vao;

@@ -66,10 +66,10 @@ public class GUICheckBoxFramePart extends FramePart {
 
         if (status && colorStatus < 1) {
             colorStatus += 0.1f;
-        }else if (!status && colorStatus > 0)
+        } else if (!status && colorStatus > 0)
             colorStatus -= 0.1f;
 
-        if (colorStatus > 0){
+        if (colorStatus > 0) {
             glColor4f(color.red, color.green, color.blue, color.alpha * colorStatus);
             OpenGLFastTools.drawSquare(position, size);
             imageFramePart.partRender(renderProperties);

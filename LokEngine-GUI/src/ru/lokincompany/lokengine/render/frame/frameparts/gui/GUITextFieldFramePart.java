@@ -5,12 +5,9 @@ import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.text.Font;
 import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.OpenGLFastTools;
-import ru.lokincompany.lokengine.tools.Timer;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
-
-import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
@@ -32,7 +29,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        pointerTime+=0.1f;
+        pointerTime += 0.1f;
 
         int fontHeight = font.getFontHeight();
         Vector2i textSize = font.getSize(text, maxSize);
@@ -61,7 +58,7 @@ public class GUITextFieldFramePart extends GUITextFramePart {
             int xPos = fontXpos + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
 
             Color lineColor = color == null ? shader.getColor(new Vector2i(text.length(), 1)) : color;
-            float s = (float)(Math.cos(pointerTime) + 1) / 2f;
+            float s = (float) (Math.cos(pointerTime) + 1) / 2f;
 
             GL11.glBegin(GL11.GL_LINES);
             GL11.glColor4f(lineColor.red, lineColor.green, lineColor.blue, lineColor.alpha * s);

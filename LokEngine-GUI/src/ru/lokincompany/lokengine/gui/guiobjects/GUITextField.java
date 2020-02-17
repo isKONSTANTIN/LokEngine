@@ -88,6 +88,7 @@ public class GUITextField extends GUIObject {
         framePart.backgroundColor = color;
         return this;
     }
+
     public String getText() {
         return framePart.text;
     }

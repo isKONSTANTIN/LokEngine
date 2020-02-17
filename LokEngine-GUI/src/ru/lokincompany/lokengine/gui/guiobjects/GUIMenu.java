@@ -28,8 +28,8 @@ public class GUIMenu extends GUIObject {
         this.drawer = new GUIFreeTextDrawer(fontPrefs);
         setPanel(new GUIPanel());
 
-        this.sizeAlgorithm = object -> new Vector2i(getSize().x, getSize().y - (int)(this.drawer.getFont().getFontHeight() * 1.2f));
-        this.positionAlgorithm = object -> new Vector2i(getPosition().x, getPosition().y + (int)(this.drawer.getFont().getFontHeight() * 1.2f));
+        this.sizeAlgorithm = object -> new Vector2i(getSize().x, getSize().y - (int) (this.drawer.getFont().getFontHeight() * 1.2f));
+        this.positionAlgorithm = object -> new Vector2i(getPosition().x, getPosition().y + (int) (this.drawer.getFont().getFontHeight() * 1.2f));
 
         this.textActiveColor = Colors.engineMainColor();
         this.textInactiveColor = Colors.white();
@@ -37,7 +37,7 @@ public class GUIMenu extends GUIObject {
         this.touchable = true;
     }
 
-    public GUIMenu(){
+    public GUIMenu() {
         this(FontPrefs.defaultFontPrefs);
     }
 
@@ -104,16 +104,6 @@ public class GUIMenu extends GUIObject {
         return items.get(name);
     }
 
-    public GUIMenu setTextActiveColor(Color textActiveColor) {
-        this.textActiveColor = textActiveColor;
-        return this;
-    }
-
-    public GUIMenu setTextInactiveColor(Color textInactiveColor) {
-        this.textInactiveColor = textInactiveColor;
-        return this;
-    }
-
     public GUIPanel getPanel() {
         return panel;
     }
@@ -121,15 +111,25 @@ public class GUIMenu extends GUIObject {
     public void setPanel(GUIPanel panel) {
         this.panel = panel
                 .setPosition(object -> getPosition())
-                .setSize(object -> new Vector2i(getSize().x, (int)(this.drawer.getFont().getFontHeight() * 1.2f)));
+                .setSize(object -> new Vector2i(getSize().x, (int) (this.drawer.getFont().getFontHeight() * 1.2f)));
     }
 
     public Color getTextActiveColor() {
         return textActiveColor;
     }
 
+    public GUIMenu setTextActiveColor(Color textActiveColor) {
+        this.textActiveColor = textActiveColor;
+        return this;
+    }
+
     public Color getTextInactiveColor() {
         return textInactiveColor;
+    }
+
+    public GUIMenu setTextInactiveColor(Color textInactiveColor) {
+        this.textInactiveColor = textInactiveColor;
+        return this;
     }
 
     public GUIFreeTextDrawer getDrawer() {

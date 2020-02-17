@@ -8,9 +8,8 @@ public abstract class PlateChunk {
     public boolean platesChanged;
     public boolean generated;
     public PlateChunkRenderData renderData = new PlateChunkRenderData();
-
-    protected int[][] plates = new int[16][16];
     public PlateScene scene;
+    protected int[][] plates = new int[16][16];
 
     public abstract boolean generate(int chunkID);
 

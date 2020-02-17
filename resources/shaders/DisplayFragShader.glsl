@@ -5,5 +5,5 @@ layout(location = 0) out vec4 color;
 uniform sampler2D frame;
 
 void main() {
-	color = texture(frame, uvposition);
+    color = texture(frame, uvposition);
 }

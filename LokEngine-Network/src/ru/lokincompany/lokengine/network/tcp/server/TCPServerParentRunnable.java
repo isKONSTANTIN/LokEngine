@@ -12,12 +12,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TCPServerParentRunnable implements Runnable {
 
+    final AtomicBoolean closed = new AtomicBoolean(false);
     BufferedReader fromClient;
     BufferedWriter toClient;
     TCPServerHandler handler;
     Socket clientSocket;
-
-    final AtomicBoolean closed = new AtomicBoolean(false);
 
     public TCPServerParentRunnable(BufferedReader fromClient, BufferedWriter toClient, TCPServerHandler handler, Socket clientSocket) {
         this.fromClient = fromClient;
@@ -58,7 +57,8 @@ public class TCPServerParentRunnable implements Runnable {
     public void close() {
         try {
             clientSocket.close();
-            while (!closed.get()) {}
+            while (!closed.get()) {
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

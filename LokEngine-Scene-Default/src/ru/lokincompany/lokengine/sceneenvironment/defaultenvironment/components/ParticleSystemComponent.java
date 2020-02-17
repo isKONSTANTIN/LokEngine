@@ -3,10 +3,10 @@ package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.Shader;
+import ru.lokincompany.lokengine.render.Sprite;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.ParticleSystemFramePart;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
-import ru.lokincompany.lokengine.render.Sprite;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem.DefaultParticleHandler;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem.Particle;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.particlesystem.ParticleHandler;

@@ -15,11 +15,11 @@ out vec3 colorAddition;
 out vec3 colorMultiplication;
 
 void main() {
-	uvposition = UVPosition;
-	exposure = Exposure;
-	gamma = Gamma;
-	colorAddition = ColorAddition;
-	colorMultiplication = ColorMultiplication;
+    uvposition = UVPosition;
+    exposure = Exposure;
+    gamma = Gamma;
+    colorAddition = ColorAddition;
+    colorMultiplication = ColorMultiplication;
 
-	gl_Position = Projection * vec4(vertexPosition.x, vertexPosition.y, 0, 1);
+    gl_Position = Projection * vec4(vertexPosition.x, vertexPosition.y, 0, 1);
 }

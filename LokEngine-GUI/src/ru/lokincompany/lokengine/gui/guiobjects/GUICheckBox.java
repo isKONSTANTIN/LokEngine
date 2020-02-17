@@ -13,17 +13,25 @@ public class GUICheckBox extends GUIObject {
     protected GUIText text;
 
     public GUICheckBox() {
-        super(new Vector2i(), new Vector2i(10,10));
+        super(new Vector2i(), new Vector2i(10, 10));
         this.framePart = new GUICheckBoxFramePart(position, size);
         this.touchable = true;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return framePart.color;
     }
 
     public GUIText getText() {
         return text;
+    }
+
+    public GUICheckBox setText(GUIText text) {
+        this.text = text;
+        text.setPosition(object -> new Vector2i(position.x + size.x + 2, position.y + 1));
+        this.size.x = text.framePart.font.getFontHeight();
+        this.size.y = this.size.x;
+        return this;
     }
 
     public Texture getTexture() {
@@ -32,14 +40,6 @@ public class GUICheckBox extends GUIObject {
 
     public GUICheckBox setTexture(Texture texture) {
         framePart.imageFramePart.texture = texture;
-        return this;
-    }
-
-    public GUICheckBox setText(GUIText text){
-        this.text = text;
-        text.setPosition(object -> new Vector2i(position.x + size.x + 2, position.y + 1));
-        this.size.x = text.framePart.font.getFontHeight();
-        this.size.y = this.size.x;
         return this;
     }
 

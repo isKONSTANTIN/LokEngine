@@ -1,7 +1,9 @@
 package ru.lokincompany.lokengine.render;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.ARBFragmentShader;
+import org.lwjgl.opengl.ARBShaderObjects;
+import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.util.vector.*;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;

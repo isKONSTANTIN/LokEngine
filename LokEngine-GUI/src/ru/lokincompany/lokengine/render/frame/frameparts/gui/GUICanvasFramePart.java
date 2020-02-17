@@ -10,21 +10,19 @@ import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
 
 public class GUICanvasFramePart extends FramePart {
-    public PartsBuilder partsBuilder;
-    public Vector2i position;
-    public Vector2i size;
-    public Vector2i viewOffset = new Vector2i(0, 0);
-    public Color color = new Color(1, 1, 1, 1);
-
     static float[] texCoords = new float[]{
             0, 1,
             1, 1,
             1, 0,
             0, 0
     };
+    public PartsBuilder partsBuilder;
+    public Vector2i position;
+    public Vector2i size;
+    public Vector2i viewOffset = new Vector2i(0, 0);
+    public Color color = new Color(1, 1, 1, 1);
 
     public GUICanvasFramePart(Vector2i position, Vector2i size) {
         super(FramePartType.GUI);

@@ -30,7 +30,7 @@ public class ApplicationGUIOnly extends Application {
         start(windowFullscreen, allowResize, true);
     }
 
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync){
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync) {
         start(windowFullscreen, allowResize, vSync, -1, new Vector2i(512, 512));
     }
 

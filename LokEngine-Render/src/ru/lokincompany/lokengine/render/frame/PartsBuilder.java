@@ -8,9 +8,6 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import java.util.Vector;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
-
 public class PartsBuilder {
 
     public Color clearColor = new Color(0, 0, 0, 0);
@@ -55,7 +52,7 @@ public class PartsBuilder {
     }
 
     public int build(Vector<FramePart> frameParts, DrawMode drawMode, RenderProperties renderProperties, Vector2i viewOffset) {
-        if (frameBufferWorker == null){
+        if (frameBufferWorker == null) {
             if (samples != -1)
                 frameBufferWorker = new FrameBufferWorker(renderProperties.getBuilderWindow().getResolution(), samples);
             else

@@ -7,9 +7,6 @@ import ru.lokincompany.lokengine.render.exceptions.GLFWNotInitializedError;
 
 import java.util.ArrayList;
 
-import static org.lwjgl.opengl.GL15C.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15C.glBindBuffer;
-
 public class VBO {
     int vboID = -1;
     int size;

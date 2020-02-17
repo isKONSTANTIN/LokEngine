@@ -1,11 +1,11 @@
 package ru.lokincompany.lokengine.render;
 
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.frameparts.SplashScreenFramePart;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
-import org.lwjgl.glfw.GLFW;
 
 public class SplashScreen {
 

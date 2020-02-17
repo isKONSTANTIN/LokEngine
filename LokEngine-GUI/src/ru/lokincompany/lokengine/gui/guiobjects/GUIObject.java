@@ -1,6 +1,5 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
-import org.lwjgl.system.CallbackI;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectUpdateScript;
@@ -38,12 +37,12 @@ public class GUIObject {
 
     public <T extends GUIObject> T setPosition(Vector2i position) {
         this.position = position;
-        return (T)this;
+        return (T) this;
     }
 
     public <T extends GUIObject> T setPosition(GUILocationAlgorithm position) {
         positionAlgorithm = position;
-        return (T)this;
+        return (T) this;
     }
 
     public Vector2i getSize() {
@@ -54,20 +53,20 @@ public class GUIObject {
         this.size = size;
         properties.size.x = size.x;
         properties.size.y = size.y;
-        return (T)this;
+        return (T) this;
     }
 
     public <T extends GUIObject> T setSize(GUILocationAlgorithm size) {
         sizeAlgorithm = size;
-        return (T)this;
+        return (T) this;
     }
 
-    public void setUpdateScript(GUIObjectUpdateScript updateScript){
-        this.updateScript = updateScript;
-    }
-
-    public GUIObjectUpdateScript getUpdateScript(){
+    public GUIObjectUpdateScript getUpdateScript() {
         return updateScript;
+    }
+
+    public void setUpdateScript(GUIObjectUpdateScript updateScript) {
+        this.updateScript = updateScript;
     }
 
     protected void pressed() {
@@ -88,11 +87,11 @@ public class GUIObject {
     protected void endRetention() {
     }
 
-    protected void mouseInField(){
+    protected void mouseInField() {
 
     }
 
-    protected void mouseOutField(){
+    protected void mouseOutField() {
 
     }
 
@@ -136,13 +135,13 @@ public class GUIObject {
                     unpressed();
                 }
 
-                if (!mouseInField){
+                if (!mouseInField) {
                     mouseInField = true;
                     mouseInField();
                 }
 
             } else {
-                if (mouseInField){
+                if (mouseInField) {
                     mouseInField = false;
                     mouseOutField();
                 }

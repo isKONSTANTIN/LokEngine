@@ -2,18 +2,17 @@ package ru.lokincompany.lokengine.tools;
 
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
-import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class FontPrefs {
+    public final static FontPrefs defaultFontPrefs = new FontPrefs();
     private String fontName = "Arial";
     private Color color = Colors.white();
     private TextColorShader shader = charPos -> color;
     private int fontStyle = 0;
     private int size = 14;
 
-    public final static FontPrefs defaultFontPrefs = new FontPrefs();
-
-    public FontPrefs(){}
+    public FontPrefs() {
+    }
 
     public int getSize() {
         return size;

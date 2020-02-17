@@ -41,7 +41,7 @@ public class GUIButton extends GUIObject {
         return text;
     }
 
-    public GUIButton setText(GUIText text){
+    public GUIButton setText(GUIText text) {
         this.text = text;
         text.setPosition(object -> new Vector2i(
                 getPosition().x + (centralizeText ? (int) (getSize().x / 2f - text.getSize().x / 2f) : 0),
@@ -61,6 +61,11 @@ public class GUIButton extends GUIObject {
         return centralizeText;
     }
 
+    public GUIButton setCentralizeText(boolean centralizeText) {
+        this.centralizeText = centralizeText;
+        return this;
+    }
+
     public boolean isPressed() {
         return active;
     }
@@ -72,11 +77,6 @@ public class GUIButton extends GUIObject {
 
     public GUIButton setCalmStateColor(Color calmStateColor) {
         this.calmStateColor = calmStateColor;
-        return this;
-    }
-
-    public GUIButton setCentralizeText(boolean centralizeText) {
-        this.centralizeText = centralizeText;
         return this;
     }
 

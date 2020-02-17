@@ -79,7 +79,7 @@ public class PlateScene {
         int xChuck = globalPos.x >> 4;
         int yChunk = globalPos.y >> 4;
 
-        PlateChunk chunk = plateChunksByPos.get(xChuck+ ":" + yChunk);
+        PlateChunk chunk = plateChunksByPos.get(xChuck + ":" + yChunk);
         if (chunk == null) return -1;
 
         int xBlock = globalPos.x & 15;
@@ -92,7 +92,7 @@ public class PlateScene {
         int xChuck = globalPos.x >> 4;
         int yChunk = globalPos.y >> 4;
 
-        PlateChunk chunk = plateChunksByPos.get(xChuck+ ":" + yChunk);
+        PlateChunk chunk = plateChunksByPos.get(xChuck + ":" + yChunk);
         if (chunk == null) return;
 
         int xBlock = globalPos.x & 15;

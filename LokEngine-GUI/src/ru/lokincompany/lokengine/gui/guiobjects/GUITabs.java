@@ -47,7 +47,7 @@ public class GUITabs extends GUIObject {
         this(FontPrefs.defaultFontPrefs);
     }
 
-    public GUIPanel getGUIPanel(){
+    public GUIPanel getGUIPanel() {
         return panel;
     }
 

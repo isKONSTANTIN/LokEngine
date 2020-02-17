@@ -4,7 +4,6 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIGraphFramePart;
 import ru.lokincompany.lokengine.tools.FontPrefs;
-import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.color.Colors;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
@@ -25,21 +24,6 @@ public class GUIGraph extends GUIObject {
         framePart = new GUIGraphFramePart(position, size, points, 100, 0, 100, Colors.engineMainColor(), Colors.engineBackgroundColor(), freeTextDrawer);
     }
 
-    public GUIGraph setMaxHeight(float maxHeight) {
-        framePart.maxHeight = maxHeight;
-        return this;
-    }
-
-    public GUIGraph setMinHeight(float minHeight) {
-        framePart.minHeight = minHeight;
-        return this;
-    }
-
-    public GUIGraph setMaxPoints(int maxPoints) {
-        framePart.maxPoints = maxPoints;
-        return this;
-    }
-
     public ArrayList<Float> getPoints() {
         return points;
     }
@@ -48,12 +32,27 @@ public class GUIGraph extends GUIObject {
         return framePart.maxHeight;
     }
 
+    public GUIGraph setMaxHeight(float maxHeight) {
+        framePart.maxHeight = maxHeight;
+        return this;
+    }
+
     public float getMinHeight() {
         return framePart.minHeight;
     }
 
+    public GUIGraph setMinHeight(float minHeight) {
+        framePart.minHeight = minHeight;
+        return this;
+    }
+
     public int getMaxPoints() {
         return framePart.maxPoints;
+    }
+
+    public GUIGraph setMaxPoints(int maxPoints) {
+        framePart.maxPoints = maxPoints;
+        return this;
     }
 
     public GUIFreeTextDrawer getFreeTextDrawer() {

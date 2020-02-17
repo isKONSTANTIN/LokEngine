@@ -11,5 +11,5 @@ void main() {
 
     hdr += bloom;
 
-    color = vec4(hdr.rgb, max(hdr.a,bloom.a));
+    color = vec4(hdr.rgb, max(hdr.a, bloom.a));
 }

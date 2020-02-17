@@ -30,7 +30,7 @@ public class GUISwitchFramePart extends FramePart {
         headPosition = new Vector2i(position.x, position.y);
 
         this.size = size;
-        headSize.x = (int)(size.x / 2.5f);
+        headSize.x = (int) (size.x / 2.5f);
         headSize.y = size.y;
 
         this.colorHead = colorHead;
@@ -53,7 +53,7 @@ public class GUISwitchFramePart extends FramePart {
         OpenGLFastTools.drawSquare(position, size);
 
         glColor4f(colorFill.red, colorFill.green, colorFill.blue, colorFill.alpha);
-        OpenGLFastTools.drawSquare(position, new Vector2i((int)(size.x * animationStatus), size.y));
+        OpenGLFastTools.drawSquare(position, new Vector2i((int) (size.x * animationStatus), size.y));
 
         glColor4f(colorHead.red, colorHead.green, colorHead.blue, colorHead.alpha);
         OpenGLFastTools.drawSquare(headPosition, headSize);

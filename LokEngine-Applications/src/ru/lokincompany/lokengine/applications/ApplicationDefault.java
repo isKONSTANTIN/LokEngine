@@ -36,7 +36,7 @@ public class ApplicationDefault extends Application {
         start(windowFullscreen, allowResize, true);
     }
 
-    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync){
+    public void start(boolean windowFullscreen, boolean allowResize, boolean vSync) {
         start(windowFullscreen, allowResize, vSync, 0, new Vector2i(512, 512));
     }
 

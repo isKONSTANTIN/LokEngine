@@ -19,6 +19,10 @@ public class TCPTest extends ApplicationConsole {
         start(false);
     }
 
+    public static void main(String[] args) {
+        new TCPTest();
+    }
+
     @Override
     protected void initEvent() {
         try {
@@ -41,9 +45,5 @@ public class TCPTest extends ApplicationConsole {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new TCPTest();
     }
 }

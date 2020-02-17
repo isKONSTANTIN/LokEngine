@@ -3,7 +3,6 @@ package ru.lokincompany.lokengine.tools;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glEnd;
 
 public class OpenGLFastTools {
 
@@ -14,7 +13,7 @@ public class OpenGLFastTools {
             0, 1
     };
 
-    public static void drawSquare(Vector2i position, Vector2i size, float[] texCoords){
+    public static void drawSquare(Vector2i position, Vector2i size, float[] texCoords) {
         glBegin(GL_POLYGON);
 
         glTexCoord2f(texCoords[0], texCoords[1]);
@@ -32,11 +31,11 @@ public class OpenGLFastTools {
         glEnd();
     }
 
-    public static void drawSquare(Vector2i position, Vector2i size){
+    public static void drawSquare(Vector2i position, Vector2i size) {
         drawSquare(position, size, defaultTexCoords);
     }
 
-    public static void drawHollowSquare(Vector2i position, Vector2i size){
+    public static void drawHollowSquare(Vector2i position, Vector2i size) {
         glBegin(GL_LINE_STRIP);
 
         glVertex3f(position.x, position.y, 0);

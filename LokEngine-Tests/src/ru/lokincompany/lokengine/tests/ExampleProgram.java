@@ -19,7 +19,7 @@ public class ExampleProgram extends ApplicationGUIOnly {
         window.getFrameBuilder().backgroundColor = Colors.engineBackgroundColor();
 
         TextColorShader textColorShader = charPos ->
-                new Color(1,1,1, (float)(Math.sin(applicationRuntime.getEngineRunTime() / 1000000000f - charPos.x / 100f) + 1) / 2f);
+                new Color(1, 1, 1, (float) (Math.sin(applicationRuntime.getEngineRunTime() / 1000000000f - charPos.x / 100f) + 1) / 2f);
 
         canvas.addObject(
                 new GUIText(new FontPrefs().setShader(textColorShader)).setText("It's simple program on LokEngine!"),

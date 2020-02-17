@@ -7,7 +7,7 @@ uniform float BrightnessLimit;
 out vec2 uvposition;
 out float brightnessLimit;
 void main() {
-	uvposition = UVPosition;
-	brightnessLimit = BrightnessLimit;
-	gl_Position = Projection * vec4(vertexPosition.x, vertexPosition.y, 0, 1);
+    uvposition = UVPosition;
+    brightnessLimit = BrightnessLimit;
+    gl_Position = Projection * vec4(vertexPosition.x, vertexPosition.y, 0, 1);
 }

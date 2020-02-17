@@ -12,7 +12,7 @@ uniform vec4 ObjectColor;
 uniform mat4 ObjectModelMatrix;
 
 void main() {
-	uvposition = UVPosition;
-	objectcolor = ObjectColor;
-	gl_Position = Projection * View * ObjectModelMatrix * vec4(vertexPosition.x * ObjectSize, vertexPosition.y * ObjectSize, 1, 1);
+    uvposition = UVPosition;
+    objectcolor = ObjectColor;
+    gl_Position = Projection * View * ObjectModelMatrix * vec4(vertexPosition.x * ObjectSize, vertexPosition.y * ObjectSize, 1, 1);
 }

@@ -14,22 +14,22 @@ public class Color {
         this.alpha = alpha;
     }
 
-    public Color setRed(float red){
+    public Color setRed(float red) {
         this.red = red;
         return this;
     }
 
-    public Color setGreen(float green){
+    public Color setGreen(float green) {
         this.green = green;
         return this;
     }
 
-    public Color setBlue(float blue){
+    public Color setBlue(float blue) {
         this.blue = blue;
         return this;
     }
 
-    public Color setAlpha(float alpha){
+    public Color setAlpha(float alpha) {
         this.alpha = alpha;
         return this;
     }

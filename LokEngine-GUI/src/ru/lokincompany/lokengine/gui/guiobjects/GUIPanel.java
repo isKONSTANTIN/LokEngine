@@ -1,6 +1,5 @@
 package ru.lokincompany.lokengine.gui.guiobjects;
 
-import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUIPanelFramePart;
@@ -15,32 +14,32 @@ public class GUIPanel extends GUIObject {
     protected BlurAction blurAction;
 
     public GUIPanel() {
-        super(new Vector2i(), new Vector2i(100,100));
+        super(new Vector2i(), new Vector2i(100, 100));
         this.framePart = new GUIPanelFramePart(position, size);
         setBlurTuning(new BlurTuning());
     }
 
-    public GUIPanel setColor(Color color){
+    public Color getColor() {
+        return framePart.color;
+    }
+
+    public GUIPanel setColor(Color color) {
         framePart.color = color;
         return this;
     }
 
-    public Color getColor(){
-        return framePart.color;
+    public BlurTuning getBlurTuning() {
+        return blurAction.blurTuning;
     }
 
-    public GUIPanel setBlurTuning(BlurTuning blur){
-        if (blur == null){
+    public GUIPanel setBlurTuning(BlurTuning blur) {
+        if (blur == null) {
             blurAction = null;
             return this;
         }
 
         this.blurAction = new BlurAction(position, size, blur);
         return this;
-    }
-
-    public BlurTuning getBlurTuning(){
-        return blurAction.blurTuning;
     }
 
     @Override

@@ -11,7 +11,6 @@ import ru.lokincompany.lokengine.tools.vectori.Vector4i;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.ARBFramebufferObject.*;
-import static org.lwjgl.opengl.ARBFramebufferObject.GL_FRAMEBUFFER;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL30.GL_DEPTH24_STENCIL8;
@@ -57,7 +56,7 @@ public class FrameBufferWorker {
         GL11.glDeleteTextures(textureBuffer);
         GL11.glDeleteTextures(depthBuffer);
 
-        if (multisampled){
+        if (multisampled) {
             GL30.glDeleteFramebuffers(multisampledFbo);
             glDeleteRenderbuffers(multisampledColorRenderBuffer);
             glDeleteRenderbuffers(multisampledDepthRenderBuffer);
@@ -142,7 +141,7 @@ public class FrameBufferWorker {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, lastFrameBuffer);
     }
 
-    private void initialiseMultisampledFrameBuffer(int samples, int x, int y){
+    private void initialiseMultisampledFrameBuffer(int samples, int x, int y) {
         multisampledColorRenderBuffer = glGenRenderbuffers();
         multisampledDepthRenderBuffer = glGenRenderbuffers();
         multisampledFbo = glGenFramebuffers();
@@ -178,7 +177,7 @@ public class FrameBufferWorker {
         GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, frameBuffer);
     }
 
-    private void resolveMultisampled(){
+    private void resolveMultisampled() {
         glBindFramebuffer(GL_READ_FRAMEBUFFER, multisampledFbo);
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frameBuffer);
         glBlitFramebuffer(0, 0, bufferResolution.x, bufferResolution.y, 0, 0, bufferResolution.x, bufferResolution.y, GL_COLOR_BUFFER_BIT, GL_NEAREST);

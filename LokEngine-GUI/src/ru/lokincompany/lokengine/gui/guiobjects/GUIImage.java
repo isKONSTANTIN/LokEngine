@@ -18,15 +18,15 @@ public class GUIImage extends GUIObject {
         return framePart.texture;
     }
 
+    public GUIImage setTexture(Texture texture) {
+        return setTexture(texture, true);
+    }
+
     public GUIImage setTexture(Texture texture, boolean resetSize) {
         framePart.texture = texture;
         if (resetSize)
             setSize(new Vector2i(texture.getSizeX(), texture.getSizeY()));
         return this;
-    }
-
-    public GUIImage setTexture(Texture texture) {
-        return setTexture(texture, true);
     }
 
     public Color getColor() {

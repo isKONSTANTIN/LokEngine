@@ -19,6 +19,13 @@ public class GUISliderHead extends GUIObject {
         return texture;
     }
 
+    public GUISliderHead setTexture(Texture texture) {
+        this.texture = texture;
+        color = Colors.white();
+        setSize(new Vector2i(texture.getSizeX(), texture.getSizeY()));
+        return this;
+    }
+
     public Color getColor() {
         return color;
     }
@@ -34,13 +41,6 @@ public class GUISliderHead extends GUIObject {
 
     public GUISliderHead setColorShader(GUISliderColorShader colorShader) {
         this.colorShader = colorShader;
-        return this;
-    }
-
-    public GUISliderHead setTexture(Texture texture) {
-        this.texture = texture;
-        color = Colors.white();
-        setSize(new Vector2i(texture.getSizeX(), texture.getSizeY()));
         return this;
     }
 

@@ -47,7 +47,7 @@ public class Colors {
         return new Color(0.2f, 0.2f, 0.2f, 1);
     }
 
-    public static Color engineBrightBackgroundColor(){
+    public static Color engineBrightBackgroundColor() {
         return new Color(0.3f, 0.3f, 0.3f, 1);
     }
 

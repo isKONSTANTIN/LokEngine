@@ -30,18 +30,18 @@ public class GUIText extends GUIObject {
         return this;
     }
 
-    public GUIText setTextShader(TextColorShader textShader){
+    public GUIText setTextShader(TextColorShader textShader) {
         framePart.shader = textShader;
-        return this;
-    }
-
-    public GUIText setMaxSize(Vector2i maxSize) {
-        framePart.maxSize = maxSize;
         return this;
     }
 
     public Vector2i getMaxSize() {
         return framePart.maxSize;
+    }
+
+    public GUIText setMaxSize(Vector2i maxSize) {
+        framePart.maxSize = maxSize;
+        return this;
     }
 
     @Override

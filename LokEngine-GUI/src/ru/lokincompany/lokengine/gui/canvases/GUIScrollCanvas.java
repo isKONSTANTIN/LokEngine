@@ -1,7 +1,6 @@
 package ru.lokincompany.lokengine.gui.canvases;
 
 import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector4f;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -59,8 +58,8 @@ public class GUIScrollCanvas extends GUICanvas {
         if (Math.abs(scrollImpulse.x) <= 0.2f) scrollImpulse.x = 0;
         if (Math.abs(scrollImpulse.y) <= 0.2f) scrollImpulse.y = 0;
 
-        framePart.viewOffset.x = (int)scrollPosition.x;
-        framePart.viewOffset.y = (int)scrollPosition.y;
+        framePart.viewOffset.x = (int) scrollPosition.x;
+        framePart.viewOffset.y = (int) scrollPosition.y;
 
         properties.globalPosition.x += framePart.viewOffset.x;
         properties.globalPosition.y += framePart.viewOffset.y;

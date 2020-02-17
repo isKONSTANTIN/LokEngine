@@ -17,7 +17,7 @@ public class GUISubWindow extends GUIObject {
     private boolean lastMFS;
 
     public GUISubWindow(GUIText titleText, GUIPanel titlePanel) {
-        super(new Vector2i(), new Vector2i(200,200));
+        super(new Vector2i(), new Vector2i(200, 200));
         Vector2i canvasSize = new Vector2i(size.x, size.y);
         Vector2i canvasPosition = new Vector2i(position.x, position.y);
 
@@ -40,7 +40,7 @@ public class GUISubWindow extends GUIObject {
         canMove = true;
     }
 
-    public GUISubWindow(){
+    public GUISubWindow() {
         this(new GUIText().setText("Window!"), new GUIPanel().setColor(Colors.engineBrightBackgroundColor()));
     }
 

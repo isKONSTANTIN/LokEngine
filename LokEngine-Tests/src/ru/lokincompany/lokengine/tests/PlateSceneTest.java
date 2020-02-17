@@ -5,7 +5,6 @@ import ru.lokincompany.lokengine.applications.ApplicationPlateWorld;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.render.Camera;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateChunk;
-import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateScene;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.Mouse;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;

@@ -3,8 +3,6 @@ package ru.lokincompany.lokengine.render;
 import org.lwjgl.opengl.GL30;
 import ru.lokincompany.lokengine.render.exceptions.GLFWNotInitializedError;
 
-import static org.lwjgl.opengl.GL30.*;
-
 public class VAO {
     int vaoID;
 
