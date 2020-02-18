@@ -2,6 +2,7 @@ package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.util.vector.Vector3f;
+import ru.lokincompany.lokengine.render.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
@@ -80,14 +81,9 @@ public class RenderProperties {
     public void update() {
         Vector2i windowResolution = window.getResolution();
 
-        useShader(displayShader);
-        window.getCamera().updateProjection(windowResolution.x, windowResolution.y, 1);
-
-        useShader(particlesShader);
-        particlesShader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(0, new Vector3f(0, 0, 0)));
-
-        useShader(objectShader);
-        window.getCamera().setFieldOfView(window.getCamera().fieldOfView);
+        objectShader.update(window.getCamera());
+        displayShader.update(window.getCamera());
+        particlesShader.update(window.getCamera());
 
         vertexScreenVBO.createNew();
 
@@ -99,9 +95,33 @@ public class RenderProperties {
     }
 
     public void init() throws Exception {
-        objectShader = new Shader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl");
-        displayShader = new Shader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl");
-        particlesShader = new Shader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl");
+        objectShader = new Shader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl") {
+            @Override
+            public void update(Camera activeCamera) {
+                useShader(this);
+                setView(window.getCamera());
+                setProjection(window.getCamera().getScreenRatio(), 1, activeCamera);
+            }
+        };
+
+        displayShader = new Shader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl") {
+            @Override
+            public void update(Camera activeCamera) {
+                useShader(this);
+                setProjection(window.getResolution().x, window.getResolution().y, 1);
+            }
+        };
+
+        particlesShader = new Shader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl") {
+            @Override
+            public void update(Camera activeCamera) {
+                useShader(this);
+                setProjection(window.getCamera().getScreenRatio(), 1, activeCamera);
+            }
+        };
+
+        useShader(particlesShader);
+        particlesShader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(0, new Vector3f(0, 0, 0)));
 
         unknownTexture = new Texture("#/resources/textures/unknown.png");
 

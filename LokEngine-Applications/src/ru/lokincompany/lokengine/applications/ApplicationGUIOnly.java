@@ -149,10 +149,9 @@ public class ApplicationGUIOnly extends Application {
 
             applicationRuntime.update();
 
-            window.getCamera().updateAudioListener();
+            window.getCamera().update();
 
             canvas.update();
-
             window.update();
         }
     }

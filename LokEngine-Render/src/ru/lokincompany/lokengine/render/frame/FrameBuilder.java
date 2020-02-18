@@ -62,8 +62,7 @@ public class FrameBuilder {
         Window window = renderProperties.getBuilderWindow();
 
         if (scenePartsBuilder.frameParts.size() > 0) {
-            renderProperties.useShader(renderProperties.getObjectShader());
-            window.getCamera().updateView();
+            renderProperties.getObjectShader().update(window.getCamera());
 
             sceneFrame = scenePartsBuilder.build(DrawMode.Scene, renderProperties);
 

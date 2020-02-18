@@ -1,6 +1,7 @@
 package ru.lokincompany.lokengine.render.postprocessing.workers.bloom;
 
 import org.lwjgl.opengl.GL11;
+import ru.lokincompany.lokengine.render.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
@@ -23,20 +24,31 @@ public class BloomActionWorker extends PostProcessingActionWorker {
     private int blurAction;
     private BloomSettings bloomSettings;
 
-    public BloomActionWorker(Window window) throws Exception {
+    public BloomActionWorker(Window window) {
         this.frameBufferWorker1 = new FrameBufferWorker(window.getResolution());
         this.frameBufferWorker2 = new FrameBufferWorker(window.getResolution());
         this.window = window;
 
-        filterShader = new Shader("#/resources/shaders/bloom/BloomFilterVertShader.glsl", "#/resources/shaders/bloom/BloomFilterFragShader.glsl");
-        mixerShader = new Shader("#/resources/shaders/bloom/BloomMixerVertShader.glsl", "#/resources/shaders/bloom/BloomMixerFragShader.glsl");
+        filterShader = new Shader("#/resources/shaders/bloom/BloomFilterVertShader.glsl", "#/resources/shaders/bloom/BloomFilterFragShader.glsl") {
+            @Override
+            public void update(Camera activeCamera) {
+                Window window = activeCamera.getWindow();
+                window.getFrameBuilder().getRenderProperties().useShader(this);
+                setProjection(window.getResolution().x, window.getResolution().y, 1);
+            }
+        };
 
-        window.getFrameBuilder().getRenderProperties().useShader(filterShader);
-        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-        window.getFrameBuilder().getRenderProperties().useShader(mixerShader);
-        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+        mixerShader = new Shader("#/resources/shaders/bloom/BloomMixerVertShader.glsl", "#/resources/shaders/bloom/BloomMixerFragShader.glsl") {
+            @Override
+            public void update(Camera activeCamera) {
+                Window window = activeCamera.getWindow();
+                window.getFrameBuilder().getRenderProperties().useShader(this);
+                setProjection(window.getResolution().x, window.getResolution().y, 1);
+            }
+        };
 
-        window.getFrameBuilder().getRenderProperties().unUseShader();
+        filterShader.update(window.getCamera());
+        mixerShader.update(window.getCamera());
     }
 
     public BloomSettings getBloomSettings() {
@@ -54,10 +66,8 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         if (blurAction == 0) return sourceFrame;
 
         if (!frameBufferWorker1.getResolution().equals(window.getResolution())) {
-            window.getFrameBuilder().getRenderProperties().useShader(filterShader);
-            window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-            window.getFrameBuilder().getRenderProperties().useShader(mixerShader);
-            window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+            filterShader.update(window.getCamera());
+            mixerShader.update(window.getCamera());
         }
 
         BlurActionWorker blur = window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class);
@@ -78,6 +88,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
 
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
         int blured = blur.onceRender(frameBufferWorker1.getTextureBuffer(), blurAction);
 
         renderProperties.useShader(mixerShader);
@@ -85,7 +96,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         DisplayDrawer.renderScreen(sourceFrame, window);
 
         frameBufferWorker2.unbindCurrentFrameBuffer();
-        return frameBufferWorker2.getTextureBuffer();
 
+        return frameBufferWorker2.getTextureBuffer();
     }
 }

@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import ru.lokincompany.lokengine.render.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
@@ -34,7 +35,16 @@ public class PlatesChunksFramePart extends FramePart {
         this.blockSize = blockSize;
 
         try {
-            this.shader = new Shader("#/resources/shaders/PlatesVertShader.glsl", "#/resources/shaders/PlatesFragShader.glsl");
+            this.shader = new Shader("#/resources/shaders/PlatesVertShader.glsl", "#/resources/shaders/PlatesFragShader.glsl") {
+                @Override
+                public void update(Camera activeCamera) {
+                    RenderProperties renderProperties = activeCamera.getWindow().getFrameBuilder().getRenderProperties();
+                    renderProperties.useShader(this);
+
+                    setView(activeCamera);
+                    setProjection(activeCamera.getScreenRatio(), 1, activeCamera);
+                }
+            };
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -42,9 +52,7 @@ public class PlatesChunksFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        renderProperties.useShader(shader);
-        renderProperties.getBuilderWindow().getCamera().updateView(shader);
-        renderProperties.getBuilderWindow().getCamera().setFieldOfView(renderProperties.getBuilderWindow().getCamera().fieldOfView, shader);
+        shader.update(renderProperties.getBuilderWindow().getCamera());
 
         vao.bind();
 

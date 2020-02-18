@@ -7,6 +7,7 @@ import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.util.vector.*;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
+import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokengine.tools.vectori.Vector3i;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public class Shader implements Saveable {
+public abstract class Shader implements Saveable {
 
     public int program;
     public String vertPath;
@@ -40,6 +41,20 @@ public class Shader implements Saveable {
             Logger.warning("Fail load shader!", "LokEngine_Shader");
             Logger.printThrowable(e);
         }
+    }
+
+    public abstract void update(Camera activeCamera);
+
+    public void setView(Camera camera){
+        setUniformData("View", MatrixTools.createViewMatrix(camera));
+    }
+
+    public void setProjection(float width, float height, float projectionFieldOfView){
+       setUniformData("Projection", MatrixTools.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+    }
+
+    public void setProjection(float width, float height, Camera activeCamera){
+        setProjection(width, height, activeCamera.fieldOfView * 0.002f);
     }
 
     public boolean equals(Object obj) {

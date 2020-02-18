@@ -162,12 +162,11 @@ public class ApplicationPlateWorld extends Application {
             if (!isRun) break;
 
             applicationRuntime.update();
-            window.getCamera().updateAudioListener();
+            window.getCamera().update();
 
             scene.update(applicationRuntime, window.getFrameBuilder().getScenePartsBuilder());
 
             canvas.update();
-
             window.update();
         }
     }

@@ -2,6 +2,7 @@ package ru.lokincompany.lokengine.render.postprocessing.workers.colorcorrection;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
+import ru.lokincompany.lokengine.render.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
@@ -17,14 +18,18 @@ public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
     Window window;
     ColorCorrectionSettings settings;
 
-    public ColorCorrectionActionWorker(Window window) throws Exception {
+    public ColorCorrectionActionWorker(Window window) {
         this.window = window;
-        shader = new Shader("#/resources/shaders/colorCorrection/ColorCorrectionVertShader.glsl", "#/resources/shaders/colorCorrection/ColorCorrectionFragShader.glsl");
+        shader = new Shader("#/resources/shaders/colorCorrection/ColorCorrectionVertShader.glsl", "#/resources/shaders/colorCorrection/ColorCorrectionFragShader.glsl") {
+            @Override
+            public void update(Camera activeCamera) {
+                Window window = activeCamera.getWindow();
+                window.getFrameBuilder().getRenderProperties().useShader(this);
+                setProjection(window.getResolution().x, window.getResolution().y, 1);
+            }
+        };
+        shader.update(window.getCamera());
         frameBufferWorker = new FrameBufferWorker(window.getResolution());
-
-        window.getFrameBuilder().getRenderProperties().useShader(shader);
-        window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
-        window.getFrameBuilder().getRenderProperties().unUseShader();
     }
 
     public ColorCorrectionSettings getColorCorrectionSettings() {
@@ -61,8 +66,7 @@ public class ColorCorrectionActionWorker extends PostProcessingActionWorker {
 
     private void checkResizeWindow() {
         if (!frameBufferWorker.getResolution().equals(window.getResolution())) {
-            window.getFrameBuilder().getRenderProperties().useShader(shader);
-            window.getCamera().updateProjection(window.getResolution().x, window.getResolution().y, 1);
+            shader.update(window.getCamera());
             frameBufferWorker.setResolution(window.getResolution());
         }
     }

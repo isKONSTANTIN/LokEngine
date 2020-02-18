@@ -40,15 +40,15 @@ public class PlateSceneTest extends ApplicationPlateWorld {
         Camera camera = window.getCamera();
         Mouse mouse = window.getMouse();
 
-        float scroll = -(mouse.getMouseScroll().x + mouse.getMouseScroll().y) * camera.fieldOfView / 10f;
+        float scroll = -(mouse.getMouseScroll().x + mouse.getMouseScroll().y) * camera.getFieldOfView() / 10f;
 
         if (scroll != 0)
-            camera.setFieldOfView(camera.fieldOfView + scroll);
+            camera.setFieldOfView(camera.getFieldOfView() + scroll);
 
-        camera.position.x += keyboard.isKeyDown(GLFW.GLFW_KEY_D) ? camera.fieldOfView * applicationRuntime.getDeltaTime() / 90f : 0;
-        camera.position.x -= keyboard.isKeyDown(GLFW.GLFW_KEY_A) ? camera.fieldOfView * applicationRuntime.getDeltaTime() / 90f : 0;
-        camera.position.y += keyboard.isKeyDown(GLFW.GLFW_KEY_W) ? camera.fieldOfView * applicationRuntime.getDeltaTime() / 90f : 0;
-        camera.position.y -= keyboard.isKeyDown(GLFW.GLFW_KEY_S) ? camera.fieldOfView * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.position.x += keyboard.isKeyDown(GLFW.GLFW_KEY_D) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.position.x -= keyboard.isKeyDown(GLFW.GLFW_KEY_A) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.position.y += keyboard.isKeyDown(GLFW.GLFW_KEY_W) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.position.y -= keyboard.isKeyDown(GLFW.GLFW_KEY_S) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
 
         text.setText("FPS: " + applicationRuntime.getFps());
     }

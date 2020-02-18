@@ -11,21 +11,12 @@ public class Camera {
 
     public Vector2f position = new Vector2f(0, 0);
     public float rollRotation;
-    public float fieldOfView = 1;
-    public float screenRatio = 1;
-    public Window window;
+    protected float fieldOfView = 1;
+    protected float screenRatio = 1;
+    protected Window window;
 
     public Camera(Window window) {
         this.window = window;
-    }
-
-    public void updateProjection(float width, float height) {
-        float projectionFieldOfView = fieldOfView * 0.0005f * 4;
-        window.getFrameBuilder().getRenderProperties().getActiveShader().setUniformData("Projection", MatrixTools.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
-    }
-
-    public void updateProjection(float width, float height, float projectionFieldOfView) {
-        window.getFrameBuilder().getRenderProperties().getActiveShader().setUniformData("Projection", MatrixTools.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
     }
 
     public Vector2f screenPointToScene(Vector2i point) {
@@ -45,51 +36,26 @@ public class Camera {
         );
     }
 
-    public void setFieldOfView(float fieldOfView, Shader shader) {
-        this.fieldOfView = fieldOfView;
-        screenRatio = (float) window.getResolution().x / (float) window.getResolution().y;
-        Shader activeShader = window.getFrameBuilder().getRenderProperties().getActiveShader();
-
-        window.getFrameBuilder().getRenderProperties().useShader(shader);
-        updateProjection(screenRatio, 1);
-
-        if (activeShader != null) {
-            window.getFrameBuilder().getRenderProperties().useShader(activeShader);
-        } else {
-            window.getFrameBuilder().getRenderProperties().unUseShader();
-        }
-    }
-
     public void setFieldOfView(float fieldOfView) {
         this.fieldOfView = fieldOfView;
-        RenderProperties renderProperties = window.getFrameBuilder().getRenderProperties();
+    }
+
+    public float getFieldOfView() {
+        return fieldOfView;
+    }
+
+    public float getScreenRatio() {
+        return screenRatio;
+    }
+
+    public Window getWindow() {
+        return window;
+    }
+
+    public void update(){
         screenRatio = (float) window.getResolution().x / (float) window.getResolution().y;
-        Shader activeShader = renderProperties.getActiveShader();
 
-        renderProperties.useShader(renderProperties.getObjectShader());
-        updateProjection(screenRatio, 1);
-
-        renderProperties.useShader(renderProperties.getParticlesShader());
-        updateProjection(screenRatio, 1);
-
-        if (activeShader != null) {
-            renderProperties.useShader(activeShader);
-        } else {
-            renderProperties.unUseShader();
-        }
-    }
-
-    public void updateView() {
-        updateView(window.getFrameBuilder().getRenderProperties().getActiveShader());
-    }
-
-    public void updateView(Shader shader) {
-        shader.setUniformData("View", MatrixTools.createViewMatrix(this));
-    }
-
-    public void updateAudioListener() {
         AL10.alListener3f(AL10.AL_POSITION, position.x, position.y, 0);
         AL10.alListener3f(AL10.AL_VELOCITY, 0, 0, 0);
     }
-
 }
