@@ -80,6 +80,14 @@ public class GUIButton extends GUIObject {
         return this;
     }
 
+    public Color getPressedColor() {
+        return pressedColor;
+    }
+
+    public Color getCalmStateColor() {
+        return calmStateColor;
+    }
+
     public GUIButton setPressScript(GUIButtonScript script) {
         this.pressScript = script;
         return this;
