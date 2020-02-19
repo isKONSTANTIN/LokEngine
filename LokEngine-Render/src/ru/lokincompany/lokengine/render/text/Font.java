@@ -99,6 +99,60 @@ public class Font {
         return result;
     }
 
+    public void inversionDrawText(String text, Vector2i position, Vector2i maxSize, TextColorShader shader){
+        int drawX = position.x + maxSize.x;
+        int drawY = position.y;
+
+        GL11.glBindTexture(GL_TEXTURE_2D, texture.getBuffer());
+        glBegin(GL_QUADS);
+
+        for (int i = text.length()-1; i >= 0 ; i--) {
+            char ch = text.charAt(i);
+
+            if (ch == '\r') continue;
+
+            Glyph g = glyphs.get(ch);
+
+            if (g == null) {
+                drawX -= spaceSize;
+                continue;
+            }
+
+            if (drawX < position.x)
+                break;
+
+            drawX -= g.width;
+
+            int width = drawX + g.width;
+            int height = drawY + g.height;
+
+            float glTexX = g.x / (float) texture.getSizeX();
+            float glTexY = g.y / (float) texture.getSizeY();
+            float glTexWidth = (g.x + g.width) / (float) texture.getSizeX();
+            float glTexHeight = (g.y + g.height) / (float) texture.getSizeY();
+
+            Color color = shader.getColor(new Vector2i(drawX - position.x, drawY - position.y));
+            glColor4d(color.red, color.green, color.blue, color.alpha);
+
+            glTexCoord2f(glTexX, glTexHeight);
+            glVertex3f(drawX, drawY, 0);
+
+            glTexCoord2f(glTexWidth, glTexHeight);
+            glVertex3f(width, drawY, 0);
+
+            glTexCoord2f(glTexWidth, glTexY);
+            glVertex3f(width, height, 0);
+
+            glTexCoord2f(glTexX, glTexY);
+            glVertex3f(drawX, height, 0);
+
+            spaceSize += g.width;
+            spaceSize /= 2f;
+        }
+        glEnd();
+        GL11.glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
     public void drawText(String text, Vector2i position, Vector2i maxSize, TextColorShader shader) {
         int drawX = position.x;
         int drawY = position.y;

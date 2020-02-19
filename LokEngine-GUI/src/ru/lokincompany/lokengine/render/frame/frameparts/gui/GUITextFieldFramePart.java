@@ -48,14 +48,14 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         Vector2i endPosText = new Vector2i(textSize.x + fontXpos, textSize.y + fontYpos);
         Vector2i maxPos = new Vector2i(size.x - 1 - xGap, size.y - yGap);
 
-        if (color != null) {
-            font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, charPos -> color);
-        } else {
-            font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, shader);
-        }
+        if (textSize.x >= size.x)
+            font.inversionDrawText(text, new Vector2i(fontXpos, fontYpos), maxPos, color == null ? shader : charPos -> color);
+        else
+            font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, color == null ? shader : charPos -> color);
+
 
         if (active) {
-            int xPos = fontXpos + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
+            int xPos = textSize.x >= size.x ? position.x + size.x - 1 : fontXpos + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
 
             Color lineColor = color == null ? shader.getColor(new Vector2i(text.length(), 1)) : color;
             float s = (float) (Math.cos(pointerTime) + 1) / 2f;
