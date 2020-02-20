@@ -4,7 +4,9 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUITextFieldScript;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.render.frame.frameparts.gui.GUITextFieldFramePart;
+import ru.lokincompany.lokengine.tools.ClipboardWorker;
 import ru.lokincompany.lokengine.tools.FontPrefs;
+import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.additionalobjects.KeyInfo;
@@ -168,6 +170,16 @@ public class GUITextField extends GUIObject {
                     } else if (eventCharacter != 0) {
                         pointerOffset = 1;
                         pointerText += eventCharacter;
+                    }
+
+                    if (keyInfo.mods == GLFW_MOD_CONTROL && eventKey == GLFW_KEY_V && keyInfo.action == GLFW_PRESS){
+                        String clipText = ClipboardWorker.getClipboardContents();
+                        pointerOffset = clipText.length();
+                        pointerText += clipText;
+                    }
+
+                    if (keyInfo.mods == GLFW_MOD_CONTROL && eventKey == GLFW_KEY_C && keyInfo.action == GLFW_PRESS){
+                        ClipboardWorker.setClipboardContents(framePart.text);
                     }
 
                     framePart.text = pointerText + framePart.text.substring(framePart.pointer);

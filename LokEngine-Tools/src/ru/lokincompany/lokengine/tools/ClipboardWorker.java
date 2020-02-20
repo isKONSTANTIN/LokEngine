@@ -22,9 +22,7 @@ public class ClipboardWorker implements ClipboardOwner {
         String result = "";
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         Transferable contents = clipboard.getContents(null);
-        boolean hasTransferableText =
-                (contents != null) &&
-                        contents.isDataFlavorSupported(DataFlavor.stringFlavor);
+        boolean hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
         if (hasTransferableText) {
             try {
                 result = (String)contents.getTransferData(DataFlavor.stringFlavor);

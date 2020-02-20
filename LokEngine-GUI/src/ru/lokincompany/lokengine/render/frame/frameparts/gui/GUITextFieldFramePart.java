@@ -53,7 +53,6 @@ public class GUITextFieldFramePart extends GUITextFramePart {
         else
             font.drawText(text, new Vector2i(fontXpos, fontYpos), maxPos, color == null ? shader : charPos -> color);
 
-
         if (active) {
             int xPos = textSize.x >= size.x ? position.x + size.x - 1 : fontXpos + font.getSize(text.substring(0, Math.min(pointer, text.length())), maxSize).x;
 
