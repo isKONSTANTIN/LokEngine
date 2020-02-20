@@ -38,11 +38,11 @@ public class Keyboard {
     }
 
     private void keyCallback(long window, int key, int scancode, int action, int mods) {
-        keysPressed.add(new KeyInfo((char) 0, key, action));
+        keysPressed.add(new KeyInfo((char) 0, key, action, mods));
     }
 
     private void charCallback(long window, int key) {
-        keysPressed.add(new KeyInfo((char) key, 0, 0));
+        keysPressed.add(new KeyInfo((char) key, 0, 0, 0));
     }
 
     public void close() {
