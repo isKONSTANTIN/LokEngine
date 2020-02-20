@@ -118,10 +118,10 @@ public class Font {
                 continue;
             }
 
+            drawX -= g.width;
+
             if (drawX < position.x)
                 break;
-
-            drawX -= g.width;
 
             int width = drawX + g.width;
             int height = drawY + g.height;
