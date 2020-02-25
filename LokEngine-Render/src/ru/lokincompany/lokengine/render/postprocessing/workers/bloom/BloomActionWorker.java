@@ -76,6 +76,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         frameBufferWorker1.bindFrameBuffer(DrawMode.Display, renderProperties);
         renderProperties.useShader(filterShader);
         filterShader.setUniformData("BrightnessLimit", bloomSettings.brightnessLimit);
+
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
@@ -83,13 +84,13 @@ public class BloomActionWorker extends PostProcessingActionWorker {
 
         frameBufferWorker1.unbindCurrentFrameBuffer();
 
-        frameBufferWorker2.bindFrameBuffer(DrawMode.Display, renderProperties);
         glDisable(GL_ALPHA_TEST);
+        int blured = blur.onceRender(frameBufferWorker1.getTextureBuffer(), blurAction);
+
+        frameBufferWorker2.bindFrameBuffer(DrawMode.Display, renderProperties);
 
         GL11.glClearColor(0, 0, 0, 0);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
-        int blured = blur.onceRender(frameBufferWorker1.getTextureBuffer(), blurAction);
 
         renderProperties.useShader(mixerShader);
         DisplayDrawer.bindTexture("frame2", blured, 1, renderProperties);
