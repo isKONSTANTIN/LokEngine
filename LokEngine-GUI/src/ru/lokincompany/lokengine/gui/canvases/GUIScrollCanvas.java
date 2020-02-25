@@ -15,6 +15,8 @@ public class GUIScrollCanvas extends GUICanvas {
     protected Vector2f scrollImpulse = new Vector2f();
     protected Vector2f scrollPosition = new Vector2f();
 
+    protected boolean scrollAxis;
+
     public GUIScrollCanvas(Vector2i position, Vector2i size, Vector2i maxOffset, Vector2i minOffset) {
         super(position, size);
         this.maxOffset = maxOffset;
@@ -29,11 +31,23 @@ public class GUIScrollCanvas extends GUICanvas {
         this(position, size, null, null);
     }
 
+    public void setScrollAxis(boolean scrollAxisY){
+        this.scrollAxis = scrollAxisY;
+    }
+
+    public boolean getScrollAxis(){
+        return scrollAxis;
+    }
+
     protected void updateScroll(GUIObjectProperties parentProperties) {
         Vector2f mouseScroll = parentProperties.mouseRaycastStatus.mouse.getMouseScroll();
 
-        scrollImpulse.x += mouseScroll.x * scrollStrength;
-        scrollImpulse.y += mouseScroll.y * scrollStrength;
+        float scroll = (mouseScroll.x + mouseScroll.y) / 2 * scrollStrength;
+
+        if (scrollAxis)
+            scrollImpulse.y += scroll;
+        else
+            scrollImpulse.x += scroll;
     }
 
     @Override
