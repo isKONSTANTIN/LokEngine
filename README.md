@@ -1,4 +1,4 @@
- # LokEngine <img src="https://lokincompany.ru/Projects/LokEngine/LogoCircle32.png">
+ # LokEngine
 ![](https://img.shields.io/github/license/lokin135/LokEngine?color=green&style=flat-square)
 ![](https://img.shields.io/github/issues/lokin135/LokEngine?color=green&style=flat-square)
 ![](https://img.shields.io/static/v1?label=community&message=ru&color=green&style=flat-square)
