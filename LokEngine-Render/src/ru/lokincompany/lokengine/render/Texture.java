@@ -40,9 +40,12 @@ public class Texture implements Saveable {
 
     public static Object[] loadData(String path) throws IOException {
         BufferedImage image;
-
         if (path.charAt(0) == '#') {
-            image = ImageIO.read(Texture.class.getResource(path.substring(1)));
+            try {
+                image = ImageIO.read(Texture.class.getResource(path.substring(1)));
+            }catch (Exception e){
+                image = ImageIO.read(new File(path.substring(2)));
+            }
         } else {
             image = ImageIO.read(new File(path));
         }
