@@ -31,8 +31,8 @@ public class GUIScrollCanvas extends GUICanvas {
         this(position, size, null, null);
     }
 
-    public void setScrollAxis(boolean scrollAxisY){
-        this.scrollAxis = scrollAxisY;
+    public void setScrollAxis(boolean scrollAxisX){
+        this.scrollAxis = scrollAxisX;
     }
 
     public boolean getScrollAxis(){
@@ -45,9 +45,9 @@ public class GUIScrollCanvas extends GUICanvas {
         float scroll = (mouseScroll.x + mouseScroll.y) / 2 * scrollStrength;
 
         if (scrollAxis)
-            scrollImpulse.y += scroll;
-        else
             scrollImpulse.x += scroll;
+        else
+            scrollImpulse.y += scroll;
     }
 
     @Override
