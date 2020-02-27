@@ -95,7 +95,7 @@ public class RenderProperties {
     }
 
     public void init() throws Exception {
-        objectShader = new Shader("#/resources/shaders/DefaultVertShader.glsl", "#/resources/shaders/DefaultFragShader.glsl") {
+        objectShader = new Shader("#/resources/shaders/ObjectVertShader.glsl", "#/resources/shaders/ObjectFragShader.glsl") {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
