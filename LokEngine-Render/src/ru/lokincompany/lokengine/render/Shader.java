@@ -76,6 +76,10 @@ public abstract class Shader implements Saveable {
         glUniform1i(getUniformLocationID(uniformName), data);
     }
 
+    public void setUniformData(String uniformName, boolean data) {
+        glUniform1i(getUniformLocationID(uniformName), data ? 1 : 0);
+    }
+
     public void setUniformData(String uniformName, Vector2i data) {
         glUniform2i(getUniformLocationID(uniformName), data.x, data.y);
     }
