@@ -1,8 +1,9 @@
 package ru.lokincompany.lokengine.tools;
 
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.camera.Camera;
 
 public class MatrixTools {
 
@@ -44,6 +45,24 @@ public class MatrixTools {
         return m;
     }
 
+    public static Matrix4f createPerspectiveMatrix(float aspect, float fov, float near, float far) {
+        Matrix4f matrix = new Matrix4f();
+        //matrix.setIdentity();
+
+        float y_scale = (float) ((1f / Math.tan(Math.toRadians(fov / 2f))) * aspect);
+        float x_scale = y_scale / aspect;
+        float frustum_length = far - near;
+
+        matrix.m00 = x_scale;
+        matrix.m11 = y_scale;
+        matrix.m22 = -((far + near) / frustum_length);
+        matrix.m23 = -1;
+        matrix.m32 = -((2 * near * far) / frustum_length);
+        matrix.m33 = 0;
+
+        return matrix;
+    }
+
     public static Matrix4f createOrthoMatrix(float width, float height) {
         return toOrtho(null, -width / 2, width / 2, -height / 2, height / 2, -1.0f, 1000.0f);
     }
@@ -52,8 +71,14 @@ public class MatrixTools {
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.setIdentity();
 
-        Matrix4f.rotate((float) degressToRadians(camera.rollRotation), new Vector3f(0, 0, 1), viewMatrix, viewMatrix);
-        Matrix4f.translate(new Vector3f(-camera.position.x, -camera.position.y, -500), viewMatrix, viewMatrix);
+        Vector3f position = camera.getPosition();
+        Vector3f rotation = camera.getRotation();
+
+        Matrix4f.rotate((float) degressToRadians(rotation.x), new Vector3f(1, 0, 0), viewMatrix, viewMatrix);
+        Matrix4f.rotate((float) degressToRadians(rotation.y), new Vector3f(0, 1, 0), viewMatrix, viewMatrix);
+        Matrix4f.rotate((float) degressToRadians(rotation.z), new Vector3f(0, 0, 1), viewMatrix, viewMatrix);
+
+        Matrix4f.translate(new Vector3f(-position.x, -position.y, -position.z), viewMatrix, viewMatrix);
         return viewMatrix;
     }
 

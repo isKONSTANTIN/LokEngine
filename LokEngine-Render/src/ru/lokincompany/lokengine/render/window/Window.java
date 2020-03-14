@@ -4,7 +4,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
-import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.camera.Camera;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.frame.FrameBuilder;
@@ -22,7 +22,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
-    private Camera camera;
+    private Camera activeCamera;
     private FrameBuilder frameBuilder;
 
     private VAO vao;
@@ -48,8 +48,12 @@ public class Window {
         return resolution;
     }
 
-    public Camera getCamera() {
-        return camera;
+    public Camera getActiveCamera() {
+        return activeCamera;
+    }
+
+    public void setActiveCamera(Camera camera) {
+        activeCamera = camera;
     }
 
     public String getTitle() {
@@ -219,7 +223,7 @@ public class Window {
             vao = new VAO();
 
             isInited = true;
-            camera = new Camera(this);
+            activeCamera = new Camera(this);
             keyboard = new Keyboard(id);
             mouse = new Mouse(id);
 

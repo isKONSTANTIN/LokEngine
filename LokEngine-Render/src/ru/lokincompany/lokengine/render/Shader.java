@@ -5,6 +5,8 @@ import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.util.vector.*;
+import ru.lokincompany.lokengine.render.camera.Camera;
+import ru.lokincompany.lokengine.render.camera.CameraMode;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.MatrixTools;
@@ -49,12 +51,20 @@ public abstract class Shader implements Saveable {
         setUniformData("View", MatrixTools.createViewMatrix(camera));
     }
 
-    public void setProjection(float width, float height, float projectionFieldOfView){
-       setUniformData("Projection", MatrixTools.createOrthoMatrix(width * projectionFieldOfView, height * projectionFieldOfView));
+    public void setRawOrthoProjection(float width, float height, float fieldOfView){
+       setUniformData("Projection", MatrixTools.createOrthoMatrix(width * fieldOfView, height * fieldOfView));
     }
 
-    public void setProjection(float width, float height, Camera activeCamera){
-        setProjection(width, height, activeCamera.fieldOfView * 0.002f);
+    public void setRawOrthoProjection(float width, float height, Camera activeCamera){
+        setRawOrthoProjection(width, height, activeCamera.getFieldOfView() * 0.002f);
+    }
+
+    public void setProjection(Camera activeCamera){
+        if (activeCamera.cameraMode == CameraMode.Orthographic){
+            setUniformData("Projection", MatrixTools.createOrthoMatrix(activeCamera.getScreenRatio() * activeCamera.getFieldOfView() * 0.002f, 0.002f * activeCamera.getFieldOfView()));
+        }else{
+            setUniformData("Projection", MatrixTools.createPerspectiveMatrix(activeCamera.getScreenRatio(), activeCamera.getFieldOfView(), 0, 1000));
+        }
     }
 
     public boolean equals(Object obj) {

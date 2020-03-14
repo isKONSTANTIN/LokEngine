@@ -162,7 +162,7 @@ public class ApplicationPlateWorld extends Application {
             if (!isRun) break;
 
             applicationRuntime.update();
-            window.getCamera().update();
+            window.getActiveCamera().update();
 
             scene.update(applicationRuntime, window.getFrameBuilder().getScenePartsBuilder());
 

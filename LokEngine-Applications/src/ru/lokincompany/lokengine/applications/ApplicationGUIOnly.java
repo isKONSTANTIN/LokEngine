@@ -149,7 +149,7 @@ public class ApplicationGUIOnly extends Application {
 
             applicationRuntime.update();
 
-            window.getCamera().update();
+            window.getActiveCamera().update();
 
             canvas.update();
             window.update();

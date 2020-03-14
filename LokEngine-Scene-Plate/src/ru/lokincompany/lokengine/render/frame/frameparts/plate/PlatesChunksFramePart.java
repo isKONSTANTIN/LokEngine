@@ -6,10 +6,10 @@ import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.render.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.VAO;
 import ru.lokincompany.lokengine.render.VBO;
+import ru.lokincompany.lokengine.render.camera.Camera;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
@@ -42,7 +42,7 @@ public class PlatesChunksFramePart extends FramePart {
                     renderProperties.useShader(this);
 
                     setView(activeCamera);
-                    setProjection(activeCamera.getScreenRatio(), 1, activeCamera);
+                    setProjection(activeCamera);
                 }
             };
         } catch (Throwable e) {
@@ -52,7 +52,7 @@ public class PlatesChunksFramePart extends FramePart {
 
     @Override
     public void partRender(RenderProperties renderProperties) {
-        shader.update(renderProperties.getBuilderWindow().getCamera());
+        shader.update(renderProperties.getBuilderWindow().getActiveCamera());
 
         vao.bind();
 

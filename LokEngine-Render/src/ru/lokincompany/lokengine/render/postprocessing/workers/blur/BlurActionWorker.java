@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.render.postprocessing.workers.blur;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
-import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.camera.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
@@ -35,10 +35,10 @@ public class BlurActionWorker extends PostProcessingActionWorker {
             @Override
             public void update(Camera activeCamera) {
                 activeCamera.getWindow().getFrameBuilder().getRenderProperties().useShader(this);
-                setProjection(window.getResolution().x, window.getResolution().y, 1);
+                setRawOrthoProjection(window.getResolution().x, window.getResolution().y, 1);
             }
         };
-        shader.update(window.getCamera());
+        shader.update(window.getActiveCamera());
     }
 
     private int blurPostProcess(int postFrame, int originalFrame) {
@@ -98,7 +98,7 @@ public class BlurActionWorker extends PostProcessingActionWorker {
 
     private void checkResizeWindow() {
         if (!blurPostProcessingFrameWorker.getResolution().equals(window.getResolution())) {
-            shader.update(window.getCamera());
+            shader.update(window.getActiveCamera());
             blurPostProcessingFrameWorker.setResolution(window.getResolution());
         }
     }

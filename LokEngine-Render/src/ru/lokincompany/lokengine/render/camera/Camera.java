@@ -1,7 +1,8 @@
-package ru.lokincompany.lokengine.render;
+package ru.lokincompany.lokengine.render.camera;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
 import ru.lokincompany.lokengine.render.window.Window;
 import ru.lokincompany.lokengine.tools.MatrixTools;
@@ -9,11 +10,14 @@ import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class Camera {
 
-    public Vector2f position = new Vector2f(0, 0);
-    public float rollRotation;
+    protected Vector3f position = new Vector3f(0, 0, 500);
+    protected Vector3f rotation = new Vector3f(0, 0, 0);
+
     protected float fieldOfView = 1;
     protected float screenRatio = 1;
     protected Window window;
+
+    public CameraMode cameraMode = CameraMode.Orthographic;
 
     public Camera(Window window) {
         this.window = window;
@@ -36,6 +40,14 @@ public class Camera {
         );
     }
 
+    public Vector3f getPosition() {
+        return position;
+    }
+
+    public Vector3f getRotation() {
+        return rotation;
+    }
+
     public void setFieldOfView(float fieldOfView) {
         this.fieldOfView = fieldOfView;
     }
@@ -55,7 +67,7 @@ public class Camera {
     public void update(){
         screenRatio = (float) window.getResolution().x / (float) window.getResolution().y;
 
-        AL10.alListener3f(AL10.AL_POSITION, position.x, position.y, 0);
+        AL10.alListener3f(AL10.AL_POSITION, position.x, position.y, position.z);
         AL10.alListener3f(AL10.AL_VELOCITY, 0, 0, 0);
     }
 }

@@ -3,7 +3,7 @@ package ru.lokincompany.lokengine.tests;
 import org.lwjgl.glfw.GLFW;
 import ru.lokincompany.lokengine.applications.ApplicationPlateWorld;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
-import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.camera.Camera;
 import ru.lokincompany.lokengine.sceneenvironment.plateenvironment.PlateChunk;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.Mouse;
@@ -37,7 +37,7 @@ public class PlateSceneTest extends ApplicationPlateWorld {
     @Override
     protected void updateEvent() {
         Keyboard keyboard = window.getKeyboard();
-        Camera camera = window.getCamera();
+        Camera camera = window.getActiveCamera();
         Mouse mouse = window.getMouse();
 
         float scroll = -(mouse.getMouseScroll().x + mouse.getMouseScroll().y) * camera.getFieldOfView() / 10f;
@@ -45,10 +45,10 @@ public class PlateSceneTest extends ApplicationPlateWorld {
         if (scroll != 0)
             camera.setFieldOfView(camera.getFieldOfView() + scroll);
 
-        camera.position.x += keyboard.isKeyDown(GLFW.GLFW_KEY_D) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
-        camera.position.x -= keyboard.isKeyDown(GLFW.GLFW_KEY_A) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
-        camera.position.y += keyboard.isKeyDown(GLFW.GLFW_KEY_W) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
-        camera.position.y -= keyboard.isKeyDown(GLFW.GLFW_KEY_S) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.getPosition().x += keyboard.isKeyDown(GLFW.GLFW_KEY_D) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.getPosition().x -= keyboard.isKeyDown(GLFW.GLFW_KEY_A) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.getPosition().y += keyboard.isKeyDown(GLFW.GLFW_KEY_W) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
+        camera.getPosition().y -= keyboard.isKeyDown(GLFW.GLFW_KEY_S) ? camera.getFieldOfView() * applicationRuntime.getDeltaTime() / 90f : 0;
 
         text.setText("FPS: " + applicationRuntime.getFps());
     }

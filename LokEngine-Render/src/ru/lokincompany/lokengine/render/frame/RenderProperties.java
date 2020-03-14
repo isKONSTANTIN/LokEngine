@@ -2,7 +2,7 @@ package ru.lokincompany.lokengine.render.frame;
 
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.util.vector.Vector3f;
-import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.camera.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Texture;
 import ru.lokincompany.lokengine.render.VBO;
@@ -81,9 +81,9 @@ public class RenderProperties {
     public void update() {
         Vector2i windowResolution = window.getResolution();
 
-        objectShader.update(window.getCamera());
-        displayShader.update(window.getCamera());
-        particlesShader.update(window.getCamera());
+        objectShader.update(window.getActiveCamera());
+        displayShader.update(window.getActiveCamera());
+        particlesShader.update(window.getActiveCamera());
 
         vertexScreenVBO.createNew();
 
@@ -99,8 +99,8 @@ public class RenderProperties {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
-                setView(window.getCamera());
-                setProjection(window.getCamera().getScreenRatio(), 1, activeCamera);
+                setView(window.getActiveCamera());
+                setProjection(activeCamera);
             }
         };
 
@@ -108,7 +108,7 @@ public class RenderProperties {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
-                setProjection(window.getResolution().x, window.getResolution().y, 1);
+                setRawOrthoProjection(window.getResolution().x, window.getResolution().y, 1);
             }
         };
 
@@ -116,7 +116,7 @@ public class RenderProperties {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
-                setProjection(window.getCamera().getScreenRatio(), 1, activeCamera);
+                setProjection(activeCamera);
             }
         };
 

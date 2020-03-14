@@ -1,7 +1,7 @@
 package ru.lokincompany.lokengine.render.postprocessing.workers.bloom;
 
 import org.lwjgl.opengl.GL11;
-import ru.lokincompany.lokengine.render.Camera;
+import ru.lokincompany.lokengine.render.camera.Camera;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.enums.DrawMode;
 import ru.lokincompany.lokengine.render.frame.DisplayDrawer;
@@ -34,7 +34,7 @@ public class BloomActionWorker extends PostProcessingActionWorker {
             public void update(Camera activeCamera) {
                 Window window = activeCamera.getWindow();
                 window.getFrameBuilder().getRenderProperties().useShader(this);
-                setProjection(window.getResolution().x, window.getResolution().y, 1);
+                setRawOrthoProjection(window.getResolution().x, window.getResolution().y, 1);
             }
         };
 
@@ -43,12 +43,12 @@ public class BloomActionWorker extends PostProcessingActionWorker {
             public void update(Camera activeCamera) {
                 Window window = activeCamera.getWindow();
                 window.getFrameBuilder().getRenderProperties().useShader(this);
-                setProjection(window.getResolution().x, window.getResolution().y, 1);
+                setRawOrthoProjection(window.getResolution().x, window.getResolution().y, 1);
             }
         };
 
-        filterShader.update(window.getCamera());
-        mixerShader.update(window.getCamera());
+        filterShader.update(window.getActiveCamera());
+        mixerShader.update(window.getActiveCamera());
     }
 
     public BloomSettings getBloomSettings() {
@@ -66,8 +66,8 @@ public class BloomActionWorker extends PostProcessingActionWorker {
         if (blurAction == 0) return sourceFrame;
 
         if (!frameBufferWorker1.getResolution().equals(window.getResolution())) {
-            filterShader.update(window.getCamera());
-            mixerShader.update(window.getCamera());
+            filterShader.update(window.getActiveCamera());
+            mixerShader.update(window.getActiveCamera());
         }
 
         BlurActionWorker blur = window.getFrameBuilder().getPostProcessingActionWorker(BlurActionWorker.class);
