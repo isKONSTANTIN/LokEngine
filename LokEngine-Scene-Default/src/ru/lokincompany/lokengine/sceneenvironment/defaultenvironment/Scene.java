@@ -4,6 +4,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.SpriteComponent;
 import ru.lokincompany.lokengine.tools.Base64;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.compression.GZIPCompression;
@@ -11,6 +12,7 @@ import ru.lokincompany.lokengine.tools.saveworker.ArraySaver;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Vector;
 
 public class Scene implements Saveable {
@@ -31,6 +33,7 @@ public class Scene implements Saveable {
     public int addObject(SceneObject newObject) {
         objects.add(newObject);
         newObject.init(this);
+        resortObjectsByRenderPriority();
         return objects.size() - 1;
     }
 
@@ -44,6 +47,13 @@ public class Scene implements Saveable {
 
     public void addPostUpdateEvent(PostUpdateEvent event) {
         postUpdateEvents.add(event);
+    }
+
+    public void resortObjectsByRenderPriority(){
+        objects.sort((o1, o2) -> {
+            float priority = o1.renderPriority - o2.renderPriority;
+            return priority > 0 ? 1 : priority < 0 ? -1 : 0;
+        });
     }
 
     public void update(ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {

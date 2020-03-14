@@ -35,7 +35,7 @@ public class PlatesChunksFramePart extends FramePart {
         this.blockSize = blockSize;
 
         try {
-            this.shader = new Shader("#/resources/shaders/PlatesVertShader.glsl", "#/resources/shaders/PlatesFragShader.glsl") {
+            this.shader = new Shader("#/resources/shaders/plates/PlatesVertShader.glsl", "#/resources/shaders/plates/PlatesFragShader.glsl") {
                 @Override
                 public void update(Camera activeCamera) {
                     RenderProperties renderProperties = activeCamera.getWindow().getFrameBuilder().getRenderProperties();

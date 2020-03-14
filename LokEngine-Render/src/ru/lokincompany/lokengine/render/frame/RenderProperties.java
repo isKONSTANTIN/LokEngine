@@ -95,7 +95,7 @@ public class RenderProperties {
     }
 
     public void init() throws Exception {
-        objectShader = new Shader("#/resources/shaders/ObjectVertShader.glsl", "#/resources/shaders/ObjectFragShader.glsl") {
+        objectShader = new Shader("#/resources/shaders/sprite/SpriteVertShader.glsl", "#/resources/shaders/sprite/SpriteFragShader.glsl") {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
@@ -104,7 +104,7 @@ public class RenderProperties {
             }
         };
 
-        displayShader = new Shader("#/resources/shaders/DisplayVertShader.glsl", "#/resources/shaders/DisplayFragShader.glsl") {
+        displayShader = new Shader("#/resources/shaders/display/DisplayVertShader.glsl", "#/resources/shaders/display/DisplayFragShader.glsl") {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
@@ -112,7 +112,7 @@ public class RenderProperties {
             }
         };
 
-        particlesShader = new Shader("#/resources/shaders/ParticleVertShader.glsl", "#/resources/shaders/ParticleFragShader.glsl") {
+        particlesShader = new Shader("#/resources/shaders/particle/ParticleVertShader.glsl", "#/resources/shaders/particle/ParticleFragShader.glsl") {
             @Override
             public void update(Camera activeCamera) {
                 useShader(this);
@@ -157,6 +157,12 @@ public class RenderProperties {
     public void setDrawMode(DrawMode dm, Vector2i resolution, Vector4i orthoView) {
         glViewport(0, 0, resolution.x, resolution.y);
         activeDrawMode = dm;
+
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_ALPHA_TEST);
+        glAlphaFunc(GL_GREATER, 0.0f);
+        glEnable(GL_BLEND);
+
         if (dm == DrawMode.Display || dm == DrawMode.RawGUI) {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
@@ -164,33 +170,12 @@ public class RenderProperties {
             setOrthoView(orthoView);
 
             glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
-
             glDisable(GL_DEPTH_TEST);
-            glEnable(GL_TEXTURE_2D);
-            glEnable(GL_BLEND);
         } else if (dm == DrawMode.Scene) {
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-
-            gluOrtho2D(0.0f, resolution.x / (float) resolution.y, 1, 0.0f);
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
-
-            glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-            glEnable(GL_TEXTURE_2D);
-            glEnable(GL_DEPTH_TEST);
-            glEnable(GL_ALPHA_TEST);
-            glAlphaFunc(GL_GREATER, 0.1f);
         }
 
-        if (dm == DrawMode.Display) {
-            useShader(getDisplayShader());
-        } else if (dm == DrawMode.Scene) {
-            useShader(getObjectShader());
-        } else {
+        if (dm == DrawMode.RawGUI) {
             unUseShader();
         }
     }
