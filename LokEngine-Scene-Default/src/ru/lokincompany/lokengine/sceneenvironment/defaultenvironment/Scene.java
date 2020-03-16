@@ -51,7 +51,7 @@ public class Scene implements Saveable {
 
     public void resortObjectsByRenderPriority(){
         objects.sort((o1, o2) -> {
-            float priority = o1.renderPriority - o2.renderPriority;
+            float priority = o1.position.z - o2.position.z;
             return priority > 0 ? 1 : priority < 0 ? -1 : 0;
         });
     }

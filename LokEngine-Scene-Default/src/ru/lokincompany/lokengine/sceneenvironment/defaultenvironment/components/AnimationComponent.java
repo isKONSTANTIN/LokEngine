@@ -72,7 +72,7 @@ public class AnimationComponent extends Component implements Saveable {
 
             sprite.uvVBO = activeAnimation.uvVBOs.get((int) currentFrame);
 
-            framePart.position = new Vector4f(source.position.x, source.position.y, source.renderPriority, source.rollRotation);
+            framePart.object = source;
             if (partsBuilder != null)
                 partsBuilder.addPart(framePart);
         }

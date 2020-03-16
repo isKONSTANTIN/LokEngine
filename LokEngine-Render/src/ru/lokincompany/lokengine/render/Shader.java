@@ -63,7 +63,7 @@ public abstract class Shader implements Saveable {
         if (activeCamera.cameraMode == CameraMode.Orthographic){
             setUniformData("Projection", MatrixTools.createOrthoMatrix(activeCamera.getScreenRatio() * activeCamera.getFieldOfView() * 0.002f, 0.002f * activeCamera.getFieldOfView()));
         }else{
-            setUniformData("Projection", MatrixTools.createPerspectiveMatrix(activeCamera.getScreenRatio(), activeCamera.getFieldOfView(), 0, 1000));
+            setUniformData("Projection", MatrixTools.createPerspectiveMatrix(activeCamera.getScreenRatio(), activeCamera.getFieldOfView(), 0.5f, 1000));
         }
     }
 
@@ -72,7 +72,7 @@ public abstract class Shader implements Saveable {
         return objs.program == program;
     }
 
-    protected int getUniformLocationID(String name) {
+    public int getUniformLocationID(String name) {
         if (!uniformsName.containsKey(name)) {
             int id = glGetUniformLocation(program, name);
             uniformsName.put(name, id);

@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/LokEngine-Inputs/LokEngine-Inputs.iml" filepath="$PROJECT_DIR$/LokEngine-Inputs/LokEngine-Inputs.iml" />
       <module fileurl="file://$PROJECT_DIR$/LokEngine-Network/LokEngine-Network.iml" filepath="$PROJECT_DIR$/LokEngine-Network/LokEngine-Network.iml" />
       <module fileurl="file://$PROJECT_DIR$/LokEngine-Render/LokEngine-Render.iml" filepath="$PROJECT_DIR$/LokEngine-Render/LokEngine-Render.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LokEngine-Scene-3D/LokEngine-Scene-3D.iml" filepath="$PROJECT_DIR$/LokEngine-Scene-3D/LokEngine-Scene-3D.iml" />
       <module fileurl="file://$PROJECT_DIR$/LokEngine-Scene-Default/LokEngine-Scene-Default.iml" filepath="$PROJECT_DIR$/LokEngine-Scene-Default/LokEngine-Scene-Default.iml" />
       <module fileurl="file://$PROJECT_DIR$/LokEngine-Scene-Plate/LokEngine-Scene-Plate.iml" filepath="$PROJECT_DIR$/LokEngine-Scene-Plate/LokEngine-Scene-Plate.iml" />
       <module fileurl="file://$PROJECT_DIR$/LokEngine-Tests/LokEngine-Tests.iml" filepath="$PROJECT_DIR$/LokEngine-Tests/LokEngine-Tests.iml" />

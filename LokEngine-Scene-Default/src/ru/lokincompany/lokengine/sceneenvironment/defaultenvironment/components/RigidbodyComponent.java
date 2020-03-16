@@ -6,6 +6,7 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.PostUpdateEvent;
@@ -44,8 +45,8 @@ public class RigidbodyComponent extends Component implements Saveable {
         }
         Vector2f b2posU = new Vector2f(body.b2body.getPosition().x / 9.5f, body.b2body.getPosition().y / 9.5f);
 
-        if (!b2posU.equals(source.position) || source.rollRotation != (float) MatrixTools.radiansToDegrees(body.b2body.getAngle())) {
-            body.b2body.setTransform(new Vec2(source.position.x * 9.5f, source.position.y * 9.5f), (float) MatrixTools.degressToRadians(source.rollRotation));
+        if (!b2posU.equals(source.position) || source.rotation.z != (float) MatrixTools.radiansToDegrees(body.b2body.getAngle())) {
+            body.b2body.setTransform(new Vec2(source.position.x * 9.5f, source.position.y * 9.5f), (float) MatrixTools.degressToRadians(source.rotation.z));
             body.b2body.setAwake(true);
         }
 
@@ -53,8 +54,9 @@ public class RigidbodyComponent extends Component implements Saveable {
             @Override
             public void postUpdate() {
                 Vec2 b2posP = body.b2body.getPosition();
-                source.position = new Vector2f(b2posP.x / 9.5f, b2posP.y / 9.5f);
-                source.rollRotation = (float) MatrixTools.radiansToDegrees(body.b2body.getAngle());
+                source.position.x = b2posP.x / 9.5f;
+                source.position.y = b2posP.y / 9.5f;
+                source.rotation.z = (float) MatrixTools.radiansToDegrees(body.b2body.getAngle());
             }
         });
     }
@@ -62,7 +64,7 @@ public class RigidbodyComponent extends Component implements Saveable {
     private void initBody(SceneObject object, Shape shape) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(object.position.x * 9.5f, object.position.y * 9.5f);
-        bodyDef.angle = (float) MatrixTools.degressToRadians(object.rollRotation);
+        bodyDef.angle = (float) MatrixTools.degressToRadians(object.rotation.z);
         bodyDef.type = body.isStatic ? BodyType.STATIC : BodyType.DYNAMIC;
 
         Body body = object.scene.b2World.createBody(bodyDef);

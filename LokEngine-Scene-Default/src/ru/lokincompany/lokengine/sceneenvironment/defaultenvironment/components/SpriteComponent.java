@@ -60,7 +60,7 @@ public class SpriteComponent extends Component implements Saveable {
 
     @Override
     public void update(SceneObject source, ApplicationRuntime applicationRuntime, PartsBuilder partsBuilder) {
-        framePart.position = new Vector4f(source.position.x, source.position.y, source.renderPriority, source.rollRotation);
+        framePart.object = source;
         if (partsBuilder != null)
             partsBuilder.addPart(framePart);
     }

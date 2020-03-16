@@ -121,7 +121,7 @@ public class RenderProperties {
         };
 
         useShader(particlesShader);
-        particlesShader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(0, new Vector3f(0, 0, 0)));
+        particlesShader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(new Vector3f(), new Vector3f()));
 
         unknownTexture = new Texture("#/resources/textures/unknown.png");
 
