@@ -17,5 +17,6 @@
     <orderEntry type="module" module-name="LokEngine-Render" />
     <orderEntry type="module" module-name="LokEngine-Inputs" />
     <orderEntry type="library" name="LWJGL" level="project" />
+    <orderEntry type="module" module-name="LokEngine-Scene-3D" />
   </component>
 </module>

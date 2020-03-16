@@ -82,11 +82,15 @@ public class MatrixTools {
         return viewMatrix;
     }
 
-    public static Matrix4f createModelMatrix(float angle, Vector3f pos) {
+    public static Matrix4f createModelMatrix(Vector3f pos, Vector3f rotation) {
         Matrix4f matrix = new Matrix4f();
         matrix.setIdentity();
         Matrix4f.translate(pos, matrix, matrix);
-        Matrix4f.rotate((float) degressToRadians(angle), new Vector3f(0, 0, 1), matrix, matrix);
+
+        Matrix4f.rotate((float) degressToRadians(rotation.x), new Vector3f(1, 0, 0), matrix, matrix);
+        Matrix4f.rotate((float) degressToRadians(rotation.y), new Vector3f(0, 1, 0), matrix, matrix);
+        Matrix4f.rotate((float) degressToRadians(rotation.z), new Vector3f(0, 0, 1), matrix, matrix);
+
         return matrix;
     }
 }

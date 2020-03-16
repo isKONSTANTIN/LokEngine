@@ -3,6 +3,7 @@ package ru.lokincompany.lokengine.render;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.executorservices.EngineExecutors;
 import ru.lokincompany.lokengine.tools.saveworker.Saveable;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
@@ -33,6 +34,15 @@ public class Texture implements Saveable {
 
     public Texture(String path) {
         loadFromPath(path);
+    }
+
+    public Texture(int buffer, Vector2i size) {
+        this.context = org.lwjgl.glfw.GLFW.glfwGetCurrentContext();
+        path = "";
+        this.buffer = buffer;
+        this.sizeX = size.x;
+        this.sizeY = size.y;
+        prepared = true;
     }
 
     public Texture() {

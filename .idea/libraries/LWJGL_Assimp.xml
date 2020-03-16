@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="LWJGL-Assimp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp-natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp-natives-windows-x86.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp-natives-linux.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp-natives-linux-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/lwjgl-assimp/lwjgl-assimp-natives-linux-arm32.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

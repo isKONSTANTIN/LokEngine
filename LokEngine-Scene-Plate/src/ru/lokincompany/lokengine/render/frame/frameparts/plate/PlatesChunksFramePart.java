@@ -90,7 +90,7 @@ public class PlatesChunksFramePart extends FramePart {
     @Override
     public void init(RenderProperties renderProperties) {
         renderProperties.useShader(shader);
-        shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(0, new Vector3f(0, 0, 0)));
+        shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(new Vector3f(), new Vector3f()));
 
         vao = new VAO();
         vertexVBO = new VBO(new float[]

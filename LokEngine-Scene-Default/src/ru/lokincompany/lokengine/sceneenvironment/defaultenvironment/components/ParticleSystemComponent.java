@@ -1,6 +1,7 @@
 package ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components;
 
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 import ru.lokincompany.lokengine.applications.ApplicationRuntime;
 import ru.lokincompany.lokengine.render.Shader;
 import ru.lokincompany.lokengine.render.Sprite;
@@ -20,7 +21,7 @@ public class ParticleSystemComponent extends Component {
     ParticleSystemFramePart framePart;
     ArrayList<Particle> particlesList = new ArrayList<>();
     ParticleHandler particleHandler;
-    private Vector2f sourcePosition = new Vector2f();
+    private Vector3f sourcePosition = new Vector3f();
     private boolean staticInited;
 
     public ParticleSystemComponent(Sprite spriteParticles, ParticleHandler particleHandler, Shader shader) {

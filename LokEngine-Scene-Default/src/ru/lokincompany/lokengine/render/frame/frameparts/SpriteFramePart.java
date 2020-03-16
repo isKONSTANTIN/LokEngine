@@ -9,6 +9,7 @@ import ru.lokincompany.lokengine.render.VBO;
 import ru.lokincompany.lokengine.render.enums.FramePartType;
 import ru.lokincompany.lokengine.render.frame.FramePart;
 import ru.lokincompany.lokengine.render.frame.RenderProperties;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.MatrixTools;
 import ru.lokincompany.lokengine.tools.color.Color;
 
@@ -21,7 +22,7 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 public class SpriteFramePart extends FramePart {
 
     public Sprite sprite;
-    public Vector4f position = new Vector4f(0, 0, 0, 0);
+    public SceneObject object;
     public Shader shader;
     public Color color;
     public VAO vao;
@@ -85,7 +86,7 @@ public class SpriteFramePart extends FramePart {
 
         shader.setUniformData("ObjectSize", (float) sprite.size * 2);
         shader.setUniformData("ObjectColor", new Vector4f(color.red, color.green, color.blue, color.alpha));
-        shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(position.w, new Vector3f(position.x, position.y, position.z)));
+        shader.setUniformData("ObjectModelMatrix", MatrixTools.createModelMatrix(object.position, object.rotation));
 
         int textureBuffer = sprite.texture.getBuffer() != -1 ? sprite.texture.getBuffer() : renderProperties.getUnknownTexture().getBuffer();
 
